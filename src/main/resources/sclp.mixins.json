@@ -4,10 +4,11 @@
   "package": "loongly.sclp.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "sodium.MixinSodiumOptionPage",
-    "sodium.MixinSodiumOptionImpl"
+    "sodium.MixinFlatButtonWidget",
+    "sodium.MixinSodiumOptionImpact",
+    "sodium.MixinSodiumOptionImpl",
+    "sodium.MixinSodiumOptionPage"
   ],
-
   "plugin": "loongly.sclp.mixin.SclpMixinPlugin",
   "injectors": {
     "defaultRequire": 1

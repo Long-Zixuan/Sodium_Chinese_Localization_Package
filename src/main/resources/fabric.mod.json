@@ -9,7 +9,8 @@
     "LoongLy"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/datapack/sodium-chinese-package"
+    "homepage": "https://modrinth.com/datapack/sodium-chinese-package",
+    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package"
   },
 
   "license": "LGPLv3",
