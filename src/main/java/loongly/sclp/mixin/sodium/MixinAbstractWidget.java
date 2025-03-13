@@ -1,0 +1,41 @@
+package loongly.sclp.mixin.sodium;
+import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
+import me.jellysquid.mods.sodium.client.util.Dim2i;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.resource.language.I18n;
+
+import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import net.minecraft.client.util.math.MatrixStack;
+@Mixin(AbstractWidget.class)
+public class MixinAbstractWidget
+{
+    @Final
+    @Shadow
+    protected TextRenderer font;
+    @Redirect(method = "drawString", at = @At(value = "INVOKE",target = "Lnet/minecraft/client/font/TextRenderer;draw(Lnet/minecraft/client/util/math/MatrixStack;Ljava/lang/String;FFI)I"))
+    public int RediectDrawString(TextRenderer instance, MatrixStack matrices, String text, float x, float y, int color)
+    {
+        if(text.charAt(text.length()-1) != '%')
+        {
+            String[] tmp = text.split(" ");
+            StringBuilder textBuilder = new StringBuilder();
+            for(String t : tmp)
+            {
+                t = I18n.translate(t);
+                textBuilder.append(t).append(" ");
+            }
+            text = textBuilder.toString();
+            //text = I18n.translate(text);
+        }
+        this.font.draw(matrices, text, x, y, color);
+        return 1;
+    }
+}

@@ -18,3 +18,5 @@ public class MixinSodiumOptionPage
         cir.setReturnValue(I18n.translate(oriName));
     }
 }
+
+//事实上，有了MixinAbstractWidget后，不InjectOptionPage的getName方法，也可以实现翻译，但是Inject该方法可以在渲染时提前获取字符串翻译后的长度，使其更加美观
