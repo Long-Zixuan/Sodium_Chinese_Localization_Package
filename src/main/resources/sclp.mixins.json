@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "loongly.sclp.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "sodium.MixinSodiumOptionPage",
+    "sodium.MixinSodiumOptionImpl"
+  ],
+
+  "plugin": "loongly.sclp.mixin.SclpMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
