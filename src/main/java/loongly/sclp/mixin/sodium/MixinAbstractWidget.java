@@ -31,6 +31,7 @@ public class MixinAbstractWidget
     @Redirect(method = "drawString", at = @At(value = "INVOKE",target = "Lnet/minecraft/client/font/TextRenderer;draw(Lnet/minecraft/client/util/math/MatrixStack;Ljava/lang/String;FFI)I"))
     public int RediectDrawString(TextRenderer instance, MatrixStack matrices, String text, float x, float y, int color)
     {
+        int oriWidth = this.font.getWidth(text);
         if(text.charAt(text.length()-1) != '%')
         {
             String[] tmp = text.split(" ");
@@ -74,7 +75,9 @@ public class MixinAbstractWidget
             text = textBuilder.toString();
             //text = I18n.translate(text);
         }
-        this.font.draw(matrices, text, x, y, color);
+        int afterTranWidth = this.font.getWidth(text);
+        int deltaWidth = afterTranWidth - oriWidth;
+        this.font.draw(matrices, text, x - deltaWidth, y, color);
         return 1;
     }
 }
