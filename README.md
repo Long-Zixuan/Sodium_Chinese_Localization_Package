@@ -1,4 +1,4 @@
-![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3.png)
+![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3_LOW_PIX.png)
 
 # 钠模组的汉化模组
 
