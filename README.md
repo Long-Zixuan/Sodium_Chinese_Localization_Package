@@ -20,7 +20,7 @@ After installing the sodium mod, install this mod to localize the module
 Supports Simplified Chinese and Traditional Chinese  
 Special thanks to Law4x
 
-![img1](https://cdn.modrinth.com/data/cached_images/3eb4beb7802def0fa1c3e3546f3813cef4193926.png)
+![img](https://cdn.modrinth.com/data/cached_images/80eabb485449aebb4bbca0a8d90b07f6b8f0887e.png)
 ![img5](https://cdn.modrinth.com/data/cached_images/f7b3cb4e9cd9df0bf4c5d597ba8e4e5d28674698.jpeg)
 ![img8](https://cdn.modrinth.com/data/cached_images/2ef651e75c15e6975b1e12e392154691f2296ae3.jpeg)
 
