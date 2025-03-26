@@ -1,6 +1,6 @@
 ![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3_LOW_PIX.png)
 <center class="half">
-  <img src="https://gitee.com/zixuan_long/Img/raw/master/Support%20fabric.png" width="300">
+  <img src="https://gitee.com/zixuan_long/Img/raw/master/Support%20fabric.png" width="30%">
 </center>
 
 # 钠模组的汉化包
@@ -25,3 +25,5 @@ Special thanks to Law4x
 ![img](https://cdn.modrinth.com/data/cached_images/80eabb485449aebb4bbca0a8d90b07f6b8f0887e.png)
 ![img5](https://cdn.modrinth.com/data/cached_images/f7b3cb4e9cd9df0bf4c5d597ba8e4e5d28674698.jpeg)
 ![img8](https://cdn.modrinth.com/data/cached_images/2ef651e75c15e6975b1e12e392154691f2296ae3.jpeg)
+
+
