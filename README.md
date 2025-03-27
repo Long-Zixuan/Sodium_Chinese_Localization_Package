@@ -1,6 +1,6 @@
 ![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3_LOW_PIX.png)
 <center class="half">
-  <img src="https://gitee.com/zixuan_long/Img/raw/master/Support%20fabric.png" width="30%">
+  <img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric2.png" width="30%">
 </center>
 
 # 钠模组的汉化包
