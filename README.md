@@ -8,12 +8,22 @@
 安装钠模组后安装此数据包即可汉化模组（1.16.3-1.16.5较为特殊，后缀名为jar，[下载链接](https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack)）  
 支持简体中文和繁体中文  
 特别鸣谢law4x
+<br>
+<p>如果你觉得这个汉化包不错的话，能否请我喝杯咖啡？感激不尽！</p>
+<a href="https://ko-fi.com/loongly">
+    <img src="https://gitee.com/zixuan_long/Img/raw/master/buy_me_coffee.png" width="25%">
+</a>
 
 # 鈉模組漢化包
 
 安裝鈉模組後安裝此数据包即可漢化模組（1.16.3-1.16.5較為特殊，后綴名為jar，[下载链接](https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack)）  
 支持簡體中文和繁體中文  
 特別鳴謝law4x
+<br>
+<p>如果你觉得这个汉化包不错的话，能否请我喝杯咖啡？感激不尽！</p>
+<a href="https://ko-fi.com/loongly">
+    <img src="https://gitee.com/zixuan_long/Img/raw/master/buy_me_coffee.png" width="25%">
+</a>
 
 # Sodium Chinese localization package
 
