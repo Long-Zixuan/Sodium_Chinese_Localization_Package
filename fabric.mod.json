@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "sclp",
+  "version": "3.0.0",
+
+  "name": "Sodium Chinese Localization Mod",
+  "description": "钠（Sodium）汉化模组 ",
+  "authors": [
+    "LoongLy"
+  ],
+  "contact": {
+    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package",
+    "issues": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
+  },
+
+  "license": "LGPLv3",
+  "icon": "assets/sclp/icon.png",
+
+  "custom": {
+    "modmenu": {
+       "parent": {
+        "id": "sodium"
+      },
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
+      }
+    }
+  },
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+    ]
+  },
+  "mixins": [
+    "sclp.mixins.json"
+  ],
+
+  "accessWidener" : "sclp.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=0.12.10",
+    "java": ">=8",
+    "sodium": ">=0.3.0-"
+  }
+}

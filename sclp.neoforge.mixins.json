@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "loongly.sclp.neoforge.mixin",
+  "refmap": "lsdc.sclp.json",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
