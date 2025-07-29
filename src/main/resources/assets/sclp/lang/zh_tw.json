@@ -43,7 +43,7 @@
   "sodium.options.cpu_render_ahead_limit.name":"CPU預渲染限制",
   "sodium.options.cpu_render_ahead_limit.tooltip":  "僅用於調試。指定GPU可以傳輸的最大幀數。不建議更改此值,因為極低或極高的值可能會導致幀率不穩定。",
   "sodium.options.cpu_render_ahead_limit.value":"%s幀",
-  "sodium.options.performance_impact_string":  "效能影響:% s",
+  "sodium.options.performance_impact_string":  "效能影響: %s",
   "sodium.options.use_persistent_mapping.name":  "使用Persistent Mapping",
   "sodium.options.use_persistent_mapping.tooltip":  "僅用於調試。如果啟用,持久記憶體映射將用於暫存緩衝區,從而避免不必要的記憶體複製。禁用此選項有助於縮小圖形損壞的原因。\n\n需要OpenGL 4.4或ARB_buffer_storage。",
   "sodium.options.chunk_update_threads.name":  "阻塞更新線程",

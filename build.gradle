@@ -47,17 +47,6 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     forge "net.minecraftforge:forge:${project.loader_version}"
-
-    modImplementation "org.embeddedt:embeddium-${project.minecraft_version}:${project.embeddium_version}"
-    modCompileOnly "maven.modrinth:oculus:${project.oculus_version}"
-
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${project.mixinextras_version}"))
-    implementation(include("io.github.llamalad7:mixinextras-forge:${project.mixinextras_version}"))
-
-    implementation(forgeRuntimeLibrary(include("com.github.dima_dencep.mods:NanoLiveConfig:${project.nanoliveconfig_version}") {
-        exclude(group: "dev.su5ed.sinytra.fabric-api")
-        exclude(group: "dev.su5ed.sinytra")
-    }))
 }
 
 processResources {
