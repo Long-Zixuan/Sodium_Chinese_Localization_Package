@@ -7,12 +7,12 @@ issueTrackerURL = "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Pa
 displayTest = "IGNORE_SERVER_VERSION"
 modId = "sclp"
 version = "${version}"
-displayName = "Embeddium Chinese Localized Package"
+displayName = "Embeddium(Rubidium) Chinese Localized Package"
 logoFile = "icon.png"
 updateJSONURL = ""
 authors = "LoongLy"
 displayURL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
-description = "Embeddium 汉化包"
+description = "Embeddium（铷-Rubidium） 汉化包"
 
 [[dependencies.sclp]]
 modId = "forge"
