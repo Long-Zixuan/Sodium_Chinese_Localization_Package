@@ -1,0 +1,114 @@
+plugins {
+    id 'dev.architectury.loom' version '1.0.+'
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = "${project.mod_version}+mc${project.minecraft_version}-${getVersionMetadata()}"
+group = project.maven_group
+
+loom {
+    forge {
+        mixinConfigs = [
+                "sclp.mixins.json"
+        ]
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
+        url "https://cursemaven.com"
+    }
+    maven {
+        url = "https://minecraft.guntram.de/maven/"
+    }
+}
+
+dependencies {
+    //to change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    modImplementation "maven.modrinth:rubidium:${project.sodium_version}"
+    modImplementation "maven.modrinth:textrues-rubidium-options:${project.rso_version}"
+    //implementation "org.joml:joml:1.10.2"
+
+    modImplementation "curse.maven:citadel-331936:3783096"
+    compileOnly group: 'com.github.oshi',name: 'oshi-core', version: '6.4.0'
+
+    // Currently using altrisi/CaffeineConfig until it is officially available through CaffeineMC's maven repository
+    // Todo: Use https://github.com/TexTrueStudio/ColaMixinConfig when available
+    include(modImplementation("com.github.ThinkingStudios:ColaMixinConfig:${project.caffeineconfig_version}"))
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
+}
+
+java {
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
+}
+
+jar {
+    from "LICENSE.txt"
+    manifest.attributes([
+            "Implementation-Title"  : project.archivesBaseName,
+            "Implementation-Version": project.version
+    ])
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "ConstructLegacy"
+            url = "https://repo.constructlegacy.ru/public"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+}
+
+static def getVersionMetadata() {
+    def build_id = System.getenv("GITHUB_RUN_NUMBER")
+
+    // CI builds only
+    if (build_id != null) {
+        return "build.${build_id}"
+    }
+    // No tracking information could be found about the build
+    return "unknown"
+}
