@@ -22,7 +22,7 @@ public class MixinPageBuilderImpl
     {
         if (name.getString().equals("General")) //这么屎山的玩意估计钠下一个版本就不会这样写了
         {
-            name = Component.translatable("General");
+            name = Component.translatable("sclp.options.pages.general");
             this.name = name;
         }
     }
