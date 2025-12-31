@@ -87,5 +87,6 @@
   "sodium.options.search": "搜索",
   "sodium.options.search.hint": "搜索...",
   "sodium.options.open_external_page_button": "打开",
-  "sclp.options.pages.general":"常规"
+  "sclp.options.pages.general":"常规",
+  "Sodium":"钠"
 }
