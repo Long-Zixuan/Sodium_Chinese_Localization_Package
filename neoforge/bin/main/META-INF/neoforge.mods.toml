@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "MIT"
+
+[[mods]]
+modId = "sclp"
+
+version = "${version}"
+displayName = "Sodium Chinese Localized Package"
+
+logoFile = "icon.png" #optional
+
+authors = "LoongLy"
+
+description = '''
+钠（Sodium）模组汉化包
+'''
+
+[[dependencies.sclp]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.11,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.sclp]]
+modId = "sodium"
+type = "required"
+versionRange = "[0.8.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[mixins]]
+config = "sclp.mixins.json"

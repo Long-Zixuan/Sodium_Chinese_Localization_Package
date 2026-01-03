@@ -1,6 +1,6 @@
 package me.loongly.mods.sclp.mixin.sodium;
 
-import net.minecraft.network.chat.Component;
+import net.minecraft.client.resources.language.I18n;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "setName", at = @At(value = "RETURN"), cancellable = true)
     public void injectSetName(String name, CallbackInfoReturnable<Runnable> c) 
     {
-        name = Component.translatable(name).getString();
+        name = I18n.get(name);
         this.name = name;
     }
 }

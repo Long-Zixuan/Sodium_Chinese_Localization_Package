@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "sclp",
+  "version": "${version}",
+  "name": "Sodium Chinese Localized Package",
+  "description": "钠（Sodium）汉化包",
+  "authors": [
+    {
+      "name": "LoongLy",
+      "contact": {
+        "homepage": "https://github.com/Long-Zixuan"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack",
+    "issues": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package//issues",
+    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/"
+  },
+  "icon": "icon.png",
+  "license": "MIT",
+  "environment": "client",
+  "mixins": [
+    "sclp.mixins.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "sodium"
+      },
+      "links": {
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x",
+        "modmenu.modrinth": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
+      }
+    }
+  },
+  "depends": {
+    "minecraft": ">=1.21.11",
+    "sodium": ">=0.8.1"
+  }
+}
