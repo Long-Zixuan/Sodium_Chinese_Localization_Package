@@ -29,6 +29,16 @@ public class MixinModOptionsBuilderImpl
             this.name = name;
         }
     }
+
+    @Inject(method = "<init>", at = @At(value = "RETURN"))
+    public void injectInit(String configId, String name, String version, CallbackInfo ci) 
+    {
+        if(SCLPClientMod.options().shouldTransModName)
+        {
+            name = I18n.get(name);
+            this.name = name;
+        }
+    }
 }
 
 //LZX-2025-12-31-001
