@@ -32,3 +32,6 @@ side = "CLIENT"
 
 [[mixins]]
 config = "sclp.mixins.json"
+
+[modproperties.sclp]
+"sodium:config_api_user" = "me.loongly.mods.sclp.common.client.options.SCLPConfigBuilder"

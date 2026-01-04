@@ -1,4 +1,4 @@
-package me.loongly.mods.sclp.mixin.sodium;
+package me.loongly.mods.sclp.common.mixin.sodium;
 
 import net.minecraft.client.resources.language.I18n;
 import org.spongepowered.asm.mixin.*;
@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 //import net.caffeinemc.mods.sodium.client.config.builder.ModOptionsBuilderImpl;
 
@@ -21,8 +23,11 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "setName", at = @At(value = "RETURN"), cancellable = true)
     public void injectSetName(String name, CallbackInfoReturnable<Runnable> c) 
     {
-        name = I18n.get(name);
-        this.name = name;
+        if(SCLPClientMod.options().shouldTransModName)
+        {
+            name = I18n.get(name);
+            this.name = name;
+        }
     }
 }
 

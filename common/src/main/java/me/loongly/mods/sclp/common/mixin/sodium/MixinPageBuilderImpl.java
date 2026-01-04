@@ -1,4 +1,4 @@
-package me.loongly.mods.sclp.mixin.sodium;
+package me.loongly.mods.sclp.common.mixin.sodium;
 
 import net.caffeinemc.mods.sodium.client.config.builder.PageBuilderImpl;
 import net.minecraft.network.chat.Component;
