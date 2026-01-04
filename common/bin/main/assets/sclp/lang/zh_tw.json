@@ -90,8 +90,11 @@
   "sodium.options.open_external_page_button": "打开",
   "sclp.options.pages.general":"一般",
   "Sodium":"鈉",
-  "sclp.pages.sclp_page.name":"汉化包设置",
-  "sclp.options.should_trans_mod_name.name":"是否翻译模组名",
-  "sclp.options.should_trans_mod_name.tooltip":"开启选项后将翻译模组名\n关闭选项后将不翻译模组名\n该选项将在重启游戏后生效"
+  "sclp.pages.sclp_page.name":"漢化包設定",
+  "sclp.options.should_trans_mod_name.name":"是否翻譯模組名",
+  "sclp.options.should_trans_mod_name.tooltip":"開啟選項後將翻譯模組名\n關閉選項後將不翻譯模組名\n該選項將在重啓遊戲後生效",
+  "Sodium Shadowy Path Blocks":"鈉-土徑陰影",
+  "Sodium Extra":"鈉-扩展",
+  "Sodium Chinese Localized Package":"鈉-漢化包"
   }
   
