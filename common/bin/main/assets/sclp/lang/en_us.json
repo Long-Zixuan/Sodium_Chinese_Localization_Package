@@ -2,6 +2,6 @@
   "sclp.options.pages.general":"General",
   "sclp.pages.sclp_page.name":"SCLP Settings",
   "sclp.options.should_trans_mod_name.name":"Translate Mod Name",
-  "sclp.options.should_trans_mod_name.tooltips":"Translate Mod Name(Only work in Chinese)"
+  "sclp.options.should_trans_mod_name.tooltip":"Translate Mod Name(Only work in Chinese)"
 }
   
