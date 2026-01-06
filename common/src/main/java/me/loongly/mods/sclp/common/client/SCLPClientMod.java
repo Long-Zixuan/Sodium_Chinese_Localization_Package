@@ -27,7 +27,6 @@ public class SCLPClientMod
 	static int chickCount = 0;
 	public static void caiDan()
 	{
-		System.out.println("Do Nothing");
 		chickCount++;
 		if (chickCount == 10)
 		{
