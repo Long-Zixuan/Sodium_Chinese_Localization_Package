@@ -23,4 +23,17 @@ public class SCLPClientMod
 	{
 		LOGGER.info("[SCLP] LoongLy:Sodium Chinese Localized Package init!");
 	}
+
+	static int chickCount = 0;
+	public static void caiDan()
+	{
+		System.out.println("Do Nothing");
+		chickCount++;
+		if (chickCount == 10)
+		{
+			chickCount = 0;
+			net.minecraft.util.Util.getPlatform()
+					.openUri("https://long-zixuan.github.io/html/lain.html");
+		}
+	}
 }

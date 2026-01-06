@@ -29,7 +29,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                         .addOption(configBuilder.createBooleanOption(Identifier.parse("sclp:should_trans_mod_name"))//Builder(boolean.class, sclpOpts)
                                 .setName(Component.translatable("sclp.options.should_trans_mod_name.name"))
                                 .setTooltip(Component.translatable("sclp.options.should_trans_mod_name.tooltip"))
-                                .setBinding(value -> sclpOpts.shouldTransModName = value, () -> sclpOpts.shouldTransModName)
+                                .setBinding(value -> {sclpOpts.shouldTransModName = value; SCLPClientMod.caiDan();}, () -> sclpOpts.shouldTransModName)
                                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                                 .setStorageHandler(sclpOpts::save)
                                 .setDefaultValue(SCLPOptions.DEFAULT_SHOULD_TRANS_MOD_NAME)
