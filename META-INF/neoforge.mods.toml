@@ -14,7 +14,7 @@ authors = "LoongLy" #optional
 description = '''钠（Sodium）汉化模组 ''' #mandatory (Supports multiline text)
 
 [[mixins]]
-config = "sodium_chinese.mixins.json"
+config = "sclp.mixins.json"
 
 [[mixins]]
 config = "sclp.neoforge.mixins.json"
