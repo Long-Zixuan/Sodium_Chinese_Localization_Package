@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Pa
 
 [[mods]] #mandatory
 modId = "sclp" #mandatory
-version = "3.0.0" #mandatory
+version = "3.0.3.1" #mandatory
 displayName = "Sodium Chinese Localization Mod" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional (see https://docs.neoforged.net/docs/misc/updatechecker/)
 displayURL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack" #optional (displayed in the mod UI)
