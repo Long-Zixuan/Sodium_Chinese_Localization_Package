@@ -43,7 +43,7 @@
   "sodium.options.cpu_render_ahead_limit.name": "CPU预渲染限制",
   "sodium.options.cpu_render_ahead_limit.tooltip": "仅用于调试。指定GPU可以传输的最大帧数。不建议更改此值，因为极低或极高的值可能会导致帧率不稳定。",
   "sodium.options.cpu_render_ahead_limit.value": "%s 帧",
-  "sodium.options.performance_impact_string": "性能影响：  %s",
+  "sodium.options.performance_impact_string": "性能影响: %s",
   "sodium.options.use_persistent_mapping.name": "使用 Persistent Mapping",
   "sodium.options.use_persistent_mapping.tooltip": "仅用于调试。如果启用，持久内存映射将用于暂存缓冲区，从而避免不必要的内存复制。禁用此选项有助于缩小图形损坏的原因。\n\n需要OpenGL 4.4或ARB_buffer_storage。",
   "sodium.options.chunk_update_threads.name": "阻塞更新线程",
@@ -75,5 +75,26 @@
   "sodium.options.allow_direct_memory_access.name": "允许直接访问内存",
   "sodium.options.allow_direct_memory_access.tooltip": "如果启用，将允许一些关键代码路径使用直接内存访问来提高性能。这通常会大大降低块和实体渲染的CPU开销，但会使诊断一些错误和崩溃变得更加困难。只有当你被要求或以其他方式知道你在做什么时，你才应该禁用它。",
   "sodium.options.use_particle_culling.name": "启用粒子消隐",
-  "sodium.options.use_particle_culling.tooltip": "如果启用，将仅渲染确定为可见的粒子。当附近有许多粒子时，这可以显著提高帧率。"
+  "sodium.options.use_particle_culling.tooltip": "如果启用，将仅渲染确定为可见的粒子。当附近有许多粒子时，这可以显著提高帧率。",
+  "options.iris.colorSpace": "色域",
+  "options.iris.colorSpace.sodium_tooltip": "适用于光影之上，如果不确定使用SRGB即可",
+
+  "sodium.options.defer_chunk_updates.name": "区块更新",
+  "sodium.options.defer_chunk_updates.tooltip": "如果设置为“延迟”，渲染将永远不会等待附近的区块更新完成。在某些情况下，这可以大大提高帧率，但可能会产生明显的视觉滞后，区块需要一段时间才能出现或消失。如果设置为“立即”则会通过阻塞帧直到块更新完成来消除视觉延迟，而设置为“很快”则最多允许一帧视觉延迟。",
+  "sodium.options.defer_chunk_updates.always": "延迟",
+  "sodium.options.defer_chunk_updates.one_frame": "很快",
+  "sodium.options.defer_chunk_updates.zero_frames": "立即",
+  "sodium.options.search": "搜索",
+  "sodium.options.search.hint": "搜索...",
+  "sodium.options.open_external_page_button": "打开",
+  "General":"通用",
+  "embeddium.search_bar_empty": "搜索选项...",
+  "embeddium.options.added_by_mod_string": "由模组: %s 添加",
+  "embeddium.conflicting_mod": "Embedium检测到存在已知会导致渲染问题和崩溃的模组。建议卸载它们。请参阅下面的列表。",
+  "embeddium.options.fullscreen.resolution.tooltip": "控制全屏下游戏的分辨率。",
+  "embeddium.options.use_quad_normals_for_lighting.name": "使用精确的四重着色",
+  "embeddium.options.use_quad_normals_for_lighting.tooltip": "启用后，Embedium将根据原版方块所面向的真实方向（而不是其轴对齐方向）对其进行渲染。这可以在禁用Forge实验的渲染管线时提高照明质量（建议使用最佳性能）。\n\n如果启用实验的渲染管线，则没有效果。",
+  "embeddium.options.use_render_pass_optimization.name": "使用渲染过程优化",
+  "embeddium.options.use_render_pass_optimization.tooltip": "启用后，当纹理不透明（或透明）时，Embedium将检测并标记为透明（或半透明）的方块，并自动为其使用更有效率的渲染方法。\n\n当使用第三方光影器包时，此选项无效。"
+
 }
