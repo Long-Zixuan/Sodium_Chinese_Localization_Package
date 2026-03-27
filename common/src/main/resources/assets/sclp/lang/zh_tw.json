@@ -4,6 +4,7 @@
   "sodium.option_impact.high":  "高",
   "sodium.option_impact.extreme":  "極高",
   "sodium.option_impact.varies":  "視情况而定",
+  "sodium.options.pages.general" : "一般",
   "sodium.options.pages.quality":  "畫質",
   "sodium.options.pages.performance":  "效能",
   "sodium.options.pages.advanced":  "高級",
@@ -11,6 +12,12 @@
   "sodium.options.simulation_distance.tooltip":  "類比距離控制加載和勾選地形和實體的距離。較短的距離可以减少內部服務器的負載,並可能提高幀率。",
   "sodium.options.brightness.tooltip":  "控制最暗的亮度。當新增時,較暗的區域會顯得更亮。這不會影響已經光線充足的區域的亮度。",
   "sodium.options.gui_scale.tooltip":  "設定使用者介面使用的大小。",
+  "sodium.options.fullscreen_mode.name" : "全屏模式",
+  "sodium.options.fullscreen_mode.off" : "关",
+  "sodium.options.fullscreen_mode.exclusive" : "独占",
+  "sodium.options.fullscreen_mode.borderless" : "无边框",
+  "sodium.options.fullscreen_mode.tooltip" : "独占全屏可以改善延迟，但可能会阻止某些输入法工作并减缓退出游戏的速度。无边框全屏可能会导致性能显著下降。",
+
   "sodium.options.fullscreen.tooltip":  "開啟後,遊戲將以全屏模式運行。（如果支持的話）",
   "sodium.options.fullscreen_resolution.tooltip":  "控制全屏模式下的顯示器分辯率和刷新率。更改此選項可能會干擾其他應用程序,並在應用程序之間切換時造成延遲。\n\n這僅在Windows作業系統上受支持。",
   "sodium.options.v_sync.tooltip":  "如果啟用,遊戲的幀率將與顯示器的刷新率同步,以犧牲整體輸入延遲為代價,提供更流暢的體驗。如果您的系統太慢,此設定可能會降低效能。",
@@ -94,6 +101,16 @@
   "sclp.options.should_trans_mod_name.tooltip":"開啟選項後將翻譯模組名\n關閉選項後將不翻譯模組名\n該選項將在重啓遊戲後生效",
   "Sodium Shadowy Path Blocks":"鈉-土徑陰影",
   "Sodium Extra":"鈉-扩展",
-  "Sodium Chinese Localized Package":"鈉-漢化包"
+  "Sodium Chinese Localized Package":"鈉-漢化包",
+    
+  "sodium.options.hidden_fluid_culling.name" : "隐藏流体剔除",
+  "sodium.options.hidden_fluid_culling.tooltip" : "如果开启，游戏将剔除流体（比如水）更多的面，这可以提升游戏的性能（尤其是您在水下时），但是当流体非常浅时，可能会出现图形错误",
+  "sodium.options.improved_fluid_shaping.name" : "更好的流体造型",
+  "sodium.options.improved_fluid_shaping.tooltip" : "此选项将改变水浸方块周围流体的形状。这可以提高流体表面的一致性，但在某些情况下，流体不会向物理流动的方向倾斜。这不会以任何方式影响流体的物理行为。",
+
+  "sodium.options.quad_splitting.name": "完美的半透明渲染",
+  "sodium.options.quad_splitting.tooltip": "完美的半透明渲染会使用四边分割和半透明排序使半透明方块（非实体方块）看起来正确，即使它们相交或形状奇怪，如浸水的彩色玻璃板。在“安全”模式下，生成的几何体数量有限制，以避免在极端情况下出现崩溃或性能下降的情况。而在“无限制”模式则不会对几何体数量进行限制。",
+  "sodium.options.quad_splitting.safe": "安全",
+  "sodium.options.quad_splitting.unlimited": "无限制"
   }
   
