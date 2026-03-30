@@ -20,13 +20,13 @@ public class SCLPOptions
     private static final Gson GSON = new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
-            .excludeFieldsWithModifiers(Modifier.PRIVATE, Modifier.STATIC)
+            .excludeFieldsWithModifiers(Modifier.TRANSIENT, Modifier.STATIC)
             .create();
-    private Path configPath;
+    private transient Path configPath;
 
     public static final boolean DEFAULT_SHOULD_TRANS_MOD_NAME = true;
 
-    public boolean shouldTransModName;
+    private boolean shouldTransModName;
 
     public void setShoudTransModName(boolean val)
     {
