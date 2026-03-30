@@ -20,6 +20,14 @@
   "icon": "icon.png",
   "license": "MIT",
   "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.loongly.mods.sclp.fabric.client.SCLPFabricClientMod"
+    ],
+    "sodium:config_api_user": [
+      "me.loongly.mods.sclp.common.client.options.SCLPConfigBuilder"
+    ]
+  },
    "mixins": [
     "sclp.mixins.json"
   ],
@@ -35,7 +43,7 @@
     }
   },
   "depends": {
-    "minecraft": ">=1.21.11",
-    "sodium": ">=0.8.3"
+    "minecraft": ">=26.1",
+    "sodium": ">=0.8.7"
   }
 }
