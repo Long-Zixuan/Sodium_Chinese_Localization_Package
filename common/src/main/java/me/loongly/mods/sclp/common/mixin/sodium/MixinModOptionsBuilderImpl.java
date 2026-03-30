@@ -19,7 +19,7 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "setName", at = @At(value = "RETURN"), cancellable = true)
     public void injectSetName(String name, CallbackInfoReturnable<Runnable> c) 
     {
-        if(SCLPClientMod.options().shouldTransModName)
+        if(SCLPClientMod.options().getShouldTransModName())
         {
             name = I18n.get(name);
             this.name = name;
@@ -29,7 +29,7 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     public void injectInit(String configId, String name, String version, CallbackInfo ci) 
     {
-        if(SCLPClientMod.options().shouldTransModName)
+        if(SCLPClientMod.options().getShouldTransModName())
         {
             name = I18n.get(name);
             this.name = name;

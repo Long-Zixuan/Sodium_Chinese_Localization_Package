@@ -26,7 +26,17 @@ public class SCLPOptions
 
     public static final boolean DEFAULT_SHOULD_TRANS_MOD_NAME = true;
 
-    public boolean shouldTransModName;
+    private boolean shouldTransModName;
+
+    public void setShoudTransModName(boolean val)
+    {
+        shouldTransModName = val;
+    }
+
+    public boolean getShouldTransModName()
+    {
+        return shouldTransModName;
+    }
 
     public SCLPOptions()
     {
