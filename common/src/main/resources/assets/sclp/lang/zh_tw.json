@@ -102,6 +102,7 @@
   "Sodium Shadowy Path Blocks":"鈉-土徑陰影",
   "Sodium Extra":"鈉-扩展",
   "Sodium Chinese Localized Package":"鈉-漢化包",
+  "Iris":"視界",
     
   "sodium.options.hidden_fluid_culling.name" : "隐藏流体剔除",
   "sodium.options.hidden_fluid_culling.tooltip" : "如果开启，游戏将剔除流体（比如水）更多的面，这可以提升游戏的性能（尤其是您在水下时），但是当流体非常浅时，可能会出现图形错误",
