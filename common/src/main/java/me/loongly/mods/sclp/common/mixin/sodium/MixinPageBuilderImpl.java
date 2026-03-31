@@ -24,7 +24,7 @@ public class MixinPageBuilderImpl
     private HashMap<String, String> transMap = new HashMap<String,String>(){
         {
             put("Settings","sclp.settings"); //反正就很离谱啊，Iris最新版本还是这种硬编码
-            put("General","stat.generalButton");
+            put("General","stat.generalButton"); // 0.8.0-0.8.2的钠也是这种硬编码
         }
     };
 
