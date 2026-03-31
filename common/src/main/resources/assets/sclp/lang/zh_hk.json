@@ -109,7 +109,7 @@
   "sodium.options.improved_fluid_shaping.tooltip" : "此选项将改变水浸方块周围流体的形状。这可以提高流体表面的一致性，但在某些情况下，流体不会向物理流动的方向倾斜。这不会以任何方式影响流体的物理行为。",
 
   "sodium.options.quad_splitting.name": "完美的半透明渲染",
-  "sodium.options.quad_splitting.tooltip": "完美的半透明渲染会使用四边分割和半透明排序使半透明方块（非实体方块）看起来正确，即使它们相交或形状奇怪，如浸水的彩色玻璃板。在“安全”模式下，生成的几何体数量有限制，以避免在极端情况下出现崩溃或性能下降的情况。而在“无限制”模式则不会对几何体数量进行限制。",
+  "sodium.options.quad_splitting.tooltip": "完美的半透明渲染会使用四边分割和半透明排序对非实体半透明方块进行渲染，即使它们相交或形状奇怪（如浸水的彩色玻璃板），也可以渲染出正确的遮挡关系。\n在“安全”模式下，生成的几何体数量有限制，以避免在极端情况下出现崩溃或性能下降的情况。而在“无限制”模式则不会对几何体数量进行限制。",
   "sodium.options.quad_splitting.safe": "安全",
   "sodium.options.quad_splitting.unlimited": "无限制",
   "sclp.settings":"設定"
