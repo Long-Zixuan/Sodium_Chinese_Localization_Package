@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "LGPLv3"
+issueTrackerURL = "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
+
+[[mods]]
+displayTest = "IGNORE_SERVER_VERSION"
+modId = "sclp"
+version = "${version}"
+displayName = "Embeddium Chinese Localized Pack"
+logoFile = "icon.png"
+updateJSONURL = ""
+authors = "LoongLy"
+displayURL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
+description = "Embeddium 汉化包"
+
+[[dependencies.sclp]]
+modId = "forge"
+mandatory = true
+versionRange = "[47.1.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.embeddium_device_check]]
+modId = "embeddium"
+mandatory = true
+versionRange = "*"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.embeddium_device_check]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "CLIENT"
