@@ -21,14 +21,14 @@ versionRange = "[47.1.3,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.embeddium_device_check]]
+[[dependencies.sclp]]
 modId = "embeddium"
 mandatory = true
 versionRange = "*"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.embeddium_device_check]]
+[[dependencies.sclp]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"
