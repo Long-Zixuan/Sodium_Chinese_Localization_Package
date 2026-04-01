@@ -13,7 +13,7 @@ import me.loongly.mods.sclp.client.SCLPClientMod;
 @Mixin(value = PlatformUtil.class, remap = false)
 public class MixinSodiumEmbeddiumOptionsGUI
 {
-    @Inject(method = "getModName", at = @At(value = "RETURN",target = "Lnet/minecraft/text/Text/;translatable(Ljava/lang/String;)V"), cancellable = true)
+    @Inject(method = "getModName", at = @At(value = "RETURN"), cancellable = true)
     private static void mixinGetModName(String modId, CallbackInfoReturnable<String> cir) {
         String modName = cir.getReturnValue();
         if(SCLPClientMod.options().isTransModName)
