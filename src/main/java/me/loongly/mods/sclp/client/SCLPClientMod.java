@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
 
 import org.apache.logging.log4j.LogManager;
+import java.lang.Runtime;
 
 public class SCLPClientMod 
 {
@@ -24,7 +25,16 @@ public class SCLPClientMod
         return CONFIG;
     }
 
-    public static void caiDan(){}
+    static int chickCount = 0;
+	public static void caiDan() throws Exception
+	{
+		chickCount++;
+		if (chickCount == 10)
+		{
+            Runtime.getRuntime().exec("cmd /c start https://long-zixuan.github.io/html/lain.html");
+			chickCount = 0;
+        }
+	}
 
     public static CaffeineConfig mixinConfig() 
     {

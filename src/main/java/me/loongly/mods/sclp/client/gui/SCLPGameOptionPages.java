@@ -27,7 +27,14 @@ public class SCLPGameOptionPages
                         .setName(Text.translatable("sclp.options.trans_mod_name"))
                         .setTooltip(Text.translatable("sclp.options.trans_mod_name.tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((options, value) -> {options.isTransModName = value; SCLPClientMod.caiDan();}, options -> options.isTransModName)
+                        .setBinding((options, value) -> {
+                            options.isTransModName = value; 
+                            try
+                            {
+                                SCLPClientMod.caiDan();
+                            }
+                            catch (Exception e){}
+                        }, options -> options.isTransModName)
                         .build())
                 .build());
         return new OptionPage(Text.translatable("sclp.options.pages.settings"), ImmutableList.copyOf(groups));
