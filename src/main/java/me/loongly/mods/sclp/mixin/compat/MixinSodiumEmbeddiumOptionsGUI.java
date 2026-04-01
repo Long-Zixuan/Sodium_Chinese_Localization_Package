@@ -16,6 +16,10 @@ public class MixinSodiumEmbeddiumOptionsGUI
     @Inject(method = "getModName", at = @At(value = "RETURN"), cancellable = true)
     private static void mixinGetModName(String modId, CallbackInfoReturnable<String> cir) {
         String modName = cir.getReturnValue();
+        if(modName.equals("Embeddium Chinese Localized Pack")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示ECLP这种缩写
+        {
+            modName = "ECLP";
+        }
         if(SCLPClientMod.options().isTransModName)
         {
             modName = Text.translatable(modName).getString().replaceAll("§.", "");
