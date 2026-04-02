@@ -156,9 +156,9 @@
   "xenon.extras.options.darkness.blocklightonly.desc": "如果启用，将禁用天空、雾和月亮亮度，使方块成为唯一的光源",
   "xenon.extras.options.darkness.moonphase.title": "使用月相",
   "xenon.extras.options.darkness.moonphase.desc": "如果启用，黑暗将受到月相的影响",
-  "xenon.extras.options.darkness.moonphase.fresh.title": "新月明亮（最小）",
+  "xenon.extras.options.darkness.moonphase.fresh.title": "新月亮度（最小）",
   "xenon.extras.options.darkness.moonphase.fresh.desc": "配置新月的亮度，也就是月相中的最小亮度",
-  "xenon.extras.options.darkness.moonphase.full.title": "满月明亮（最大）",
+  "xenon.extras.options.darkness.moonphase.full.title": "满月亮度（最大）",
   "xenon.extras.options.darkness.moonphase.full.desc": "配置满月的亮度，也就是月相中的最大亮度",
 
   "xenon.extras.options.displayfps.title": "显示帧率",
@@ -242,6 +242,7 @@
   "xenon.extras.options.others.languagescreen.fastreload.desc": "如果启用，语言更新仅重新加载语言，而不是所有资源，速度提高99.9%",
   "xenon.extras.options.leaf_culling.name": "叶子剔除模式",
   "xenon.extras.options.leaf_culling.tooltip": "如果启用，其他叶子后面的叶子将被剔除以提高性能。空心模式将会剔除多余的面，实心模式将启用其他叶子后面的叶子当作实心方块渲染。",
+  "embeddium.search_bar_empty": "搜索选项...",
 
   "options.leaf_culling.none": "无",
   "options.leaf_culling.hollow": "空心模式",
