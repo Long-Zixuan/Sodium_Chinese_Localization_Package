@@ -1,0 +1,121 @@
+plugins {
+    id 'signing'
+    id 'dev.architectury.loom' version '1.6-SNAPSHOT'
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = "${project.mod_version}+mc${project.minecraft_version}-${getVersionMetadata()}"
+group = project.maven_group
+
+loom {
+    accessWidenerPath = file("src/main/resources/sclp.accesswidener")
+
+    forge {
+        convertAccessWideners = true
+
+        mixinConfigs = [
+                "sclp.mixins.json"
+        ]
+    }
+}
+
+repositories {
+    maven { 
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven {
+        url = "https://repo.redlance.org/public"
+    }
+    maven {
+        url = "https://maven.neoforged.net/releases"
+    }
+    maven {
+        url = "https://maven.blamejared.com"
+    }
+}
+
+dependencies {
+    //to change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    forge "net.minecraftforge:forge:${project.loader_version}"
+
+    modImplementation "org.embeddedt:embeddium-${project.minecraft_version}:${project.embeddium_version}"
+    modCompileOnly "maven.modrinth:oculus:${project.oculus_version}"
+
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${project.mixinextras_version}"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:${project.mixinextras_version}"))
+
+    implementation(forgeRuntimeLibrary(include("com.github.dima_dencep.mods:NanoLiveConfig:${project.nanoliveconfig_version}") {
+        exclude(group: "dev.su5ed.sinytra.fabric-api")
+        exclude(group: "dev.su5ed.sinytra")
+    }))
+
+     // Fabric API
+    modCompileOnly "org.jetbrains:annotations:24.1.0"
+    modImplementation("maven.modrinth:sodium-options-api:1.0.8")
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
+}
+
+java {
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
+}
+
+jar {
+    from "LICENSE.txt"
+}
+
+// configure the maven publication
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    // select the repositories you want to publish to
+    repositories {
+        maven {
+            name = "Redlance"
+            url = "https://repo.redlance.org/public"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+}
+
+static def getVersionMetadata() {
+    def build_id = System.getenv("GITHUB_RUN_NUMBER")
+
+    // CI builds only
+    if (build_id != null) {
+        return "build.${build_id}"
+    }
+    // No tracking information could be found about the build
+    return "unknown"
+}
