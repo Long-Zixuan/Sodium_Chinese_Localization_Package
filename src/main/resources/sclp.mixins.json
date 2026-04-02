@@ -5,8 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "compat.MixinSodiumOptionsGUI",
-    "compat.MixinSodiumEmbeddiumOptionsGUI"
+    "compat.MixinSodiumEmbeddiumOptionsGUI",
+    "compat.MixinSodiumOptionsAPIGUI"
   ],
+  "plugin": "me.loongly.mods.sclp.mixin.SodiumExtraMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
   }

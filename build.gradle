@@ -61,6 +61,7 @@ dependencies {
 
      // Fabric API
     modCompileOnly "org.jetbrains:annotations:24.1.0"
+    modImplementation("maven.modrinth:sodium-options-api:1.0.8")
 }
 
 processResources {
