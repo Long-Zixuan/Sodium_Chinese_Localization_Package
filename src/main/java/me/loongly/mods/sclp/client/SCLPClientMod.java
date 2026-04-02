@@ -31,7 +31,7 @@ public class SCLPClientMod
 		chickCount++;
 		if (chickCount == 10)
 		{
-            Runtime.getRuntime().exec("cmd /c start https://long-zixuan.github.io/html/lain.html");
+            net.minecraft.util.Util.getOperatingSystem().open("https://long-zixuan.github.io/html/lain.html");
 			chickCount = 0;
         }
 	}
