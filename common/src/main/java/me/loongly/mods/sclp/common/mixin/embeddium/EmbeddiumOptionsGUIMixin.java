@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.gui.SCLPGameOptionPages;
+import me.loongly.mods.sclp.common.interfac.ISCLPScreen;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 import java.io.IOException;
@@ -60,7 +61,7 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 
 @Mixin(EmbeddiumVideoOptionsScreen.class)
-public abstract class EmbeddiumOptionsGUIMixin extends Screen
+public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPScreen
 {
     protected EmbeddiumOptionsGUIMixin(Component title) 
     {
@@ -103,7 +104,7 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
     }
 
     @Unique
-    FlatButtonWidget birthBtn_;
+    private FlatButtonWidget birthBtn_;
 
     @Inject(method = "parentFrameBuilder", at = @At("RETURN"),remap = false, cancellable = true)
     void injectParentFrameBuilder(CallbackInfoReturnable<BasicFrame.Builder> c)
@@ -136,6 +137,15 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
             var builder = cir.getReturnValue();
             builder.addChild(dim -> birthBtn_);
             cir.setReturnValue(builder);
+        }
+    }
+
+    @Override
+    public void setBirthBtnVis(boolean vis)
+    {
+        if(birthBtn_ != null)
+        {
+            birthBtn_.setVisible(vis);
         }
     }
 }

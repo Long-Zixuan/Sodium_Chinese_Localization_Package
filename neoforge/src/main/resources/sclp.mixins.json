@@ -11,7 +11,8 @@
     "embeddium.MixinScreenPrompt",
     "embeddium.EmbeddiumOptionsGUIMixin",
     "embeddium.MixinControlValueFormatter",
-    "sodium.MixinControlValueFormatter"
+    "sodium.MixinControlValueFormatter",
+    "embeddium.ScrollableFrameMixin"
   ],
   "server": [
   ],
