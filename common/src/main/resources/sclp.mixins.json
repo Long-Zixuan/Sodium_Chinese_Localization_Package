@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "sodium.MixinModOptionsBuilderImpl",
-    "sodium.MixinPageBuilderImpl"
+    "sodium.MixinPageBuilderImpl",
+    "sodium.MixinSodiumVideoSettingsScreen"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -35,4 +35,12 @@ public class SCLPClientMod
 					.openUri("https://long-zixuan.github.io/html/lain.html");
 		}
 	}
+
+	public static void birthCaiDan()
+	{
+		net.minecraft.util.Util.getPlatform()
+				.openUri("https://www.loongly.me/html/clock.html");
+		net.minecraft.util.Util.getPlatform()
+				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
+	}
 }
