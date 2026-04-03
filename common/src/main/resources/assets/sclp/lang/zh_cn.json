@@ -117,9 +117,10 @@
   "sclp.donation.prompt.1":"看起来您非常中意",
   "sclp.donation.prompt.2":",一款十分强大的优化模组。",
   "sclp.donation.prompt.3":"这样的模组很复杂，需要",
-  "sclp.donation.prompt.thousand_hours":"上千小时",
-  "sclp.donation.prompt.4":"来开发、测试和维护以给予玩家所期待的体验。，",
+  "sclp.donation.thousand_hours":"上千小时",
+  "sclp.donation.prompt.4":"来开发、测试和维护以给予玩家所期待的体验。",
   "sclp.donation.prompt.5":"若您想表达感激之情，同时支持我们模组的开发，不妨考虑",
   "sclp.donation.buycoffee":"请我们喝杯奶茶",
-  "sclp.donation.prompt.6":"最后再一次感谢您，希望找个模组可以帮助您（和您的电脑。）"
+  "sclp.donation.prompt.6":"最后再一次感谢您，希望找个模组可以帮助您（和您的电脑。）",
+  "sclp.close":"关闭"
 }

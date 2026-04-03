@@ -7,10 +7,11 @@
   "sclp.donation.prompt.1":"It seems that you've been enjoying ",
   "sclp.donation.prompt.2":", the powerful and open rendering optimization mod for Minecraft.",
   "sclp.donation.prompt.3":"Mods like these are complex. They require ",
-  "sclp.donation.prompt.thousand_hours":"thousands of hours",
+  "sclp.donation.thousand_hours":"thousands of hours",
   "sclp.donation.prompt.4":" of development, debugging, and tuning to create the experience that players have come to expect.",
   "sclp.donation.prompt.5":"If you'd like to show your token of appreciation, and support the development of our mod in the process, then consider ",
   "sclp.donation.buycoffee":"buying us a coffee",
-  "sclp.donation.prompt.6":"And thanks again for using our mod! We hope it helps you (and your computer.)"
+  "sclp.donation.prompt.6":"And thanks again for using our mod! We hope it helps you (and your computer.)",
+  "sclp.close":"Close"
 }
   
