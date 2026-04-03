@@ -186,7 +186,7 @@ public class MixinSodiumGUI extends Screen
         int day = today.getDayOfMonth();
         if(isMyBirthday(year, month, day))
         {
-            birthPage_ = new OptionPage("ᗜᴗᗜ", ImmutableList.of());
+            birthPage_ = SCLPGameOptionPages.birthPage();
             this.pages.add(birthPage_);
         }
     }

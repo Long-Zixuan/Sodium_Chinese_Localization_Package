@@ -36,6 +36,15 @@ public class SCLPGameOptionPages
         return new OptionPage(I18N.trans("sclp.page_name"), ImmutableList.copyOf(groups));
     }
 
+     public static OptionPage birthPage()
+     {
+        List<OptionGroup> groups = new ArrayList<>();
+        buildSclpPages(groups);
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        return new OptionPage(I18N.trans("ᗜᴗᗜ:" + (year - 2004)), ImmutableList.copyOf(groups));
+     }
+
     static void buildSclpPages(List<OptionGroup> groups)
     {
         groups.add(OptionGroup.createBuilder()
