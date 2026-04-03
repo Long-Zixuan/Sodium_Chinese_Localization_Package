@@ -61,8 +61,12 @@ public class MixinSodiumGUI extends Screen
 
     void birthCaidan()
     {
-         Util.getOperatingSystem()
+        Util.getOperatingSystem()
                 .open("https://long-zixuan.github.io/html/lain.html");
+        Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/badapple_h.html");
+        Util.getOperatingSystem()
+                .open("https://www.loongly.me/html/clock.html");
     }
 
     boolean isMyBirthday(int year, int month, int day)
