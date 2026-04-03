@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.gui.SCLPGameOptionPages;
-import me.loongly.mods.sclp.common.interfac.ISCLPScreen;
+import me.loongly.mods.sclp.common.api.ISCLPScreen;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 import java.io.IOException;

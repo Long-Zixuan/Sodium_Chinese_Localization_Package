@@ -1,4 +1,4 @@
-package me.loongly.mods.sclp.common.interfac;
+package me.loongly.mods.sclp.common.api;
 
 public interface ISCLPScreen 
 {

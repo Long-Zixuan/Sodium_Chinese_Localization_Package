@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.gui.ECLPGameOptionPages;
 import me.loongly.mods.sclp.common.client.gui.SCLPGameOptionPages;
-import me.loongly.mods.sclp.common.interfac.ISCLPScreen;
+import me.loongly.mods.sclp.common.api.ISCLPScreen;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 import java.io.IOException;
@@ -53,6 +53,7 @@ import org.embeddedt.embeddium.impl.gui.widgets.FlatButtonWidget;
 import org.embeddedt.embeddium.impl.gui.EmbeddiumVideoOptionsScreen;
 
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -64,39 +65,23 @@ import java.lang.reflect.Field;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 
-@Mixin(ScrollableFrame.Builder.class)
-class ScrollableFrameMixin
+@Mixin(OptionPageFrame.class)
+class OptionPageFrameMixin
 {
-    @Inject(method = "setFrame", at = @At("TAIL"),remap = false, cancellable = true)
-    void injectSetFrame(AbstractFrame frame, CallbackInfoReturnable<Void> cir) 
+    @Shadow(remap = false) @Final
+    OptionPage page;
+    @Inject(method = "render", at = @At("TAIL"),remap = false, cancellable = true)
+    void injectRender(GuiGraphics drawContext, int mouseX, int mouseY, float delta,CallbackInfo ci) 
     {
-        if(frame instanceof OptionPageFrame)
+        if(page.getId().getModId().equals(SCLPClientMod.MOD_ID))
         {
-            OptionPageFrame optionPageFrame = (OptionPageFrame)frame;
-            Class<?> optionPageFrameClass = OptionPageFrame.class;
-            try
+            var embScreen = getEmbScreen();
+            if(embScreen != null)
             {
-                // 获取私有属性 "page"
-                Field pageField = optionPageFrameClass.getDeclaredField("page");
-
-                // 设置可访问性为 true（绕过访问权限限制）
-                pageField.setAccessible(true);
-                OptionPage page = (OptionPage) pageField.get(optionPageFrame);
-                if(page.getId().getModId().equals(SCLPClientMod.MOD_ID))
-                {
-                    var embScreen = getEmbScreen();
-                    if(embScreen != null)
-                    {
-                        ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
-                        sclpScreen.setBirthBtnVis(true);
-                    }
-                    return;
-                }
+                ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
+                sclpScreen.setBirthBtnVis(true);
             }
-            catch (Exception e)
-            {
-                SCLPClientMod.LOGGER.error("[SCLP] Failed to get page field from OptionPageFrame", e);
-            }
+            return;
         }
         var embScreen = getEmbScreen();
         if(embScreen != null)

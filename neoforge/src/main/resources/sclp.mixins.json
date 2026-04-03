@@ -12,7 +12,7 @@
     "embeddium.EmbeddiumOptionsGUIMixin",
     "embeddium.MixinControlValueFormatter",
     "sodium.MixinControlValueFormatter",
-    "embeddium.ScrollableFrameMixin"
+    "embeddium.OptionPageFrameMixin"
   ],
   "server": [
   ],
