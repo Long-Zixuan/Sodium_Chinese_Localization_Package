@@ -61,7 +61,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                 .addOption(configBuilder.createExternalButtonOption(this.optionId("support_project"))
                                         .setName(Component.translatable("sclp.options.support_project.name"))
                                         .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                                        .setScreenConsumer(screen -> Util.getPlatform().openUri("https://ifdian.net/a/loongly")));
+                                        .setScreenConsumer(SCLPClientMod::openSupportWeb));
         
         group.addOption(configBuilder.createBooleanOption(this.optionId("close_support_page"))//Builder(boolean.class, sclpOpts)
                 .setName(Component.translatable("sclp.options.close_support_page.name"))

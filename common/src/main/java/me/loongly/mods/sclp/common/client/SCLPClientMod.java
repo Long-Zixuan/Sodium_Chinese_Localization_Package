@@ -1,9 +1,13 @@
 package me.loongly.mods.sclp.common.client;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import me.loongly.mods.sclp.common.client.options.SCLPOptions;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.util.Util;
 
 
 public class SCLPClientMod
@@ -43,7 +47,7 @@ public class SCLPClientMod
 		{
 			LOGGER.info("[SCLP]Open Lain's website.");
 			chickCount = 0;
-			net.minecraft.util.Util.getPlatform()
+			Util.getPlatform()
 					.openUri("https://long-zixuan.github.io/html/lain.html");
 		}
 	}
@@ -51,10 +55,22 @@ public class SCLPClientMod
 	public static void birthCaiDan()
 	{
 		LOGGER.info("[SCLP]Happly birthday to LoongLy!!!");
-		net.minecraft.util.Util.getPlatform()
+		Util.getPlatform()
 				.openUri("https://www.loongly.me/html/clock.html");
-		net.minecraft.util.Util.getPlatform()
+		Util.getPlatform()
 				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
+	}
+
+	public static void openSupportWeb(Screen screen)
+	{
+		LOGGER.info("[SCLP]Open Support website.");
+		Util.getPlatform().openUri("https://ifdian.net/a/loongly");
+	}
+
+	public static void openSupportWeb()//未来预留
+	{
+		LOGGER.info("[SCLP]Open Support website.");
+		Util.getPlatform().openUri("https://ifdian.net/a/loongly");
 	}
 }
 
