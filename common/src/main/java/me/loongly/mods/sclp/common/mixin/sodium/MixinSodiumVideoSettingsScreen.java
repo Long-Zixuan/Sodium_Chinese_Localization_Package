@@ -81,7 +81,7 @@ public class MixinSodiumVideoSettingsScreen
     {
         var videoSettingsScrIns = ((VideoSettingsScreen)(Object)this);
         var prompt = new ScreenPrompt(videoSettingsScrIns, DONATION_PROMPT_I18N_MESSAGE, 320, 190,
-                new ScreenPrompt.Action(Component.translatable("sclp.donation.buycoffee"), this::openDonationPage));
+                new ScreenPrompt.Action(Component.translatable("sclp.donation.buycoffee2"), this::openDonationPage));
         prompt.setFocused(true);
 
         options.notifications.hasSeenDonationPrompt = true;
