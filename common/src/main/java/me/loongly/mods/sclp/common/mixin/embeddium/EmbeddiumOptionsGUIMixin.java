@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.gui.SCLPGameOptionPages;
+import me.loongly.mods.sclp.common.language.I18N;
 import me.loongly.mods.sclp.common.api.ISCLPScreen;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
@@ -106,20 +107,25 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
     @Unique
     private FlatButtonWidget birthBtn_;
 
+    @Unique
+    private FlatButtonWidget supportBtn_;
+
+    @Unique
+    private FlatButtonWidget closeSupportBtn_;
+
     @Inject(method = "parentFrameBuilder", at = @At("RETURN"),remap = false, cancellable = true)
     void injectParentFrameBuilder(CallbackInfoReturnable<BasicFrame.Builder> c)
     {
+        int newWidth = this.width;
+        if (newWidth > 550 && (float) this.width / (float) this.height > (5f / 4f)) 
+        {
+            newWidth = Math.max(550, (int) (this.height * 5f / 4f));
+        }
+
+        Dim2i basicFrameDim = new Dim2i((this.width - newWidth) / 2, 0, newWidth, this.height);
+        Dim2i tabFrameDim = new Dim2i(basicFrameDim.x() + basicFrameDim.width() / 20 / 2, basicFrameDim.y() + basicFrameDim.height() / 4 / 2, basicFrameDim.width() - (basicFrameDim.width() / 20), basicFrameDim.height() / 4 * 3);
         if(SCLPClientMod.isMyBirthday())
         {
-            int newWidth = this.width;
-            if (newWidth > 550 && (float) this.width / (float) this.height > (5f / 4f)) 
-            {
-                newWidth = Math.max(550, (int) (this.height * 5f / 4f));
-            }
-
-            Dim2i basicFrameDim = new Dim2i((this.width - newWidth) / 2, 0, newWidth, this.height);
-            Dim2i tabFrameDim = new Dim2i(basicFrameDim.x() + basicFrameDim.width() / 20 / 2, basicFrameDim.y() + basicFrameDim.height() / 4 / 2, basicFrameDim.width() - (basicFrameDim.width() / 20), basicFrameDim.height() / 4 * 3);
-
             var data = LocalDate.now();
             var year = data.getYear();
             var birthText = Component.literal("🎂:" + (year -2004));
@@ -127,25 +133,66 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
             var birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - 240 - birthTextWidth, tabFrameDim.getLimitY() + 5, birthTextWidth + 10, 20);
             birthBtn_ = new FlatButtonWidget(birthBtnDim, birthText, SCLPClientMod::birthCaiDan);
         }
+        if(SCLPClientMod.options().shouldShowSupportPage)
+        {
+            var supportBtnDim = new Dim2i(30, tabFrameDim.getLimitY() + 5, 100, 20);
+            supportBtn_ = new FlatButtonWidget(supportBtnDim, Component.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});
+            var closeSupportBtnDim = new Dim2i(supportBtnDim.x() + supportBtnDim.width() + 2, supportBtnDim.y(), 20, 20);
+            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});
+        }
+    }
+
+    void onClickCloseSupportBtn()
+    {
+        SCLPClientMod.options().shouldShowSupportPage = false;
+        try
+        {
+            SCLPClientMod.options().writeChanges();
+        }
+        catch (IOException e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Failed to save options.", e);
+        }
+        supportBtn_.setVisible(false);
+        closeSupportBtn_.setVisible(false);
+    }
+
+    void openSupportWeb()
+    {
+        SCLPClientMod.LOGGER.info("[SCLP]Open Support website.");
+        Util.getPlatform().openUri("https://ifdian.net/a/loongly");
     }
 
     @Inject(method = "parentBasicFrameBuilder", at = @At("RETURN"),remap = false, cancellable = true)
     void injectParentBasicFrameBuilder(Dim2i parentBasicFrameDim, Dim2i tabFrameDim, CallbackInfoReturnable<BasicFrame.Builder> cir)
     {
+        var builder = cir.getReturnValue();
         if(SCLPClientMod.isMyBirthday())
         {
-            var builder = cir.getReturnValue();
             builder.addChild(dim -> birthBtn_);
-            cir.setReturnValue(builder);
         }
+        if(SCLPClientMod.options().shouldShowSupportPage)
+        {
+            builder.addChild(dim -> closeSupportBtn_);
+            builder.addChild(dim -> supportBtn_);
+        }
+        cir.setReturnValue(builder);
     }
 
     @Override
-    public void setBirthBtnVis(boolean vis)
+    public void setUIEleVis(boolean vis)
     {
         if(birthBtn_ != null)
         {
             birthBtn_.setVisible(vis);
+        }
+        if(supportBtn_ != null && SCLPClientMod.options().shouldShowSupportPage)
+        {
+            supportBtn_.setVisible(vis);
+        }
+        if(closeSupportBtn_ != null && SCLPClientMod.options().shouldShowSupportPage)
+        {
+            closeSupportBtn_.setVisible(vis);
         }
     }
 }

@@ -26,6 +26,7 @@ public class SCLPGameOptions
     private Path configPath;
 
     public boolean shouldTransModName = true;
+    public boolean shouldShowSupportPage = true;
 
     public SCLPGameOptions()
     {

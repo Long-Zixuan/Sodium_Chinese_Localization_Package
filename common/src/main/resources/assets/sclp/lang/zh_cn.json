@@ -154,5 +154,6 @@
     "sodium.options.improved_fluid_shaping.default" : "原版",
   "sodium.options.improved_fluid_shaping.alternative" : "替代的",
   "sodium.options.default":"默认",
-    "sodium.options.pages.general" : "通用"
+    "sodium.options.pages.general" : "通用",
+  "sclp.options.support_project.name":"请LoongLy喝一杯奶茶"
 }

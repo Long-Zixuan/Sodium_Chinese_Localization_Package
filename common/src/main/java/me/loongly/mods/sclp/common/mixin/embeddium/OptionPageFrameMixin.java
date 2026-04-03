@@ -79,7 +79,7 @@ class OptionPageFrameMixin
             if(embScreen != null)
             {
                 ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
-                sclpScreen.setBirthBtnVis(true);
+                sclpScreen.setUIEleVis(true);
             }
             return;
         }
@@ -87,7 +87,7 @@ class OptionPageFrameMixin
         if(embScreen != null)
         {
             ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
-            sclpScreen.setBirthBtnVis(false);
+            sclpScreen.setUIEleVis(false);
         }
     }
 

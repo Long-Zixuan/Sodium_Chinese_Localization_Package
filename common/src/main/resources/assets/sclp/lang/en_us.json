@@ -29,6 +29,7 @@
   "sclp.multiplier":"%sx",
   "sclp.page":"SCLP Settings",
   "sclp.cur_languagecode":"en_us",
-  "sclp.format_error":"Format Error:"
+  "sclp.format_error":"Format Error:",
+  "sclp.options.support_project.name":"Buy LoongLy a coffee"
 }
   

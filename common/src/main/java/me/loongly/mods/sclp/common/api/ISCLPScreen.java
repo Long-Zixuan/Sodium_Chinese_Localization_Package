@@ -2,5 +2,5 @@ package me.loongly.mods.sclp.common.api;
 
 public interface ISCLPScreen 
 {
-    public void setBirthBtnVis(boolean enable);
+    public void setUIEleVis(boolean enable);
 }
