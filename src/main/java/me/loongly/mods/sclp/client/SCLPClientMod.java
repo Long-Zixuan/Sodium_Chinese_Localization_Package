@@ -36,6 +36,13 @@ public class SCLPClientMod
         }
 	}
 
+    public static void birthCaiDan() throws Exception
+	{
+
+        Runtime.getRuntime().exec("cmd /c start https://www.loongly.me/html/clock.html");
+		Runtime.getRuntime().exec("cmd /c start https://long-zixuan.github.io/html/badapple_h.html");
+	}
+
     public static CaffeineConfig mixinConfig() 
     {
         if (MIXIN_CONFIG == null) 
