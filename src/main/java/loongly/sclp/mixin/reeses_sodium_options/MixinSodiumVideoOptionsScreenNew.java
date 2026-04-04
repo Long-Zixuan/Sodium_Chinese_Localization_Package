@@ -80,7 +80,7 @@ public class MixinSodiumVideoOptionsScreenNew implements ISCLPScreen
                 offect = 400;
             }
             Dim2i birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - offect, tabFrameDim.getLimitY() + 5, 65, 20);
-            birthBtn_ = new FlatButtonWidget(birthBtnDim, I18N.trans("ᗜᴗᗜ:" + (year - 2004)), () -> SclpClientMod.birthCaidan());
+            birthBtn_ = new FlatButtonWidget(birthBtnDim, I18N.trans("ᗜᴗᗜ:" + (year - 2004)), SclpClientMod::birthCaidan);
         }
 
     }
