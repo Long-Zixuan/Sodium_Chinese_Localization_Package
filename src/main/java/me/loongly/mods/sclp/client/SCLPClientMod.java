@@ -36,6 +36,12 @@ public class SCLPClientMod
         }
 	}
 
+    public static void birthCaiDan()
+	{
+        net.minecraft.util.Util.getOperatingSystem().open("https://www.loongly.me/html/clock.html");
+        net.minecraft.util.Util.getOperatingSystem().open("https://long-zixuan.github.io/html/badapple_h.html");
+	}
+
     public static CaffeineConfig mixinConfig() 
     {
         if (MIXIN_CONFIG == null) 
