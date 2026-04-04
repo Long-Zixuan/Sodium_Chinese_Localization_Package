@@ -115,6 +115,7 @@ public class MixinSodiumGUI extends Screen
         {
             tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"请安装Fabric API，否则汉化包将无法正常工作！")));
             tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"請安裝Fabric API，否則漢化包將無法正常工作！")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"Please install the Fabric API, otherwise SCLP will not work properly!")));//虽然老外不太可能安装这个模组，但是考虑到这个模组实际上是支持多国语言的，使用还是按照国际惯例价格英语
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
@@ -131,7 +132,7 @@ public class MixinSodiumGUI extends Screen
 
         if(!hadTrans)
         {
-            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 26, boxX + boxWidth, boxY + boxHeight, 0xFFED65FF, 0xFFED65FF);
+            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 38, boxX + boxWidth, boxY + boxHeight, 0xFFED65FF, 0xFFED65FF);
         }
 
         for (int i = 0; i < tooltip.size(); i++)
