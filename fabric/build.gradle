@@ -23,6 +23,7 @@ loom {
     }
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
+        useLegacyMixinAp = true // 尝试切换此值，有时新版 AP 会有兼容性问题
     }
     runs {
         client {
