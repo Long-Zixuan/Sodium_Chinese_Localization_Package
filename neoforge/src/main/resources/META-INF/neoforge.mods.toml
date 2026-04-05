@@ -23,12 +23,5 @@ versionRange = "[1.21,)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.sclp]]
-modId = "sodium"
-type = "required"
-versionRange = "[0.6.0,)"
-ordering = "NONE"
-side = "CLIENT"
-
 [[mixins]]
 config = "sclp.mixins.json"
