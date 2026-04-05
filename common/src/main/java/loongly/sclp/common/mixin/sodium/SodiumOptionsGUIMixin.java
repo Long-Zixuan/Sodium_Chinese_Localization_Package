@@ -5,6 +5,7 @@ import net.caffeinemc.mods.sodium.client.gui.options.OptionPage;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,6 +31,7 @@ import net.minecraft.network.chat.FormattedText;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
+import net.minecraft.Util;
 
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -78,5 +80,36 @@ public abstract class SodiumOptionsGUIMixin
         {
             this.pages.add(SCLPGameOptionPages.birth());
         }
+    }
+
+    //@Redirect(method = "openDonationPrompt", at = @At(value = "INVOKE"),remap = false)
+     /**
+     * @reason 替换默认的 Sodium 捐赠提示，对捐赠按钮进行翻译。
+     * @author Loongly
+     */
+    @Overwrite(remap = false)
+    private void openDonationPrompt(SodiumGameOptions options) 
+    {
+        var videoSettingsScrIns = ((SodiumOptionsGUI)(Object)this);
+        var prompt = new ScreenPrompt(videoSettingsScrIns, DONATION_PROMPT_MESSAGE, 320, 190,
+                new ScreenPrompt.Action(Component.translatable("sclp.donation.buycoffee2"), this::openDonationPage));
+        prompt.setFocused(true);
+
+        options.notifications.hasSeenDonationPrompt = true;
+
+        try 
+        {
+            SodiumGameOptions.writeToDisk(options);
+        } 
+        catch (IOException e) 
+        {
+            SodiumClientMod.logger()
+                    .error("Failed to update config file", e);
+        }
+    }
+
+    private void openDonationPage()
+    {
+        Util.getPlatform().openUri("https://caffeinemc.net/donate");
     }
 }
