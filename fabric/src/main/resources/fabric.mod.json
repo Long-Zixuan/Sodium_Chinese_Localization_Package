@@ -17,7 +17,7 @@
     "issues": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues",
     "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/"
   },
-  "icon": "sclp/icon.png",
+  "icon": "icon.png",
   "license": "MIT",
   "environment": "client",
   "mixins": [

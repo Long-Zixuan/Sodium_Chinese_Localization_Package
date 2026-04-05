@@ -8,7 +8,7 @@ modId = "sclp"
 version = "${version}"
 displayName = "Sodium Chinese Localized Package"
 
-logoFile = "sclp/icon.png" #optional
+logoFile = "icon.png" #optional
 
 authors = "LoongLy"
 
