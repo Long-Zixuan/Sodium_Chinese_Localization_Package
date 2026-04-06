@@ -35,7 +35,7 @@ import java.util.List;
 @Mixin(value = ScreenPrompt.class)
 public class MixinScreenPrompt
 {
-    @Final @Shadow(remap = false)
+    /*@Final @Shadow(remap = false)
     private int width; 
     
     @Final @Shadow(remap = false)
@@ -74,5 +74,5 @@ public class MixinScreenPrompt
         style.textDisabled = style.textDefault;
 
         return style;
-    }
+    }*/
 }
