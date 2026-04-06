@@ -243,6 +243,7 @@
   "xenon.extras.options.leaf_culling.name": "叶子剔除模式",
   "xenon.extras.options.leaf_culling.tooltip": "如果启用，其他叶子后面的叶子将被剔除以提高性能。空心模式将会剔除多余的面，实心模式将启用其他叶子后面的叶子当作实心方块渲染。",
   "embeddium.search_bar_empty": "搜索选项...",
+  "embeddium.options.fullscreen.resolution.tooltip": "控制全屏模式下的屏幕分辨率。",
 
   "options.leaf_culling.none": "无",
   "options.leaf_culling.hollow": "空心模式",
