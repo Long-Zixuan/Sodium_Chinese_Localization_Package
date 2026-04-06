@@ -59,7 +59,7 @@ public class MixinSodiumOptionsGUI
      * @reason 替换默认的 Sodium 捐赠提示，对捐赠按钮进行翻译。
      * @author Loongly
      */
-    /*@Overwrite
+    @Overwrite
     private void openDonationPrompt(SodiumGameOptions options) 
     {
         SodiumOptionsGUI sodiumGUI = (SodiumOptionsGUI)((Object)this);
@@ -83,5 +83,5 @@ public class MixinSodiumOptionsGUI
     private void openDonationPage() 
     {
         net.minecraft.util.Util.getOperatingSystem().open("https://caffeinemc.net/donate");
-    }*/
+    }
 }

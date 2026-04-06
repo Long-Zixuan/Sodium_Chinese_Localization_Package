@@ -6,7 +6,8 @@
   "client": [
     "compat.MixinSodiumOptionsGUI",
     "compat.MixinSodiumEmbeddiumOptionsGUI",
-    "compat.MixinSodiumOptionsAPIGUI"
+    "compat.MixinSodiumOptionsAPIGUI",
+    "compat.MixinScreenPrompt"
   ],
   "plugin": "me.loongly.mods.sclp.mixin.SodiumExtraMixinConfigPlugin",
   "injectors": {
