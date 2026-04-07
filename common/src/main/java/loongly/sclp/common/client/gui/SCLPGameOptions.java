@@ -77,8 +77,7 @@ public class SCLPGameOptions
         }
         else if (!Files.isDirectory(dir)) 
         {
-            //throw new IOException("Not a directory: " + dir);
-            SCLPClientMod.LOGGER.warn("Not a directory: " + dir);
+            throw new IOException("Not a directory: " + dir);
         }
 
         Files.writeString(this.configPath, GSON.toJson(this));

@@ -16,14 +16,19 @@ public class SCLPClientMod {
 
 	public static SCLPGameOptions options() 
 	{
+		if(CONFIG == null)
+		{
+			CONFIG = SCLPGameOptions.load();
+			LOGGER.info("Init SCLP Config");
+		}
 		return CONFIG;
 	}
 
 	public static void onInitClient() 
 	{
-		CONFIG = SCLPGameOptions.load();
+		//CONFIG = SCLPGameOptions.load();
 
-		LOGGER.info("Init SCLP Config");
+		LOGGER.info("Init SCLP Client");
 	}
 
 	static int chickCount = 0;

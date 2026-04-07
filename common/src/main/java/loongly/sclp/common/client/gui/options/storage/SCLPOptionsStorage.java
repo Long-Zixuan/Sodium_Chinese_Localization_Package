@@ -27,8 +27,9 @@ public class SCLPOptionsStorage implements OptionStorage<SCLPGameOptions>
         }
         catch (IOException e) 
         {
-            SCLPClientMod.LOGGER.warn("Couldn't save SCLP config changes" + e.toString());
-            return;
+            throw new RuntimeException("Couldn't save SCLP config changes",e);
+            //SCLPClientMod.LOGGER.warn("Couldn't save SCLP config changes" + e.toString());
+            //return;
         }
 
         SCLPClientMod.LOGGER.info("[SCLP] Saved changes to SCLP config");
