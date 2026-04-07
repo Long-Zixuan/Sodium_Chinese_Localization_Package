@@ -45,15 +45,15 @@ public class SCLPGameOptionPages
                         .build())
                 .build());
         }
-        groups.add(OptionGroup.createBuilder()
-        .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
-                        .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
+        // groups.add(OptionGroup.createBuilder()
+        // .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+        //                 .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
+        //                 .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
+        //                 .setControl(TickBoxControl::new)
+        //                 .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
+        //                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+        //                 .build())
+        //         .build());
         return new OptionPage(Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
 }
