@@ -96,6 +96,10 @@
   "embeddium.options.use_quad_normals_for_lighting.tooltip": "启用后，Embedium将根据原版方块所面向的真实方向（而不是其轴对齐方向）对其进行渲染。这可以在禁用Forge实验的渲染管线时提高照明质量（建议使用最佳性能）。\n\n如果启用实验的渲染管线，则没有效果。",
   "embeddium.options.use_render_pass_optimization.name": "使用渲染过程优化",
   "embeddium.options.use_render_pass_optimization.tooltip": "启用后，当纹理不透明（或透明）时，Embedium将检测并标记为透明（或半透明）的方块，并自动为其使用更有效率的渲染方法。\n\n当使用第三方光影器包时，此选项无效。",
+  "sodium.options.quad_splitting.name": "完美的半透明渲染",
+  "sodium.options.quad_splitting.tooltip": "启用后将使用四边形分割和透明排序来渲染半透明的方块，即使他们互相交错或形状奇怪（如浸水的玻璃板），也可以渲染出正确的遮挡关系。在“安全”模式下，将对生成的几何顶点数量进行限制。以防止游戏性能下降甚至崩溃。而在“无限制”模式下，将没有限制。",
+  "sodium.options.quad_splitting.safe": "安全",
+  "sodium.options.quad_splitting.unlimited": "无限制",
 
   "sclp.settings":"设置",
   "sclp.hello":"您好！",
