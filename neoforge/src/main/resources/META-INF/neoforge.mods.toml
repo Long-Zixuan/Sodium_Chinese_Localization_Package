@@ -6,14 +6,14 @@ license = "MIT"
 modId = "sclp"
 
 version = "${version}"
-displayName = "Sodium Chinese Localized Package"
+displayName = "Sodium/Embeddium Chinese Localized Package"
 
 logoFile = "icon.png" #optional
 
 authors = "LoongLy"
 
 description = '''
-钠（Sodium）模组汉化包
+钠（Sodium）模组和Embeddium模组汉化包
 '''
 
 [[dependencies.sclp]]
