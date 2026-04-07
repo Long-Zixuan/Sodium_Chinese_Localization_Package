@@ -12,7 +12,7 @@ logoFile = "icon.png"
 updateJSONURL = ""
 authors = "LoongLy"
 displayURL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
-description = "Embeddium 汉化包"
+description = "Embeddium/Xenon 汉化包"
 
 [[dependencies.sclp]]
 modId = "forge"
