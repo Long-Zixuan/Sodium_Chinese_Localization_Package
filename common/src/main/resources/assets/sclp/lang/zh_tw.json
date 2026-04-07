@@ -113,7 +113,10 @@
   "sclp.donation.buycoffee":"請我們喝杯奶茶",
   "sclp.donation.buycoffee2":"請我們喝杯奶茶",
   "sclp.donation.prompt.6":"最後再一次感謝您，希望這個模組可以幫助您（和您的電腦。）",
-  "sclp.close":"關閉"
-  "Sodium":"钠（Sodium）"
+  "sclp.close":"關閉",
+  "Sodium":"钠（Sodium）",
+  "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
+  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n该选项将在重新打开该页面时生效",
+  "sclp.page":"漢化包設置"
   }
   

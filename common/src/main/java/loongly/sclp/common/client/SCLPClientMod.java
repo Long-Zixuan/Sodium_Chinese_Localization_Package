@@ -1,5 +1,7 @@
 package loongly.sclp.common.client;
 
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +14,20 @@ public class SCLPClientMod {
 	public static final Logger LOGGER = LoggerFactory.getLogger("SCLP");
 
 	private static SCLPGameOptions CONFIG;
+
+	public static boolean isMyBirthday(int year, int month, int day)
+    {
+        return month == 4 && day == 4;
+    }
+
+	public static boolean isMyBirthday()
+    {
+		LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        return isMyBirthday(year, month, day);
+    }
 
 
 	public static SCLPGameOptions options() 

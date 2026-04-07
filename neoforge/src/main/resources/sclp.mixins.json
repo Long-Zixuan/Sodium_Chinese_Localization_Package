@@ -3,10 +3,11 @@
   "minVersion": "0.8",
   "package": "loongly.sclp.common.mixin",
   "refmap": "sclp.refmap.json",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "client": [
     "sodium.SodiumOptionsGUIMixin",
-    "sodium.MixinScreenPrompt"
+    "sodium.MixinScreenPrompt",
+    "embeddium.MixinEmbeddiumPlatformUtil"
   ],
   "server": [
   ],

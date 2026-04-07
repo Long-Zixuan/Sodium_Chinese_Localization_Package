@@ -36,4 +36,6 @@ dependencies {
     //modCompileOnly "maven.modrinth:forgified-fabric-api:${fabric_version}"
 
     implementation "maven.modrinth:sodium:${sodium_version}-neoforge"
+
+    implementation "org.embeddedt:embeddium-1.21.1:1.0.12-beta.400+mc1.21.1"
 }

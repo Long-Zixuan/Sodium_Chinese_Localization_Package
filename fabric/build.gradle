@@ -14,6 +14,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
     modImplementation "maven.modrinth:sodium:${sodium_version}-fabric"
+
+    modImplementation "org.embeddedt:embeddium-1.21.1:1.0.12-beta.400+mc1.21.1"
 }
 
 loom {
@@ -36,6 +38,6 @@ loom {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }

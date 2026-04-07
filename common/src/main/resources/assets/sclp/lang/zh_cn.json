@@ -102,6 +102,7 @@
   "sodium.options.quad_splitting.unlimited": "无限制",
 
   "sclp.settings":"设置",
+  "sclp.page":"汉化包设置",
   "sclp.hello":"您好！",
   "sclp.donation.prompt.1":"看起来您非常中意",
   "sclp.donation.prompt.2":",这是一款十分强大的优化模组。",
@@ -113,5 +114,8 @@
   "sclp.donation.buycoffee2":"请我们喝杯奶茶",
   "sclp.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）",
   "sclp.close":"关闭",
-  "Sodium":"钠（Sodium）"
+  "Sodium":"钠（Sodium）" ,
+  "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
+  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n该选项将在重新打开该页面时生效",
+  "Embeddium":"Embeddium(钠)"
 }

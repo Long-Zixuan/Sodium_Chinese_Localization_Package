@@ -31,6 +31,8 @@ dependencies {
     compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.0'
 
     compileOnly "maven.modrinth:sodium:${sodium_version}-neoforge"
+
+    modImplementation "org.embeddedt:embeddium-1.21.1:1.0.12-beta.400+mc1.21.1"
 }
 
 configurations {
@@ -50,6 +52,6 @@ artifacts {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }

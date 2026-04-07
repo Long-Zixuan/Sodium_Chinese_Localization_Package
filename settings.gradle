@@ -48,6 +48,16 @@ pluginManagement {
                 includeGroup("codechicken")
             }
         }
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'BlameJared'
+                    url = uri("https://maven.blamejared.com")
+                }
+            }
+            filter {
+            }
+        }
         maven {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'

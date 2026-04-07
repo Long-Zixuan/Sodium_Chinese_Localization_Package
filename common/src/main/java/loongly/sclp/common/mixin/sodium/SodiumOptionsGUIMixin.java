@@ -46,10 +46,6 @@ public abstract class SodiumOptionsGUIMixin extends Screen
         //TODO Auto-generated constructor stub
     }
 
-    boolean isMyBirthday(int year, int month, int day)
-    {
-        return month == 4 && day == 4;
-    }
     @Final @Shadow(remap = false)
     private static final List<FormattedText> DONATION_PROMPT_MESSAGE;
 
@@ -70,15 +66,9 @@ public abstract class SodiumOptionsGUIMixin extends Screen
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void addLSDCOptionPage(CallbackInfo ci)
     {
-        LocalDate today = LocalDate.now();
-        int year = today.getYear();
-        int month = today.getMonthValue();
-        int day = today.getDayOfMonth();
-
-
-        if (isMyBirthday(year, month, day))
+        if(SCLPClientMod.isMyBirthday())
         {
-            this.pages.add(SCLPGameOptionPages.birth());
+            this.pages.add(SCLPGameOptionPages.page());
         }
     }
 
@@ -125,7 +115,7 @@ public abstract class SodiumOptionsGUIMixin extends Screen
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
-        if(isMyBirthday(year, month, day))
+        if(SCLPClientMod.isMyBirthday(year, month, day))
         {
             this.birthButton = new FlatButtonWidget(new Dim2i(width - 73, height - 55, 65, 20), Component.literal("🎂:" + (year - 2004)), SCLPClientMod::birthCaiDan);
             this.addRenderableWidget(birthButton);

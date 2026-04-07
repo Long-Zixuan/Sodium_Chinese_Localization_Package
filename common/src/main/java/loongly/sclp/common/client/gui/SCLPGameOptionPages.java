@@ -26,13 +26,17 @@ public class SCLPGameOptionPages
 
     private static final SCLPOptionsStorage lsdcOpts = new SCLPOptionsStorage();
 
-    public static OptionPage birth()
+    public static OptionPage page()
     {
         LocalDate today = LocalDate.now();
         int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
         List<OptionGroup> groups = new ArrayList<>();
-        groups.add(OptionGroup.createBuilder()
-        .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+        if(SCLPClientMod.isMyBirthday(year, month, day))
+        {
+            groups.add(OptionGroup.createBuilder()
+            .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
                         .setName(Component.literal("🎂:" + (year -2004)))
                         .setTooltip(Component.literal("🎂"))
                         .setControl(TickBoxControl::new)
@@ -40,7 +44,17 @@ public class SCLPGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-        return new OptionPage(Component.literal("🎂"), ImmutableList.copyOf(groups));
+        }
+        groups.add(OptionGroup.createBuilder()
+        .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+                        .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
+                        .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
+                        .setControl(TickBoxControl::new)
+                        .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
+                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                        .build())
+                .build());
+        return new OptionPage(Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
 }
 
