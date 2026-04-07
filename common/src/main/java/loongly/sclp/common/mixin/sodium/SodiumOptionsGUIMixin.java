@@ -30,6 +30,7 @@ import net.caffeinemc.mods.sodium.client.util.Dim2i;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.Util;
 
@@ -37,13 +38,12 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 
 @Mixin(SodiumOptionsGUI.class)
-public abstract class SodiumOptionsGUIMixin 
+public abstract class SodiumOptionsGUIMixin extends Screen
 {
-
-
-    void birthCaiDan()
+    protected SodiumOptionsGUIMixin(Component title) 
     {
-        
+        super(title);
+        //TODO Auto-generated constructor stub
     }
 
     boolean isMyBirthday(int year, int month, int day)
@@ -111,5 +111,24 @@ public abstract class SodiumOptionsGUIMixin
     private void openDonationPage()
     {
         Util.getPlatform().openUri("https://caffeinemc.net/donate");
+    }
+
+    private FlatButtonWidget birthButton;
+
+    @Inject(method = "rebuildGUI", at = @At("TAIL"),remap = false)
+    private void injectRebuild(CallbackInfo ci)
+    { 
+        SodiumOptionsGUI videoSettingsScrIns = (SodiumOptionsGUI)((Object)this);
+        int width = videoSettingsScrIns.width;
+        int height = videoSettingsScrIns.height;
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        if(isMyBirthday(year, month, day))
+        {
+            this.birthButton = new FlatButtonWidget(new Dim2i(width - 73, height - 55, 65, 20), Component.literal("🎂:" + (year - 2004)), SCLPClientMod::birthCaiDan);
+            this.addRenderableWidget(birthButton);
+        }
     }
 }
