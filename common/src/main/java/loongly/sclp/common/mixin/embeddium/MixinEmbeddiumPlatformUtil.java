@@ -17,9 +17,9 @@ public class MixinEmbeddiumPlatformUtil
     private static void mixinGetModName(String modId, CallbackInfoReturnable<String> cir) 
     {
         String modName = cir.getReturnValue();
-        if(modName.equals("Sodium Chinese Localized Pack")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示ECLP这种缩写
+        if(modName.equals("Sodium/Embeddium Chinese Localized Package")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示ECLP这种缩写
         {
-            modName = "SCLP";
+            modName = "ECLP";
         }
         if(SCLPClientMod.options().shouldTransModName)
         {

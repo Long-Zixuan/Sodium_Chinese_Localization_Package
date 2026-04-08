@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import loongly.sclp.common.client.gui.ECLPGameOptionPages;
 import loongly.sclp.common.client.gui.SCLPGameOptions;
 import net.minecraft.Util;
 
@@ -65,5 +66,18 @@ public class SCLPClientMod {
 				.openUri("https://www.loongly.me/html/clock.html");
 		Util.getPlatform()
 				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
+	}
+
+	public static boolean isEmbeddium()
+	{
+		try
+		{
+			Class.forName("org.embeddedt.embeddium.impl.gui.EmbeddiumGameOptionPages");
+			return true;
+		}
+		catch (ClassNotFoundException e)
+		{
+			return false;
+		}
 	}
 }

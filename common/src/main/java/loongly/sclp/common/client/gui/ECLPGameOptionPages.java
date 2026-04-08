@@ -1,0 +1,74 @@
+package loongly.sclp.common.client.gui;
+
+import com.google.common.collect.ImmutableList;
+
+import org.embeddedt.embeddium.api.options.control.SliderControl;
+import org.embeddedt.embeddium.api.options.structure.Option;
+import org.embeddedt.embeddium.api.options.structure.OptionGroup;
+import org.embeddedt.embeddium.api.options.structure.OptionImpact;
+import org.embeddedt.embeddium.api.options.structure.OptionImpl;
+import org.embeddedt.embeddium.api.options.structure.OptionStorage;
+import org.embeddedt.embeddium.impl.gui.EmbeddiumGameOptionPages;
+import org.embeddedt.embeddium.api.options.structure.OptionPage;
+
+import org.embeddedt.embeddium.api.options.structure.OptionFlag;
+import org.embeddedt.embeddium.api.options.control.TickBoxControl;
+import org.embeddedt.embeddium.api.options.OptionIdentifier;
+
+import org.embeddedt.embeddium.api.OptionGroupConstructionEvent;
+import org.embeddedt.embeddium.api.OptionPageConstructionEvent;
+
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import loongly.sclp.common.client.gui.options.storage.ECLPOptionsStorage;
+import loongly.sclp.common.client.gui.options.storage.SCLPOptionsStorage;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import loongly.sclp.common.client.SCLPClientMod;
+
+
+public class ECLPGameOptionPages 
+{
+
+    private static final ECLPOptionsStorage lsdcOpts = new ECLPOptionsStorage();
+
+    public static OptionPage buildPage()
+    {
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        List<OptionGroup> groups = new ArrayList<>();
+        if(SCLPClientMod.isMyBirthday(year, month, day))
+        {
+            groups.add(OptionGroup.createBuilder()
+                .setId(OptionIdentifier.create("sclp", "birth_group"))
+                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+                    .setId(ResourceLocation.fromNamespaceAndPath("sclp", "birth_cai_dan"))
+                    .setName(Component.literal("🎂:" + (year -2004)))
+                    .setTooltip(Component.literal("🎂"))
+                    .setControl(TickBoxControl::new)
+                    .setBinding((opts, value) -> SCLPClientMod.birthCaiDan(), opts -> true)
+                    //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                .build())
+            .build());
+        }
+        groups.add(OptionGroup.createBuilder()
+        .setId(OptionIdentifier.create("sclp", "trans_mod_name_group"))
+            .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+                .setId(ResourceLocation.fromNamespaceAndPath("sclp", "should_trans_mod_name"))
+                .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
+                .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((opts, value) -> {opts.shouldTransModName = value;SCLPClientMod.caiDan();}, opts -> opts.shouldTransModName)
+                //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                .build())
+            .build());
+        return new OptionPage(OptionIdentifier.create("sclp", "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
+    }
+}
+
+//LoongLy Software Update 2026/04/05
