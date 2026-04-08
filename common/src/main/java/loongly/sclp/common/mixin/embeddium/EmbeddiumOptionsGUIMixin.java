@@ -75,10 +75,10 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
     static { //这里文本以后要改
         DONATION_PROMPT_MESSAGE = List.of(
                 FormattedText.composite(Component.translatable("sclp.hello")),
-                FormattedText.composite(Component.translatable("sclp.donation.prompt.1"), Component.translatable("Sodium").withColor(0x27eb92), Component.translatable("sclp.donation.prompt.2")),
-                FormattedText.composite(Component.translatable("sclp.donation.prompt.3"), Component.translatable("sclp.donation.thousand_hours").withColor(0xff6e00), Component.translatable("sclp.donation.prompt.4")),
-                FormattedText.composite(Component.translatable("sclp.donation.prompt.5"), Component.translatable("sclp.donation.buycoffee").withColor(0xed49ce), Component.literal(".")),
-                FormattedText.composite(Component.translatable("sclp.donation.prompt.6"))
+                FormattedText.composite(Component.translatable("sclp.emb.donation.prompt.1"), Component.translatable("Embeddium").withColor(0x27eb92), Component.translatable("sclp.emb.donation.prompt.2")),
+                FormattedText.composite(Component.translatable("sclp.emb.donation.prompt.3"), Component.translatable("sclp.donation.thousand_hours").withColor(0xff6e00), Component.translatable("sclp.emb.donation.prompt.4")),
+                FormattedText.composite(Component.translatable("sclp.emb.donation.prompt.5"), Component.translatable("sclp.emb.donation.buycoffee").withColor(0xed49ce), Component.literal(".")),
+                FormattedText.composite(Component.translatable("sclp.emb.donation.prompt.6"))
         );
     }
 
@@ -91,7 +91,7 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
      private void openDonationPrompt() //这里文本以后要改
      {
         var prompt = new PromptScreen(this, DONATION_PROMPT_MESSAGE, 320, 190,
-                new PromptScreen.Action(Component.translatable("sclp.donation.buycoffee2"), this::openDonationPage));
+                new PromptScreen.Action(Component.translatable("sclp.emb.donation.buycoffee2"), this::openDonationPage));
         this.minecraft.setScreen(prompt);
     }
 
