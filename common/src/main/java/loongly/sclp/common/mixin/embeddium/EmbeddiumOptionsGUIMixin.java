@@ -69,6 +69,9 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
     @Final @Shadow(remap = false)
     private static final List<FormattedText> DONATION_PROMPT_MESSAGE;
 
+    @Shadow(remap = false)
+    private static final ResourceLocation LOGO_LOCATION = ResourceLocation.fromNamespaceAndPath("sclp", "textures/embeddium/gui/logo_transparent.png");
+
     static { //这里文本以后要改
         DONATION_PROMPT_MESSAGE = List.of(
                 FormattedText.composite(Component.translatable("sclp.hello")),
