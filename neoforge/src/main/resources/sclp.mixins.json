@@ -7,7 +7,8 @@
   "client": [
     "sodium.SodiumOptionsGUIMixin",
     "sodium.MixinScreenPrompt",
-    "embeddium.MixinEmbeddiumPlatformUtil"
+    "embeddium.MixinEmbeddiumPlatformUtil",
+    "embeddium.MixinScreenPrompt",
   ],
   "server": [
   ],
