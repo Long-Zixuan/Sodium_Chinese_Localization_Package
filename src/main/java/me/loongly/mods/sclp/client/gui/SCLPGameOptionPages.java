@@ -26,6 +26,15 @@ public class SCLPGameOptionPages
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
+        /*
+        为什么Xenon隐藏该选项呢？因为Xenon在设置UI不会显示模组名字，
+        唯一会显示模组名字的地方是兼容性警告，但是有兼容性问题的模组肯定是没有收入翻译的。
+        为了避免玩家开了个寂寞的感觉，故在Xenon关闭该选项 */
+        if(SCLPClientMod.isXenon())
+        {
+            sodiumExtraOpts.getData().isTransModName = false;
+            sodiumExtraOpts.save();
+        }
         
         List<OptionGroup> groups = new ArrayList<>();
         groups.add(OptionGroup.createBuilder()
@@ -33,7 +42,7 @@ public class SCLPGameOptionPages
                         .setName(Text.translatable("sclp.options.trans_mod_name"))
                         .setTooltip(Text.translatable("sclp.options.trans_mod_name.tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setEnabled(!SCLPClientMod.isXenon())
+                        .setEnabled(!SCLPClientMod.isXenon())//同上
                         .setBinding((options, value) -> {
                             options.isTransModName = value; 
                             try
