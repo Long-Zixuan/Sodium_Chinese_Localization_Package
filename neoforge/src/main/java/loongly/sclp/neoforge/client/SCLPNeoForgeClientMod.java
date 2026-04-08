@@ -8,7 +8,7 @@ import loongly.sclp.common.client.gui.ECLPGameOptionPages;
 import org.embeddedt.embeddium.api.OptionGUIConstructionEvent;
 
 
-@Mod("sclp")
+@Mod(SCLPClientMod.MOD_ID)
 public class SCLPNeoForgeClientMod {
 
 	public SCLPNeoForgeClientMod(IEventBus eventBus) 

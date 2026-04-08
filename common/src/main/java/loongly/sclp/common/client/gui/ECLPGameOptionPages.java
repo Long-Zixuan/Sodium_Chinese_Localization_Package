@@ -45,9 +45,9 @@ public class ECLPGameOptionPages
         if(SCLPClientMod.isMyBirthday(year, month, day))
         {
             groups.add(OptionGroup.createBuilder()
-                .setId(OptionIdentifier.create("sclp", "birth_group"))
+                .setId(OptionIdentifier.create(SCLPClientMod.MOD_ID, "birth_group"))
                 .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                    .setId(ResourceLocation.fromNamespaceAndPath("sclp", "birth_cai_dan"))
+                    .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "birth_cai_dan"))
                     .setName(Component.literal("🎂:" + (year -2004)))
                     .setTooltip(Component.literal("🎂"))
                     .setControl(TickBoxControl::new)
@@ -57,9 +57,9 @@ public class ECLPGameOptionPages
             .build());
         }
         groups.add(OptionGroup.createBuilder()
-        .setId(OptionIdentifier.create("sclp", "trans_mod_name_group"))
+        .setId(OptionIdentifier.create(SCLPClientMod.MOD_ID, "trans_mod_name_group"))
             .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                .setId(ResourceLocation.fromNamespaceAndPath("sclp", "should_trans_mod_name"))
+                .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "should_trans_mod_name"))
                 .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
                 .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
                 .setControl(TickBoxControl::new)
@@ -67,8 +67,8 @@ public class ECLPGameOptionPages
                 //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                 .build())
             .build());
-        return new OptionPage(OptionIdentifier.create("sclp", "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
+        return new OptionPage(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
 }
 
-//LoongLy Software Update 2026/04/05
+//LoongLy Software Update 2026/04/08

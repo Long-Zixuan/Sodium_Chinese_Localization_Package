@@ -70,9 +70,9 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
     private static final List<FormattedText> DONATION_PROMPT_MESSAGE;
 
     @Shadow(remap = false)
-    private static final ResourceLocation LOGO_LOCATION = ResourceLocation.fromNamespaceAndPath("sclp", "textures/embeddium/gui/logo_transparent.png");
+    private static final ResourceLocation LOGO_LOCATION = ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "textures/embeddium/gui/logo_transparent.png");
 
-    static { //这里文本以后要改
+    static { 
         DONATION_PROMPT_MESSAGE = List.of(
                 FormattedText.composite(Component.translatable("sclp.hello")),
                 FormattedText.composite(Component.translatable("sclp.emb.donation.prompt.1"), Component.translatable("Embeddium").withColor(0x27eb92), Component.translatable("sclp.emb.donation.prompt.2")),
@@ -88,7 +88,7 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
      * @author Loongly
      */
     @Overwrite(remap = false)
-     private void openDonationPrompt() //这里文本以后要改
+     private void openDonationPrompt() 
      {
         var prompt = new PromptScreen(this, DONATION_PROMPT_MESSAGE, 320, 190,
                 new PromptScreen.Action(Component.translatable("sclp.emb.donation.buycoffee2"), this::openDonationPage));

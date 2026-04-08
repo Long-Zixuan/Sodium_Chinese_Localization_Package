@@ -10,7 +10,10 @@ import loongly.sclp.common.client.gui.SCLPGameOptions;
 import net.minecraft.Util;
 
 
-public class SCLPClientMod {
+public class SCLPClientMod 
+{
+
+	public static final String MOD_ID = "sclp";
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("SCLP");
 
