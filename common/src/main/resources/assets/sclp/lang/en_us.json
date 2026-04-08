@@ -22,6 +22,9 @@
   "sclp.emb.donation.prompt.5":"If you'd like to show a token of appreciation, and support the development of Sodium in the process, then consider ",
   "sclp.emb.donation.buycoffee":"buying them a coffee",
   "sclp.emb.donation.buycoffee2":"Support Sodium",
-  "sclp.emb.donation.prompt.6":"And thanks again for using the mod! We hope it helps you (and your computer.)"
+  "sclp.emb.donation.prompt.6":"And thanks again for using the mod! We hope it helps you (and your computer.)",
+  "sclp.options.shoud_trans_mod_name":"Translate Mod Name",
+  "sclp.options.shoud_trans_mod_name.tooltip":"On enabled, mod names will be translated",
+  "sclp.page":"SCLP Settings"
 }
   
