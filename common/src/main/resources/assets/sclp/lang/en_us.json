@@ -13,6 +13,15 @@
   "sclp.donation.buycoffee":"buying us a coffee",
   "sclp.donation.buycoffee2":"Buy us a coffee",
   "sclp.donation.prompt.6":"And thanks again for using our mod! We hope it helps you (and your computer.)",
-  "sclp.close":"Close"
+  "sclp.close":"Close",
+  "sclp.emb.donation.prompt.1":"It seems that you've been enjoying ",
+  "sclp.emb.donation.prompt.2":", a fork of Sodium for Minecraft.",
+  "sclp.emb.donation.prompt.3":"Sodium is complex, and requires ",
+  "sclp.emb.donation.thousand_hours":"thousands of hours",
+  "sclp.emb.donation.prompt.4":" of development, debugging, and tuning to create the experience that players have come to expect.",
+  "sclp.emb.donation.prompt.5":"If you'd like to show a token of appreciation, and support the development of Sodium in the process, then consider ",
+  "sclp.emb.donation.buycoffee":"buying them a coffee",
+  "sclp.emb.donation.buycoffee2":"Support Sodium",
+  "sclp.emb.donation.prompt.6":"And thanks again for using the mod! We hope it helps you (and your computer.)"
 }
   
