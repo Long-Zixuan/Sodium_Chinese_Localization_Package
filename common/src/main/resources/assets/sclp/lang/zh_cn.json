@@ -117,5 +117,11 @@
   "Sodium":"钠（Sodium）" ,
   "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
   "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n该选项将在重新打开该页面时生效",
-  "Embeddium":"Embeddium(钠)"
+  "Embeddium":"Embeddium(钠)",
+  "ECLP":"Embeddium-汉化包",
+  "Sodium Dynamic Lights":"钠:动态光源",
+  "Sodium Extras":"钠:附属",
+  "Sodium Device Check":"Embeddium-设备检测",
+  "Embeddium Extra":"铷·扩展",
+  "Oculus":"眼界"
 }
