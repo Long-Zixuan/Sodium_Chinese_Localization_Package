@@ -9,6 +9,7 @@
     "sodium.MixinScreenPrompt",
     "embeddium.MixinEmbeddiumPlatformUtil",
     "embeddium.MixinScreenPrompt",
+    "embeddium.EmbeddiumOptionsGUIMixin"
   ],
   "server": [
   ],
