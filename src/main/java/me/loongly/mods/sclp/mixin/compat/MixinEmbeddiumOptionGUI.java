@@ -2,6 +2,7 @@ package me.loongly.mods.sclp.mixin.compat;
 
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
+import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPrompt;
 
@@ -38,53 +39,22 @@ import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPromptable;
 import java.io.IOException;
 import java.util.List;
 
-@Mixin(value = PromptScreen.class) 
-class MixinScreenPrompt extends Screen
+import org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen;
+
+@Mixin(value = EmbeddiumVideoOptionsScreen.class) 
+class MixinEmbeddiumOptionGUI
 {
-    protected MixinScreenPrompt(Text title) 
+    @Overwrite(remap = false)
+    private void openDonationPrompt() 
     {
-        super(title);
-        //TODO Auto-generated constructor stub
+        var srcIns = (EmbeddiumVideoOptionsScreen)((Object) this);
+        var prompt = new PromptScreen(srcIns, SodiumOptionsGUI.DONATION_PROMPT_MESSAGE, 320, 190,
+                new PromptScreen.Action(Text.translatable("Support Sodium"), this::openDonationPage));
+        MinecraftClient.getInstance().setScreen(prompt);
     }
-
-    @Final @Shadow(remap = false)
-    private Screen prevScreen;
-
-    @Final @Shadow(remap = false)
-    int promptWidth, promptHeight;
-   
-    @Shadow(remap = false)
-    private FlatButtonWidget closeButton;
-
-    @Inject(method = "init", at = @At(value = "RETURN"))
-    public void injectInit(CallbackInfo c)
-    {
-        var scrIns = (PromptScreen)((Object)this);
-        this.closeButton.setVisible(false);
-        int boxX = (prevScreen.width / 2) - (promptWidth / 2);
-        int boxY = (prevScreen.height / 2) - (promptHeight / 2);
-
-        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + promptWidth) - 84, (boxY + promptHeight) - 24, 80, 20), Text.translatable("Close"), this::onClose);
-        this.closeButton.setStyle(createButtonStyle());
-
-        this.addDrawableChild(this.closeButton);
-    }
-
-    public void onClose()
-    {
-        MinecraftClient.getInstance().setScreen(this.prevScreen);
-    }
-
-    private static FlatButtonWidget.Style createButtonStyle() 
-    {
-        var style = new FlatButtonWidget.Style();
-        style.bgDefault = 0xff2b2b2b;
-        style.bgHovered = 0xff393939;
-        style.bgDisabled = style.bgDefault;
-
-        style.textDefault = 0xFFFFFFFF;
-        style.textDisabled = style.textDefault;
-
-        return style;
-    }
+    
+    void openDonationPage()
+	{
+        net.minecraft.util.Util.getOperatingSystem().open("https://caffeinemc.net/donate");
+	}
 }
