@@ -7,7 +7,8 @@ import org.apache.logging.log4j.Logger;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
 
 import org.apache.logging.log4j.LogManager;
-import java.lang.Runtime;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLLoader;
 
 public class SCLPClientMod 
 {
@@ -57,6 +58,16 @@ public class SCLPClientMod
     private static SCLPGameOptions loadConfig() 
     {
         return SCLPGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-chinese-pack.json").toFile());
+    }
+
+    public static boolean isXenon()
+    {
+        var modName = ModList.get().getModContainerById("xenon").map(container -> container.getModInfo().getDisplayName()).orElse(null);
+        if(modName != null)
+        {
+            return true;
+        }
+        return false;
     }
 
     public SCLPClientMod() 

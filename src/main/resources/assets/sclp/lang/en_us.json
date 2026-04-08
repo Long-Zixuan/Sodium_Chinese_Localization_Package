@@ -1,5 +1,5 @@
 {
   "sclp.options.pages.settings":"SCLP Settings",
   "sclp.options.trans_mod_name":"Translate Mod Name",
-  "sclp.options.trans_mod_name.tooltip":"This Option only works in Chinese Language."
+  "sclp.options.trans_mod_name.tooltip":"If enabled, the mod name will be translated.This option only works in Embeddium"
 }

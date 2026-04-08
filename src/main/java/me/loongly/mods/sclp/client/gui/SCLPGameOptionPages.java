@@ -33,6 +33,7 @@ public class SCLPGameOptionPages
                         .setName(Text.translatable("sclp.options.trans_mod_name"))
                         .setTooltip(Text.translatable("sclp.options.trans_mod_name.tooltip"))
                         .setControl(TickBoxControl::new)
+                        .setEnabled(!SCLPClientMod.isXenon())
                         .setBinding((options, value) -> {
                             options.isTransModName = value; 
                             try
