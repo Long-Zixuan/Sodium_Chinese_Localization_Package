@@ -31,7 +31,7 @@ public class SCLPGameOptionPages
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
                         .setName(Text.literal("是否翻译模组名"))
-                        .setTooltip(Text.translatable("如果启用，模组名将会被翻译。\\n该选项将在重开此页面时生效"))
+                        .setTooltip(Text.translatable("如果启用，模组名将会被翻译。\n该选项将在重开此页面时生效"))
                         .setControl(TickBoxControl::new)
                         .setBinding((options, value) -> {
                             options.isTransModName = value; 

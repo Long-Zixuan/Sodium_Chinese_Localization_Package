@@ -38,6 +38,7 @@ import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPromptable;
 
 import java.io.IOException;
 import java.util.List;
+import java.lang.Runtime;
 
 import org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen;
 
@@ -49,12 +50,19 @@ class MixinEmbeddiumOptionGUI
     {
         var srcIns = (EmbeddiumVideoOptionsScreen)((Object) this);
         var prompt = new PromptScreen(srcIns, SodiumOptionsGUI.DONATION_PROMPT_MESSAGE, 320, 190,
-                new PromptScreen.Action(Text.translatable("支持钠"), this::openDonationPage));
+                new PromptScreen.Action(Text.translatable("支持钠"), ()->{
+                    try
+                    {
+                        this.openDonationPage();
+                    }
+                    catch (Exception e){}
+                }));
         MinecraftClient.getInstance().setScreen(prompt);
     }
     
-    void openDonationPage()
+    void openDonationPage() throws IOException
 	{
-        net.minecraft.util.Util.getOperatingSystem().open("https://caffeinemc.net/donate");
+        Runtime.getRuntime().exec("cmd /c start https://caffeinemc.net/donate");
+        //net.minecraft.util.Util.getOperatingSystem().open("https://caffeinemc.net/donate");
 	}
 }
