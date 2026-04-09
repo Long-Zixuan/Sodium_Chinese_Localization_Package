@@ -234,6 +234,7 @@
   "xenon.extras.options.zoom.max.desc": "最大缩放视场角（FOV）",
   "xenon.extras.options.zoom.min.title": "最小视场角（FOV）",
   "xenon.extras.options.zoom.min.desc": "最小缩放视场角（FOV）",
+  "rso.search_bar_empty":"搜索选项......",
 
   "xenon.extras.options.others.page": "其他",
   "xenon.extras.options.others.borderless.attachmode.title": "按F11启用的无边界全屏",
