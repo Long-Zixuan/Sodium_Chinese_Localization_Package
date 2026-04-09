@@ -249,6 +249,7 @@
   "options.leaf_culling.solid": "实心模式",
   "options.leaf_culling.solid_aggressive": "全实心模式",
   "embeddium.search_bar_empty": "搜索選項...",
+  "rso.search_bar_empty":"搜索選項......",
   
   "sclp.options.pages.settings":"漢化包設定",
   "sclp.options.trans_mod_name":"是否翻譯模組名",
