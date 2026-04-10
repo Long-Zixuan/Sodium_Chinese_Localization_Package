@@ -127,6 +127,7 @@
   "sclp.close":"關閉",
   "options.framerate":"%s幀",
   "sodium.options.chunk_update_threads.value":"%s綫程",
-  "sodium.options.default":"默認"
+  "sodium.options.default":"默認",
+   "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。"
   }
   
