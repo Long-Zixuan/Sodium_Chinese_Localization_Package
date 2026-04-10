@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "sodium.SodiumOptionsGUIMixin",
-    "sodium.MixinScreenPrompt"
+    "sodium.MixinScreenPrompt",
+    "sodium.MixinLaunchWarn"
   ],
   "injectors": {
     "defaultRequire": 1
