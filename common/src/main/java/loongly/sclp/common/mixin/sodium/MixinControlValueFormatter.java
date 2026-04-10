@@ -77,6 +77,16 @@ public interface MixinControlValueFormatter
     {
         return (v) -> Component.translatable("sclp.multiplier", v);
     }
+
+     /**
+     * @author LoongLy
+     * @reason 为 guiScale 添加 I18n 翻译支持
+     */
+    @Overwrite
+    static ControlValueFormatter guiScale() 
+    {
+        return (v) -> (v == 0) ? Component.translatable("options.guiScale.auto") : Component.translatable("sclp.multiplier", v);
+    }
 }
 
 //LZX-2026-04-11-002
