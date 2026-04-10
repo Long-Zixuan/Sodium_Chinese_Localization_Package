@@ -135,6 +135,7 @@
   "sclp.emb.donation.buycoffee2":"支持钠",
   "sclp.emb.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）",
   "options.framerate":"%s帧",
+  "sclp.multiplier":"%s倍",
   "Default":"默认",
   "threads":"线程"
 }

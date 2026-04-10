@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 public interface MixinControlValueFormatter 
 {
     /**
-     * @author LZX
+     * @author LoongLy
      * @reason 为 quantityOrDisabled 添加 I18n 翻译支持
      */
     @Overwrite
@@ -34,6 +34,49 @@ public interface MixinControlValueFormatter
         String i18NDisableText = I18n.get(disableText);
         return (v) -> Component.literal(v == 0 ? i18NDisableText : v + " " + i18nName);
     }
+
+     /**
+     * @author LoongLy
+     * @reason 为 brightness 添加 I18n 翻译支持
+     */
+    @Overwrite
+    static ControlValueFormatter brightness() 
+    {
+        return (v) -> {
+            if (v == 0) 
+            {
+                return Component.translatable("options.gamma.min");
+            } 
+            else if (v == 100) 
+            {
+                return Component.translatable("options.gamma.max");
+            } 
+            else
+            {
+                return Component.translatable("sclp.percent", v);
+            }
+        };
+    }
+
+    /**
+     * @author LoongLy
+     * @reason 为 percentage 添加 I18n 翻译支持
+     */
+    @Overwrite
+    static ControlValueFormatter percentage() 
+    {
+        return (v) -> Component.translatable("sclp.percent", v);
+    }
+
+    /**
+     * @author LoongLy
+     * @reason 为 multiplier 添加 I18n 翻译支持
+     */
+    @Overwrite
+    static ControlValueFormatter multiplier() 
+    {
+        return (v) -> Component.translatable("sclp.multiplier", v);
+    }
 }
 
-//LZX-2026-04-11-001
+//LZX-2026-04-11-002
