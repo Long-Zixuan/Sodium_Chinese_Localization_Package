@@ -7,7 +7,6 @@
   "client": [
     "sodium.SodiumOptionsGUIMixin",
     "sodium.MixinScreenPrompt",
-    "sodium.MixinLaunchWarn",
     "sodium.MixinControlValueFormatter"
   ],
   "injectors": {
