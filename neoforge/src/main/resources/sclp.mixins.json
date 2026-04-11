@@ -10,7 +10,6 @@
     "embeddium.MixinEmbeddiumPlatformUtil",
     "embeddium.MixinScreenPrompt",
     "embeddium.EmbeddiumOptionsGUIMixin",
-    "sodium.MixinLaunchWarn",
     "sodium.MixinControlValueFormatter"
   ],
   "server": [
