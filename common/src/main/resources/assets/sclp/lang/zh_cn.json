@@ -123,5 +123,11 @@
   "sclp.donation.buycoffee":"请我们喝杯奶茶",
   "sclp.donation.buycoffee2":"请我们喝杯奶茶",
   "sclp.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）",
-  "sclp.close":"关闭"
+  "sclp.close":"关闭",
+  "options.framerate":"%s帧",
+  "sodium.options.chunk_update_threads.value":"%s线程",
+  "sodium.options.default":"默认",
+  "sodium.options.chunk_fade_time.value" : "%s秒",
+  "sclp.multiplier":"%s×",
+  "sodium.options.clouds_distance.tooltip": "远距离云层将渲染至该高度范围。该选项对性能影响极小，仅影响视觉效果。"
 }

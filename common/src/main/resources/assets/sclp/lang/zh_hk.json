@@ -123,6 +123,10 @@
   "sclp.donation.buycoffee":"請我們喝杯奶茶",
   "sclp.donation.buycoffee2":"請我們喝杯奶茶",
   "sclp.donation.prompt.6":"最後再一次感謝您，希望這個模組可以幫助您（和您的電腦。）",
-  "sclp.close":"關閉"
+  "sclp.close":"關閉",
+  
+  "sodium.options.chunk_update_threads.value":"%s綫程",
+  "sodium.options.default":"默認",
+   "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。"
   }
   
