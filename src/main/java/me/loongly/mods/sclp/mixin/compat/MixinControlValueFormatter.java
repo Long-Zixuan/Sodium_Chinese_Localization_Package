@@ -1,5 +1,6 @@
 package me.loongly.mods.sclp.mixin.compat;
 
+import org.apache.logging.log4j.core.config.builder.api.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -23,5 +24,11 @@ public interface MixinControlValueFormatter
     static ControlValueFormatter multiplier() 
     {
         return (v) -> Text.translatable("sclp.multiplier",v);
+    }
+
+    @Overwrite
+    static ControlValueFormatter guiScale() 
+    {
+        return (v) -> (v == 0) ? Text.translatable("options.guiScale.auto") : Text.translatable("sclp.multiplier",v);
     }
 }
