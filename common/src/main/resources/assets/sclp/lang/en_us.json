@@ -25,7 +25,7 @@
   "sclp.emb.donation.prompt.6":"And thanks again for using the mod! We hope it helps you (and your computer.)",
   "sclp.options.shoud_trans_mod_name":"Translate Mod Name",
   "sclp.options.shoud_trans_mod_name.tooltip":"On enabled, mod names will be translated",
-  "sclp.percent":"%s %",
+  "sclp.percent":"%s%%",
   "sclp.multiplier":"%sx",
   "sclp.page":"SCLP Settings"
 }

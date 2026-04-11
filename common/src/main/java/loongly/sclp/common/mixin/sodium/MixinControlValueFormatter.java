@@ -39,34 +39,34 @@ public interface MixinControlValueFormatter
      * @author LoongLy
      * @reason 为 brightness 添加 I18n 翻译支持
      */
-    // @Overwrite
-    // static ControlValueFormatter brightness() 
-    // {
-    //     return (v) -> {
-    //         if (v == 0) 
-    //         {
-    //             return Component.translatable("options.gamma.min");
-    //         } 
-    //         else if (v == 100) 
-    //         {
-    //             return Component.translatable("options.gamma.max");
-    //         } 
-    //         else
-    //         {
-    //             return Component.translatable("sclp.percent", v);
-    //         }
-    //     };
-    // }
+    @Overwrite
+    static ControlValueFormatter brightness() 
+    {
+        return (v) -> {
+            if (v == 0) 
+            {
+                return Component.translatable("options.gamma.min");
+            } 
+            else if (v == 100) 
+            {
+                return Component.translatable("options.gamma.max");
+            } 
+            else
+            {
+                return Component.translatable("sclp.percent", v);
+            }
+        };
+    }
 
     /**
      * @author LoongLy
      * @reason 为 percentage 添加 I18n 翻译支持
      */
-    // @Overwrite
-    // static ControlValueFormatter percentage() 
-    // {
-    //     return (v) -> Component.translatable("sclp.percent", v);
-    // }
+    @Overwrite
+    static ControlValueFormatter percentage() 
+    {
+        return (v) -> Component.translatable("sclp.percent", v);
+    }
 
     /**
      * @author LoongLy
