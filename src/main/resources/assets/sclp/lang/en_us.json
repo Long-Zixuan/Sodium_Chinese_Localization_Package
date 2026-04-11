@@ -1,5 +1,17 @@
 {
   "sclp.options.pages.settings":"SCLP Settings",
   "sclp.options.trans_mod_name":"Translate Mod Name",
-  "sclp.options.trans_mod_name.tooltip":"If enabled, the mod name will be translated.This option only works in Embeddium"
+  "sclp.options.trans_mod_name.tooltip":"If enabled, the mod name will be translated.This option only works in Embeddium",
+  "sclp.hello":"Hello!",
+  "sclp.donation.1":"It seems that you've been enjoying ",
+  "sclp.donation.2":", a fork of Sodium for Minecraft.",
+  "sclp.donation.3":"Sodium is complex, and requires ",
+  "sclp.donation.4":"thousands of hours",
+  "sclp.donation.5":" of development, debugging, and tuning to create the experience that players have come to expect.",
+  "sclp.donation.6":"If you'd like to show a token of appreciation, and support the development of Sodium in the process, then consider ",
+  "sclp.donation.7":"buying them a coffee",
+  "sclp.dot":".",
+  "sclp.donation.8":"And thanks again for using the mod! We hope it helps you (and your computer.)",
+  "sclp.donation.9":"Support Sodium",
+  "sclp.close":"Close"
 }

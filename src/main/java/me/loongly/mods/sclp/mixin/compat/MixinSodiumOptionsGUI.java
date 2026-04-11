@@ -47,11 +47,11 @@ public class MixinSodiumOptionsGUI
 
      static {
         DONATION_PROMPT_MESSAGE = List.of(
-                StringVisitable.concat(Text.translatable("Hello!")),
-                StringVisitable.concat(Text.translatable("It seems that you've been enjoying "), Text.translatable("Embeddium").setStyle(Style.EMPTY.withColor(0x27eb92)), Text.translatable(", a fork of Sodium for Minecraft.")),
-                StringVisitable.concat(Text.translatable("Sodium is complex, and requires "), Text.translatable("thousands of hours").setStyle(Style.EMPTY.withColor(0xff6e00)), Text.translatable(" of development, debugging, and tuning to create the experience that players have come to expect.")),
-                StringVisitable.concat(Text.translatable("If you'd like to show a token of appreciation, and support the development of Sodium in the process, then consider "), Text.translatable("buying them a coffee").setStyle(Style.EMPTY.withColor(0xed49ce)), Text.translatable(".")),
-                StringVisitable.concat(Text.translatable("And thanks again for using the mod! We hope it helps you (and your computer.)"))
+                StringVisitable.concat(Text.translatable("sclp.hello")),
+                StringVisitable.concat(Text.translatable("sclp.donation.1"), Text.translatable("Embeddium").setStyle(Style.EMPTY.withColor(0x27eb92)), Text.translatable("sclp.donation.2")),
+                StringVisitable.concat(Text.translatable("sclp.donation.3"), Text.translatable("sclp.donation.4").setStyle(Style.EMPTY.withColor(0xff6e00)), Text.translatable("sclp.donation.5")),
+                StringVisitable.concat(Text.translatable("sclp.donation.6"), Text.translatable("sclp.donation.7").setStyle(Style.EMPTY.withColor(0xed49ce)), Text.translatable("sclp.dot")),
+                StringVisitable.concat(Text.translatable("sclp.donation.8"))
         );
     }
 

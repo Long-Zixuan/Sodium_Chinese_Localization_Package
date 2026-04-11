@@ -49,7 +49,7 @@ class MixinEmbeddiumOptionGUI
     {
         var srcIns = (EmbeddiumVideoOptionsScreen)((Object) this);
         var prompt = new PromptScreen(srcIns, SodiumOptionsGUI.DONATION_PROMPT_MESSAGE, 320, 190,
-                new PromptScreen.Action(Text.translatable("Support Sodium"), this::openDonationPage));
+                new PromptScreen.Action(Text.translatable("sclp.donation.9"), this::openDonationPage));
         MinecraftClient.getInstance().setScreen(prompt);
     }
     

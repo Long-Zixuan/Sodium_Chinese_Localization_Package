@@ -64,7 +64,7 @@ class MixinScreenPrompt extends Screen
         int boxX = (prevScreen.width / 2) - (promptWidth / 2);
         int boxY = (prevScreen.height / 2) - (promptHeight / 2);
 
-        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + promptWidth) - 84, (boxY + promptHeight) - 24, 80, 20), Text.translatable("Close"), this::onClose);
+        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + promptWidth) - 84, (boxY + promptHeight) - 24, 80, 20), Text.translatable("sclp.close"), this::onClose);
         this.closeButton.setStyle(createButtonStyle());
 
         this.addDrawableChild(this.closeButton);
