@@ -8,8 +8,7 @@
     "sodium.MixinModOptionsBuilderImpl",
     "sodium.MixinPageBuilderImpl",
     "sodium.MixinSodiumVideoSettingsScreen",
-    "sodium.MixinScreenPrompt",
-    "sodium.MixinLaunchWarn"
+    "sodium.MixinScreenPrompt"
   ],
   "injectors": {
     "defaultRequire": 1
