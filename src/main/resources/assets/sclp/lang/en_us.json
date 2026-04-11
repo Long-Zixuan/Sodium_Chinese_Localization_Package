@@ -13,5 +13,6 @@
   "sclp.dot":".",
   "sclp.donation.8":"And thanks again for using the mod! We hope it helps you (and your computer.)",
   "sclp.donation.9":"Support Sodium",
-  "sclp.close":"Close"
+  "sclp.close":"Close",
+  "sclp.multiplier":"%sx"
 }

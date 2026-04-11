@@ -8,7 +8,8 @@
     "compat.MixinSodiumEmbeddiumOptionsGUI",
     "compat.MixinSodiumOptionsAPIGUI",
     "compat.MixinEmbeddiumOptionGUI",
-    "compat.MixinScreenPrompt"
+    "compat.MixinScreenPrompt",
+    "compat.MixinControlValueFormatter"
   ],
   "plugin": "me.loongly.mods.sclp.mixin.SodiumExtraMixinConfigPlugin",
   "injectors": {

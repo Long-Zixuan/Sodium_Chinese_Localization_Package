@@ -271,5 +271,9 @@
   "sclp.dot":"。",
   "sclp.donation.8":"最后再一次感谢您！我们希望它能帮助您（和您的电脑）。",
   "sclp.donation.9":"支持钠",
-  "sclp.close":"关闭"
+  "sclp.close":"关闭",
+  "sclp.multiplier":"%s×",
+  "options.framerate":"%s帧",
+  "Default":"默认",
+  "threads":"线程"
 }
