@@ -21,7 +21,7 @@
   "sodium.options.fullscreen.tooltip":  "開啟後,遊戲將以全屏模式運行。（如果支持的話）",
   "sodium.options.fullscreen_resolution.tooltip":  "控制全屏模式下的顯示器分辯率和刷新率。更改此選項可能會干擾其他應用程序,並在應用程序之間切換時造成延遲。\n\n這僅在Windows作業系統上受支持。",
   "sodium.options.v_sync.tooltip":  "如果啟用,遊戲的幀率將與顯示器的刷新率同步,以犧牲整體輸入延遲為代價,提供更流暢的體驗。如果您的系統太慢,此設定可能會降低效能。",
-  "sodium.options.fps_limit.tooltip":  "設定最大幀率。這有助於在多工處理時减少電池使用和系統負載。如果啟用了VSync,則此選項將被忽略,除非它低於顯示器的刷新率。",
+  "sodium.options.fps_limit.tooltip":  "設定最大FPS。這有助於在多工處理時减少電池使用和系統負載。如果啟用了VSync,則此選項將被忽略,除非它低於顯示器的刷新率。",
   "sodium.options.view_bobbing.tooltip":  "如果啟用,玩家的視圖在移動時會搖擺和擺動。暈3D的玩家建議禁用此選項。",
   "sodium.options.attack_indicator.tooltip":  "控制攻擊指示器在荧幕上的顯示位置。",
   "sodium.options.autosave_indicator.tooltip":  "如果啟用,當遊戲將世界保存到磁片時,將顯示一個指示器。",
@@ -125,7 +125,7 @@
   "sclp.donation.buycoffee2":"請我們喝杯奶茶",
   "sclp.donation.prompt.6":"最後再一次感謝您，希望這個模組可以幫助您（和您的電腦。）",
   "sclp.close":"關閉",
-  "options.framerate":"%s幀",
+  "options.framerate":"%sFPS",
   "sodium.options.chunk_update_threads.value":"%s綫程",
   "sodium.options.default":"默認",
    "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。"
