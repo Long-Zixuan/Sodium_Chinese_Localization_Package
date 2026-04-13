@@ -249,16 +249,31 @@
   "options.leaf_culling.solid": "实心模式",
   "options.leaf_culling.solid_aggressive": "全实心模式",
   "embeddium.search_bar_empty": "搜索選項...",
+  "rso.search_bar_empty":"搜索選項......",
   
   "sclp.options.pages.settings":"漢化包設定",
   "sclp.options.trans_mod_name":"是否翻譯模組名",
-  "sclp.options.trans_mod_name.tooltip":"如果啟用，模組名將會被翻譯。 \n該選項將在重開此頁面時生效",
+  "sclp.options.trans_mod_name.tooltip":"如果啟用，模組名將會被翻譯。该选项对Xenon无效\n該選項將在重開此頁面時生效",
   "ECLP":"Embeddium-漢化包",
   "Sodium Dynamic Lights":"钠:动态光源",
   "Sodium Extras":"钠:附属",
   "Embeddium Device Check":"Embeddium-设备检测",
   "Embeddium Extra":"铷·扩展",
    "Oculus":"眼界",
-  "Embeddium":"Embeddium（钠）"
+  "Embeddium":"Embeddium（钠）",
+  "sclp.hello":"你好！",
+  "sclp.donation.1":"看來您非常滿意",
+  "sclp.donation.2":"，这是我的世界Sodium模组的一个分支。",
+  "sclp.donation.3":"Sodium是複雜的，需要",
+  "sclp.donation.4":"上千小時",
+  "sclp.donation.5":"開發、測試和維護以給予玩家所期待的體驗。",
+  "sclp.donation.6":"如果你想要表达对Sodium的感激之情，并在这个过程中支持Sodium的开发，不妨",
+  "sclp.donation.7":"Support Sodium（支持钠）",
+  "sclp.dot":"。",
+  "sclp.donation.8":"最後再一次感謝您，希望這個模組可以幫助您（和您的電腦。）",
+  "sclp.donation.9":"支持钠",
+  "sclp.close":"關閉",
+   "Default":"默認",
+  "threads":"綫程"
   }
   
