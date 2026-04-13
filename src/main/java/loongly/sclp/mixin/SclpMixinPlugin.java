@@ -24,7 +24,37 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
     public String getRefMapperConfig() {return null;}
 
     @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
+    {
+        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinOptionPageScrollFrame")) 
+        {
+            Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
+
+            if(rsoOptionalModContainer.isPresent()) 
+            {
+                SemanticVersion rsoVersion = (SemanticVersion) rsoOptionalModContainer.get().getMetadata().getVersion();
+                try 
+                {
+                    // don't load the RSO options mixin for RSO versions >= 1.4.2
+                    if(rsoVersion.compareTo(Version.parse("1.0.0")) == 0) 
+                    {
+                        return false;
+                    }
+                    else 
+                    {
+                        return true;
+                    }
+                }
+                catch (VersionParsingException e) 
+                {
+                    return false; // this should never happen
+                }
+            }
+            else 
+            {
+                return false;
+            }
+        }
         return true;
     }
 

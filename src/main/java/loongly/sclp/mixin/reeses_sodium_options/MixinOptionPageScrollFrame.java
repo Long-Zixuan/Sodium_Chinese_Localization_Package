@@ -1,0 +1,98 @@
+package loongly.sclp.mixin.reeses_sodium_options;
+import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
+import me.jellysquid.mods.sodium.client.util.Dim2i;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.gui.screen.Screen;
+
+import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import net.minecraft.client.util.math.MatrixStack;
+import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.OptionPageScrollFrame;
+import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.AbstractFrame;
+import me.jellysquid.mods.sodium.client.gui.options.control.ControlElement;
+import me.jellysquid.mods.sodium.client.gui.options.*;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.OrderedText;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Language;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Mixin(value = OptionPageScrollFrame.class)
+public class MixinOptionPageScrollFrame extends AbstractFrame
+{
+    public MixinOptionPageScrollFrame(Dim2i dim, OptionPage page) 
+    {
+        super(dim);
+    }
+
+    @Shadow
+    private long lastTime;
+
+    @Final
+    @Shadow
+    protected Dim2i originalDim;
+
+    /**
+    * @author Loongly
+    * @reason 为renderOptionTooltip方法，增加I18n支持。
+    */
+   @Overwrite
+   private void renderOptionTooltip(MatrixStack matrixStack, int mouseX, int mouseY, ControlElement<?> element) 
+   {
+        Dim2i dim = element.getDimensions();
+
+        int textPadding = 3;
+        int boxPadding = 3;
+
+        int boxWidth = dim.getWidth();
+
+        //Offset based on mouse position, width and height of content and width and height of the window
+        int boxY = dim.getLimitY();
+        int boxX = dim.getOriginX();
+
+        Option<?> option = element.getOption();
+        List<OrderedText> tooltip = new ArrayList<>(MinecraftClient.getInstance().textRenderer.wrapLines(option.getTooltip(), boxWidth - (textPadding * 2)));
+
+        OptionImpact impact = option.getImpact();
+
+        if (impact != null) 
+        {
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18n.translate("sclp.performance_impact") + impact.toDisplayString())));
+        }
+
+        int boxHeight = (tooltip.size() * 12) + boxPadding;
+        int boxYLimit = boxY + boxHeight;
+        int boxYCutoff = this.dim.getLimitY();
+
+        // If the box is going to be cutoff on the Y-axis, move it back up the difference
+        if (boxYLimit > boxYCutoff)
+        {
+            boxY -= boxHeight + dim.getHeight();
+        }
+
+        if (boxY < 0)
+        {
+            boxY = dim.getLimitY();
+        }
+
+        this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
+        this.drawRectOutline(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
+
+        for (int i = 0; i < tooltip.size(); i++) 
+        {
+            MinecraftClient.getInstance().textRenderer.draw(matrixStack, tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF);
+        }
+    }
+}
