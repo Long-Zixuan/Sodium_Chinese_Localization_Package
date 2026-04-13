@@ -104,5 +104,6 @@
   "Buy us a coffee!": "请我们喝杯奶茶吧！",
   "x": "×",
   "sclp.performance_impact":"性能影响: ",
-  "rso.search_bar_empty": "搜索选项......"
+  "rso.search_bar_empty": "搜索选项......",
+  "FPS":"帧"
   }
