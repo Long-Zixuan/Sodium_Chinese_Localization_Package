@@ -31,7 +31,7 @@
   "Biome Blend": "生物群系过度距离",
   "Entity Distance": "实体渲染距离",
   "Entity Shadows": "实体阴影",
-  "Mipmap Levels": "纹理映射(Mipmap) 级别",
+  "Mipmap Levels": "多级渐远纹理(Mipmap) 级别",
   "Performance Impact: ": "性能影响： ",
   "The view distance controls how far away terrain will be rendered. Lower distances mean that less terrain will be rendered, improving frame rates.": "渲染距离越低，往往对显卡负载越小，帧率一般会越高，但不绝对。反之亦然。",
   "Chunks": "个区块",
