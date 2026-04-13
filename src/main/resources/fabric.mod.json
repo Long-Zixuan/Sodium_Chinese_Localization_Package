@@ -10,7 +10,8 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack",
-    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package"
+    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package",
+    "issues": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
   },
 
   "license": "LGPLv3",
