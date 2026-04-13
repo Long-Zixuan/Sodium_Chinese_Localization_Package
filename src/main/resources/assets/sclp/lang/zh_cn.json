@@ -31,7 +31,7 @@
   "sodium.options.entity_shadows.tooltip": "如果启用，实体下方将会出现遮蔽光产生的阴影",
   "sodium.options.vignette.name": "晕影",
   "sodium.options.vignette.tooltip": "如果启用，当玩家处于较暗区域时，整体画面将变得更暗，使得玩家更有沉浸感。",
-  "sodium.options.mipmap_levels.tooltip": "控制将用于块模型纹理的mipmap数量。较高的值可以更好地渲染远处的块，但可能会对使用许多动画纹理的资源包的性能产生不利影响。",
+  "sodium.options.mipmap_levels.tooltip": "控制将用于块模型纹理的mipmap(多级渐远纹理)层级。较高的值可以更好地渲染远处的方块，但可能会对使用较多动画纹理的资源包的性能产生不利影响。",
   "sodium.options.use_block_face_culling.name": "启用方块表面剔除",
   "sodium.options.use_block_face_culling.tooltip": "如果启用，则只渲染面向摄像机的多边形。从而大大提高渲染性能。某些资源包（材质包）可能存在此选项的问题，因此如果使用第三方资源包（材质包）时出现了图形问题，请尝试禁用它。",
   "sodium.options.use_fog_occlusion.name": "启用迷雾遮挡",
