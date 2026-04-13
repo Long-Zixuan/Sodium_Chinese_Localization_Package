@@ -26,7 +26,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
     {
-        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinOptionPageScrollFrame")) 
+        /*if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinOptionPageScrollFrame")) 
         {
             Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
 
@@ -54,7 +54,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
             {
                 return false;
             }
-        }
+        }*/
         return true;
     }
 

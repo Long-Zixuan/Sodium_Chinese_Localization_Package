@@ -32,17 +32,13 @@ import java.util.List;
 @Mixin(value = OptionPageScrollFrame.class)
 public class MixinOptionPageScrollFrame extends AbstractFrame
 {
-    public MixinOptionPageScrollFrame(Dim2i dim, OptionPage page) 
+    public MixinOptionPageScrollFrame(Dim2i dim, boolean renderOutline, OptionPage page) 
     {
-        super(dim);
+        super(dim, renderOutline);
     }
 
     @Shadow
     private long lastTime;
-
-    @Final
-    @Shadow
-    protected Dim2i originalDim;
 
     /**
     * @author Loongly
@@ -51,6 +47,8 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
    @Overwrite
    private void renderOptionTooltip(MatrixStack matrixStack, int mouseX, int mouseY, ControlElement<?> element) 
    {
+        if (this.lastTime + 500 > System.currentTimeMillis()) return;
+
         Dim2i dim = element.getDimensions();
 
         int textPadding = 3;
@@ -67,7 +65,7 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
 
         OptionImpact impact = option.getImpact();
 
-        if (impact != null) 
+        if (impact != null)
         {
             tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18n.translate("sclp.performance_impact") + impact.toDisplayString())));
         }
@@ -77,12 +75,12 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
         int boxYCutoff = this.dim.getLimitY();
 
         // If the box is going to be cutoff on the Y-axis, move it back up the difference
-        if (boxYLimit > boxYCutoff)
+        if (boxYLimit > boxYCutoff) 
         {
             boxY -= boxHeight + dim.getHeight();
         }
 
-        if (boxY < 0)
+        if (boxY < 0) 
         {
             boxY = dim.getLimitY();
         }

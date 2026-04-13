@@ -9,8 +9,7 @@
     "sodium.MixinSodiumOptionImpact",
     "sodium.MixinSodiumOptionImpl",
     "sodium.MixinSodiumOptionPage",
-    "sodium.MixinSodiumGUI",
-    "reeses_sodium_options.MixinOptionPageScrollFrame"
+    "sodium.MixinSodiumGUI"
   ],
   "plugin": "loongly.sclp.mixin.SclpMixinPlugin",
   "injectors": {
