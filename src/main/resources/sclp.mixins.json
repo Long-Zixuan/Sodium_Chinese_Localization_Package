@@ -8,7 +8,8 @@
     "sodium.MixinFlatButtonWidget",
     "sodium.MixinSodiumOptionImpact",
     "sodium.MixinSodiumOptionImpl",
-    "sodium.MixinSodiumOptionPage"
+    "sodium.MixinSodiumOptionPage",
+    "sodium.MixinSodiumGUI"
   ],
   "plugin": "loongly.sclp.mixin.SclpMixinPlugin",
   "injectors": {
