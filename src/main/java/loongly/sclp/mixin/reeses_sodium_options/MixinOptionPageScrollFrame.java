@@ -109,7 +109,10 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
         }
 
         this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
-        this.drawRect(boxX, boxY + boxHeight - 24, boxX + boxWidth, boxY + boxHeight, 0xED65FFFF);
+        if(!hadTrans)
+        {
+            this.drawRect(boxX, boxY + boxHeight - 24, boxX + boxWidth, boxY + boxHeight, 0xED65FFFF);
+        }
         this.drawRectOutline(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
 
         for (int i = 0; i < tooltip.size(); i++) 
