@@ -71,11 +71,26 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
         Option<?> option = element.getOption();
         List<OrderedText> tooltip = new ArrayList<>(MinecraftClient.getInstance().textRenderer.wrapLines(option.getTooltip(), boxWidth - (textPadding * 2)));
 
+        boolean hadTrans = true;
+
         OptionImpact impact = option.getImpact();
+        String perImpactStr = I18n.translate("sclp.performance_impact");
+        if(perImpactStr.equals("sclp.performance_impact"))
+        {
+            hadTrans = false;
+            perImpactStr = "Performance Impact:";
+        }
 
         if (impact != null) 
         {
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18n.translate("sclp.performance_impact") + impact.toDisplayString())));
+            
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + perImpactStr + impact.toDisplayString())));
+        }
+
+        if(!hadTrans)
+        {
+            tooltip.add(Language.getInstance().reorder(new LiteralText("请安装Fabric API，否则汉化包将无法正常工作。")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText("請安裝Fabric API，否則漢化包將無法正常工作。")));
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
@@ -94,6 +109,7 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
         }
 
         this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
+        this.drawRect(boxX, boxY + boxHeight - 24, boxX + boxWidth, boxY + boxHeight, 0xED65FFFF);
         this.drawRectOutline(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
 
         for (int i = 0; i < tooltip.size(); i++) 
