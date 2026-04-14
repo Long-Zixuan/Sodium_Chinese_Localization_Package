@@ -1,5 +1,6 @@
 package loongly.sclp.mixin.sodium;
 import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
+import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.resource.language.I18n;
@@ -23,9 +24,12 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Language;
+import net.minecraft.util.Util;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.client.gui.Drawable;
 
 @Mixin(value = SodiumOptionsGUI.class)
 public class MixinSodiumGUI extends Screen
@@ -34,6 +38,39 @@ public class MixinSodiumGUI extends Screen
     {
         super(new TranslatableText("SCLP Mixin Sodium Options"));
     }
+
+    private FlatButtonWidget birthButton;
+    @Shadow
+    @Final
+    private List<Drawable> drawable;
+
+    @Inject(method = "rebuildGUI", at = @At(value = "RETURN"),remap = false, cancellable = true)
+    private void injectRebuildGUI(CallbackInfo ci)
+    {
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        if(isMyBirthday(year, month, day))
+        {
+            this.birthButton = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), this::birthCaidan);
+            this.children.add(this.birthButton);
+            this.drawable.add(this.birthButton);
+        }
+    }
+
+    void birthCaidan()
+    {
+         Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/lain.html");
+    }
+
+    boolean isMyBirthday(int year, int month, int day)
+    {
+        return month == 4 && day == 4;
+    }
+
+
     /**
     * @author Loongly
     * @reason 为renderOptionTooltip方法，增加I18n支持。
