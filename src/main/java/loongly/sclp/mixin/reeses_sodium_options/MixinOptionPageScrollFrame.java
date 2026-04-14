@@ -17,10 +17,14 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.client.util.math.MatrixStack;
-import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.OptionPageScrollFrame;
+import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.OptionPageFrame;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.AbstractFrame;
+import me.jellysquid.mods.sodium.client.gui.options.control.Control;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlElement;
-import me.jellysquid.mods.sodium.client.gui.options.*;
+import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
+import me.jellysquid.mods.sodium.client.gui.options.Option;
+import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
+import me.jellysquid.mods.sodium.client.gui.options.OptionImpact;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.TranslatableText;
@@ -29,13 +33,17 @@ import net.minecraft.util.Language;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(value = OptionPageScrollFrame.class)
+@Mixin(value = OptionPageFrame.class,remap = false)
 public class MixinOptionPageScrollFrame extends AbstractFrame
 {
     public MixinOptionPageScrollFrame(Dim2i dim, boolean renderOutline, OptionPage page) 
     {
         super(dim, renderOutline);
     }
+
+    @Final
+    @Shadow
+    protected Dim2i originalDim;
 
     @Shadow
     private long lastTime;
@@ -44,9 +52,9 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
     * @author Loongly
     * @reason 为renderOptionTooltip方法，增加I18n支持。
     */
-   @Overwrite
-   private void renderOptionTooltip(MatrixStack matrixStack, int mouseX, int mouseY, ControlElement<?> element) 
-   {
+    @Overwrite(remap = false)
+    private void renderOptionTooltip(MatrixStack matrixStack, ControlElement<?> element) 
+    {
         if (this.lastTime + 500 > System.currentTimeMillis()) return;
 
         Dim2i dim = element.getDimensions();
@@ -65,14 +73,14 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
 
         OptionImpact impact = option.getImpact();
 
-        if (impact != null)
+        if (impact != null) 
         {
             tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18n.translate("sclp.performance_impact") + impact.toDisplayString())));
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
         int boxYLimit = boxY + boxHeight;
-        int boxYCutoff = this.dim.getLimitY();
+        int boxYCutoff = this.originalDim.getLimitY();
 
         // If the box is going to be cutoff on the Y-axis, move it back up the difference
         if (boxYLimit > boxYCutoff) 
@@ -85,12 +93,12 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
             boxY = dim.getLimitY();
         }
 
-        this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
+        //this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
         this.drawRectOutline(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
 
         for (int i = 0; i < tooltip.size(); i++) 
         {
-            MinecraftClient.getInstance().textRenderer.draw(matrixStack, tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF);
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrixStack, tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF);
         }
     }
 }

@@ -36,7 +36,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
                 try 
                 {
                     // don't load the RSO options mixin for RSO versions >= 1.4.2
-                    if(rsoVersion.compareTo(Version.parse("1.0.0")) == 0) 
+                    if(rsoVersion.compareTo(Version.parse("1.6.0")) >= 0) 
                     {
                         return false;
                     }
