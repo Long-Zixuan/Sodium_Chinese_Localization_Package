@@ -1,11 +1,11 @@
 package loongly.sclp.mixin.reeses_sodium_options;
-import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
+import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.gui.screen.Screen;
-
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -93,7 +93,7 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
             boxY = dim.getLimitY();
         }
 
-        //this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
+        this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
         this.drawRectOutline(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
 
         for (int i = 0; i < tooltip.size(); i++) 
