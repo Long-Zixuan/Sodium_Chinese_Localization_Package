@@ -38,44 +38,64 @@ public class MixinSodiumGUI extends Screen
     * @author Loongly
     * @reason 为renderOptionTooltip方法，增加I18n支持。
     */
-   @Overwrite
-   private void renderOptionTooltip(MatrixStack matrixStack, ControlElement<?> element)
-   {
-       Dim2i dim = element.getDimensions();
+    @Overwrite
+    private void renderOptionTooltip(MatrixStack matrixStack, ControlElement<?> element)
+    {
+        Dim2i dim = element.getDimensions();
 
-       int textPadding = 3;
-       int boxPadding = 3;
+        int textPadding = 3;
+        int boxPadding = 3;
 
-       int boxWidth = 200;
+        int boxWidth = 200;
 
-       int boxY = dim.getOriginY();
-       int boxX = dim.getLimitX() + boxPadding;
+        int boxY = dim.getOriginY();
+        int boxX = dim.getLimitX() + boxPadding;
 
-       Option<?> option = element.getOption();
-       List<OrderedText> tooltip = new ArrayList<>(this.textRenderer.wrapLines(option.getTooltip(), boxWidth - (textPadding * 2)));
+        Option<?> option = element.getOption();
+        List<OrderedText> tooltip = new ArrayList<>(this.textRenderer.wrapLines(option.getTooltip(), boxWidth - (textPadding * 2)));
 
-       OptionImpact impact = option.getImpact();
+        OptionImpact impact = option.getImpact();
 
-       if (impact != null)
-       {
-           tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18n.translate("sclp.performance_impact") + impact.toDisplayString())));
-       } 
+        boolean hadTrans = true;
 
-       int boxHeight = (tooltip.size() * 12) + boxPadding;
-       int boxYLimit = boxY + boxHeight;
-       int boxYCutoff = this.height - 40;
+        String perImpactStr = I18n.translate("sclp.performance_impact");
+        if(perImpactStr.equals("sclp.performance_impact"))
+        {
+            hadTrans = false;
+            perImpactStr = "Performance Impact:";
+        }
 
-       // If the box is going to be cutoff on the Y-axis, move it back up the difference
-       if (boxYLimit > boxYCutoff)
-       {
-           boxY -= boxYLimit - boxYCutoff;
-       }
+        if (impact != null)
+        {    
+           tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + perImpactStr + impact.toDisplayString())));
+        } 
 
-       this.fillGradient(matrixStack, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000, 0xE0000000);
+        if(!hadTrans)
+        {
+            tooltip.add(Language.getInstance().reorder(new LiteralText("请安装Fabric API，否则汉化包将无法正常工作。")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText("請安裝Fabric API，否則漢化包將無法正常工作。")));
+        }
 
-       for (int i = 0; i < tooltip.size(); i++)
-       {
+        int boxHeight = (tooltip.size() * 12) + boxPadding;
+        int boxYLimit = boxY + boxHeight;
+        int boxYCutoff = this.height - 40;
+
+        // If the box is going to be cutoff on the Y-axis, move it back up the difference
+        if (boxYLimit > boxYCutoff)
+        {
+            boxY -= boxYLimit - boxYCutoff;
+        }
+
+        this.fillGradient(matrixStack, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000, 0xE0000000);
+
+        if(!hadTrans)
+        {
+            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 24, boxX + boxWidth, boxY + boxHeight, 0xED65FFFF, 0xED65FFFF);
+        }
+
+        for (int i = 0; i < tooltip.size(); i++)
+        {
            this.textRenderer.draw(matrixStack, tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF);
-       }
-   }
+        }
+    }
 }
