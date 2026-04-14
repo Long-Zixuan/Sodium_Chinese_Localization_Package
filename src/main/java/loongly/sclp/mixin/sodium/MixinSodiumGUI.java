@@ -90,7 +90,7 @@ public class MixinSodiumGUI extends Screen
 
         if(!hadTrans)
         {
-            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 24, boxX + boxWidth, boxY + boxHeight, 0xED65FFFF, 0xED65FFFF);
+            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 26, boxX + boxWidth, boxY + boxHeight, 0xED65FFFF, 0xED65FFFF);
         }
 
         for (int i = 0; i < tooltip.size(); i++)
