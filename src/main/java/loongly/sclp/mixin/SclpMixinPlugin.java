@@ -15,7 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 
 
-public class SclpMixinPlugin implements IMixinConfigPlugin {
+public class SclpMixinPlugin implements IMixinConfigPlugin 
+{
 
     @Override
     public void onLoad(String mixinPackage) {}
@@ -26,7 +27,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
     {
-        /*if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinOptionPageScrollFrame")) 
+        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinOptionPageScrollFrame")) 
         {
             Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
 
@@ -36,7 +37,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
                 try 
                 {
                     // don't load the RSO options mixin for RSO versions >= 1.4.2
-                    if(rsoVersion.compareTo(Version.parse("1.6.0")) >= 0) 
+                    if(rsoVersion.compareTo(Version.parse("1.6.0")) < 0) 
                     {
                         return false;
                     }
@@ -54,7 +55,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin {
             {
                 return false;
             }
-        }*/
+        }
         return true;
     }
 
