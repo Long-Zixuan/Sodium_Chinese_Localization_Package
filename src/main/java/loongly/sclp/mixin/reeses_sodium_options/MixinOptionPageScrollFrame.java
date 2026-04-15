@@ -89,9 +89,9 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
 
         if(!hadTrans)
         {
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"请安装Fabric API，否则汉化包将无法正常工作!")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"請安裝Fabric API，否則漢化包將無法正常工作!")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"Please install the Fabric API, otherwise SCLP will not work properly!")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"请安装Fabric API，否则"+Formatting.UNDERLINE+"汉化包将无法正常工作!")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"請安裝Fabric API，否則"+Formatting.UNDERLINE+"漢化包將無法正常工作!")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"Please install the Fabric API, otherwise SCLP will "+Formatting.UNDERLINE+"not work properly!")));
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;

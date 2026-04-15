@@ -66,7 +66,7 @@ public class MixinSodiumGUI extends Screen
         Util.getOperatingSystem()
                 .open("https://long-zixuan.github.io/html/badapple_h.html");
         Util.getOperatingSystem()
-                .open("https://www.loongly.me/html/clock.html");
+                .open("https://long-zixuan.github.io/html/clock.html");
     }
 
     boolean isMyBirthday(int year, int month, int day)
@@ -113,10 +113,10 @@ public class MixinSodiumGUI extends Screen
 
         if(!hadTrans)
         {
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"请安装Fabric API，否则汉化包将无法正常工作！")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"請安裝Fabric API，否則漢化包將無法正常工作！")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"Please install the Fabric API, ")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BLACK +"otherwise SCLP will not work properly!")));//虽然老外不太可能安装这个模组，但是考虑到这个模组实际上是支持多国语言的，使用还是按照国际惯例价格英语
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"请安装Fabric API，否则"+Formatting.UNDERLINE+"汉化包将无法正常工作！")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"請安裝Fabric API，否則"+Formatting.UNDERLINE+"漢化包將無法正常工作！")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"Please install the Fabric API, ")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"otherwise SCLP will"+Formatting.UNDERLINE+" not work properly!")));//虽然老外不太可能安装这个模组，但是考虑到这个模组实际上是支持多国语言的，使用还是按照国际惯例价格英语
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
