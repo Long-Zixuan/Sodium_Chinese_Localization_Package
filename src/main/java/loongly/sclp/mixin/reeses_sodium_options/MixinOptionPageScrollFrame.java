@@ -29,6 +29,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Language;
+import loongly.sclp.language.I18NLanguage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +90,9 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
 
         if(!hadTrans)
         {
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"请安装Fabric API，否则"+Formatting.UNDERLINE+"汉化包将无法正常工作!")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"請安裝Fabric API，否則"+Formatting.UNDERLINE+"漢化包將無法正常工作!")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"Please install the Fabric API, otherwise SCLP will "+Formatting.UNDERLINE+"not work properly!")));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_ZH_CN)));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_ZH_TW)));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_1_EN_US + I18NLanguage.NO_FABRIC_API_WARM_2_EN_US)));
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;

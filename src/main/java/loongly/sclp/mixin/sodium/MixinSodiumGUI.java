@@ -30,6 +30,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.Drawable;
+import loongly.sclp.language.I18NLanguage;
 
 @Mixin(value = SodiumOptionsGUI.class)
 public class MixinSodiumGUI extends Screen
@@ -113,10 +114,10 @@ public class MixinSodiumGUI extends Screen
 
         if(!hadTrans)
         {
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"请安装Fabric API，否则"+Formatting.UNDERLINE+"汉化包将无法正常工作！")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"請安裝Fabric API，否則"+Formatting.UNDERLINE+"漢化包將無法正常工作！")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"Please install the Fabric API, ")));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.BOLD +"otherwise SCLP will"+Formatting.UNDERLINE+" not work properly!")));//虽然老外不太可能安装这个模组，但是考虑到这个模组实际上是支持多国语言的，使用还是按照国际惯例价格英语
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_ZH_CN)));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_ZH_TW)));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_1_EN_US)));
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_2_EN_US)));//虽然老外不太可能安装这个模组，但是考虑到这个模组实际上是支持多国语言的，使用还是按照国际惯例价格英语
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
