@@ -1,7 +1,9 @@
 package loongly.sclp.language;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.util.Formatting;
 
@@ -15,13 +17,13 @@ public class I18NLanguage
     static public String NO_FABRIC_API_WARM_2_EN_US = Formatting.BOLD +"otherwise SCLP will"+Formatting.UNDERLINE+" not work properly!";
     static public String NO_FABRIC_API_WARM_JP_JP = Formatting.BOLD + "Fabric APIをインストールしてください";
 
-    static public HashMap<String, String> getLanguage(String lanCode)
+    static public Map<String, String> getLanguage(String lanCode)
     {
         if(LANGUAGES.containsKey(lanCode))
         {
-            return LANGUAGES.get(lanCode);
+            return Collections.unmodifiableMap(LANGUAGES.get(lanCode));
         }
-        return LANGUAGES.get("en_us");
+        return Collections.unmodifiableMap(LANGUAGES.get("en_us"));
     }
 
     static final HashMap<String,HashMap<String,String>> LANGUAGES = new HashMap<String,HashMap<String,String>>();
