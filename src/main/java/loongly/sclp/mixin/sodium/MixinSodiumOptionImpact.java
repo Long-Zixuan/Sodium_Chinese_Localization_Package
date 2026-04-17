@@ -1,7 +1,8 @@
 package loongly.sclp.mixin.sodium;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpact;
 
-import net.minecraft.client.resource.language.I18n;
+//import net.minecraft.client.resource.language.I18n;
+import loongly.sclp.language.I18N;
 
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
@@ -20,6 +21,6 @@ public class MixinSodiumOptionImpact
     @Inject(method = "toDisplayString", at = @At(value = "RETURN",target = "Lnet/minecraft/client/resource/language/I18n;translate(Ljava/lang/String;)V"), cancellable = true)
     public void toDisplayString(CallbackInfoReturnable<String> cir)
     {
-        cir.setReturnValue(this.color + I18n.translate(this.text));
+        cir.setReturnValue(this.color + I18N.trans(this.text));
     }
 }

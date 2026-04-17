@@ -1,7 +1,7 @@
 package loongly.sclp.mixin.sodium;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
-
-import net.minecraft.client.resource.language.I18n;
+import loongly.sclp.language.I18N;
+//import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ public class MixinSodiumOptionImpl
     public void InjectGetName(CallbackInfoReturnable<String> cir)
     {
         String oriName = cir.getReturnValue();
-        cir.setReturnValue(I18n.translate(oriName));
+        cir.setReturnValue(I18N.trans(oriName));
     }
 
     @Inject(method = "getTooltip", at = @At(value = "RETURN",target = "Lnet/minecraft/client/resource/language/I18n;translate(Ljava/lang/String;)V"), cancellable = true)
@@ -24,7 +24,7 @@ public class MixinSodiumOptionImpl
     {
         Text oriTip = cir.getReturnValue();
         String oriTipStr = oriTip.getString();
-        String tranTipStr = I18n.translate(oriTipStr);
+        String tranTipStr = I18N.trans(oriTipStr);
         Text tranTip = new LiteralText(tranTipStr);
         cir.setReturnValue(tranTip);
     }

@@ -3,7 +3,8 @@ import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.resource.language.I18n;
+//import net.minecraft.client.resource.language.I18n;
+import loongly.sclp.language.I18N;
 import net.minecraft.client.gui.screen.Screen;
 
 import net.minecraft.util.Formatting;
@@ -100,7 +101,7 @@ public class MixinSodiumGUI extends Screen
 
         boolean hadTrans = true;
 
-        String perImpactStr = I18n.translate("sclp.performance_impact");
+        String perImpactStr = I18N.trans("sclp.performance_impact");
         if(perImpactStr.equals("sclp.performance_impact"))
         {
             hadTrans = false;

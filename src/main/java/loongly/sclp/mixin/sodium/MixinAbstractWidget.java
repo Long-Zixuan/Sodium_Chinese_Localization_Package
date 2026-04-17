@@ -2,7 +2,8 @@ package loongly.sclp.mixin.sodium;
 import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.resource.language.I18n;
+//import net.minecraft.client.resource.language.I18n;
+import loongly.sclp.language.I18N;
 
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
@@ -69,7 +70,7 @@ public class MixinAbstractWidget
             textBuilder = new StringBuilder();
             for(String t : transList)
             {
-                t = I18n.translate(t);
+                t = I18N.trans(t);
                 textBuilder.append(t);
             }
             text = textBuilder.toString();

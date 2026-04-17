@@ -1,0 +1,72 @@
+package loongly.sclp.language;
+
+import java.util.HashMap;
+import java.util.IllegalFormatException;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import net.minecraft.client.MinecraftClient;
+
+@Environment(EnvType.CLIENT)
+public class I18N
+{
+    public static String trans(String key, Object... args)
+    {
+        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
+        HashMap<String, String> language = I18NLanguage.getLanguage(languageCode);
+        HashMap<String, String> fallbackLanguage = I18NLanguage.getLanguage("en_us");
+        String string = key;
+      
+        if(language != null && language.containsKey(key))
+        {
+            string = language.get(key);
+        }
+        else
+        {
+            if(fallbackLanguage.containsKey(key))
+            {
+                string = fallbackLanguage.get(key);
+            }
+        }
+        try 
+        {
+            return String.format(string, args);
+        }
+        catch (IllegalFormatException var4) 
+        {
+            return "Format error: " + string;
+        }
+    }
+
+    /*public static String trans(String key)
+    {
+        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
+        HashMap<String, String> language = I18NLanguage.getLanguage(languageCode);
+        HashMap<String, String> fallbackLanguage = I18NLanguage.getLanguage("en_us");
+        String string = key;
+        if(language.containsKey(key))
+        {
+            string = language.get(key);
+        }
+        else
+        {
+            if(fallbackLanguage.containsKey(key))
+            {
+                string = fallbackLanguage.get(key);
+            }
+        }
+        return string;
+    }*/
+
+
+    static public boolean hadTrans(String key)
+    {
+        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
+        HashMap<?, ?> language = I18NLanguage.getLanguage(languageCode);
+        if(language != null && language.containsKey(key))
+        {
+            return true;
+        }
+        return false;
+    }
+}

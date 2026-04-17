@@ -1,7 +1,8 @@
 package loongly.sclp.mixin.sodium;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 
-import net.minecraft.client.resource.language.I18n;
+//import net.minecraft.client.resource.language.I18n;
+import loongly.sclp.language.I18N;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +16,7 @@ public class MixinSodiumOptionPage
     public void InjectGetName(CallbackInfoReturnable<String> cir)
     {
         String oriName = cir.getReturnValue();
-        cir.setReturnValue(I18n.translate(oriName));
+        cir.setReturnValue(I18N.trans(oriName));
     }
 }
 
