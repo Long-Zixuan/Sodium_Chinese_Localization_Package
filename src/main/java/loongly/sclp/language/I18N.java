@@ -4,12 +4,8 @@ import java.util.HashMap;
 import java.util.IllegalFormatException;
 import java.util.Map;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import net.minecraft.client.MinecraftClient;
 
-@Environment(EnvType.CLIENT)
 public class I18N
 {
     public static String trans(String key, Object... args)
@@ -18,7 +14,7 @@ public class I18N
         Map<String, String> language = I18NLanguage.getInstance().getLanguage(languageCode);
         Map<String, String> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");
         String string = key;
-      
+        key = key.replace("\n", "<br>");//lang文件中换行统一用<br>
         if(language != null && language.containsKey(key))
         {
             string = language.get(key);
@@ -30,6 +26,7 @@ public class I18N
                 string = fallbackLanguage.get(key);
             }
         }
+        string = string.replace("<br>", "\n");//lang文件中换行统一用<br>
         try 
         {
             return String.format(string, args);
@@ -44,6 +41,7 @@ public class I18N
     {
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
         Map<?, ?> language = I18NLanguage.getInstance().getLanguage(languageCode);
+        key = key.replace("\n", "<br>");//键值的换行统一用<br>代替
         if(language != null && language.containsKey(key))
         {
             return true;
