@@ -30,7 +30,7 @@ public class I18NLanguage
         return instance;
     }
 
-    public Map<String, String> getLanguage(String lanCode)
+    public synchronized Map<String, String> getLanguage(String lanCode)
     {
         if(LANGUAGES.containsKey(lanCode))
         {
