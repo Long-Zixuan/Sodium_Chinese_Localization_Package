@@ -1,10 +1,12 @@
 package loongly.sclp.language;
 
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 
 public class I18NLanguage 
@@ -17,481 +19,96 @@ public class I18NLanguage
     static public String NO_FABRIC_API_WARM_2_EN_US = Formatting.BOLD +"otherwise SCLP will"+Formatting.UNDERLINE+" not work properly!";
     static public String NO_FABRIC_API_WARM_JP_JP = Formatting.BOLD + "Fabric APIをインストールしてください";
 
-    static public Map<String, String> getLanguage(String lanCode)
+    private static I18NLanguage instance;
+
+    public static I18NLanguage getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new I18NLanguage();
+        }
+        return instance;
+    }
+
+    public Map<String, String> getLanguage(String lanCode)
     {
         if(LANGUAGES.containsKey(lanCode))
         {
             return Collections.unmodifiableMap(LANGUAGES.get(lanCode));
         }
+        else
+        {
+            if(loadLanguage(lanCode))
+            {
+                return Collections.unmodifiableMap(LANGUAGES.get(lanCode));
+            }
+        }
         return Collections.unmodifiableMap(LANGUAGES.get("en_us"));
     }
 
-    static final HashMap<String,HashMap<String,String>> LANGUAGES = new HashMap<String,HashMap<String,String>>();
-   
+    final HashMap<String,HashMap<String,String>> LANGUAGES = new HashMap<String,HashMap<String,String>>();
 
-    private static final HashMap<String,String> ZH_CN = new HashMap<String,String>();
-    static{
+    private I18NLanguage()
+    {
+        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
+        String langFilePath = LangFile.getLangFilePath(languageCode);
+        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
         {
-            ZH_CN.put("Low", "低");
-            ZH_CN.put("Medium", "中");
-            ZH_CN.put("High", "高");
-            ZH_CN.put("Extreme", "极高");
-            ZH_CN.put("Varies", "视情况而定");
-            ZH_CN.put("General", "通用");
-            ZH_CN.put("Quality", "画质");
-            ZH_CN.put("Advanced", "高级");
-            ZH_CN.put("Auto","自动");
-            ZH_CN.put("View Distance", "渲染距离");
-            ZH_CN.put("Brightness", "亮度");
-            ZH_CN.put("Moody", "昏暗");
-            ZH_CN.put("Bright", "明亮");
-            ZH_CN.put("Clouds", "云");
-            ZH_CN.put("GUI Scale", "界面尺寸");
-            ZH_CN.put("Fullscreen", "全屏");
-            ZH_CN.put("FPS Limit", "最大帧率");
-            ZH_CN.put("Unlimited", "无限制");
-            ZH_CN.put("View Bobbing", "视角摇晃");
-            ZH_CN.put("Attack Indicator", "攻击指示器");
-            ZH_CN.put("Off", "关闭");
-            ZH_CN.put("Crosshair", "十字准星");
-            ZH_CN.put("Hotbar", "工具栏");
-            ZH_CN.put("Graphics Quality", "画面质量");
-            ZH_CN.put("Fancy", "高品质");
-            ZH_CN.put("Fabulous", "极佳");
-            ZH_CN.put("Fast", "流畅");
-            ZH_CN.put("Default", "默认");
-            ZH_CN.put("Smooth Lighting", "平滑光照");
-            ZH_CN.put("Biome Blend", "生物群系过度距离");
-            ZH_CN.put("Entity Distance", "实体渲染距离");
-            ZH_CN.put("Entity Shadows", "实体阴影");
-            ZH_CN.put("Mipmap Levels", "多级渐远纹理(Mipmap) 级别");
-            ZH_CN.put("Performance Impact: ", "性能影响： ");
-            ZH_CN.put("The view distance controls how far away terrain will be rendered. Lower distances mean that less terrain will be rendered, improving frame rates.", "渲染距离越低，往往对显卡负载越小，帧率一般会越高，但不绝对。反之亦然。");
-            ZH_CN.put("Chunks", "个区块");
-            ZH_CN.put("Controls the brightness (gamma) of the game.", "控制游戏画面的亮度（伽马值）。");
-            ZH_CN.put("Controls whether or not clouds will be visible.", "控制云是否可见。");
-            ZH_CN.put("Fog", "迷雾");
-            ZH_CN.put("If enabled, a fog effect will be used for terrain in the distance. Disabling this option will not change fog effects used underwater or in the Nether.", "启用后，远处的地形将被迷雾覆盖。此选项不会影响水下和下界的迷雾。");
-            ZH_CN.put("Sets the maximum scale factor to be used for the user interface. If 'auto' is used, then the largest scale factor will always be used.", "设置界面尺寸比例。如果设置为“自动”，则使用可能的最大比例。");
-            ZH_CN.put("If enabled, the game will display in full-screen (if supported).", "启用后，游戏将全屏显示（若支持）。");
-            ZH_CN.put("V-Sync", "垂直同步");
-            ZH_CN.put("If enabled, the game's frame rate will be synchronized to the monitor's refresh rate, making for a generally smoother experience at the expense of overall input latency. This setting might reduce performance if your system is too slow.", "启用后，游戏的帧率将与显示器的刷新率同步，从而在牺牲整体输入延迟的情况下获得更流畅的体验。如果设备配置过低，此设置可能会降低性能。");
-            ZH_CN.put("Limits the maximum number of frames per second. In effect, this will throttle the game and can be useful when you want to conserve battery life or multi-task between other applications. If V-Sync is enabled, this option will be ignored unless it is lower than your display's refresh rate.", "限制最大帧率。此选项有限制游戏渲染速度的的效果，因此开启此选项有利于提升电池续航或多任务处理。启用垂直同步时此选项会被自动忽略，除非该值低于显示器的刷新");
-            ZH_CN.put("If enabled, the player's view will sway and bob when moving around. Players who suffer from motion sickness can benefit from disabling this.", "启用后，玩家在移动时的视角会摇晃摆动。禁用该选项可缓解晕动症症状。");
-            ZH_CN.put("Controls where the Attack Indicator is displayed on screen.", "控制攻击指示器显示在屏幕上的位置。");
-            ZH_CN.put("The default graphics quality controls some legacy options and is necessary for mod compatibility. If the options below are left to \"Default\", they will use this setting.", "默认图像质量控制一些原版选项，且对于Mod兼容性是必要的。若下方的选项保留为“默认”，则将会使用此选项的品质。");
-            ZH_CN.put("Clouds Quality", "云的图像质量");
-            ZH_CN.put("Controls the quality of rendered clouds in the sky.", "控制云在空中的渲染质量。");
-            ZH_CN.put("Weather Quality", "天气的图像质量");
-            ZH_CN.put("Controls the quality of rain and snow effects.", "控制雨、雪的渲染质量。");
-            ZH_CN.put("Particle Quality", "颗粒的图像质量");
-            ZH_CN.put("Controls the maximum number of particles which can be present on screen at any one time.", "控制每次可以在屏幕上出现的颗粒的最大数量。");
-            ZH_CN.put("Controls the quality of smooth lighting effects.\n\nOff - No smooth lighting\nLow - Smooth block lighting only\nHigh (new!) - Smooth block and entity lighting", "控制平滑光照效果的品质。\n\n关 - 无平滑滑光照\n低 - 只有方块应用平滑光照\n高（新！） - 方块和实体都应用平滑光照");
-            ZH_CN.put("Controls the range which biomes will be sampled for block colorization. Higher values greatly increase the amount of time it takes to build chunks for diminishing improvements in quality.", "控制生物群系之间方块颜色的采样范围。较高的值会极大地增加渲染区块时因质量改进而所花费的时间。");
-            ZH_CN.put("block(s)", "个方块");
-            ZH_CN.put("Controls how far away entities can render from the player. Higher values increase the render distance at the expense of frame rates.", "控制实体的显示距离。较高的值会以牺牲帧率为代价增加渲染距离。");
-            ZH_CN.put("If enabled, basic shadows will be rendered beneath mobs and other entities.", "启用后，在生物和其他实体下面渲染简单的阴影。");
-            ZH_CN.put("Vignette", "晕影");
-            ZH_CN.put("Use Chunk Multi-Draw", "启用区块多点取样");
-            ZH_CN.put("Multi-draw allows multiple chunks to be rendered with fewer draw calls, greatly reducing CPU overhead when rendering the world while also potentially allowing for more efficient GPU utilization. This optimization may cause issues with some graphics drivers, so you should try disabling it if you are experiencing glitches.", "多点取样允许以更少的绘制调用渲染多个区块，在渲染世界时大大减低CPU性能压力，同时还可能更有效的GPU利用率。 但是优化可能会导致某些图形驱动程序出现问题，所以如果你遇到故障，请尝试禁用此功能。");
-            ZH_CN.put("Use Vertex Array Objects", "启用顶点数组阵对象");
-            ZH_CN.put("Helps to improve performance by moving information about how vertex data should be rendered into the driver, allowing it to better optimize for repeated rendering of the same objects. There is generally no reason to disable this unless you're using incompatible mods.", "通过将有关如何渲染顶点数据的信息移动到驱动程序中来帮助提高性能，使其能够更好地优化相同对象的重复渲染。 除非你使用不兼容的模组，否则通常没有理由禁用此功能。");
-            ZH_CN.put("Use Block Face Culling", "启用方块表面剔除");
-            ZH_CN.put("If enabled, only the sides of blocks which are facing the camera will be submitted for rendering. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU. Some resource packs may have issues with this option, so try disabling it if you're seeing holes in blocks.", "启用后，将只会渲染面向镜头的方块表面。 这可以在渲染过程的早期剔除大量方块表面，从而节省GPU上的内存带宽和时间。 某些资源包可能会遇到此选项的问题，因此如果你看到方块显示不全，请尝试禁用功能。");
-            ZH_CN.put("If enabled, a vignette effect will be rendered on the player's view. This is very unlikely to make a difference to frame rates unless you are fill-rate limited.", "启用后，屏幕四角处会轻微变暗。除非限制覆盖范围，否则基本不影响帧率。");
-            ZH_CN.put("Controls the number of mipmaps which will be used for block model textures. Higher values provide better rendering of blocks in the distance, but may adversely affect performance with many animated textures.", "控制平滑材质的多级纹理（Mipmap）的级别。较高的级别可使远处的物体获得更好的渲染效果，但可能会在渲染很多动态材质时产生性能损失。");
-            ZH_CN.put("Chunk Renderer", "区块渲染器");
-            ZH_CN.put("Modern versions of OpenGL provide features which can be used to greatly reduce driver overhead when rendering chunks. You should use the latest feature set allowed by Sodium for optimal performance. If you're experiencing chunk rendering issues or driver crashes, try using the older (and possibly more stable) feature sets.", "新版本的OpenGL提供了一些可以大幅降低渲染程序占用的特性。为了获得最佳性能，最好使用Sodium所允许的最新的渲染器。若区块渲染出错或驱动程序崩溃，请尝试较旧的渲染器（可能更稳定）。");
-            ZH_CN.put("Use Chunk Face Culling", "启用区块表面剔除");
-            ZH_CN.put("If enabled, an additional culling pass will be performed on the CPU to determine which planes of a chunk mesh are visible. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU.", "启用后，将增加一道使用CPU的剔除流程来判断区块表面是否可见。这可在早期渲染流程时大量减少区块渲染，以节约GPU的显存带宽和渲染时间。");
-            ZH_CN.put("Use Compact Vertex Format", "启用顶点压缩格式");
-            ZH_CN.put("If enabled, a more compact vertex format will be used for rendering chunks. This can reduce graphics memory usage and bandwidth requirements significantly, especially for integrated graphics cards, but can cause z-fighting with some resource packs due to how it reduces the precision of position and texture coordinate attributes.", "启用顶点压缩格式");
-            ZH_CN.put("Use Fog Occlusion", "启用迷雾遮挡");
-            ZH_CN.put("If enabled, chunks which are determined to be fully hidden by fog effects will not be rendered, helping to improve performance. The improvement can be more dramatic when fog effects are heavier (such as while underwater), but it may cause undesirable visual artifacts between the sky and fog in some scenarios.", "启用后，被迷雾效果完全隐藏的区块将不会被渲染，有助于提高性能。 当迷雾效果较重时（例如在水下时），改进可能会更加显着，但在某些情况下可能会导致天空和雾之间出现不良的视觉伪影。");
-            ZH_CN.put("Use Entity Culling", "启用实体剔除");
-            ZH_CN.put("If enabled, entities determined not to be in any visible chunks will be skipped during rendering. This can help improve performance by avoiding the rendering of entities located underground or behind walls.", "启用后，则在渲染期间跳过在不可见区块的实体。 这可以通过避免渲染位于地下或墙后的实体来帮助提高性能。");
-            ZH_CN.put("If enabled, a secondary culling pass will be performed before attempting to render an entity. This additional pass takes into account the current set of visible chunks and removes entities which are not in any visible chunks.", "启用后，将在尝试渲染实体之前执行第二次剔除。这一额外流程将会考虑到当前可见区块的范围，然后剔除不在可见区块范围内的实体。");
-            ZH_CN.put("Use Particle Culling", "启用颗粒剔除");
-            ZH_CN.put("If enabled, only particles which are determined to be visible will be rendered. This can provide a significant improvement to frame rates when many particles are nearby.", "启用后，将仅渲染可见的颗粒。当周围有许多颗粒时，这可以显著地提高帧率。");
-            ZH_CN.put("Animate Only Visible Textures", "仅渲染可见的动态材质");
-            ZH_CN.put("Allow Direct Memory Access", "允许直接访问内存");
-            ZH_CN.put("If enabled, some critical code paths will be allowed to use direct memory access for performance. This often greatly reduces CPU overhead for chunk and entity rendering, but can make it harder to diagnose some bugs and crashes. You should only disable this if you've been asked to or otherwise know what you're doing.", "启用后，将允许某些关键代码使用路径直接访问内存来提高性能。 这通常会大大降低区块和实体渲染的CPU性能，但会使诊断某些错误和崩溃变得更加困难。 如果你被要求或以其他方式知道您在做什么，你应该只禁用它。");
-            ZH_CN.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware, especially with heavier resource packs. If you experience issues with some textures not being animated, try disabling this option.", "启用后，只会更新可见的动态材质。这可以大大提高某些硬件的帧率，尤其是对于较大的资源包。如果遇到某些材质无动画的问题，请禁用此选项。");
-            ZH_CN.put("Use Memory Intrinsics", "对内存使用内置函数");
-            ZH_CN.put("If enabled, special intrinsics will be used to speed up the copying of client memory in certain vertex-limited scenarios, such as particle and text rendering. This option only exists for debugging purposes and should be left enabled unless you know what you are doing.", "启用后，出现特定受顶点限制的情况时（如粒子和文本的渲染）将使用特殊的内部函数来加速客户端内存的复制。此选项仅用于调试目的，除非你知道自己在干什么，否则应保持启用。");
-            ZH_CN.put("Ignore Driver Blacklist", "忽略驱动程序黑名单");
-            ZH_CN.put("If enabled, known incompatibilities with your hardware/driver configuration will be ignored, allowing you to enable options that may cause issues with your game. You should generally not touch this option unless you know exactly what you are doing. After changing this option, you must save, close, and then re-open the settings screen.", "启用后，已知不兼容配置的硬件/驱动程序将被忽略，允许启用可能导致游戏问题的选项。 除非你确切地知道自己在做什么，否则通常不应修改此选项。 更改此选项后，你必须保存并关闭，然后重新打开设置界面。");
-            ZH_CN.put("Disable Driver Blacklist", "禁用驱动程序黑名单");
-            ZH_CN.put("If selected, Sodium will ignore the built-in driver blacklist and enable options which are known to be broken with your system configuration. This might cause serious problems and should not be used unless you really do know better. The settings screen must be saved, closed, and re-opened after changing this option in order to reveal previously hidden options.", "选中后，Sodium将强制允许使用某些与你的系统不兼容的隐藏选项。这可能导致严重问题。除非你了解你在做什么，否则不建议启用该选项。改变此选项后，需要保存设置并再次打开设置界面才能启用隐藏选项。");
-            ZH_CN.put("Performance Impact: %s", "性能影响: %s");
-            ZH_CN.put("Undo", "取消");
-            ZH_CN.put("Apply", "应用");
-            ZH_CN.put("Close", "关闭");
-            ZH_CN.put("None", "无");
-            ZH_CN.put("GPU", "显卡");
-            ZH_CN.put("CPU", "CPU");
-            ZH_CN.put("Memory", "内存");
-            ZH_CN.put("OS", "操作系统");
-            ZH_CN.put("LZX", "LoongLy");
-            ZH_CN.put("Buy us a coffee!", "请我们喝杯奶茶吧！");
-            ZH_CN.put("x", "×");
-            ZH_CN.put("sclp.performance_impact", "性能影响: ");
-            ZH_CN.put("rso.search_bar_empty", "搜索选项......");
-            ZH_CN.put("FPS", "帧");
-            ZH_CN.put("If enabled, chunks which are determined to be fully hidden by fog effects will be skipped during rendering. This will generally provide a modest improvement to the number of chunks rendered each frame, especially where fog effects are heavier (i.e. while underwater.)", "若启用此功能，渲染时将跳过被雾效完全遮挡的区块。这通常能适度提升每帧渲染的区块数量，尤其在雾效浓重的区域（例如水下场景）效果更明显");
-            ZH_CN.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware. If you experience issues with some textures not being animated, disable this option.", "启用后，仅更新判定为可见的动态纹理。此功能可在某些硬件上显著提升帧率。若遇到部分纹理未动态更新的问题，请禁用此选项。");
-            ZH_CN.put("If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.", "如果启用，块网格将使用更紧凑的顶点格式，这会限制顶点属性的精度。这种格式将使图形内存使用量和带宽要求减少约40%，但在某些边缘情况下可能会导致z-fighting/闪烁纹理问题。");
-        }
-    };
+            if (inputStream == null) 
+            {
 
-    private final static HashMap<String,String> EN_US = new HashMap<String,String>();
-    static{
-        {
-            EN_US.put("sclp.performance_impact", "Performance Impact:");
+            }
+            else
+            {
+                LANGUAGES.put(languageCode, LangFile.parseLangFile(inputStream));
+            }
         }
-    };
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-    private final static HashMap<String,String> ZH_TW = new HashMap<String,String>();
-    static{
+        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(LangFile.getLangFilePath("en_us"))) 
         {
-            ZH_TW.put("Low", "低");
-            ZH_TW.put("Medium", "中");
-            ZH_TW.put("High", "高");
-            ZH_TW.put("Extreme", "極高");
-            ZH_TW.put("Varies", "視情況而定");
-            ZH_TW.put("General", "一般");
-            ZH_TW.put("Quality", "畫質");
-            ZH_TW.put("Advanced", "進階");
-            ZH_TW.put("View Distance", "渲染距離");
-            ZH_TW.put("Brightness", "亮度");
-            ZH_TW.put("Moody", "昏暗");
-            ZH_TW.put("Bright", "明亮");
-            ZH_TW.put("Clouds", "雲");
-            ZH_TW.put("GUI Scale", "介面尺寸");
-            ZH_TW.put("Fullscreen", "全螢幕");
-            ZH_TW.put("FPS Limit", "最大影格率");
-            ZH_TW.put("Unlimited", "無限制");
-            ZH_TW.put("View Bobbing", "視角搖晃");
-            ZH_TW.put("Attack Indicator", "攻擊指示器");
-            ZH_TW.put("Off", "關閉");
-            ZH_TW.put("Crosshair", "十字準星");
-            ZH_TW.put("Hotbar", "快捷欄");
-            ZH_TW.put("Auto", "自動");
-            ZH_TW.put("Graphics Quality", "畫面品質");
-            ZH_TW.put("Fancy", "高品質");
-            ZH_TW.put("Fabulous", "極佳");
-            ZH_TW.put("Fast", "流暢");
-            ZH_TW.put("Default", "默認");
-            ZH_TW.put("Smooth Lighting", "平滑光照");
-            ZH_TW.put("Biome Blend", "生物群系過度距離");
-            ZH_TW.put("Entity Distance", "實體渲染距離");
-            ZH_TW.put("Entity Shadows", "實體陰影");
-            ZH_TW.put("Mipmap Levels", "紋理映射（Mipmap）級別");
-            ZH_TW.put("Performance Impact: ", "效能影響：");
-            ZH_TW.put("The view distance controls how far away terrain will be rendered. Lower distances mean that less terrain will be rendered, improving frame rates.", "渲染距離越低，往往對顯示卡負載越小，影格率一般會越高，但不絕對。 反之亦然。");
-            ZH_TW.put("Chunks", "個區塊");
-            ZH_TW.put("Controls the brightness (gamma) of the game.", "控制遊戲畫面的亮度（伽馬值）。");
-            ZH_TW.put("Controls whether or not clouds will be visible.", "控制雲是否可見。");
-            ZH_TW.put("Fog", "迷霧");
-            ZH_TW.put("If enabled, a fog effect will be used for terrain in the distance. Disabling this option will not change fog effects used underwater or in the Nether.", "啟用後，遠處的地形將被迷霧覆蓋。 此選項不會影響水下和下界的迷霧。");
-            ZH_TW.put("Sets the maximum scale factor to be used for the user interface. If 'auto' is used, then the largest scale factor will always be used.", "設定介面尺寸比例。 如果設定為“自動”，則使用可能的最大比例。");
-            ZH_TW.put("If enabled, the game will display in full-screen (if supported).", "啟用後，遊戲將全螢幕顯示（若支持）。");
-            ZH_TW.put("V-Sync", "垂直同步");
-            ZH_TW.put("If enabled, the game's frame rate will be synchronized to the monitor's refresh rate, making for a generally smoother experience at the expense of overall input latency. This setting might reduce performance if your system is too slow.", "啟用後，遊戲的影格率將與顯示器的刷新率同步，從而在犧牲整體輸入延遲的情況下獲得更流暢的體驗。 如果設備配置過低，此設定可能會降低效能。");
-            ZH_TW.put("Limits the maximum number of frames per second. In effect, this will throttle the game and can be useful when you want to conserve battery life or multi-task between other applications. If V-Sync is enabled, this option will be ignored unless it is lower than your display's refresh rate.", "限制最大影格率。 此選項有限制遊戲渲染速度的的效果，囙此開啟此選項有利於提升電池續航或多工處理。 啟用垂直同步時此選項會被自動忽略，除非該值低於顯示器的重繪");
-            ZH_TW.put("If enabled, the player's view will sway and bob when moving around. Players who suffer from motion sickness can benefit from disabling this.", "啟用後，玩家在移動時的視角會搖晃擺動。 禁用該選項可紓解3D暈眩症症狀。");
-            ZH_TW.put("Controls where the Attack Indicator is displayed on screen.", "控制攻擊指示器顯示在螢幕上的位置。");
-            ZH_TW.put("The default graphics quality controls some legacy options and is necessary for mod compatibility. If the options below are left to \"Default\", they will use this setting.", "默認影像品質控制一些原版選項，且對於模組相容性是必要的。 若下方的選項保留為「默認」，則將會使用此選項的品質。");
-            ZH_TW.put("Clouds Quality", "雲的圖像品質");
-            ZH_TW.put("Controls the quality of rendered clouds in the sky.", "控制雲在空中的渲染品質。");
-            ZH_TW.put("Weather Quality", "天氣的圖像品質");
-            ZH_TW.put("Controls the quality of rain and snow effects.", "控制雨、雪的渲染品質。");
-            ZH_TW.put("Particle Quality", "顆粒的圖像品質");
-            ZH_TW.put("Controls the maximum number of particles which can be present on screen at any one time.", "控制每次可以在螢幕上出現的顆粒的最大數量。");
-            ZH_TW.put("Controls the quality of smooth lighting effects.\n\nOff - No smooth lighting\nLow - Smooth block lighting only\nHigh (new!) - Smooth block and entity lighting", "控制平滑光照效果的品質。 \n\n關-無平滑滑光照\n低-只有方塊應用平滑光照\n高（新！）-方塊和實體都應用平滑光照");
-            ZH_TW.put("Controls the range which biomes will be sampled for block colorization. Higher values greatly increase the amount of time it takes to build chunks for diminishing improvements in quality.", "控制生物群系之間方塊顏色的採樣範圍。 較高的值會極大地新增渲染區塊時因品質改進而所花費的時間。");
-            ZH_TW.put("block(s)", "個方塊");
-            ZH_TW.put("Controls how far away entities can render from the player. Higher values increase the render distance at the expense of frame rates.", "控制實體的顯示距離。 較高的值會以犧牲影格率為代價新增渲染距離。");
-            ZH_TW.put("If enabled, basic shadows will be rendered beneath mobs and other entities.", "啟用後，在生物和其他實體下面渲染簡單的陰影。");
-            ZH_TW.put("Vignette", "暈影");
-            ZH_TW.put("Use Chunk Multi-Draw", "啟用區塊多點取樣");
-            ZH_TW.put("Multi-draw allows multiple chunks to be rendered with fewer draw calls, greatly reducing CPU overhead when rendering the world while also potentially allowing for more efficient GPU utilization. This optimization may cause issues with some graphics drivers, so you should try disabling it if you are experiencing glitches.", "多點取樣允許以更少的繪製調用渲染多個區塊，在渲染世界時大大減低CPU效能壓力，同時還可能更有效的GPU利用率。 但是最佳化可能會導致某些圖形驅動程式出現問題，所以如果你遇到故障，請嘗試禁用此功能。");
-            ZH_TW.put("Use Vertex Array Objects", "啟用頂點數組陣對象");
-            ZH_TW.put("Helps to improve performance by moving information about how vertex data should be rendered into the driver, allowing it to better optimize for repeated rendering of the same objects. There is generally no reason to disable this unless you're using incompatible mods.", "透過將有關如何渲染頂點數據的資訊移動到驅動程式中來幫助提高效能，使其能夠更好地最佳化相同對象的重複渲染。 除非你使用不相容的模組，否則通常沒有理由禁用此功能。");
-            ZH_TW.put("Use Block Face Culling", "啟用方塊表面剔除");
-            ZH_TW.put("If enabled, only the sides of blocks which are facing the camera will be submitted for rendering. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU. Some resource packs may have issues with this option, so try disabling it if you're seeing holes in blocks.", "啟用後，將只會渲染面向鏡頭的方塊表面。 這可以在渲染過程的早期剔除大量方塊表面，從而節省GPU上的記憶體頻寬和時間。 某些資源包可能會遇到此選項的問題，囙此如果你看到方塊顯示不全，請嘗試禁用功能。");
-            ZH_TW.put("If enabled, a vignette effect will be rendered on the player's view. This is very unlikely to make a difference to frame rates unless you are fill-rate limited.", "啟用後，螢幕四角處會輕微變暗。 除非限制覆蓋範圍，否則基本上不影響影格率。");
-            ZH_TW.put("Controls the number of mipmaps which will be used for block model textures. Higher values provide better rendering of blocks in the distance, but may adversely affect performance with many animated textures.", "控制平滑材質的多級紋理（Mipmap）的級別。 較高的級別可使遠處的物體獲得更好的渲染效果，但可能會在渲染很多動態材質時產生效能損失。");
-            ZH_TW.put("Chunk Renderer", "區塊渲染器");
-            ZH_TW.put("Modern versions of OpenGL provide features which can be used to greatly reduce driver overhead when rendering chunks. You should use the latest feature set allowed by Sodium for optimal performance. If you're experiencing chunk rendering issues or driver crashes, try using the older (and possibly more stable) feature sets.", "新版本的OpenGL提供了一些可以大幅降低渲染程式佔用的特性。 為了獲得最佳效能，最好使用Sodium所允許的最新的渲染器。 若區塊渲染出錯或驅動程式崩潰，請嘗試較舊的渲染器（可能更穩定）。");
-            ZH_TW.put("Use Chunk Face Culling", "啟用區塊表面剔除");
-            ZH_TW.put("If enabled, an additional culling pass will be performed on the CPU to determine which planes of a chunk mesh are visible. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU.", "啟用後，將新增一道使用CPU的剔除流程來判斷區塊表面是否可見。 這可在早期渲染流程時大量減少區塊渲染，以節約GPU的顯示記憶體頻寬和渲染時間。");
-            ZH_TW.put("Use Compact Vertex Format", "啟用頂點壓縮格式");
-            ZH_TW.put("If enabled, a more compact vertex format will be used for rendering chunks. This can reduce graphics memory usage and bandwidth requirements significantly, especially for integrated graphics cards, but can cause z-fighting with some resource packs due to how it reduces the precision of position and texture coordinate attributes.", "啟用頂點壓縮格式");
-            ZH_TW.put("Use Fog Occlusion", "啟用迷霧遮擋");
-            ZH_TW.put("If enabled, chunks which are determined to be fully hidden by fog effects will not be rendered, helping to improve performance. The improvement can be more dramatic when fog effects are heavier (such as while underwater), but it may cause undesirable visual artifacts between the sky and fog in some scenarios.", "啟用後，被迷霧效果完全隱藏的區塊將不會被渲染，有助於提高效能。 當迷霧效果較重時（例如在水下時），改進可能會更加顯著，但在某些情況下可能會導致天空和霧之間出現不良的視覺偽影。");
-            ZH_TW.put("Use Entity Culling", "啟用實體剔除");
-            ZH_TW.put("If enabled, entities determined not to be in any visible chunks will be skipped during rendering. This can help improve performance by avoiding the rendering of entities located underground or behind walls.", "啟用後，則在渲染期間跳過在不可見區塊的實體。 這可以透過避免渲染位於地下或牆後的實體來幫助提高效能。");
-            ZH_TW.put("If enabled, a secondary culling pass will be performed before attempting to render an entity. This additional pass takes into account the current set of visible chunks and removes entities which are not in any visible chunks.", "啟用後，將在嘗試渲染實體之前執行第二次剔除。 這一額外流程將會考慮到當前可見區塊的範圍，然後剔除不在可見區塊範圍內的實體。");
-            ZH_TW.put("Use Particle Culling", "啟用顆粒剔除");
-            ZH_TW.put("If enabled, only particles which are determined to be visible will be rendered. This can provide a significant improvement to frame rates when many particles are nearby.", "啟用後，將僅渲染可見的顆粒。 當周圍有許多顆粒時，這可以顯著地提高影格率。");
-            ZH_TW.put("Animate Only Visible Textures", "僅渲染可見的動態材質");
-            ZH_TW.put("Allow Direct Memory Access", "允許直接訪問記憶體");
-            ZH_TW.put("If enabled, some critical code paths will be allowed to use direct memory access for performance. This often greatly reduces CPU overhead for chunk and entity rendering, but can make it harder to diagnose some bugs and crashes. You should only disable this if you've been asked to or otherwise know what you're doing.", "啟用後，將允許某些關鍵程式碼使用路徑直接訪問記憶體來提高效能。 這通常會大大降低區塊和實體渲染的CPU效能，但會使診斷某些錯誤和崩潰變得更加困難。 如果你被要求或以其他管道知道您在做什麼，你應該只禁用它。");
-            ZH_TW.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware, especially with heavier resource packs. If you experience issues with some textures not being animated, try disabling this option.", "啟用後，只會更新可見的動態材質。 這可以大大提高某些硬體的影格率，尤其是對於較大的資源包。 如果遇到某些材質無動畫的問題，請禁用此選項。");
-            ZH_TW.put("Use Memory Intrinsics", "對記憶體使用內寘函數");
-            ZH_TW.put("If enabled, special intrinsics will be used to speed up the copying of client memory in certain vertex-limited scenarios, such as particle and text rendering. This option only exists for debugging purposes and should be left enabled unless you know what you are doing.", "啟用後，出現特定受頂點限制的情況時（如粒子和文字的渲染）將使用特殊的內部函數來加速用戶端記憶體的複製。 此選項僅用於除錯目的，除非你知道自己在幹什麼，否則應保持啟用。");
-            ZH_TW.put("Ignore Driver Blacklist", "忽略驅動程式黑名單");
-            ZH_TW.put("If enabled, known incompatibilities with your hardware/driver configuration will be ignored, allowing you to enable options that may cause issues with your game. You should generally not touch this option unless you know exactly what you are doing. After changing this option, you must save, close, and then re-open the settings screen.", "啟用後，已知不相容配寘的硬體/驅動程式將被忽略，允許啟用可能導致遊戲問題的選項。 除非你確切地知道自己在做什麼，否則通常不應修改此選項。 更改此選項後，你必須保存並關閉，然後重新打開設定介面。");
-            ZH_TW.put("Disable Driver Blacklist", "禁用驅動程式黑名單");
-            ZH_TW.put("If selected, Sodium will ignore the built-in driver blacklist and enable options which are known to be broken with your system configuration. This might cause serious problems and should not be used unless you really do know better. The settings screen must be saved, closed, and re-opened after changing this option in order to reveal previously hidden options.", "選中後，Sodium將強制允許使用某些與你的系統不相容的隱藏選項。 這可能導致嚴重問題。 除非你瞭解你在做什麼，否則不建議啟用該選項。 改變此選項後，需要保存設置並再次打開設定介面才能啟用隱藏選項。");
-            ZH_TW.put("Performance Impact: %s", "效能影響：%s");
-            ZH_TW.put("Undo", "取消");
-            ZH_TW.put("Apply", "應用");
-            ZH_TW.put("Close", "關閉");
-            ZH_TW.put("None", "無");
-            ZH_TW.put("GPU", "顯示卡");
-            ZH_TW.put("CPU", "CPU");
-            ZH_TW.put("Memory", "記憶體");
-            ZH_TW.put("OS", "操作系統");
-            ZH_TW.put("LZX", "LoongLy");
-            ZH_TW.put("Buy us a coffee!", "請我們喝杯奶茶吧！");
-            ZH_TW.put("sclp.performance_impact", "效能影響:");
-            ZH_TW.put("rso.search_bar_empty", "搜索選項......");
-            ZH_TW.put("If enabled, chunks which are determined to be fully hidden by fog effects will be skipped during rendering. This will generally provide a modest improvement to the number of chunks rendered each frame, especially where fog effects are heavier (i.e. while underwater.)", "若啟用此功能，渲染時將跳過被霧效完全遮擋的區塊。 這通常能適度提升每幀渲染的區塊數量，尤其在霧效濃重的區域（例如水下場景）效果更明顯");
-            ZH_TW.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware. If you experience issues with some textures not being animated, disable this option.", "啟用後，僅更新判定為可見的動態紋理。 此功能可在某些硬體上顯著提升幀率。 若遇到部分紋理未動態更新的問題，請禁用此選項。");
-            ZH_TW.put("If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.", "如果啟用，塊網格將使用更緊湊的頂點格式，這會限制頂點内容的精度。 這種格式將使圖形記憶體使用量和頻寬要求减少約40%，但在某些邊緣情况下可能會導致z-fighting/閃爍紋理問題。");
-        }
-    };
+            if (inputStream == null) 
+            {
+                
+                System.err.println("en_us.lang file not found");
+            }
+            else
+            {
+                LANGUAGES.put("en_us", LangFile.parseLangFile(inputStream));
+            }
 
-    private final static HashMap<String,String> ZH_HK = new HashMap<String,String>();
-    static{
-        {
-            ZH_HK.put("Low", "低");
-            ZH_HK.put("Medium", "中");
-            ZH_HK.put("High", "高");
-            ZH_HK.put("Extreme", "极高");
-            ZH_HK.put("Varies", "視情况而定");
-            ZH_HK.put("General", "一般");
-            ZH_HK.put("Quality", "畫質");
-            ZH_HK.put("Advanced", "高級");
-            ZH_HK.put("View Distance", "渲染距離");
-            ZH_HK.put("Brightness", "亮度");
-            ZH_HK.put("Moody", "昏暗");
-            ZH_HK.put("Bright", "明亮");
-            ZH_HK.put("Clouds", "云");
-            ZH_HK.put("GUI Scale", "介面尺寸");
-            ZH_HK.put("Fullscreen", "全屏");
-            ZH_HK.put("FPS Limit", "最大FPS");
-            ZH_HK.put("Unlimited", "無限制");
-            ZH_HK.put("View Bobbing", "視角搖晃");
-            ZH_HK.put("Attack Indicator", "攻擊指示器");
-            ZH_HK.put("Off", "關閉");
-            ZH_HK.put("Crosshair", "十字準星");
-            ZH_HK.put("Hotbar", "工具列");
-            ZH_HK.put("Auto", "自動");
-            ZH_HK.put("Graphics Quality", "畫面質量");
-            ZH_HK.put("Fancy", "高品質");
-            ZH_HK.put("Fabulous", "極佳");
-            ZH_HK.put("Fast", "流暢");
-            ZH_HK.put("Default", "默認");
-            ZH_HK.put("Smooth Lighting", "平滑光照");
-            ZH_HK.put("Biome Blend", "生物群系過度距離");
-            ZH_HK.put("Entity Distance", "實體渲染距離");
-            ZH_HK.put("Entity Shadows", "實體陰影");
-            ZH_HK.put("Mipmap Levels", "紋理映射（Mipmap）級別");
-            ZH_HK.put("Performance Impact: ", "效能影響：");
-            ZH_HK.put("The view distance controls how far away terrain will be rendered. Lower distances mean that less terrain will be rendered, improving frame rates.", "渲染距離越低，往往對顯卡負載越小，幀率一般會越高，但不絕對。 反之亦然。");
-            ZH_HK.put("Chunks", "個區塊");
-            ZH_HK.put("Controls the brightness (gamma) of the game.", "控制遊戲畫面的亮度（伽馬值）。");
-            ZH_HK.put("Controls whether or not clouds will be visible.", "控制雲是否可見。");
-            ZH_HK.put("Fog", "迷霧");
-            ZH_HK.put("If enabled, a fog effect will be used for terrain in the distance. Disabling this option will not change fog effects used underwater or in the Nether.", "啟用後，遠處的地形將被迷霧覆蓋。 此選項不會影響水下和下界的迷霧。");
-            ZH_HK.put("Sets the maximum scale factor to be used for the user interface. If 'auto' is used, then the largest scale factor will always be used.", "設定介面尺寸比例。 如果設定為“自動”，則使用可能的最大比例。");
-            ZH_HK.put("If enabled, the game will display in full-screen (if supported).", "啟用後，遊戲將全屏顯示（若支持）。");
-            ZH_HK.put("V-Sync", "垂直同步");
-            ZH_HK.put("If enabled, the game's frame rate will be synchronized to the monitor's refresh rate, making for a generally smoother experience at the expense of overall input latency. This setting might reduce performance if your system is too slow.", "啟用後，遊戲的幀率將與顯示器的刷新率同步，從而在犧牲整體輸入延遲的情况下獲得更流暢的體驗。 如果設備配置過低，此設定可能會降低效能。");
-            ZH_HK.put("Limits the maximum number of frames per second. In effect, this will throttle the game and can be useful when you want to conserve battery life or multi-task between other applications. If V-Sync is enabled, this option will be ignored unless it is lower than your display's refresh rate.", "限制最大幀率。 此選項有限制遊戲渲染速度的的效果，囙此開啟此選項有利於提升電池續航或多工處理。 啟用垂直同步時此選項會被自動忽略，除非該值低於顯示器的重繪");
-            ZH_HK.put("If enabled, the player's view will sway and bob when moving around. Players who suffer from motion sickness can benefit from disabling this.", "啟用後，玩家在移動時的視角會搖晃擺動。 禁用該選項可緩解暈動症症狀。");
-            ZH_HK.put("Controls where the Attack Indicator is displayed on screen.", "控制攻擊指示器顯示在荧幕上的位置。");
-            ZH_HK.put("The default graphics quality controls some legacy options and is necessary for mod compatibility. If the options below are left to \"Default\", they will use this setting.", "默認影像品質控制一些原版選項，且對於Mod相容性是必要的。 若下方的選項保留為“默認”，則將會使用此選項的品質。");
-            ZH_HK.put("Clouds Quality", "雲的圖像品質");
-            ZH_HK.put("Controls the quality of rendered clouds in the sky.", "控制雲在空中的渲染質量。");
-            ZH_HK.put("Weather Quality", "天氣的圖像品質");
-            ZH_HK.put("Controls the quality of rain and snow effects.", "控制雨、雪的渲染質量。");
-            ZH_HK.put("Particle Quality", "顆粒的圖像品質");
-            ZH_HK.put("Controls the maximum number of particles which can be present on screen at any one time.", "控制每次可以在荧幕上出現的顆粒的最大數量。");
-            ZH_HK.put("Controls the quality of smooth lighting effects.\n\nOff - No smooth lighting\nLow - Smooth block lighting only\nHigh (new!) - Smooth block and entity lighting", "控制平滑光照效果的品質。 \n\n關-無平滑滑光照\n低-只有方塊應用平滑光照\n高（新！）-方塊和實體都應用平滑光照");
-            ZH_HK.put("Controls the range which biomes will be sampled for block colorization. Higher values greatly increase the amount of time it takes to build chunks for diminishing improvements in quality.", "控制生物群系之間方塊顏色的採樣範圍。 較高的值會極大地新增渲染區塊時因品質改進而所花費的時間。");
-            ZH_HK.put("block(s)", "個方塊");
-            ZH_HK.put("Controls how far away entities can render from the player. Higher values increase the render distance at the expense of frame rates.", "控制實體的顯示距離。 較高的值會以犧牲幀率為代價新增渲染距離。");
-            ZH_HK.put("If enabled, basic shadows will be rendered beneath mobs and other entities.", "啟用後，在生物和其他實體下麵渲染簡單的陰影。");
-            ZH_HK.put("Vignette", "暈影");
-            ZH_HK.put("Use Chunk Multi-Draw", "啟用區塊多點取樣");
-            ZH_HK.put("Multi-draw allows multiple chunks to be rendered with fewer draw calls, greatly reducing CPU overhead when rendering the world while also potentially allowing for more efficient GPU utilization. This optimization may cause issues with some graphics drivers, so you should try disabling it if you are experiencing glitches.", "多點取樣允許以更少的繪製調用渲染多個區塊，在渲染世界時大大减低CPU效能壓力，同時還可能更有效的GPU利用率。 但是優化可能會導致某些圖形驅動程序出現問題，所以如果你遇到故障，請嘗試禁用此功能。");
-            ZH_HK.put("Use Vertex Array Objects", "啟用頂點數組陣對象");
-            ZH_HK.put("Helps to improve performance by moving information about how vertex data should be rendered into the driver, allowing it to better optimize for repeated rendering of the same objects. There is generally no reason to disable this unless you're using incompatible mods.", "通過將有關如何渲染頂點數據的資訊移動到驅動程序中來幫助提高效能，使其能够更好地優化相同對象的重複渲染。 除非你使用不相容的模組，否則通常沒有理由禁用此功能。");
-            ZH_HK.put("Use Block Face Culling", "啟用方塊表面剔除");
-            ZH_HK.put("If enabled, only the sides of blocks which are facing the camera will be submitted for rendering. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU. Some resource packs may have issues with this option, so try disabling it if you're seeing holes in blocks.", "啟用後，將只會渲染面向鏡頭的方塊表面。 這可以在渲染過程的早期剔除大量方塊表面，從而節省GPU上的記憶體頻寬和時間。 某些資源包可能會遇到此選項的問題，囙此如果你看到方塊顯示不全，請嘗試禁用功能。");
-            ZH_HK.put("If enabled, a vignette effect will be rendered on the player's view. This is very unlikely to make a difference to frame rates unless you are fill-rate limited.", "啟用後，荧幕四角處會輕微變暗。 除非限制覆蓋範圍，否則基本不影響幀率。");
-            ZH_HK.put("Controls the number of mipmaps which will be used for block model textures. Higher values provide better rendering of blocks in the distance, but may adversely affect performance with many animated textures.", "控制平滑材質的多級紋理（Mipmap）的級別。 較高的級別可使遠處的物體獲得更好的渲染效果，但可能會在渲染很多動態材質時產生效能損失。");
-            ZH_HK.put("Chunk Renderer", "區塊渲染器");
-            ZH_HK.put("Modern versions of OpenGL provide features which can be used to greatly reduce driver overhead when rendering chunks. You should use the latest feature set allowed by Sodium for optimal performance. If you're experiencing chunk rendering issues or driver crashes, try using the older (and possibly more stable) feature sets.", "新版本的OpenGL提供了一些可以大幅降低渲染程式佔用的特性。 為了獲得最佳效能，最好使用Sodium所允許的最新的渲染器。 若區塊渲染出錯或驅動程序崩潰，請嘗試較舊的渲染器（可能更穩定）。");
-            ZH_HK.put("Use Chunk Face Culling", "啟用區塊表面剔除");
-            ZH_HK.put("If enabled, an additional culling pass will be performed on the CPU to determine which planes of a chunk mesh are visible. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU.", "啟用後，將新增一道使用CPU的剔除流程來判斷區塊表面是否可見。 這可在早期渲染流程時大量减少區塊渲染，以節約GPU的顯存頻寬和渲染時間。");
-            ZH_HK.put("Use Compact Vertex Format", "啟用頂點壓縮格式");
-            ZH_HK.put("If enabled, a more compact vertex format will be used for rendering chunks. This can reduce graphics memory usage and bandwidth requirements significantly, especially for integrated graphics cards, but can cause z-fighting with some resource packs due to how it reduces the precision of position and texture coordinate attributes.", "啟用頂點壓縮格式");
-            ZH_HK.put("Use Fog Occlusion", "啟用迷霧遮擋");
-            ZH_HK.put("If enabled, chunks which are determined to be fully hidden by fog effects will not be rendered, helping to improve performance. The improvement can be more dramatic when fog effects are heavier (such as while underwater), but it may cause undesirable visual artifacts between the sky and fog in some scenarios.", "啟用後，被迷霧效果完全隱藏的區塊將不會被渲染，有助於提高效能。 當迷霧效果較重時（例如在水下時），改進可能會更加顯著，但在某些情况下可能會導致天空和霧之間出現不良的視覺偽影。");
-            ZH_HK.put("Use Entity Culling", "啟用實體剔除");
-            ZH_HK.put("If enabled, entities determined not to be in any visible chunks will be skipped during rendering. This can help improve performance by avoiding the rendering of entities located underground or behind walls.", "啟用後，則在渲染期間跳過在不可見區塊的實體。 這可以通過避免渲染位於地下或牆後的實體來幫助提高效能。");
-            ZH_HK.put("If enabled, a secondary culling pass will be performed before attempting to render an entity. This additional pass takes into account the current set of visible chunks and removes entities which are not in any visible chunks.", "啟用後，將在嘗試渲染實體之前執行第二次剔除。 這一額外流程將會考慮到當前可見區塊的範圍，然後剔除不在可見區塊範圍內的實體。");
-            ZH_HK.put("Use Particle Culling", "啟用顆粒剔除");
-            ZH_HK.put("If enabled, only particles which are determined to be visible will be rendered. This can provide a significant improvement to frame rates when many particles are nearby.", "啟用後，將僅渲染可見的顆粒。 當周圍有許多顆粒時，這可以顯著地提高幀率。");
-            ZH_HK.put("Animate Only Visible Textures", "僅渲染可見的動態材質");
-            ZH_HK.put("Allow Direct Memory Access", "允許直接訪問記憶體");
-            ZH_HK.put("If enabled, some critical code paths will be allowed to use direct memory access for performance. This often greatly reduces CPU overhead for chunk and entity rendering, but can make it harder to diagnose some bugs and crashes. You should only disable this if you've been asked to or otherwise know what you're doing.", "啟用後，將允許某些關鍵程式碼使用路徑直接訪問記憶體來提高效能。 這通常會大大降低區塊和實體渲染的CPU效能，但會使診斷某些錯誤和崩潰變得更加困難。 如果你被要求或以其他管道知道您在做什麼，你應該只禁用它。");
-            ZH_HK.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware, especially with heavier resource packs. If you experience issues with some textures not being animated, try disabling this option.", "啟用後，只會更新可見的動態材質。 這可以大大提高某些硬體的幀率，尤其是對於較大的資源包。 如果遇到某些材質無動畫的問題，請禁用此選項。");
-            ZH_HK.put("Use Memory Intrinsics", "對記憶體使用內寘函數");
-            ZH_HK.put("If enabled, special intrinsics will be used to speed up the copying of client memory in certain vertex-limited scenarios, such as particle and text rendering. This option only exists for debugging purposes and should be left enabled unless you know what you are doing.", "啟用後，出現特定受頂點限制的情况時（如粒子和文字的渲染）將使用特殊的內部函數來加速用戶端記憶體的複製。 此選項僅用於調試目的，除非你知道自己在幹什麼，否則應保持啟用。");
-            ZH_HK.put("Ignore Driver Blacklist", "忽略驅動程序黑名單");
-            ZH_HK.put("If enabled, known incompatibilities with your hardware/driver configuration will be ignored, allowing you to enable options that may cause issues with your game. You should generally not touch this option unless you know exactly what you are doing. After changing this option, you must save, close, and then re-open the settings screen.", "啟用後，已知不相容配寘的硬體/驅動程序將被忽略，允許啟用可能導致遊戲問題的選項。 除非你確切地知道自己在做什麼，否則通常不應修改此選項。 更改此選項後，你必須保存並關閉，然後重新打開設定介面。");
-            ZH_HK.put("Disable Driver Blacklist", "禁用驅動程序黑名單");
-            ZH_HK.put("If selected, Sodium will ignore the built-in driver blacklist and enable options which are known to be broken with your system configuration. This might cause serious problems and should not be used unless you really do know better. The settings screen must be saved, closed, and re-opened after changing this option in order to reveal previously hidden options.", "選中後，Sodium將強制允許使用某些與你的系統不相容的隱藏選項。 這可能導致嚴重問題。 除非你瞭解你在做什麼，否則不建議啟用該選項。 改變此選項後，需要保存設置並再次打開設定介面才能啟用隱藏選項。");
-            ZH_HK.put("Performance Impact: %s", "效能影響：%s");
-            ZH_HK.put("Undo", "取消");
-            ZH_HK.put("Apply", "應用");
-            ZH_HK.put("Close", "關閉");
-            ZH_HK.put("None", "無");
-            ZH_HK.put("GPU", "显卡");
-            ZH_HK.put("CPU", "CPU");
-            ZH_HK.put("Memory", "内存");
-            ZH_HK.put("OS", "操作系统");
-            ZH_HK.put("LZX", "LoongLy");
-            ZH_HK.put("Buy us a coffee!", "请我们喝杯奶茶吧！");
-            ZH_HK.put("sclp.performance_impact", "效能影響:");
-            ZH_HK.put("rso.search_bar_empty", "搜索選項......");
-            ZH_HK.put("FPS", "幀");
-            ZH_HK.put("If enabled, chunks which are determined to be fully hidden by fog effects will be skipped during rendering. This will generally provide a modest improvement to the number of chunks rendered each frame, especially where fog effects are heavier (i.e. while underwater.)", "若啟用此功能，渲染時將跳過被霧效完全遮擋的區塊。 這通常能適度提升每幀渲染的區塊數量，尤其在霧效濃重的區域（例如水下場景）效果更明顯");
-            ZH_HK.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware. If you experience issues with some textures not being animated, disable this option.", "啟用後，僅更新判定為可見的動態紋理。 此功能可在某些硬體上顯著提升幀率。 若遇到部分紋理未動態更新的問題，請禁用此選項。");
-            ZH_HK.put("If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.", "如果啟用，塊網格將使用更緊湊的頂點格式，這會限制頂點内容的精度。 這種格式將使圖形記憶體使用量和頻寬要求减少約40%，但在某些邊緣情况下可能會導致z-fighting/閃爍紋理問題。");
-        }
-    };
 
-    private final static HashMap<String,String> JA_JP = new HashMap<String,String>();
-    static{
-        {
-            JA_JP.put("Low", "低");
-            JA_JP.put("Medium", "中");
-            JA_JP.put("High", "高");
-            JA_JP.put("Extreme", "極めて高い");
-            JA_JP.put("Varies", "状況に応じて");
-            JA_JP.put("General", "共通");
-            JA_JP.put("Quality", "画質");
-            JA_JP.put("Advanced", "詳細");
-            JA_JP.put("View Distance", "レンダー距離(Render Distance)");
-            JA_JP.put("Brightness", "明るさ");
-            JA_JP.put("Moody", "薄暗い");
-            JA_JP.put("Bright", "明るい");
-            JA_JP.put("Clouds", "雲");
-            JA_JP.put("GUI Scale", "インタフェース寸法");
-            JA_JP.put("Fullscreen", "フルスクリーン");
-            JA_JP.put("FPS Limit", "フレームレート(Frame Rate)");
-            JA_JP.put("Unlimited", "無制限");
-            JA_JP.put("View Bobbing", "画角が揺れる");
-            JA_JP.put("Attack Indicator", "攻撃インジケータ");
-            JA_JP.put("Off", "閉じる");
-            JA_JP.put("Crosshair", "十字準星");
-            JA_JP.put("Hotbar", "ツールバー");
-            JA_JP.put("Graphics Quality", "画面品質");
-            JA_JP.put("Fancy", "高品質");
-            JA_JP.put("Fabulous", "素晴らしい");
-            JA_JP.put("Fast", "スムーズ");
-            JA_JP.put("Default", "デフォルト");
-            JA_JP.put("Smooth Lighting", "スムーズライティング(Smooth Lighting)");
-            JA_JP.put("Biome Blend", "生物群系の過度な距離");
-            JA_JP.put("Entity Distance", "ソリッドレンダリング距離(Solid Render Distance)");
-            JA_JP.put("Entity Shadows", "ソリッドシャドウ");
-            JA_JP.put("Mipmap Levels", "テクスチャマッピング（Mipmap）レベル");
-            JA_JP.put("Performance Impact: ", "パフォーマンスへの影響：");
-            JA_JP.put("The view distance controls how far away terrain will be rendered. Lower distances mean that less terrain will be rendered, improving frame rates.", "レンダリング距離が低いほど,ビデオカードへの負荷が小さくなり,フレームレートは一般的に高くなりますが,絶対的ではありません。その逆も同様です");
-            JA_JP.put("Chunks", "個ブロック");
-            JA_JP.put("Controls the brightness (gamma) of the game.", "ゲーム画面の明るさ（ガンマ値）を制御する。");
-            JA_JP.put("Controls whether or not clouds will be visible.", "クラウドが表示されるかどうかを制御する");
-            JA_JP.put("Fog", "霧");
-            JA_JP.put("If enabled, a fog effect will be used for terrain in the distance. Disabling this option will not change fog effects used underwater or in the Nether.", "オンにすると,遠くの地形は霧に覆われます。このオプションは水中と下界の霧には影響しません。");
-            JA_JP.put("Sets the maximum scale factor to be used for the user interface. If 'auto' is used, then the largest scale factor will always be used.", "インタフェースの寸法スケールを設定します。自動に設定すると,可能な最大スケールが使用されます。");
-            JA_JP.put("If enabled, the game will display in full-screen (if supported).", "有効にすると,ゲームが全画面表示されます（サポートされている場合）");
-            JA_JP.put("V-Sync", "垂直同期");
-            JA_JP.put("If enabled, the game's frame rate will be synchronized to the monitor's refresh rate, making for a generally smoother experience at the expense of overall input latency. This setting might reduce performance if your system is too slow.", "有効にすると,ゲームのフレームレートがディスプレイのリフレッシュレートと同期され,入力全体の遅延を犠牲にしてよりスムーズな体験を得ることができます。デバイスの構成が低すぎると,この設定はパフォーマンスを低下させる可能性があります");
-            JA_JP.put("Limits the maximum number of frames per second. In effect, this will throttle the game and can be useful when you want to conserve battery life or multi-task between other applications. If V-Sync is enabled, this option will be ignored unless it is lower than your display's refresh rate.", "最大フレームレートを制限します。このオプションはゲームのレンダリング速度を制限する効果があるので,このオプションをオンにするとバッテリの航続時間やマルチタスク処理を向上させることができます。垂直同期を有効にすると,この値がモニタのリフレッシュよりも低くならない限り,このオプションは自動的に無視されます。");
-            JA_JP.put("If enabled, the player's view will sway and bob when moving around. Players who suffer from motion sickness can benefit from disabling this.", "オンにすると,プレイヤーの移動中の視点が揺れます。オフにすると,めまいの症状を緩和できます。");
-            JA_JP.put("Controls where the Attack Indicator is displayed on screen.", "攻撃インジケータが画面に表示される位置を制御する");
-            JA_JP.put("The default graphics quality controls some legacy options and is necessary for mod compatibility. If the options below are left to \"Default\", they will use this setting.", "デフォルトの画質はオリジナルオプションの一部を制御し,Mod互換性のために必要です。下のオプションがデフォルトのままの場合,このオプションの品質が使用されます");
-            JA_JP.put("Clouds Quality", "クラウドの画質");
-            JA_JP.put("Controls the quality of rendered clouds in the sky.", "空のクラウドのレンダリング品質を制御する");
-            JA_JP.put("Weather Quality", "天気の画質");
-            JA_JP.put("Controls the quality of rain and snow effects.", "雨,雪のレンダリング品質を制御する");
-            JA_JP.put("Particle Quality", "粒子の画質");
-            JA_JP.put("Controls the maximum number of particles which can be present on screen at any one time.", "画面に表示できる粒子の最大数を制御する");
-            JA_JP.put("Controls the quality of smooth lighting effects.\n\nOff - No smooth lighting\nLow - Smooth block lighting only\nHigh (new!) - Smooth block and entity lighting", "平滑ライティング効果の品質を制御します。 \n\nオフ-平滑ライティングなし \n低-平滑ライティングを適用するのは正方形のみ \n高（新規！）-平滑ライティングを適用するのは正方形とソリッドです");
-            JA_JP.put("Controls the range which biomes will be sampled for block colorization. Higher values greatly increase the amount of time it takes to build chunks for diminishing improvements in quality.", "生物学的クラスタ間のブロックカラーのサンプリング範囲を制御します。高い値を指定すると,ブロックをレンダリングする際の品質向上にかかる時間が大幅に増加します。");
-            JA_JP.put("block(s)", "四角形");
-            JA_JP.put("Controls how far away entities can render from the player. Higher values increase the render distance at the expense of frame rates.", "エンティティの表示距離を制御します。高い値はフレームレートを犠牲にしてレンダリング距離を増加させます。");
-            JA_JP.put("If enabled, basic shadows will be rendered beneath mobs and other entities.", "オンにすると,生物や他のエンティティの下に簡単なシャドウがレンダリングされます。");
-            JA_JP.put("Vignette", "影酔い");
-            JA_JP.put("Use Chunk Multi-Draw", "ブロックマルチサンプリングを有効にする");
-            JA_JP.put("Multi-draw allows multiple chunks to be rendered with fewer draw calls, greatly reducing CPU overhead when rendering the world while also potentially allowing for more efficient GPU utilization. This optimization may cause issues with some graphics drivers, so you should try disabling it if you are experiencing glitches.", "マルチサンプリングでは,世界をレンダリングする際にCPUのパフォーマンス圧力を大幅に低減し,GPU使用率をより効果的にレンダリングするために,より少ない描画呼び出しで複数のブロックをレンダリングすることができます。しかし,最適化によって一部のグラフィックスドライバに問題が発生する可能性があるので,障害が発生した場合は,この機能を無効にしてみてください");
-            JA_JP.put("Use Vertex Array Objects", "頂点配列配列オブジェクトを有効化(Enable Vertex Array Array Objects)");
-            JA_JP.put("Helps to improve performance by moving information about how vertex data should be rendered into the driver, allowing it to better optimize for repeated rendering of the same objects. There is generally no reason to disable this unless you're using incompatible mods.", "頂点データをレンダリングする方法に関する情報をドライバに移動することで,パフォーマンスを向上させ,同じオブジェクトの繰り返しレンダリングをより最適化することができます。互換性のないモジュールを使用しない限り,通常は無効にする理由はありません");
-            JA_JP.put("Use Block Face Culling", "ブロックサーフェスの間引きを有効にする");
-            JA_JP.put("If enabled, only the sides of blocks which are facing the camera will be submitted for rendering. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU. Some resource packs may have issues with this option, so try disabling it if you're seeing holes in blocks.", "オンにすると,レンズに面する四角形の表面だけがレンダリングされます。これにより,レンダリングパスの初期段階で大量の四角形の表面を除去することができ,GPU上のメモリ帯域幅と時間を節約できます。リソースバンドルの中にはこのオプションの問題が発生する可能性があるので,四角形の表示が不十分であることを確認した場合は,機能を無効にしてみてください");
-            JA_JP.put("If enabled, a vignette effect will be rendered on the player's view. This is very unlikely to make a difference to frame rates unless you are fill-rate limited.", "有効にすると,画面の四角は少し暗くなります。カバレッジ範囲を制限しない限り,フレームレートにはほとんど影響しません");
-            JA_JP.put("Controls the number of mipmaps which will be used for block model textures. Higher values provide better rendering of blocks in the distance, but may adversely affect performance with many animated textures.", "スムージングマテリアルのマルチレベルテクスチャ（Mipmap）のレベルを制御します。高いレベルにすると,遠くのオブジェクトのレンダリング効果が向上しますが,ダイナミックマテリアルを多くレンダリングするとパフォーマンスが低下する可能性があります。");
-            JA_JP.put("Chunk Renderer", "ブロックレンダラー");
-            JA_JP.put("Modern versions of OpenGL provide features which can be used to greatly reduce driver overhead when rendering chunks. You should use the latest feature set allowed by Sodium for optimal performance. If you're experiencing chunk rendering issues or driver crashes, try using the older (and possibly more stable) feature sets.", "新しいバージョンのOpenGLでは,レンダラーの占有率を大幅に下げることができるいくつかの特性が提供されています。最適なパフォーマンスを得るためには,Sodiumで許可されている最新のレンダラーを使用することが望ましいでしょう。ブロックレンダリングでエラーが発生したり,ドライバがクラッシュしたりする場合は,古いレンダラーを試してみてください（より安定している可能性があります）");
-            JA_JP.put("Use Chunk Face Culling", "ブロック表面の間引きを有効にする");
-            JA_JP.put("If enabled, an additional culling pass will be performed on the CPU to determine which planes of a chunk mesh are visible. This can eliminate a large number of block faces very early in the rendering process, saving memory bandwidth and time on the GPU.", "有効にすると,CPUを使用した間引きプロセスが追加され,ブロック表面が見えるかどうかを判断します。これにより,初期のレンダリングプロセス時にブロックレンダリングを大幅に削減し,GPUのグラフィックメモリ帯域幅とレンダリング時間を節約できます");
-            JA_JP.put("Use Compact Vertex Format", "頂点圧縮フォーマットの有効化(Enable Vertex Compression Format)");
-            JA_JP.put("If enabled, a more compact vertex format will be used for rendering chunks. This can reduce graphics memory usage and bandwidth requirements significantly, especially for integrated graphics cards, but can cause z-fighting with some resource packs due to how it reduces the precision of position and texture coordinate attributes.", "頂点圧縮フォーマットの有効化(Enable Vertex Compression Format)");
-            JA_JP.put("Use Fog Occlusion", "フォグマスクを有効にする");
-            JA_JP.put("If enabled, chunks which are determined to be fully hidden by fog effects will not be rendered, helping to improve performance. The improvement can be more dramatic when fog effects are heavier (such as while underwater), but it may cause undesirable visual artifacts between the sky and fog in some scenarios.", "オンにすると,フォグ効果によって完全に隠されたブロックはレンダリングされず,パフォーマンスの向上に役立ちます。フォグ効果が重い場合（水中など）は改善が顕著になる可能性がありますが,場合によっては空とフォグの間に視覚的なアーティファクトが発生する可能性があります");
-            JA_JP.put("Use Entity Culling", "ソリッド間引きを有効にする");
-            JA_JP.put("If enabled, entities determined not to be in any visible chunks will be skipped during rendering. This can help improve performance by avoiding the rendering of entities located underground or behind walls.", "有効にすると,レンダリング中に非表示ブロックのエンティティをスキップします。これにより,地下または壁の後ろにあるエンティティをレンダリングしないようにすることでパフォーマンスを向上させることができます。");
-            JA_JP.put("If enabled, a secondary culling pass will be performed before attempting to render an entity. This additional pass takes into account the current set of visible chunks and removes entities which are not in any visible chunks.", "有効にすると,エンティティをレンダーしようとする前に2回目の間引きが実行されます。この追加のプロセスでは,現在表示されているブロックの範囲を考慮し,表示されていないブロックの範囲内のエンティティを間引きします");
-            JA_JP.put("Use Particle Culling", "パーティクル間引きを有効にする");
-            JA_JP.put("If enabled, only particles which are determined to be visible will be rendered. This can provide a significant improvement to frame rates when many particles are nearby.", "オンにすると,表示されているパーティクルのみがレンダリングされます。周囲にパーティクルがたくさんある場合,フレームレートを大幅に向上させることができます。");
-            JA_JP.put("Animate Only Visible Textures", "表示されているダイナミックマテリアルのみをレンダリング");
-            JA_JP.put("Allow Direct Memory Access", "メモリへの直接アクセスを許可");
-            JA_JP.put("If enabled, some critical code paths will be allowed to use direct memory access for performance. This often greatly reduces CPU overhead for chunk and entity rendering, but can make it harder to diagnose some bugs and crashes. You should only disable this if you've been asked to or otherwise know what you are doing.", "有効にすると,一部のキーコードはパスを使用してメモリに直接アクセスしてパフォーマンスを向上させることができます。これにより,通常はブロックやエンティティレンダリングのCPUパフォーマンスが大幅に低下しますが,一部のエラーやクラッシュの診断がさらに困難になります。何をしているのかを要求されたり,他の方法で知ったりする場合は,無効にするだけでよいでしょう");
-            JA_JP.put("If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware, especially with heavier resource packs. If you experience issues with some textures not being animated, try disabling this option.", "オンにすると,表示されているダイナミックマテリアルのみが更新されます。これにより,特に大きなリソースバンドルのためにハードウェアのフレームレートが大幅に向上します。一部のマテリアルにアニメーションがないという問題が発生した場合は,このオプションをオフにしてください。");
-            JA_JP.put("Use Memory Intrinsics", "メモリに組み込み関数を使用する");
-            JA_JP.put("If enabled, special intrinsics will be used to speed up the copying of client memory in certain vertex-limited scenarios, such as particle and text rendering. This option only exists for debugging purposes and should be left enabled unless you know what you are doing.", "有効にすると,パーティクルやテキストのレンダリングなど,特定の頂点によって制限された状況が発生すると,クライアントメモリのコピーを高速化するために特別な内部関数が使用されます。このオプションは,自分が何をしているかがわからない限り,デバッグ目的でのみ使用されます。");
-            JA_JP.put("Ignore Driver Blacklist", "ドライバのブラックリストを無視");
-            JA_JP.put("If enabled, known incompatibilities with your hardware/driver configuration will be ignored, allowing you to enable options that may cause issues with your game. You should generally not touch this option unless you know exactly what you are doing. After changing this option, you must save, close, and then re-open the settings screen.", "有効にすると,互換性のない構成が知られているハードウェア/ドライバは無視され,ゲームの問題を引き起こす可能性のあるオプションを有効にできます。自分が何をしているのかを正確に知っていない限り,通常はこのオプションを変更するべきではありません。このオプションを変更した後,保存して閉じる必要があり,設定インタフェースを再度開く必要があります");
-            JA_JP.put("Disable Driver Blacklist", "ドライバのブラックリストを無効にする");
-            JA_JP.put("If selected, Sodium will ignore the built-in driver blacklist and enable options which are known to be broken with your system configuration. This might cause serious problems and should not be used unless you really do know better. The settings screen must be saved, closed, and re-opened after changing this option in order to reveal previously hidden options.", "チェックすると,Sodiumはあなたのシステムと互換性のない隠しオプションの使用を強制的に許可します。これは深刻な問題を引き起こす可能性があります。あなたが何をしているかを理解していない限り,このオプションを有効にすることはお勧めしません。このオプションを変更すると,非表示オプションを有効にするには,設定を保存して再度設定インタフェースを開く必要があります。");
-            JA_JP.put("Performance Impact: %s", "パフォーマンスへの影響:%s");
-            JA_JP.put("Undo", "キャンセル");
-            JA_JP.put("Apply", "適用");
-            JA_JP.put("Close", "閉じる");
-            JA_JP.put("None", "なし");
-            JA_JP.put("GPU", "ビデオカード");
-            JA_JP.put("CPU", "CPU");
-            JA_JP.put("Memory", "メモリ");
-            JA_JP.put("OS", "オペレーティングシステム");
-            JA_JP.put("LZX", "LoongLy");
-            JA_JP.put("Buy us a coffee!", "ミルクティーを飲みましょう!");
         }
-    };
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
-    static {
+    boolean loadLanguage(String languageCode)
+    {
+        String langFilePath = LangFile.getLangFilePath(languageCode);
+        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
         {
-            LANGUAGES.put("zh_cn",ZH_CN);
-            LANGUAGES.put("en_us",EN_US);
-            LANGUAGES.put("zh_tw",ZH_TW);
-            LANGUAGES.put("zh_hk",ZH_HK);
-            LANGUAGES.put("ja_jp",JA_JP);
+            if (inputStream == null) 
+            {
+                
+                System.out.println(languageCode + ".lang file not found");
+                return false;
+            }
+            else
+            {
+                LANGUAGES.put(languageCode, LangFile.parseLangFile(inputStream));
+                return true;
+            }
         }
-    };
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

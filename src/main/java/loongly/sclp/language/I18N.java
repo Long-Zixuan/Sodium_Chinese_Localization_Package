@@ -15,8 +15,8 @@ public class I18N
     public static String trans(String key, Object... args)
     {
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
-        Map<String, String> language = I18NLanguage.getLanguage(languageCode);
-        Map<String, String> fallbackLanguage = I18NLanguage.getLanguage("en_us");
+        Map<String, String> language = I18NLanguage.getInstance().getLanguage(languageCode);
+        Map<String, String> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");
         String string = key;
       
         if(language != null && language.containsKey(key))
@@ -40,31 +40,10 @@ public class I18N
         }
     }
 
-    /*public static String trans(String key)
-    {
-        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
-        HashMap<String, String> language = I18NLanguage.getLanguage(languageCode);
-        HashMap<String, String> fallbackLanguage = I18NLanguage.getLanguage("en_us");
-        String string = key;
-        if(language.containsKey(key))
-        {
-            string = language.get(key);
-        }
-        else
-        {
-            if(fallbackLanguage.containsKey(key))
-            {
-                string = fallbackLanguage.get(key);
-            }
-        }
-        return string;
-    }*/
-
-
     static public boolean hadTrans(String key)
     {
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
-        Map<?, ?> language = I18NLanguage.getLanguage(languageCode);
+        Map<?, ?> language = I18NLanguage.getInstance().getLanguage(languageCode);
         if(language != null && language.containsKey(key))
         {
             return true;
