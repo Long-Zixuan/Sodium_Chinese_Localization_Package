@@ -12,6 +12,41 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 public class LangFile 
 {
+    private String _langCode;
+    private Map<String, String> _data = null;
+    public LangFile(String langCode)
+    {
+        _langCode = langCode;
+    }
+
+    public Map<String, String> toMap()
+    {
+        if(_data != null)
+        {
+            return Collections.unmodifiableMap(_data);
+        }
+        String langFilePath = LangFile.getLangFilePath(_langCode);
+        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
+        {
+            if (inputStream == null) 
+            {
+                
+                System.out.println(_langCode + ".lang file not found");
+                _data = new HashMap<String,String>();
+            }
+            else
+            {
+                _data = LangFile.parseLangFile(inputStream);
+            }
+            return Collections.unmodifiableMap(_data);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
      /**
      * 解析 .lang 文件流为 Map
      * @param inputStream lang 文件的输入流

@@ -21,7 +21,7 @@ public class I18N
         }
         else
         {
-            if(fallbackLanguage.containsKey(key))
+            if(fallbackLanguage != null && fallbackLanguage.containsKey(key))
             {
                 string = fallbackLanguage.get(key);
             }
@@ -37,15 +37,20 @@ public class I18N
         }
     }
 
-    static public boolean hadTrans(String key)
+    static public int hadTrans(String key)
     {
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
         Map<?, ?> language = I18NLanguage.getInstance().getLanguage(languageCode);
+        Map<?, ?> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");
         key = key.replace("\n", "<br>");//键值的换行统一用<br>代替
         if(language != null && language.containsKey(key))
         {
-            return true;
+            return 2;
         }
-        return false;
+        if(fallbackLanguage != null && fallbackLanguage.containsKey(key))
+        {
+            return 1;
+        }
+        return 0;
     }
 }

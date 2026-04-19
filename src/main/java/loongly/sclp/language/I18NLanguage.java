@@ -34,81 +34,35 @@ public class I18NLanguage
     {
         if(LANGUAGES.containsKey(lanCode))
         {
-            return Collections.unmodifiableMap(LANGUAGES.get(lanCode));
+            return Collections.unmodifiableMap(LANGUAGES.get(lanCode).toMap());
         }
         else
         {
-            if(loadLanguage(lanCode))
+            if(reloadLanguage(lanCode))
             {
-                return Collections.unmodifiableMap(LANGUAGES.get(lanCode));
+                return Collections.unmodifiableMap(LANGUAGES.get(lanCode).toMap());
             }
         }
-        return Collections.unmodifiableMap(LANGUAGES.get("en_us"));
+        return Collections.unmodifiableMap(LANGUAGES.get("en_us").toMap());
     }
 
-    final HashMap<String,HashMap<String,String>> LANGUAGES = new HashMap<String,HashMap<String,String>>();
+    final HashMap<String,LangFile> LANGUAGES = new HashMap<String,LangFile>();
 
     private I18NLanguage()
     {
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
-        String langFilePath = LangFile.getLangFilePath(languageCode);
-        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
-        {
-            if (inputStream == null) 
-            {
-
-            }
-            else
-            {
-                LANGUAGES.put(languageCode, LangFile.parseLangFile(inputStream));
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(LangFile.getLangFilePath("en_us"))) 
-        {
-            if (inputStream == null) 
-            {
-                
-                System.err.println("en_us.lang file not found");
-            }
-            else
-            {
-                LANGUAGES.put("en_us", LangFile.parseLangFile(inputStream));
-            }
-
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        reloadLanguage(languageCode);
+        reloadLanguage("en_us");
     }
 
-    boolean loadLanguage(String languageCode)
+    boolean reloadLanguage(String languageCode)
     {
-        String langFilePath = LangFile.getLangFilePath(languageCode);
-        try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
+        LangFile langFile = new LangFile(languageCode);
+        LANGUAGES.put(languageCode, langFile);
+        if(langFile.toMap().size() > 0)
         {
-            if (inputStream == null) 
-            {
-                
-                System.out.println(languageCode + ".lang file not found");
-                return false;
-            }
-            else
-            {
-                LANGUAGES.put(languageCode, LangFile.parseLangFile(inputStream));
-                return true;
-            }
+            return true;
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+        return false;
     }
 }
