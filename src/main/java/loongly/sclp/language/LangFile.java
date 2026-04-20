@@ -60,7 +60,15 @@ public class LangFile
             ()->
             {
                 String langUrl = LangFile.getLangUrl(langCode_);
-                data_ = parseLangFile(doGet(langUrl));
+                InputStream inputStream = doGet(langUrl);
+                if(inputStream != null)
+                {
+                    HashMap<String, String> tmp = parseLangFile(doGet(langUrl));
+                    for(Map.Entry<String, String> entry : tmp.entrySet())
+                    {
+                        data_.put(entry.getKey(), entry.getValue());
+                    }
+                }
             }
         );
     }
@@ -133,7 +141,7 @@ public class LangFile
 
     public static String getLangUrl(String langCode)
     {
-        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/lang/%s";
+        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/lang/%s.lang";
         return String.format(url, langCode);
     }
 
