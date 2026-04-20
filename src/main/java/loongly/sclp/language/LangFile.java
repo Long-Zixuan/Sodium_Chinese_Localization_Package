@@ -1,12 +1,18 @@
 package loongly.sclp.language;
 
 import java.util.HashMap;
-
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
@@ -17,15 +23,20 @@ public class LangFile
     public LangFile(String langCode)
     {
         langCode_ = langCode;
-        toMap();
+        initMap();
     }
 
     public Map<String, String> toMap()
     {
-        if(data_ != null)
+        if(data_ == null)
         {
-            return Collections.unmodifiableMap(data_);
+            initMap();
         }
+        return Collections.unmodifiableMap(data_);
+    }
+
+    public void initMap()
+    {
         String langFilePath = LangFile.getLangFilePath(langCode_);
         try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
         {
@@ -39,13 +50,19 @@ public class LangFile
             {
                 data_ = LangFile.parseLangFile(inputStream);
             }
-            return Collections.unmodifiableMap(data_);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return null;
         }
+        CompletableFuture.runAsync
+        (
+            ()->
+            {
+                String langUrl = LangFile.getLangUrl(langCode_);
+                data_ = parseLangFile(doGet(langUrl));
+            }
+        );
     }
 
      /**
@@ -112,5 +129,65 @@ public class LangFile
     {
         String path = "/assets/sclp/lang/%s.lang";
         return String.format(path, langCode);
+    }
+
+    public static String getLangUrl(String langCode)
+    {
+        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/lang/%s";
+        return String.format(url, langCode);
+    }
+
+    static private InputStream doGet(String httpurl)
+    {
+        HttpURLConnection connection = null;
+        InputStream is = null;
+        InputStream result = null;// 返回结果字符串
+        try
+        {
+            // 创建远程url连接对象
+            URL url = new URL(httpurl);
+            // 通过远程url连接对象打开一个连接，强转成httpURLConnection类
+            connection = (HttpURLConnection) url.openConnection();
+            // 设置连接方式：get
+            connection.setRequestMethod("GET");
+            // 设置连接主机服务器的超时时间：15000毫秒
+            connection.setConnectTimeout(3000);
+            // 设置读取远程返回的数据时间：60000毫秒
+            connection.setReadTimeout(6000);
+            // 发送请求
+            connection.connect();
+            // 通过connection连接，获取输入流
+            if (connection.getResponseCode() == 200)
+            {
+                is = connection.getInputStream();
+                result = is;
+            }
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (null != is)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+            connection.disconnect();// 关闭远程连接
+        }
+
+        return result;
     }
 }

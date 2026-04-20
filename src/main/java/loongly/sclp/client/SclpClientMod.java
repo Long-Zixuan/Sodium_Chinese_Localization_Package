@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import loongly.sclp.language.I18NLanguage;
 
 
 @Environment(EnvType.CLIENT)
@@ -16,5 +17,6 @@ public class SclpClientMod implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("[sclp] 钠模组汉化包");
+		I18NLanguage.init();
 	}
 }

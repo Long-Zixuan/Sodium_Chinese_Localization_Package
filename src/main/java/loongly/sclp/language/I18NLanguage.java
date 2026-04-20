@@ -25,9 +25,18 @@ public class I18NLanguage
     {
         if(instance_s == null)
         {
-            instance_s = new I18NLanguage();
+            System.err.println("I18NLanguage used before init");
         }
         return instance_s;
+    }
+
+    public static void init()
+    {
+        if(instance_s != null)
+        {
+            System.err.println("I18NLanguage init twice");
+        }
+        instance_s = new I18NLanguage();
     }
 
     public synchronized Map<String, String> getLanguage(String lanCode)
@@ -50,9 +59,11 @@ public class I18NLanguage
 
     private I18NLanguage()
     {
-        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
-        reloadLanguage(languageCode);
-        reloadLanguage("en_us");
+        String[] languages = new String[]{"en_us","zh_cn","zh_tw","zh_hk","ja_jp"};
+        for(String languageCode : languages)
+        {
+            reloadLanguage(languageCode);
+        }
     }
 
     boolean reloadLanguage(String languageCode)
