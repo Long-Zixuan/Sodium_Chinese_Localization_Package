@@ -12,33 +12,33 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 public class LangFile 
 {
-    private String _langCode;
-    private Map<String, String> _data = null;
+    private String langCode_;
+    private Map<String, String> data_ = null;
     public LangFile(String langCode)
     {
-        _langCode = langCode;
+        langCode_ = langCode;
     }
 
     public Map<String, String> toMap()
     {
-        if(_data != null)
+        if(data_ != null)
         {
-            return Collections.unmodifiableMap(_data);
+            return Collections.unmodifiableMap(data_);
         }
-        String langFilePath = LangFile.getLangFilePath(_langCode);
+        String langFilePath = LangFile.getLangFilePath(langCode_);
         try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
         {
             if (inputStream == null) 
             {
                 
-                System.out.println(_langCode + ".lang file not found");
-                _data = new HashMap<String,String>();
+                System.out.println(langCode_ + ".lang file not found");
+                data_ = new HashMap<String,String>();
             }
             else
             {
-                _data = LangFile.parseLangFile(inputStream);
+                data_ = LangFile.parseLangFile(inputStream);
             }
-            return Collections.unmodifiableMap(_data);
+            return Collections.unmodifiableMap(data_);
         }
         catch (Exception e)
         {
