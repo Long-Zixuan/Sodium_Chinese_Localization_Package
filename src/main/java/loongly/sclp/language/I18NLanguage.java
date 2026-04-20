@@ -19,7 +19,15 @@ public class I18NLanguage
     static public String NO_FABRIC_API_WARM_2_EN_US = Formatting.BOLD +"otherwise SCLP will"+Formatting.UNDERLINE+" not work properly!";
     static public String NO_FABRIC_API_WARM_JP_JP = Formatting.BOLD + "Fabric APIをインストールしてください";
 
-    private static I18NLanguage instance_s;
+    private static I18NLanguage instance_s = null;
+
+    static
+    {
+        if(instance_s == null)
+        {
+            instance_s = new I18NLanguage();
+        }
+    }
 
     public static I18NLanguage getInstance()
     {
@@ -32,11 +40,8 @@ public class I18NLanguage
 
     public static void init()
     {
-        if(instance_s != null)
-        {
-            System.err.println("I18NLanguage init twice");
-        }
-        instance_s = new I18NLanguage();
+        System.out.println("I18NLanguage init");
+        //由static代码段中的代码初始化instance_s
     }
 
     public synchronized Map<String, String> getLanguage(String lanCode)
