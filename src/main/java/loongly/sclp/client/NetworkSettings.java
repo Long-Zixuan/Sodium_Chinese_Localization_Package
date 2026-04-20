@@ -78,11 +78,13 @@ public class NetworkSettings
 			//优麒麟
 			Arrays.asList("ukui-control-center"),
 			Arrays.asList("gnome-control-center","network"),
-			Arrays.asList("nm-connection-editor"),
+			
 			// Deepin / UOS (深度/统信) - 优先尝试，因为优麒麟和Deepin有时会有重叠或特定需求
 			Arrays.asList("deepin-control-center"), 
             Arrays.asList("dde-control-center"), // 旧版本 Deepin
-            // 安卓(但是只有开了ADB的情况下有用)
+			// 默认的 nm-connection-editor - 适用于大多数 Linux 发行版
+			Arrays.asList("nm-connection-editor"),
+            // 安卓(大部分情况没有用，开了ADB的情况下有概率可以用)
             Arrays.asList("adb", "shell", "am", "start", "-a", "android.settings.WIRELESS_SETTINGS")
     	);
         for (List<String> command : COMMANDS) 
