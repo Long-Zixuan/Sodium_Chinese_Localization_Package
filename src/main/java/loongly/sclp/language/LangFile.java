@@ -2,6 +2,8 @@ package loongly.sclp.language;
 
 import java.util.HashMap;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -13,6 +15,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+
+import org.apache.commons.io.input.ReaderInputStream;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
@@ -63,7 +67,7 @@ public class LangFile
                 InputStream inputStream = doGet(langUrl);
                 if(inputStream != null)
                 {
-                    HashMap<String, String> tmp = parseLangFile(doGet(langUrl));
+                    HashMap<String, String> tmp = parseLangFile(inputStream);
                     for(Map.Entry<String, String> entry : tmp.entrySet())
                     {
                         data_.put(entry.getKey(), entry.getValue());
@@ -129,7 +133,20 @@ public class LangFile
             System.err.println("Error parsing lang file stream: " + e.getMessage());
             e.printStackTrace();
         }
-
+        finally
+        {
+            try
+            {
+                if(inputStream != null)
+                {
+                    inputStream.close();
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
         return map;
     }
     
@@ -149,7 +166,7 @@ public class LangFile
     {
         HttpURLConnection connection = null;
         InputStream is = null;
-        InputStream result = null;// 返回结果字符串
+        InputStream result = null;// 返回结果数据流
         try
         {
             // 创建远程url连接对象
@@ -168,7 +185,15 @@ public class LangFile
             if (connection.getResponseCode() == 200)
             {
                 is = connection.getInputStream();
-                result = is;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = is.read(buffer)) > -1) 
+                {
+                    baos.write(buffer, 0, len);
+                }
+                baos.flush();
+                result = new ByteArrayInputStream(baos.toByteArray());
             }
         }
         catch (MalformedURLException e)
