@@ -1,6 +1,7 @@
 package loongly.sclp.client;
 
-public enum OsType {
+public enum OsType 
+{
     WINDOWS,
     MACOS,
     LINUX,

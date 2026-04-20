@@ -74,7 +74,9 @@ public class NetworkSettings
 			// XFCE (Xubuntu, etc.) - 通常没有独立的网络设置GUI，需打开主设置
 			Arrays.asList("xfce4-settings-manager"),
 			// MATE (Ubuntu MATE)
-			Arrays.asList("mate-control-center", "network")
+			Arrays.asList("mate-control-center", "network"),
+            // 安卓(但是只有开了ADB的情况下有用)
+            Arrays.asList("adb", "shell", "am", "start", "-a", "android.settings.WIRELESS_SETTINGS")
     	);
         for (List<String> command : COMMANDS) 
 		{
