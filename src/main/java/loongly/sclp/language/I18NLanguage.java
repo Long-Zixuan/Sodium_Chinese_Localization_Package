@@ -44,7 +44,7 @@ public class I18NLanguage
         //由static代码段中的代码初始化instance_s
     }
 
-    public synchronized Map<String, String> getLanguage(String lanCode)
+    public Map<String, String> getLanguage(String lanCode)
     {
         if(LANGUAGES.containsKey(lanCode))
         {
