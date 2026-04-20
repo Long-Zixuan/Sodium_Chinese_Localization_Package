@@ -75,6 +75,13 @@ public class NetworkSettings
 			Arrays.asList("xfce4-settings-manager"),
 			// MATE (Ubuntu MATE)
 			Arrays.asList("mate-control-center", "network"),
+			//优麒麟
+			Arrays.asList("ukui-control-center"),
+			Arrays.asList("gnome-control-center","network"),
+			Arrays.asList("nm-connection-editor"),
+			// Deepin / UOS (深度/统信) - 优先尝试，因为优麒麟和Deepin有时会有重叠或特定需求
+			Arrays.asList("deepin-control-center"), 
+            Arrays.asList("dde-control-center"), // 旧版本 Deepin
             // 安卓(但是只有开了ADB的情况下有用)
             Arrays.asList("adb", "shell", "am", "start", "-a", "android.settings.WIRELESS_SETTINGS")
     	);
