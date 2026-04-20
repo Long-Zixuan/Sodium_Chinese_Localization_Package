@@ -17,6 +17,7 @@ public class LangFile
     public LangFile(String langCode)
     {
         langCode_ = langCode;
+        toMap();
     }
 
     public Map<String, String> toMap()

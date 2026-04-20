@@ -21,7 +21,7 @@ public class I18NLanguage
 
     private static I18NLanguage instance_s;
 
-    public static I18NLanguage getInstance_s()
+    public static I18NLanguage getInstance()
     {
         if(instance_s == null)
         {
