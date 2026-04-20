@@ -102,6 +102,7 @@ LZX=LoongLy
 Buy us a coffee!=请我们喝杯奶茶吧！
 x=×
 sclp.performance_impact=性能影响: 
+sclp.no_internet=联网以获取最新翻译
 rso.search_bar_empty=搜索选项......
 FPS=帧
 If enabled, chunks which are determined to be fully hidden by fog effects will be skipped during rendering. This will generally provide a modest improvement to the number of chunks rendered each frame, especially where fog effects are heavier (i.e. while underwater.)=若启用此功能，渲染时将跳过被雾效完全遮挡的区块。这通常能适度提升每帧渲染的区块数量，尤其在雾效浓重的区域（例如水下场景）效果更明显

@@ -3,6 +3,7 @@ import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
+import loongly.sclp.client.SclpClientMod;
 //import net.minecraft.client.resource.language.I18n;
 import loongly.sclp.language.I18N;
 import net.minecraft.client.gui.screen.Screen;
@@ -42,6 +43,7 @@ public class MixinSodiumGUI extends Screen
     }
 
     private FlatButtonWidget birthButton;
+    private FlatButtonWidget noInternetButton;
     @Shadow
     @Final
     private List<Drawable> drawable;
@@ -59,6 +61,12 @@ public class MixinSodiumGUI extends Screen
             this.children.add(this.birthButton);
             this.drawable.add(this.birthButton);
         }
+        if(!SclpClientMod.isConnected)
+        {
+            this.noInternetButton = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
+            this.children.add(this.noInternetButton);
+            this.drawable.add(this.noInternetButton);
+        }
     }
 
     void birthCaidan()
@@ -69,6 +77,10 @@ public class MixinSodiumGUI extends Screen
                 .open("https://long-zixuan.github.io/html/badapple_h.html");
         Util.getOperatingSystem()
                 .open("https://long-zixuan.github.io/html/clock.html");
+    }
+
+    void noInternet()
+    {
     }
 
     boolean isMyBirthday(int year, int month, int day)
