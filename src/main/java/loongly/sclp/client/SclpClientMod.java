@@ -7,6 +7,8 @@ import net.fabricmc.api.Environment;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.logging.log4j.LogManager;
@@ -52,4 +54,10 @@ public class SclpClientMod implements ClientModInitializer {
             return false;
         }
     }
+
+	public static void openNetworkSettings()
+	{
+		NetworkSettings.openNetWorkSettings();
+	}
+	
 }

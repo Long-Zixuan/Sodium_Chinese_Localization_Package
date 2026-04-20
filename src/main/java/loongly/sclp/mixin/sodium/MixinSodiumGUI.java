@@ -3,6 +3,7 @@ import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
+import loongly.sclp.client.OsType;
 import loongly.sclp.client.SclpClientMod;
 //import net.minecraft.client.resource.language.I18n;
 import loongly.sclp.language.I18N;
@@ -28,6 +29,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Language;
 import net.minecraft.util.Util;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +83,8 @@ public class MixinSodiumGUI extends Screen
 
     void noInternet()
     {
+        SclpClientMod.isConnected = true;
+        SclpClientMod.openNetworkSettings();
     }
 
     boolean isMyBirthday(int year, int month, int day)
