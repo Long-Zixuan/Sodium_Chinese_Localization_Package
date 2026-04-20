@@ -44,8 +44,8 @@ public class MixinSodiumGUI extends Screen
         super(new TranslatableText("SCLP Mixin Sodium Options"));
     }
 
-    private FlatButtonWidget birthButton;
-    private FlatButtonWidget noInternetButton;
+    private FlatButtonWidget birthButton_;
+    private FlatButtonWidget noInternetButton_;
     @Shadow
     @Final
     private List<Drawable> drawable;
@@ -59,15 +59,15 @@ public class MixinSodiumGUI extends Screen
         int day = today.getDayOfMonth();
         if(isMyBirthday(year, month, day))
         {
-            this.birthButton = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), this::birthCaidan);
-            this.children.add(this.birthButton);
-            this.drawable.add(this.birthButton);
+            this.birthButton_ = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), this::birthCaidan);
+            this.children.add(this.birthButton_);
+            this.drawable.add(this.birthButton_);
         }
         if(!SclpClientMod.isConnected)
         {
-            this.noInternetButton = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
-            this.children.add(this.noInternetButton);
-            this.drawable.add(this.noInternetButton);
+            this.noInternetButton_ = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
+            this.children.add(this.noInternetButton_);
+            this.drawable.add(this.noInternetButton_);
         }
     }
 
@@ -84,6 +84,7 @@ public class MixinSodiumGUI extends Screen
     void noInternet()
     {
         SclpClientMod.isConnected = true;
+        this.noInternetButton_.setVisible(false);
         SclpClientMod.openNetworkSettings();
     }
 
