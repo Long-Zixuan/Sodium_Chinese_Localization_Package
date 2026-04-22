@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import me.loongly.mods.sclp.common.client.options.SCLPOptions;
+import me.loongly.mods.sclp.common.language.I18NLanguage;
 
 
 public class SCLPClientMod
@@ -22,6 +23,7 @@ public class SCLPClientMod
 	public static void onInitClient() 
 	{
 		LOGGER.info("[SCLP] LoongLy:Sodium Chinese Localized Package init!");
+		I18NLanguage.init();
 	}
 
 	static int chickCount = 0;

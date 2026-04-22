@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
+import me.loongly.mods.sclp.common.language.I18N;
 
 @Mixin(targets = "net.caffeinemc.mods.sodium.client.config.builder.ModOptionsBuilderImpl")
 public class MixinModOptionsBuilderImpl
@@ -21,7 +22,7 @@ public class MixinModOptionsBuilderImpl
     {
         if(SCLPClientMod.options().getShouldTransModName())
         {
-            name = I18n.get(name);
+            name = I18N.trans(name);
             this.name = name;
         }
     }
@@ -31,7 +32,7 @@ public class MixinModOptionsBuilderImpl
     {
         if(SCLPClientMod.options().getShouldTransModName())
         {
-            name = I18n.get(name);
+            name = I18N.trans(name);
             this.name = name;
         }
     }

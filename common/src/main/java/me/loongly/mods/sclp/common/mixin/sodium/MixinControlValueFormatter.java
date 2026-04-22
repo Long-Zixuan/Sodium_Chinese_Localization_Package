@@ -1,6 +1,6 @@
 package me.loongly.mods.sclp.common.mixin.sodium;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
-
+import me.loongly.mods.sclp.common.language.I18N;
 import net.minecraft.network.chat.Component;
 
 import org.spongepowered.asm.mixin.*;
@@ -18,7 +18,6 @@ import net.caffeinemc.mods.sodium.client.gui.options.control.ControlValueFormatt
 import net.caffeinemc.mods.sodium.api.config.option.ControlValueFormatter;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import org.spongepowered.asm.mixin.Overwrite;
 
 
 @Mixin(value = ControlValueFormatterImpls.class, remap = false)
@@ -31,7 +30,7 @@ class MixinControlValueFormatter
     @Overwrite
     public static ControlValueFormatter multiplier() 
     {
-        return (v) -> Component.translatable("sclp.multiplier", v);
+        return (v) -> Component.literal(I18N.trans("sclp.multiplier", v));
     }
 
      /**
@@ -41,7 +40,7 @@ class MixinControlValueFormatter
     @Overwrite
     public static ControlValueFormatter guiScale() 
     {
-        return (v) -> (v == 0) ? Component.translatable("options.guiScale.auto") : Component.translatable("sclp.multiplier", v);
+        return (v) -> (v == 0) ? Component.translatable("options.guiScale.auto") : Component.literal(I18N.trans("sclp.multiplier", v));
     }
 }
 
