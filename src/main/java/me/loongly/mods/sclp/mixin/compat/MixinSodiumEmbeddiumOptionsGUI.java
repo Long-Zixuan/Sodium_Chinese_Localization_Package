@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import net.minecraft.client.resource.language.I18n;
 import org.embeddedt.embeddium.util.PlatformUtil;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
+import me.loongly.mods.sclp.language.I18N;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 
 
@@ -23,7 +23,7 @@ public class MixinSodiumEmbeddiumOptionsGUI
         }
         if(SCLPClientMod.options().isTransModName)
         {
-            modName = I18n.translate(modName);
+            modName = I18N.trans(modName);
         }
         cir.setReturnValue(modName);
     }

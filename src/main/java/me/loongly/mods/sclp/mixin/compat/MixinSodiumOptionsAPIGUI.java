@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.client.SCLPClientMod;
 import toni.sodiumoptionsapi.gui.TabHeaderWidget;
-
+import me.loongly.mods.sclp.language.I18N;
 
 @Mixin(value = TabHeaderWidget.class, remap = false)
 public class MixinSodiumOptionsAPIGUI
@@ -24,7 +24,7 @@ public class MixinSodiumOptionsAPIGUI
         }
         if(SCLPClientMod.options().isTransModName)
         {
-            modName = I18n.translate(modName);
+            modName = I18N.trans(modName);
         }
         cir.setReturnValue(modName);
     }
