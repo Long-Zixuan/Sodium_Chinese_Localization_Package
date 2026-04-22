@@ -42,10 +42,10 @@ public class LangFile
             ()->
             {
                 String langUrl = LangFile.getLangUrl(langCode_);
-                InputStream inputStream = doGet(langUrl);
-                if(inputStream != null)
+                String langStr = doGet(langUrl);
+                if(langStr != null)
                 {
-                    HashMap<String, String> tmp = parseLangFile(inputStream);
+                    Map<String, String> tmp = (Map<String, String>)convertJsonToMap(langStr);
                     for(Map.Entry<String, String> entry : tmp.entrySet())
                     {
                         data_.put(entry.getKey(), entry.getValue());
@@ -55,90 +55,64 @@ public class LangFile
         );
     }
 
-     /**
-     * 解析 .lang 文件流为 Map
-     * @param inputStream lang 文件的输入流
-     * @return 包含键值对的 Map
-     */
-    public static HashMap<String, String> parseLangFile(InputStream inputStream) 
+    public static String getLangUrl(String langCode)
     {
-        HashMap<String, String> map = new HashMap<>();
-        if (inputStream == null) 
+        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/1.20/lang/%s.json";
+        return String.format(url, langCode);
+    }
+
+    static public Map convertJsonToMap(String jsonString)
+    {
+        Map<String, String> map = new HashMap<>();
+        if (jsonString == null || jsonString.isEmpty())
         {
             return map;
         }
 
-        try (java.io.BufferedReader reader = new java.io.BufferedReader(
-                new java.io.InputStreamReader(inputStream, java.nio.charset.StandardCharsets.UTF_8))) 
-        {
-            
-            String line;
-            int lineNumber = 0;
-            while ((line = reader.readLine()) != null) 
-            {
-                lineNumber++;
-                // 去除首尾空白
-                line = line.trim();
-                
-                // 跳过空行和注释行
-                if (line.isEmpty() || line.startsWith("#")) 
-                {
-                    continue;
-                }
-
-                // 查找第一个 '=' 的位置
-                int separatorIndex = line.indexOf('=');
-                if (separatorIndex == -1) 
-                {
-                    System.out.println("Invalid line: " + line + " in lang file, line number: " + lineNumber);
-                    // 如果没有 '='，则该行格式不正确，跳过
-                    continue;
-                }
-
-                // 提取 Key 和 Value
-                String key = line.substring(0, separatorIndex).trim();
-                String value = line.substring(separatorIndex + 1);
-                value = value.trim();
-
-                if (!key.isEmpty()) 
-                {
-                    map.put(key, value);
-                }
-            }
+        // 去掉首尾的花括号
+        jsonString = jsonString.trim();
+        if (!jsonString.startsWith("{") || !jsonString.endsWith("}")) {
+            throw new IllegalArgumentException("Invalid JSON string");
         }
-        catch (Exception e) 
-        {
-            System.err.println("Error parsing lang file stream: " + e.getMessage());
-            e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                if(inputStream != null)
-                {
-                    inputStream.close();
-                }
+        jsonString = jsonString.substring(1, jsonString.length() - 1).trim();
+
+        // 按逗号分隔键值对
+        String[] pairs = jsonString.split(",");
+        for (String pair : pairs) {
+            String[] keyValue = pair.trim().split(":");
+            if (keyValue.length != 2) {
+                throw new IllegalArgumentException("Invalid key-value pair: " + pair);
             }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+
+            String key = parseString(keyValue[0].trim());
+            String value = parseString(keyValue[1].trim());
+            map.put(key, value);
         }
+
         return map;
     }
-    
-    public static String getLangUrl(String langCode)
+
+    /**
+     * 解析字符串类型的值（去掉引号）
+     *
+     * @param str 字符串
+     * @return 去掉引号后的字符串
+     */
+    static private String parseString(String str)
     {
-        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/1.20/lang/%s.lang";
-        return String.format(url, langCode);
+        if (str.startsWith("\"") && str.endsWith("\""))
+        {
+            return str.substring(1, str.length() - 1);
+        }
+        return str;
     }
 
-    static private InputStream doGet(String httpurl)
+    static private String doGet(String httpurl)
     {
         HttpURLConnection connection = null;
         InputStream is = null;
-        InputStream result = null;// 返回结果数据流
+        BufferedReader br = null;
+        String result = null;// 返回结果字符串
         try
         {
             // 创建远程url连接对象
@@ -157,15 +131,17 @@ public class LangFile
             if (connection.getResponseCode() == 200)
             {
                 is = connection.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                byte[] buffer = new byte[1024];
-                int len;
-                while ((len = is.read(buffer)) > -1) 
+                // 封装输入流is，并指定字符集
+                br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                // 存放数据
+                StringBuffer sbf = new StringBuffer();
+                String temp = null;
+                while ((temp = br.readLine()) != null)
                 {
-                    baos.write(buffer, 0, len);
+                    sbf.append(temp);
+                    sbf.append("\r\n");
                 }
-                baos.flush();
-                result = new ByteArrayInputStream(baos.toByteArray());
+                result = sbf.toString();
             }
         }
         catch (MalformedURLException e)
@@ -178,6 +154,19 @@ public class LangFile
         }
         finally
         {
+            // 关闭资源
+            if (null != br)
+            {
+                try
+                {
+                    br.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
             if (null != is)
             {
                 try
