@@ -21,7 +21,7 @@ public class I18N
         }
         else
         {
-            return I18n.translate(key, args)
+            return I18n.translate(key, args);
         }
         string = string.replace("<br>", "\n");//lang文件中换行统一用<br>
         try 
