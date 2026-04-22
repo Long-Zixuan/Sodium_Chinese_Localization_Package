@@ -45,7 +45,7 @@ public class LangFile
                 String langStr = doGet(langUrl);
                 if(langStr != null)
                 {
-                    Map<String, String> tmp = (Map<String, String>)convertJsonToMap(langStr);
+                    Map<String, String> tmp = convertJsonToMap(langStr);
                     for(Map.Entry<String, String> entry : tmp.entrySet())
                     {
                         data_.put(entry.getKey(), entry.getValue());

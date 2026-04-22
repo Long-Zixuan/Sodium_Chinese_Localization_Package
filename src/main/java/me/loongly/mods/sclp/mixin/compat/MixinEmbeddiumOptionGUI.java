@@ -35,7 +35,7 @@ import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.OrderedText;
 import net.minecraft.client.MinecraftClient;
 import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPromptable;
-
+import me.loongly.mods.sclp.language.I18N;
 import java.io.IOException;
 import java.util.List;
 
@@ -49,7 +49,7 @@ class MixinEmbeddiumOptionGUI
     {
         var srcIns = (EmbeddiumVideoOptionsScreen)((Object) this);
         var prompt = new PromptScreen(srcIns, SodiumOptionsGUI.DONATION_PROMPT_MESSAGE, 320, 190,
-                new PromptScreen.Action(Text.translatable("sclp.donation.9"), this::openDonationPage));
+                new PromptScreen.Action(Text.literal(I18N.trans("sclp.donation.9")), this::openDonationPage));
         MinecraftClient.getInstance().setScreen(prompt);
     }
     

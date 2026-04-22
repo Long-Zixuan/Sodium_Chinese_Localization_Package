@@ -15,6 +15,7 @@ import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget.Style;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages;
+import me.loongly.mods.sclp.language.I18N;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -64,7 +65,7 @@ class MixinScreenPrompt extends Screen
         int boxX = (prevScreen.width / 2) - (promptWidth / 2);
         int boxY = (prevScreen.height / 2) - (promptHeight / 2);
 
-        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + promptWidth) - 84, (boxY + promptHeight) - 24, 80, 20), Text.translatable("sclp.close"), this::onClose);
+        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + promptWidth) - 84, (boxY + promptHeight) - 24, 80, 20), Text.literal(I18N.trans("sclp.close")), this::onClose);
         this.closeButton.setStyle(createButtonStyle());
 
         this.addDrawableChild(this.closeButton);

@@ -7,6 +7,7 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPrompt;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages;
+import me.loongly.mods.sclp.language.I18N;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -47,8 +48,8 @@ public class MixinSodiumOptionsGUI
 
      static {
         DONATION_PROMPT_MESSAGE = List.of(
-                StringVisitable.concat(Text.translatable("sclp.hello")),
-                StringVisitable.concat(Text.translatable("sclp.donation.1"), Text.translatable("Embeddium").setStyle(Style.EMPTY.withColor(0x27eb92)), Text.translatable("sclp.donation.2")),
+                StringVisitable.concat(Text.literal("sclp.hello")),
+                StringVisitable.concat(Text.translatable("sclp.donation.1"), Text.literal(I18N.trans("Embeddium")).setStyle(Style.EMPTY.withColor(0x27eb92)), Text.translatable("sclp.donation.2")),
                 StringVisitable.concat(Text.translatable("sclp.donation.3"), Text.translatable("sclp.donation.4").setStyle(Style.EMPTY.withColor(0xff6e00)), Text.translatable("sclp.donation.5")),
                 StringVisitable.concat(Text.translatable("sclp.donation.6"), Text.translatable("sclp.donation.7").setStyle(Style.EMPTY.withColor(0xed49ce)), Text.translatable("sclp.dot")),
                 StringVisitable.concat(Text.translatable("sclp.donation.8"))
