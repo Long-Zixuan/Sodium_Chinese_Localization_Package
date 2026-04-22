@@ -11,7 +11,7 @@ public class I18N
 {
     public static String trans(String key, Object... args)
     {
-        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
+        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage();
         Map<String, String> language = I18NLanguage.getInstance().getLanguage(languageCode);
         String string = key;
         key = key.replace("\n", "<br>");//lang文件中换行统一用<br>
@@ -36,7 +36,7 @@ public class I18N
 
     static public int hadTrans(String key)
     {
-        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
+        String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage();
         Map<?, ?> language = I18NLanguage.getInstance().getLanguage(languageCode);
         Map<?, ?> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");
         key = key.replace("\n", "<br>");//键值的换行统一用<br>代替
