@@ -129,5 +129,6 @@
   "sodium.options.default":"默认",
   "sodium.options.chunk_fade_time.value" : "%s秒",
   "sclp.multiplier":"%s×",
-  "sodium.options.clouds_distance.tooltip": "远距离云层将渲染至该高度范围。该选项对性能影响极小，仅影响视觉效果。"
+  "sodium.options.clouds_distance.tooltip": "远距离云层将渲染至该高度范围。该选项对性能影响极小，仅影响视觉效果。",
+  "sclp.cur_languagecode":"zh_cn"
 }
