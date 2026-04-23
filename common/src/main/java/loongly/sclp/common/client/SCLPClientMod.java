@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import loongly.sclp.common.client.gui.ECLPGameOptionPages;
 import loongly.sclp.common.client.gui.SCLPGameOptions;
 import net.minecraft.Util;
+import loongly.sclp.common.language.I18NLanguage;
 
 
 public class SCLPClientMod 
@@ -47,6 +48,7 @@ public class SCLPClientMod
 	public static void onInitClient() 
 	{
 		//CONFIG = SCLPGameOptions.load();
+		I18NLanguage.init();
 
 		LOGGER.info("Init SCLP Client");
 	}

@@ -5,12 +5,29 @@ import net.fabricmc.loader.api.FabricLoader;
 import loongly.sclp.common.services.IPlatformHelper;
 
 import java.nio.file.Path;
+import net.minecraft.client.Minecraft;
 
 
-public class FabricPlatformHelper implements IPlatformHelper {
+public class FabricPlatformHelper implements IPlatformHelper 
+{
 
     @Override
-    public Path getConfigDirectory() {
+    public Path getConfigDirectory() 
+    {
         return FabricLoader.getInstance().getConfigDir();
+    }
+
+    @Override
+    public String getLanguageCode()
+    {
+        if(Minecraft.getInstance().getLanguageManager() != null)
+        {
+            return Minecraft.getInstance().getLanguageManager().getSelected();
+        }
+        if(Minecraft.getInstance().options != null)
+        {
+            return Minecraft.getInstance().options.languageCode;
+        }
+        return "en_us";
     }
 }

@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import loongly.sclp.common.client.SCLPClientMod;
 import net.minecraft.client.resources.language.I18n;
+import loongly.sclp.common.language.I18N;
 
 
 @Mixin(value = PlatformUtil.class, remap = false)
@@ -23,7 +24,7 @@ public class MixinEmbeddiumPlatformUtil
         }
         if(SCLPClientMod.options().shouldTransModName)
         {
-            modName = I18n.get(modName);
+            modName = I18N.trans(modName);
         }
         cir.setReturnValue(modName);
     }
