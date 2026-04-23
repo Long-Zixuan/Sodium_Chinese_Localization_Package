@@ -3,7 +3,7 @@ package loongly.sclp.language;
 import java.util.HashMap;
 import java.util.IllegalFormatException;
 import java.util.Map;
-
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.MinecraftClient;
 
 public class I18N
@@ -14,19 +14,21 @@ public class I18N
         Map<String, String> language = I18NLanguage.getInstance().getLanguage(languageCode);
         Map<String, String> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");
         String string = key;
-        key = key.replace("\n", "<br>");//lang文件中换行统一用<br>
         if(language != null && language.containsKey(key))
         {
             string = language.get(key);
         }
         else
         {
+            if(I18n.hasTranslation(key))
+            {
+                return I18n.translate(key, args);
+            }
             if(fallbackLanguage != null && fallbackLanguage.containsKey(key))
             {
                 string = fallbackLanguage.get(key);
             }
         }
-        string = string.replace("<br>", "\n");//lang文件中换行统一用<br>
         try 
         {
             return String.format(string, args);
@@ -42,7 +44,6 @@ public class I18N
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
         Map<?, ?> language = I18NLanguage.getInstance().getLanguage(languageCode);
         Map<?, ?> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");
-        key = key.replace("\n", "<br>");//键值的换行统一用<br>代替
         if(language != null && language.containsKey(key))
         {
             return 2;
