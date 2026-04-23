@@ -27,6 +27,7 @@
   "sclp.options.shoud_trans_mod_name.tooltip":"On enabled, mod names will be translated",
   "sclp.percent":"%s%%",
   "sclp.multiplier":"%sx",
-  "sclp.page":"SCLP Settings"
+  "sclp.page":"SCLP Settings",
+  "sclp.cur_languagecode":"en_us"
 }
   

@@ -137,5 +137,6 @@
   "options.framerate":"%s帧",
   "sclp.multiplier":"%s倍",
   "Default":"默认",
-  "threads":"线程"
+  "threads":"线程",
+  "sclp.cur_languagecode":"zh_cn"
 }
