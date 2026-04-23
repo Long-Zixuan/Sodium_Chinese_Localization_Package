@@ -19,12 +19,20 @@ public class I18NLanguage
         return instance_s;
     }
 
-    public static void init()
+    static
     {
         if(instance_s == null)
         {
             instance_s = new I18NLanguage();
             System.out.println("[sclp]I18NLanguage init");
+        }
+    }
+
+    public static void init()
+    {
+        if(instance_s == null)
+        {
+           //static代码段会初始化实例
         }
         else
         {
