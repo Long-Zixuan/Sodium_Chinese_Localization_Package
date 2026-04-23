@@ -18,6 +18,9 @@ import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.io.input.ReaderInputStream;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 public class LangFile 
@@ -61,50 +64,11 @@ public class LangFile
         return String.format(url, langCode);
     }
 
-    static public Map convertJsonToMap(String jsonString)
+    static public Map<String, String> convertJsonToMap(String jsonString)
     {
-        Map<String, String> map = new HashMap<>();
-        if (jsonString == null || jsonString.isEmpty())
-        {
-            return map;
-        }
-
-        // 去掉首尾的花括号
-        jsonString = jsonString.trim();
-        if (!jsonString.startsWith("{") || !jsonString.endsWith("}")) {
-            throw new IllegalArgumentException("Invalid JSON string");
-        }
-        jsonString = jsonString.substring(1, jsonString.length() - 1).trim();
-
-        // 按逗号分隔键值对
-        String[] pairs = jsonString.split(",");
-        for (String pair : pairs) {
-            String[] keyValue = pair.trim().split(":");
-            if (keyValue.length != 2) {
-                throw new IllegalArgumentException("Invalid key-value pair: " + pair);
-            }
-
-            String key = parseString(keyValue[0].trim());
-            String value = parseString(keyValue[1].trim());
-            map.put(key, value);
-        }
-
-        return map;
-    }
-
-    /**
-     * 解析字符串类型的值（去掉引号）
-     *
-     * @param str 字符串
-     * @return 去掉引号后的字符串
-     */
-    static private String parseString(String str)
-    {
-        if (str.startsWith("\"") && str.endsWith("\""))
-        {
-            return str.substring(1, str.length() - 1);
-        }
-        return str;
+        Gson gson = new Gson();
+        TypeToken<Map<String, String>> typeToken = new TypeToken<Map<String, String>>() {};
+        return gson.fromJson(jsonString, typeToken.getType());
     }
 
     static private String doGet(String httpurl)
