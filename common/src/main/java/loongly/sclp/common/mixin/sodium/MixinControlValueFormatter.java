@@ -18,6 +18,7 @@ import net.caffeinemc.mods.sodium.client.gui.options.control.ControlValueFormatt
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Overwrite;
+import loongly.sclp.common.language.I18N;
 
 
 @Mixin(value = ControlValueFormatter.class, remap = false)
@@ -30,8 +31,8 @@ public interface MixinControlValueFormatter
     @Overwrite
     static ControlValueFormatter quantityOrDisabled(String name, String disableText) 
     {
-        String i18nName = I18n.get(name);
-        String i18NDisableText = I18n.get(disableText);
+        String i18nName = I18N.trans(name);
+        String i18NDisableText = I18N.trans(disableText);
         return (v) -> Component.literal(v == 0 ? i18NDisableText : v + " " + i18nName);
     }
 
