@@ -1,3 +1,5 @@
 {
-      "sclp.performance_impact":"Performance Impact："
+      "sclp.performance_impact":"Performance Impact：",
+      "sclp.no_internet":"No Internet Connection",
+      "sclp.no_fabricapi_warm":"Please install Fabric API"
 }

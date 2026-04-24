@@ -8,7 +8,7 @@ import loongly.sclp.client.SclpClientMod;
 //import net.minecraft.client.resource.language.I18n;
 import loongly.sclp.language.I18N;
 import net.minecraft.client.gui.screen.Screen;
-
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -118,7 +118,7 @@ public class MixinSodiumGUI extends Screen
 
         boolean hadTrans = true;
 
-        String perImpactStr = I18N.trans("sclp.performance_impact");
+        String perImpactStr = I18n.translate("sclp.performance_impact");
         if(perImpactStr.equals("sclp.performance_impact"))
         {
             hadTrans = false;
@@ -127,15 +127,12 @@ public class MixinSodiumGUI extends Screen
 
         if (impact != null)
         {    
-           tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + perImpactStr + impact.toDisplayString())));
+           tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18N.trans("sclp.performance_impact") + impact.toDisplayString())));
         } 
 
         if(!hadTrans)
         {
-            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_ZH_CN)));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_ZH_TW)));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_1_EN_US)));
-            tooltip.add(Language.getInstance().reorder(new LiteralText(I18NLanguage.NO_FABRIC_API_WARM_2_EN_US)));//虽然老外不太可能安装这个模组，但是考虑到这个模组实际上是支持多国语言的，使用还是按照国际惯例价格英语
+            tooltip.add(Language.getInstance().reorder(new LiteralText(I18N.trans("sclp.no_fabricapi_warm"))));
         }
 
         int boxHeight = (tooltip.size() * 12) + boxPadding;
@@ -152,7 +149,7 @@ public class MixinSodiumGUI extends Screen
 
         if(!hadTrans)
         {
-            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 50, boxX + boxWidth, boxY + boxHeight, 0xFFED65FF, 0xFFED65FF);
+            this.fillGradient(matrixStack, boxX, boxY + boxHeight - 14, boxX + boxWidth, boxY + boxHeight, 0xFFED65FF, 0xFFED65FF);
         }
 
         for (int i = 0; i < tooltip.size(); i++)

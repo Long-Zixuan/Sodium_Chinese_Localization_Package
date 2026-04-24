@@ -105,5 +105,7 @@
   "rso.search_bar_empty": "搜索選項......",
   "If enabled, chunks which are determined to be fully hidden by fog effects will be skipped during rendering. This will generally provide a modest improvement to the number of chunks rendered each frame, especially where fog effects are heavier (i.e. while underwater.)":"若啟用此功能，渲染時將跳過被霧效完全遮擋的區塊。 這通常能適度提升每幀渲染的區塊數量，尤其在霧效濃重的區域（例如水下場景）效果更明顯",
   "If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware. If you experience issues with some textures not being animated, disable this option.":"啟用後，僅更新判定為可見的動態紋理。 此功能可在某些硬體上顯著提升幀率。 若遇到部分紋理未動態更新的問題，請禁用此選項。",
-  "If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.":"如果啟用，塊網格將使用更緊湊的頂點格式，這會限制頂點内容的精度。 這種格式將使圖形記憶體使用量和頻寬要求减少約40%，但在某些邊緣情况下可能會導致z-fighting/閃爍紋理問題。"
+  "If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.":"如果啟用，塊網格將使用更緊湊的頂點格式，這會限制頂點内容的精度。 這種格式將使圖形記憶體使用量和頻寬要求减少約40%，但在某些邊緣情况下可能會導致z-fighting/閃爍紋理問題。",
+  "sclp.no_internet":"联网以获取最新翻译",
+  "sclp.no_fabricapi_warm":"建议安装FabricAPI，以获得更好的兼容性。"
   }
