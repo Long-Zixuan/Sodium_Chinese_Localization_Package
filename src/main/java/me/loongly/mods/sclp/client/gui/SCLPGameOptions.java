@@ -28,12 +28,12 @@ import java.util.Map;
 
 public class SCLPGameOptions 
 {
-    public BooleanValue isTransModName;
+    private BooleanValue isTransModName;
     private File file;
 
     public final ForgeConfigSpec SPECS;
 
-    public SCLPGameOptions()
+    public SCLPGameOptions(File file_)
     {
         var BUILDER = new ForgeConfigSpec.Builder();
 
@@ -48,7 +48,13 @@ public class SCLPGameOptions
        
         BUILDER.pop();
 
+        file = file_;
+
         SPECS = BUILDER.build();
+
+        final var configData = CommentedFileConfig.builder(file).sync().autosave().writingMode(WritingMode.REPLACE).build();
+        configData.load();
+        SPECS.setConfig(configData);
     }
 
     public boolean isLoaded() 
@@ -59,34 +65,7 @@ public class SCLPGameOptions
     public static SCLPGameOptions load(File file)
     {
         SCLPGameOptions config;
-        config = new SCLPGameOptions();
-        if(!file.exists())
-        {
-            try
-            {
-                file.createNewFile();
-            }
-            catch (Exception e) 
-            {
-                SCLPClientMod.LOGGER.error("Could not create config file!", e);
-            }
-        }
-
-        if (file.exists()) 
-        {
-            try 
-            {
-                final var configData = CommentedFileConfig.builder(file).sync().autosave().writingMode(WritingMode.REPLACE).build();
-                configData.load();
-                config.SPECS.setConfig(configData);
-                config.setIsTransModNameVal((config.SPECS.get("sclp.settings.isTransModName")));
-            } 
-            catch (Exception e) 
-            {
-                SCLPClientMod.LOGGER.error("Could not parse config, falling back to defaults!", e);
-            }
-        }
-        config.file = file;
+        config = new SCLPGameOptions(file);
         config.writeChanges();
 
         return config;
