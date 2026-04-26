@@ -32,7 +32,7 @@ public class SCLPGameOptionPages
         为了避免玩家开了个寂寞的感觉，故在Xenon关闭该选项 */
         if(SCLPClientMod.isXenon())
         {
-            sodiumExtraOpts.getData().isTransModName = false;
+            sodiumExtraOpts.getData().setIsTransModNameVal(false);
             sodiumExtraOpts.save();
         }
         
@@ -44,13 +44,13 @@ public class SCLPGameOptionPages
                         .setControl(TickBoxControl::new)
                         .setEnabled(!SCLPClientMod.isXenon())//同上
                         .setBinding((options, value) -> {
-                            options.isTransModName = value; 
+                            options.setIsTransModNameVal(value); 
                             try
                             {
                                 SCLPClientMod.caiDan();
                             }
                             catch (Exception e){}
-                        }, options -> options.isTransModName)
+                        }, options -> options.getIsTransModNameVal())
                         .build())
                 .build());
         if(isMyBirthday(year, month, day))
@@ -66,7 +66,7 @@ public class SCLPGameOptionPages
                                 SCLPClientMod.birthCaiDan();
                             }
                             catch (Exception e){}
-                        }, options -> options.isTransModName)
+                        }, options -> options.getIsTransModNameVal())
                         .build())
                 .build());
         }

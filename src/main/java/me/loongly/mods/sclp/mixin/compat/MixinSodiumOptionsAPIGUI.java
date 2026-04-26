@@ -22,7 +22,7 @@ public class MixinSodiumOptionsAPIGUI
         {
             modName = "ECLP";
         }
-        if(SCLPClientMod.options().isTransModName)
+        if(SCLPClientMod.options().getIsTransModNameVal())
         {
             modName = I18N.trans(modName);
         }
