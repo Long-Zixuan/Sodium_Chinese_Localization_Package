@@ -7,6 +7,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
+import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Identifier;
@@ -39,8 +40,8 @@ public class SCLPGameOptionPages
         List<OptionGroup> groups = new ArrayList<>();
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
-                        .setName(Text.translatable("sclp.options.trans_mod_name"))
-                        .setTooltip(Text.translatable("sclp.options.trans_mod_name.tooltip"))
+                        .setName(Text.literal(I18N.trans("sclp.options.trans_mod_name")))
+                        .setTooltip(Text.literal(I18N.trans("sclp.options.trans_mod_name.tooltip")))
                         .setControl(TickBoxControl::new)
                         .setEnabled(!SCLPClientMod.isXenon())//同上
                         .setBinding((options, value) -> {

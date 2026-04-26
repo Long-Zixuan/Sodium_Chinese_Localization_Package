@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import me.loongly.mods.sclp.client.SCLPClientMod;
+import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -43,7 +44,7 @@ public class SCLPGameOptions
         // sclp -> settings ->
         BUILDER.push("settings");
         isTransModName = BUILDER
-                .comment("是否翻译模组名")
+                .comment(I18N.trans("sclp.options.trans_mod_name"))
                 .define("isTransModName", true);
        
         BUILDER.pop();
