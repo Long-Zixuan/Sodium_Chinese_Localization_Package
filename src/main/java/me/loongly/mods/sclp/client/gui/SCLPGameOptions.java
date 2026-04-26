@@ -28,12 +28,12 @@ import java.util.Map;
 
 public class SCLPGameOptions 
 {
-    public static BooleanValue isTransModName;
+    public BooleanValue isTransModName;
     private File file;
 
-    public static final ForgeConfigSpec SPECS;
+    public final ForgeConfigSpec SPECS;
 
-    static 
+    public SCLPGameOptions()
     {
         var BUILDER = new ForgeConfigSpec.Builder();
 
@@ -51,7 +51,7 @@ public class SCLPGameOptions
         SPECS = BUILDER.build();
     }
 
-    public static boolean isLoaded() 
+    public boolean isLoaded() 
     {
         return SPECS.isLoaded();
     }
@@ -59,7 +59,7 @@ public class SCLPGameOptions
     public static SCLPGameOptions load(File file)
     {
         SCLPGameOptions config;
-
+        config = new SCLPGameOptions();
         if(!file.exists())
         {
             try
@@ -78,15 +78,14 @@ public class SCLPGameOptions
             {
                 final var configData = CommentedFileConfig.builder(file).sync().autosave().writingMode(WritingMode.REPLACE).build();
                 configData.load();
-                SPECS.setConfig(configData);
-                isTransModName.set(SPECS.get("sclp.settings.isTransModName"));
+                config.SPECS.setConfig(configData);
+                config.setIsTransModNameVal((config.SPECS.get("sclp.settings.isTransModName")));
             } 
             catch (Exception e) 
             {
                 SCLPClientMod.LOGGER.error("Could not parse config, falling back to defaults!", e);
             }
         }
-        config = new SCLPGameOptions();
         config.file = file;
         config.writeChanges();
 
