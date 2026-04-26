@@ -31,7 +31,7 @@ public class SCLPGameOptions
     private BooleanValue isTransModName;
     private File file;
 
-    public final ForgeConfigSpec SPECS;
+    private final ForgeConfigSpec SPECS;
 
     public SCLPGameOptions(File file_)
     {
