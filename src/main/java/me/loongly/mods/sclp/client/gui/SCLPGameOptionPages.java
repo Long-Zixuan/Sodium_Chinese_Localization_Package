@@ -34,13 +34,13 @@ public class SCLPGameOptionPages
                         .setTooltip(Text.translatable("如果启用，模组名将会被翻译。\n该选项将在重开此页面时生效"))
                         .setControl(TickBoxControl::new)
                         .setBinding((options, value) -> {
-                            options.isTransModName = value; 
+                            options.setIsTransModNameVal(value); 
                             try
                             {
                                 SCLPClientMod.caiDan();
                             }
                             catch (Exception e){}
-                        }, options -> options.isTransModName)
+                        }, options -> options.getIsTransModNameVal())
                         .build())
                 .build());
         if(isMyBirthday(year, month, day))
@@ -56,7 +56,7 @@ public class SCLPGameOptionPages
                                 SCLPClientMod.birthCaiDan();
                             }
                             catch (Exception e){}
-                        }, options -> options.isTransModName)
+                        }, options -> options.getIsTransModNameVal())
                         .build())
                 .build());
         }

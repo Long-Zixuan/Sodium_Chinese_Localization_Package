@@ -1,5 +1,7 @@
 package me.loongly.mods.sclp.client.gui;
 
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,8 +10,12 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import me.loongly.mods.sclp.client.SCLPClientMod;
+import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -18,54 +24,67 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
-public class SCLPGameOptions {
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Identifier.class, new Identifier.Serializer())
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .setPrettyPrinting()
-            .excludeFieldsWithModifiers(Modifier.PRIVATE)
-            .create();
-    public boolean isTransModName = true;
-    private File file;
+public class SCLPGameOptions 
+{
+    private BooleanValue isTransModName_;
+    private File file_;
 
-    public static SCLPGameOptions load(File file) {
+    private final ForgeConfigSpec SPECS;
+
+    public SCLPGameOptions(File file)
+    {
+        var BUILDER = new ForgeConfigSpec.Builder();
+
+        // sclp ->
+        BUILDER.push("sclp");
+
+        // sclp -> settings ->
+        BUILDER.push("settings");
+        isTransModName_ = BUILDER
+                .comment("是否翻译模组名")
+                .define("isTransModName", true);
+       
+        BUILDER.pop();
+
+        file_ = file;
+
+        SPECS = BUILDER.build();
+
+        final var configData = CommentedFileConfig.builder(file).sync().autosave().writingMode(WritingMode.REPLACE).build();
+        configData.load();
+        SPECS.setConfig(configData);
+    }
+
+    public boolean isLoaded() 
+    {
+        return SPECS.isLoaded();
+    }
+
+    public static SCLPGameOptions load(File file)
+    {
         SCLPGameOptions config;
-
-        if (file.exists()) {
-            try (FileReader reader = new FileReader(file)) {
-                config = gson.fromJson(reader, SCLPGameOptions.class);
-            } catch (Exception e) {
-                SCLPClientMod.LOGGER.error("Could not parse config, falling back to defaults!", e);
-                config = new SCLPGameOptions();
-            }
-        } else {
-            config = new SCLPGameOptions();
-        }
-
-        config.file = file;
+        config = new SCLPGameOptions(file);
         config.writeChanges();
 
         return config;
     }
 
-    public void writeChanges() {
-        File dir = this.file.getParentFile();
+    public void writeChanges() 
+    {
+        SPECS.save();
+    }
 
-        if (!dir.exists()) {
-            if (!dir.mkdirs()) {
-                throw new RuntimeException("Could not create parent directories");
-            }
-        } else if (!dir.isDirectory()) {
-            throw new RuntimeException("The parent file is not a directory");
-        }
+    public void setIsTransModNameVal(boolean isTransModName) 
+    {
+        isTransModName_.set(isTransModName); 
+    }
 
-        try (FileWriter writer = new FileWriter(this.file)) {
-            gson.toJson(this, writer);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not save configuration file", e);
-        }
+    public boolean getIsTransModNameVal()
+    {
+        return isTransModName_.get();
     }
 
 }
