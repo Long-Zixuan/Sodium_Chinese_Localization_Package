@@ -29,12 +29,12 @@ import java.util.Map;
 
 public class SCLPGameOptions 
 {
-    private BooleanValue isTransModName;
-    private File file;
+    private BooleanValue isTransModName_;
+    private File file_;
 
     private final ForgeConfigSpec SPECS;
 
-    public SCLPGameOptions(File file_)
+    public SCLPGameOptions(File file)
     {
         var BUILDER = new ForgeConfigSpec.Builder();
 
@@ -43,13 +43,13 @@ public class SCLPGameOptions
 
         // sclp -> settings ->
         BUILDER.push("settings");
-        isTransModName = BUILDER
+        isTransModName_ = BUILDER
                 .comment(I18N.trans("sclp.options.trans_mod_name"))
                 .define("isTransModName", true);
        
         BUILDER.pop();
 
-        file = file_;
+        file_ = file;
 
         SPECS = BUILDER.build();
 
@@ -77,14 +77,14 @@ public class SCLPGameOptions
         SPECS.save();
     }
 
-    public void setIsTransModNameVal(boolean isTransModName_) 
+    public void setIsTransModNameVal(boolean isTransModName) 
     {
-        isTransModName.set(isTransModName_); 
+        isTransModName_.set(isTransModName); 
     }
 
     public boolean getIsTransModNameVal()
     {
-        return isTransModName.get();
+        return isTransModName_.get();
     }
 
 }
