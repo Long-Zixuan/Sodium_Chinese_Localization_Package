@@ -24,12 +24,22 @@ public interface MixinControlValueFormatter
     @Overwrite
     static ControlValueFormatter multiplier() 
     {
+        if(I18N.hadTrans("sclp.multiplier") == 2)
+        {
+            var mulStr = I18N.trans("sclp.multiplier");
+            return (v) -> Text.literal(String.format(mulStr,v));
+        }
         return (v) -> Text.literal(String.format("%s×",v));
     }
 
     @Overwrite
     static ControlValueFormatter guiScale() 
     {
+        if(I18N.hadTrans("sclp.multiplier") == 2)
+        {
+            var mulStr = I18N.trans("sclp.multiplier");
+            return (v) -> (v == 0) ? Text.translatable("options.guiScale.auto") : Text.literal(String.format(mulStr,v));
+        }
         return (v) -> (v == 0) ? Text.translatable("options.guiScale.auto") : Text.literal(String.format("%s×",v));
     }
 }
