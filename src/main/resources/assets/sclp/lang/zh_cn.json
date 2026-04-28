@@ -256,5 +256,8 @@
   "Embeddium Device Check":"Embeddium-设备检测",
   "Embeddium Extra":"铷·扩展",
   "Oculus":"眼界",
-  "Embeddium":"Embeddium（钠）"
+  "Embeddium":"Embeddium（钠）",
+  "options.framerate":"%s帧",
+  "Default":"默认",
+  "threads":"线程"
 }
