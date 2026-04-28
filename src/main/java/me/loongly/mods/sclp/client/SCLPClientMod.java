@@ -59,9 +59,8 @@ public class SCLPClientMod
 
     private static SCLPGameOptions loadConfig() 
     {
-        String localAppDataFolder = System.getenv("APPDATA");
-        Path localAppData = Paths.get(localAppDataFolder).getParent();
-        Path path = Paths.get(localAppData.toString(), "Local","Netease", "MCLauncher", "config", "mod", "sodium-chinese-pack-1.20.toml");
+        String localAppDataFolder = System.getenv("LOCALAPPDATA");
+        Path path = Paths.get(localAppDataFolder, "Netease", "MCLauncher", "config", "mod", "sodium-chinese-pack-1.20.toml");
         return SCLPGameOptions.load(path.toFile());
     }
 
