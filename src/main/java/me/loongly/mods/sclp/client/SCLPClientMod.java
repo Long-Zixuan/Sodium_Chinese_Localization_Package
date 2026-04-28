@@ -8,6 +8,8 @@ import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
 
 import org.apache.logging.log4j.LogManager;
 import java.lang.Runtime;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SCLPClientMod 
 {
@@ -57,7 +59,10 @@ public class SCLPClientMod
 
     private static SCLPGameOptions loadConfig() 
     {
-        return SCLPGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-chinese-pack.toml").toFile());
+        String localAppDataFolder = System.getenv("APPDATA");
+        Path localAppData = Paths.get(localAppDataFolder).getParent();
+        Path path = Paths.get(localAppData.toString(), "Local","Netease", "MCLauncher", "config", "mod", "sodium-chinese-pack-1.20.toml");
+        return SCLPGameOptions.load(path.toFile());
     }
 
     public SCLPClientMod() 

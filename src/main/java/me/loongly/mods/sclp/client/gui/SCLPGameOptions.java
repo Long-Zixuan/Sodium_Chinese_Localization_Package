@@ -65,6 +65,10 @@ public class SCLPGameOptions
 
     public static SCLPGameOptions load(File file)
     {
+        if(!file.getParentFile().exists())
+        {
+            file.getParentFile().mkdirs();
+        }
         SCLPGameOptions config;
         config = new SCLPGameOptions(file);
         config.writeChanges();
