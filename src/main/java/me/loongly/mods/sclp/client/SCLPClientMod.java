@@ -57,7 +57,7 @@ public class SCLPClientMod
 
     private static SCLPGameOptions loadConfig() 
     {
-        return SCLPGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium_chinese_pack_options.txt").toFile());
+        return SCLPGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-chinese-pack.toml").toFile());
     }
 
     public static boolean isXenon()
