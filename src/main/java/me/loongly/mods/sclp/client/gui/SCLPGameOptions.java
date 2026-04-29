@@ -21,6 +21,7 @@ import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -28,6 +29,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,7 +37,6 @@ import java.util.Map;
 
 public class SCLPGameOptions 
 {
-    private BooleanValue isTransModName_;
     private File file_;
     private Map<String, String> optionMap_;
 
@@ -44,8 +45,9 @@ public class SCLPGameOptions
         file_ = file;
         if(file.exists())
         {
-            try (InputStream inputStream = new FileInputStream(file)) 
+            try
             {   
+                InputStream inputStream = new FileInputStream(file);
                 optionMap_ = parseOptionFile(inputStream);
             }
             catch (Exception e)
@@ -80,7 +82,7 @@ public class SCLPGameOptions
     public void writeChanges() 
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("#LoongLy Software \n# This is a configuration file for Sodium Chinese Localization Pack.\n");
+        builder.append("# LoongLy Software \n# This is a configuration file for Sodium Chinese Localization Pack.\n");
         for (Map.Entry<String, String> entry : optionMap_.entrySet()) 
         {
             builder.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
@@ -109,7 +111,7 @@ public class SCLPGameOptions
 
     public boolean getIsTransModNameVal()
     {
-        return optionMap_.get("isTranModName") == "true";
+        return optionMap_.get("isTranModName").equals("true");
     }
 
     public static HashMap<String, String> parseOptionFile(InputStream inputStream) 
@@ -117,7 +119,7 @@ public class SCLPGameOptions
         HashMap<String, String> map = new HashMap<>();
         if (inputStream == null) 
         {
-            return map;
+            throw new IllegalArgumentException("InputStream cannot be null");
         }
 
         try (java.io.BufferedReader reader = new java.io.BufferedReader(
@@ -143,7 +145,7 @@ public class SCLPGameOptions
                 if (separatorIndex == -1) 
                 {
                     System.out.println("Invalid line: " + line + " in lang file, line number: " + lineNumber);
-                    // 如果没有 '='，则该行格式不正确，跳过
+                    // 如果没有 ':'，则该行格式不正确，跳过
                     continue;
                 }
 
