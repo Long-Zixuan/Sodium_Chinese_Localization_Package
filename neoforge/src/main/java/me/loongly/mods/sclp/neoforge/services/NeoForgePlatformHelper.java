@@ -6,7 +6,7 @@ import me.loongly.mods.sclp.common.services.IPlatformHelper;
 
 import java.nio.file.Path;
 import java.util.Locale;
-
+import net.minecraft.client.Minecraft;
 //import net.neoforged.fml.i18n.I18nManager;
 
 public class NeoForgePlatformHelper implements IPlatformHelper 
@@ -21,7 +21,14 @@ public class NeoForgePlatformHelper implements IPlatformHelper
     @Override
     public String getLanguageCode()
     {
-        Locale locale = Locale.getDefault();
-        return locale.getLanguage();
+        if(Minecraft.getInstance().getLanguageManager() != null)
+        {
+            return Minecraft.getInstance().getLanguageManager().getSelected();
+        }
+        if(Minecraft.getInstance().options != null)
+        {
+            return Minecraft.getInstance().options.languageCode;
+        }
+        return "en_us";
     }
 }
