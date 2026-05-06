@@ -1,6 +1,7 @@
 package me.loongly.mods.sclp.client;
 
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
+import net.minecraft.util.Util;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +11,17 @@ import org.apache.logging.log4j.LogManager;
 import java.lang.Runtime;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class SCLPClientMod 
 {
@@ -25,6 +37,81 @@ public class SCLPClientMod
         }
 
         return CONFIG;
+    }
+
+    public static void openErrorHtml()
+    {
+        try 
+        {
+            //var uri = SCLPClientMod.class.getResource("/assets/sclp/html/error.html");
+            //Util.getOperatingSystem().open(uri.toExternalForm());
+            var jFrame = new JFrame();
+
+            var jd = new JDialog(jFrame);
+
+            jd.setLayout(new FlowLayout());
+
+            jd.setBounds(500, 300, 400, 300);
+
+            var jLabel = new JLabel("Embeddium汉化包：本版本转为网易我的世界开发。");
+            var jLabel2 = new JLabel("如需游玩请前往国际版社区下载");
+
+            var closeBtn = new JButton("关闭");
+            closeBtn.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    jd.setVisible(false);
+                    jFrame.dispose();
+                }
+            });
+
+            var toModrinth = new JButton("Modrinth");
+            toModrinth.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    try 
+                    {
+                        Runtime.getRuntime().exec("cmd /c start https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack");
+                    } 
+                    catch (Exception exception) 
+                    {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+
+            var toCurseForge = new JButton("CurseForge");
+            toCurseForge.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    try 
+                    {
+                        Runtime.getRuntime().exec("cmd /c start https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x");
+                    } 
+                    catch (Exception exception) 
+                    {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+
+            jd.add(jLabel);
+            jd.add(jLabel2);
+            jd.add(toModrinth);
+            jd.add(toCurseForge);
+            jd.add(closeBtn);
+            jd.setVisible(true);
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
     }
 
     static int chickCount = 0;
