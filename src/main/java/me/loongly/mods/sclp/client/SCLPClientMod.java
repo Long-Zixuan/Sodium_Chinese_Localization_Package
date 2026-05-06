@@ -51,7 +51,7 @@ public class SCLPClientMod
 
             jd.setLayout(new FlowLayout());
 
-            jd.setBounds(500, 300, 400, 300);
+            jd.setBounds(500, 300, 400, 160);
 
             var jLabel = new JLabel("Embeddium汉化包：本版本转为网易我的世界开发。");
             var jLabel2 = new JLabel("如需游玩请前往国际版社区下载");
@@ -107,7 +107,7 @@ public class SCLPClientMod
             jd.add(jLabel2);
             jd.add(toModrinth);
             jd.add(toCurseForge);
-            jd.add(closeBtn);
+            //jd.add(closeBtn);
             jd.setVisible(true);
         } 
         catch (Exception e) 
