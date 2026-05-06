@@ -63,6 +63,8 @@ public class SCLPClientMod
                 public void actionPerformed(ActionEvent e) 
                 {
                     jd.setVisible(false);
+                    jd.dispose();
+                    jFrame.setVisible(false);
                     jFrame.dispose();
                 }
             });
@@ -75,7 +77,7 @@ public class SCLPClientMod
                 {
                     try 
                     {
-                        Runtime.getRuntime().exec("cmd /c start https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack");
+                        Util.getOperatingSystem().open("https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack");
                     } 
                     catch (Exception exception) 
                     {
@@ -92,7 +94,7 @@ public class SCLPClientMod
                 {
                     try 
                     {
-                        Runtime.getRuntime().exec("cmd /c start https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x");
+                        Util.getOperatingSystem().open("https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x");
                     } 
                     catch (Exception exception) 
                     {
