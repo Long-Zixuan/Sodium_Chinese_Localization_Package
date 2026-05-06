@@ -36,18 +36,17 @@ public class SodiumExtraMixinConfigPlugin extends AbstractCaffeineConfigMixinPlu
         }
         catch(Exception e)
         {
-            CompletableFuture.runAsync
-            (
-                ()->
-                {
-                    if(!hadShowError)
+            if(!hadShowError)
+            {
+                CompletableFuture.runAsync
+                (
+                    ()->
                     {
                         SCLPClientMod.openErrorHtml();
-                        hadShowError = true;
                     }
-                }
-            );
-            //SCLPClientMod.openErrorHtml();
+                );
+            }
+            hadShowError = true;
             return false;
             //throw new IllegalArgumentException("该版本的 Embeddium-汉化模组 仅可以在网易我的世界运行，如果需要在国际版运行，请前往国际版社区下载：https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack");
         }
