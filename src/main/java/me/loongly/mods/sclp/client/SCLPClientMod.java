@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.*;
 
 public class SCLPClientMod 
@@ -58,7 +60,7 @@ public class SCLPClientMod
             Image icon = Toolkit.getDefaultToolkit().getImage(SCLPClientMod.class.getResource("/icon.png"));
             jd.setIconImage(icon);
 
-            var jLabel = new JLabel("Embeddium汉化包：本版本转为网易我的世界开发。");
+            var jLabel = new JLabel("Embeddium汉化包：本版本专为网易我的世界开发。");
             var jLabel2 = new JLabel("如需游玩请前往国际版社区下载");
             var jLabel3 = new JLabel("This version is developed for NetEase MC.");
 
@@ -120,6 +122,15 @@ public class SCLPClientMod
         catch (Exception e) 
         {
             e.printStackTrace();
+            try
+            {
+                Util.getOperatingSystem().open("https://long-zixuan.github.io/html/ne_error.html");
+            }
+            catch (Exception e1)
+            {
+                System.out.println("本版本为网易我的世界开发，如需游玩请前往国际版社区下载");
+                e1.printStackTrace();
+            }
         }
     }
 
