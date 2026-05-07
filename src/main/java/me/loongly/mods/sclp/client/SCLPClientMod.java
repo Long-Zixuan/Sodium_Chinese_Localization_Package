@@ -43,6 +43,11 @@ public class SCLPClientMod
 
     public static void openErrorHtml()
     {
+        var osName = System.getProperty("os.name").toLowerCase();
+        if( osName.contains("android") || osName.contains("ios"))
+        {
+            Util.getOperatingSystem().open("https://long-zixuan.github.io/html/ne_error.html");//安卓和ios无法弹窗而且弹窗不会报错
+        }
         try 
         {
             //var uri = SCLPClientMod.class.getResource("/assets/sclp/html/error.html");
