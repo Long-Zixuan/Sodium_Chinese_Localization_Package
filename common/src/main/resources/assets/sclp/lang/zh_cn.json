@@ -144,6 +144,8 @@
     "sodium.options.hidden_fluid_culling.default" : "默认",
   "sodium.options.hidden_fluid_culling.optimized" : "优化",
     "sodium.options.improved_fluid_shaping.default" : "原版",
-  "sodium.options.improved_fluid_shaping.alternative" : "替代的"
+  "sodium.options.improved_fluid_shaping.alternative" : "替代的",
+
+  "Reese's Sodium Options":"Reese的钠视频界面"
 
 }
