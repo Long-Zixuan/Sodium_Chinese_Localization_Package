@@ -20,8 +20,8 @@
   "sclp.options.group.support":"Support",
   "sclp.options.support_project.name":"Buy LoongLy a Coffee",
   "sclp.options.support_project.tooltip":"Will open support LoongLy website in your browser",
-  "sclp.options.close_support_page.name":"Close Support Page",
-  "sclp.options.close_support_page.tooltip":"Close the support page in the settings menu"
+  "sclp.options.close_support_page.name":"Permanently close the support page",
+  "sclp.options.close_support_page.tooltip":"The support page will no longer be displayed. This option will take effect after restarting the game"
 
 }
   
