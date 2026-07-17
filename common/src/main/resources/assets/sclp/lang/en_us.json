@@ -15,6 +15,11 @@
   "sclp.donation.prompt.6":"And thanks again for using our mod! We hope it helps you (and your computer.)",
   "sclp.multiplier":"%sx",
   "sclp.cur_languagecode":"en_us",
-  "sclp.close":"Close"
+  "sclp.close":"Close",
+  
+  "sclp.options.group.support":"Support",
+  "sclp.options.support_project.name":"Support LoongLy",
+  "sclp.options.support_project.tooltip":"Will open support LoongLy website in your browser"
+
 }
   

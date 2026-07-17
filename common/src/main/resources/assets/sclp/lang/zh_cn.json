@@ -146,6 +146,11 @@
     "sodium.options.improved_fluid_shaping.default" : "原版",
   "sodium.options.improved_fluid_shaping.alternative" : "替代的",
 
-  "Reese's Sodium Options":"Reese的钠视频界面"
+  "Reese's Sodium Options":"Reese的钠视频界面",
+
+  "sclp.options.group.support":"支持",
+  "sclp.options.support_project.name":"支持LoongLy",
+  "sclp.options.support_project.tooltip":"将在浏览器打开支持LoongLy的页面",
+  "sodium.options.open_external_page_button": "打开"
 
 }

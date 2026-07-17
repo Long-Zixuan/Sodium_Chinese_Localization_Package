@@ -129,6 +129,11 @@
   "sodium.options.chunk_update_threads.value":"%s綫程",
   "sodium.options.default":"默認",
   "sclp.cur_languagecode":"zh_hk",
-   "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。"
+   "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。",
+
+  "sclp.options.group.support":"支持",
+  "sclp.options.support_project.name":"支持LoongLy",
+  "sclp.options.support_project.tooltip":"将在浏览器打开支持LoongLy的页面",
+  "sodium.options.open_external_page_button": "打開"
   }
   
