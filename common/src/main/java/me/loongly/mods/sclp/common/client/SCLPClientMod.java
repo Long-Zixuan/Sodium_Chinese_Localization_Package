@@ -14,6 +14,8 @@ public class SCLPClientMod
 
 	private static final SCLPOptions CONFIG = SCLPOptions.load();
 
+	public static final String MOD_ID = "sclp";
+
 
 	public static SCLPOptions options() 
 	{

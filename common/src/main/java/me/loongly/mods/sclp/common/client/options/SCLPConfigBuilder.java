@@ -15,7 +15,6 @@ import me.loongly.mods.sclp.common.client.SCLPClientMod;
 public class SCLPConfigBuilder implements ConfigEntryPoint 
 {
     private static final SCLPOptions sclpOpts = SCLPClientMod.options();
-    private static final String MOD_ID = "sclp";
 
     @Override
     public void registerConfigLate(ConfigBuilder configBuilder) 
@@ -28,7 +27,10 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                 .setVersion("5.4.2.1-Test");
         var page = createOptionsPage(configBuilder);
         page.addOptionGroup(createGeneralPage(configBuilder));
-        page.addOptionGroup(createSupportPage(configBuilder));
+        if(sclpOpts.getShouldShowSupportPage())
+        {
+                page.addOptionGroup(createSupportPage(configBuilder));
+        }
         modOpts.addPage(page);
     }
 
@@ -54,16 +56,27 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
 
     private OptionGroupBuilder createSupportPage(ConfigBuilder configBuilder)
     {
-        return configBuilder.createOptionGroup()
+        var group = configBuilder.createOptionGroup()
                                 .setName(Component.translatable("sclp.options.group.support"))
                                 .addOption(configBuilder.createExternalButtonOption(this.optionId("support_project"))
                                         .setName(Component.translatable("sclp.options.support_project.name"))
                                         .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
                                         .setScreenConsumer(screen -> Util.getPlatform().openUri("https://www.loongly.me/html/support_me_old.html")));
+        
+        group.addOption(configBuilder.createBooleanOption(this.optionId("close_support_page"))//Builder(boolean.class, sclpOpts)
+                .setName(Component.translatable("sclp.options.close_support_page.name"))
+                .setTooltip(Component.translatable("sclp.options.close_support_page.tooltip"))
+                .setBinding(value -> sclpOpts.setShouldShowSupportPage(!value), () -> !sclpOpts.getShouldShowSupportPage())
+                .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                .setStorageHandler(sclpOpts::save)
+                .setDefaultValue(SCLPOptions.DEFAULT_SHOULD_SHOW_SCLP_SUPPORT_PAGE)
+        );
+        
+        return group;
     }
 
     private Identifier optionId(String path) 
     {
-        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(SCLPClientMod.MOD_ID, path);
     }
 }

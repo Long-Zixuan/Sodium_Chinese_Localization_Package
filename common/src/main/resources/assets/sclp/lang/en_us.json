@@ -18,8 +18,10 @@
   "sclp.close":"Close",
   
   "sclp.options.group.support":"Support",
-  "sclp.options.support_project.name":"Support LoongLy",
-  "sclp.options.support_project.tooltip":"Will open support LoongLy website in your browser"
+  "sclp.options.support_project.name":"Buy LoongLy a Coffee",
+  "sclp.options.support_project.tooltip":"Will open support LoongLy website in your browser",
+  "sclp.options.close_support_page.name":"Close Support Page",
+  "sclp.options.close_support_page.tooltip":"Close the support page in the settings menu"
 
 }
   

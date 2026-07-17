@@ -25,8 +25,10 @@ public class SCLPOptions
     private transient Path configPath;
 
     public static final boolean DEFAULT_SHOULD_TRANS_MOD_NAME = true;
+    public static final boolean DEFAULT_SHOULD_SHOW_SCLP_SUPPORT_PAGE = true;
 
     private boolean shouldTransModName;
+    private boolean shouldShowSCLPSupportPage;
 
     public void setShoudTransModName(boolean val)
     {
@@ -38,9 +40,20 @@ public class SCLPOptions
         return shouldTransModName;
     }
 
+    public void setShouldShowSupportPage(boolean val)
+    {
+        shouldShowSCLPSupportPage = val;
+    }
+
+    public boolean getShouldShowSupportPage()
+    {
+        return shouldShowSCLPSupportPage;
+    }
+
     public SCLPOptions()
     {
         shouldTransModName = DEFAULT_SHOULD_TRANS_MOD_NAME;
+        shouldShowSCLPSupportPage = DEFAULT_SHOULD_SHOW_SCLP_SUPPORT_PAGE;
     }
 
     public void save() 
