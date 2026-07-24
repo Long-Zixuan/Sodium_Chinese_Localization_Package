@@ -24,7 +24,16 @@ public class SCLPClientMod
 
 	public static void onInitClient() 
 	{
+		var ls = 		"	____                                       ____ \r\n" + //
+						"   /   /                                      /   /   \r\n" + //
+						"  /   /    _____   _____    ______  _____    /   /    __   __ \r\n" + //
+						" /   /___ /  _  \\ /  _  \\  /     / /  _  \\  /   /___ \\  \\/  /\r\n" + //
+						"/_______/ \\____/  \\____/  /  /  /  \\___  / /_______/  \\    /\r\n" + //
+						"                                    __/ /            __/  /\r\n" + //
+						"                                   /___/            /___/";
+		LOGGER.info(ls);
 		LOGGER.info("[SCLP] LoongLy:Sodium Chinese Localized Package init!");
+		LOGGER.info("[SCLP] LoongLy:钠汉化包初始化成功！");
 		I18NLanguage.init();
 	}
 
@@ -48,3 +57,13 @@ public class SCLPClientMod
 				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
 	}
 }
+
+/*
+    ____                                       ____ 
+   /   /                                      /   /   
+  /   /    _____   _____    ______  _____    /   /    __   __ 
+ /   /___ /  _  \ /  _  \  /     / /  _  \  /   /___ \  \/  /
+/_______/ \____/  \____/  /  /  /  \___  / /_______/  \    /
+                                    __/ /            __/  /
+                                   /___/            /___/
+ */

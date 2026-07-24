@@ -156,5 +156,5 @@
   "sclp.options.close_support_page.tooltip":"将不再显示支持页面,该选项将在重启游戏后生效",
 
   "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
-  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验\n---#-------###---\n---#------#-------\n---#-------###---\n---#-----------#--\n---####---###---"
+  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验\n    ____                                       ____ \n   /   /                                      /   /   \n  /   /    _____   _____    ______  _____    /   /    __   __ \n /   /___ /  _    /  _     /     / /  _     /   /___     /  /\n/_______/  ____/   ____/  /  /  /   ___  / /_______/       /\n                                    __/ /            __/  /\n                                   /___/            /___/"
 }
