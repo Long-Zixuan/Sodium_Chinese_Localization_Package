@@ -24,7 +24,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(Identifier.parse("sclp:texture/icon.png"))
-                .setVersion("5.4.2.1-Test");
+                .setVersion("5.4.3");
         var page = createOptionsPage(configBuilder);
         page.addOptionGroup(createGeneralPage(configBuilder));
         if(sclpOpts.getShouldShowSupportPage())
@@ -61,7 +61,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                 .addOption(configBuilder.createExternalButtonOption(this.optionId("support_project"))
                                         .setName(Component.translatable("sclp.options.support_project.name"))
                                         .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                                        .setScreenConsumer(screen -> Util.getPlatform().openUri("https://www.loongly.me/html/support_me_old.html")));
+                                        .setScreenConsumer(screen -> Util.getPlatform().openUri("https://ifdian.net/a/loongly")));
         
         group.addOption(configBuilder.createBooleanOption(this.optionId("close_support_page"))//Builder(boolean.class, sclpOpts)
                 .setName(Component.translatable("sclp.options.close_support_page.name"))
