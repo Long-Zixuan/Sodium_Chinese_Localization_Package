@@ -16,16 +16,21 @@ public class I18NLanguage
         if(instance_s == null)
         {
             SCLPClientMod.LOGGER.error("[SCLP]I18NLanguage used before init");
+            instance_s = new I18NLanguage();//补救措施，但是返回的字典就来不及联网更新了（这种情况不应该发生）
         }
         return instance_s;
     }
 
-    static
+    public static void init()
     {
         if(instance_s == null)
         {
             instance_s = new I18NLanguage();
             SCLPClientMod.LOGGER.info("[SCLP]I18NLanguage init");
+        }
+        else
+        {
+            SCLPClientMod.LOGGER.error("[SCLP]I18NLanguage init twice");
         }
     }
 
