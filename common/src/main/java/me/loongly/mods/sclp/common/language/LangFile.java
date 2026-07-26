@@ -14,9 +14,10 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.*;
 
 import com.google.common.reflect.TypeToken;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gson.Gson;
 
 import org.apache.commons.io.input.ReaderInputStream;
@@ -39,24 +40,18 @@ public class LangFile
 
     public void initMap()
     {
-        CompletableFuture.runAsync
-        (
-            ()->
+        String langUrl = LangFile.getLangUrl(langCode_);
+        String langStr = doGet(langUrl);
+        if(langStr != null)
+        {
+            SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " have internet update");
+            Map<String, String> tmp = convertJsonToMap(langStr);
+            for(Map.Entry<String, String> entry : tmp.entrySet())
             {
-                String langUrl = LangFile.getLangUrl(langCode_);
-                String langStr = doGet(langUrl);
-                if(langStr != null)
-                {
-                    SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " have internet update");
-                    Map<String, String> tmp = convertJsonToMap(langStr);
-                    for(Map.Entry<String, String> entry : tmp.entrySet())
-                    {
-                        data_.put(entry.getKey(), entry.getValue());
-                    }
-                }
-                SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " language loaded");
+                data_.put(entry.getKey(), entry.getValue());
             }
-        );
+        }
+        SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " language loaded");
     }
 
     public static String getLangUrl(String langCode)
