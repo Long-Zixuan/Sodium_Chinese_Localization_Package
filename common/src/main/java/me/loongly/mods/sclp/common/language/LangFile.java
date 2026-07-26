@@ -20,6 +20,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import org.apache.commons.io.input.ReaderInputStream;
+import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 public class LangFile 
 {
@@ -108,10 +109,12 @@ public class LangFile
         }
         catch (MalformedURLException e)
         {
+            SCLPClientMod.LOGGER.error("[SCLP]MalformedURLException:" + e.toString());
             e.printStackTrace();
         }
         catch (IOException e)
         {
+            SCLPClientMod.LOGGER.error("[SCLP]IOException1:" + e.toString());
             e.printStackTrace();
         }
         finally
@@ -125,6 +128,7 @@ public class LangFile
                 }
                 catch (IOException e)
                 {
+                    SCLPClientMod.LOGGER.error("[SCLP]IOException2:" + e.toString());
                     e.printStackTrace();
                 }
             }
@@ -137,6 +141,7 @@ public class LangFile
                 }
                 catch (IOException e)
                 {
+                    SCLPClientMod.LOGGER.error("[SCLP]IOException3:" + e.toString());
                     e.printStackTrace();
                 }
             }
