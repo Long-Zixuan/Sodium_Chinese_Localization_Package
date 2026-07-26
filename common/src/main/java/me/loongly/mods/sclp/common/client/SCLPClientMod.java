@@ -24,7 +24,7 @@ public class SCLPClientMod
 	public static void onInitClient() 
 	{
 		var ls = "[SCLP]\r\n"+ //
-						"	   ____                                       ____ \r\n" + //
+						"      ____                                       ____ \r\n" + //
 						"     /   /                                      /   /   \r\n" + //
 						"    /   /    _____   _____    ______  _____    /   /   ___  ___ \r\n" + //
 						"   /   /___ /  _  \\ /  _  \\  /     / /  _  \\  /   /___ \\  \\/  /\r\n" + //
