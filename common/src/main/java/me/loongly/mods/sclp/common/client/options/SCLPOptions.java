@@ -111,6 +111,7 @@ public class SCLPOptions
         if (!Files.exists(dir)) 
         {
             Files.createDirectories(dir);
+            SCLPClientMod.LOGGER.info("[SCLP] Create config file :" + dir.toString());
         }
         else if (!Files.isDirectory(dir)) 
         {
