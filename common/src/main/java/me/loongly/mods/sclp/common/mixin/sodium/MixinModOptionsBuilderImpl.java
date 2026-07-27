@@ -22,10 +22,10 @@ public class MixinModOptionsBuilderImpl
     {
         if(SCLPClientMod.options().getShouldTransModName())
         {
-            var oriName = name;
+            //var oriName = name;
             name = I18N.trans(name);
             this.name = name;
-            SCLPClientMod.LOGGER.info("[SCLP]" + oriName + " -> " + name);
+            //SCLPClientMod.LOGGER.info("[SCLP]" + oriName + " -> " + name);
         }
     }
 
@@ -34,10 +34,10 @@ public class MixinModOptionsBuilderImpl
     {
         if(SCLPClientMod.options().getShouldTransModName())
         {
-            var oriName = name;
+            //var oriName = name;
             name = I18N.trans(name);
             this.name = name;
-            SCLPClientMod.LOGGER.info("[SCLP]" + oriName + " -> " + name);
+            //SCLPClientMod.LOGGER.info("[SCLP]" + oriName + " -> " + name);
         }
     }
 }

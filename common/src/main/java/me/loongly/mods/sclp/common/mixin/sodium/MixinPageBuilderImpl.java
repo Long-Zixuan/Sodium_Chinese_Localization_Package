@@ -33,10 +33,10 @@ public class MixinPageBuilderImpl
     {
         if (transMap.containsKey(name.getString())) 
         {
-            var oriName = name;
+            //var oriName = name;
             name = Component.translatable(transMap.get(name.getString()));
             this.name = name;
-            SCLPClientMod.LOGGER.info("[SCLP]" + oriName.getString() + " -> " + name.getString());
+            //SCLPClientMod.LOGGER.info("[SCLP]" + oriName.getString() + " -> " + name.getString());
         }
     }
 }
