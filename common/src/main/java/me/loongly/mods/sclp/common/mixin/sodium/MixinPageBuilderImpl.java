@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
+import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 @Mixin(PageBuilderImpl.class)
 public class MixinPageBuilderImpl
@@ -33,8 +33,10 @@ public class MixinPageBuilderImpl
     {
         if (transMap.containsKey(name.getString())) 
         {
+            var oriName = name;
             name = Component.translatable(transMap.get(name.getString()));
             this.name = name;
+            SCLPClientMod.LOGGER.info("[SCLP]" + oriName.getString() + " -> " + name.getString());
         }
     }
 }
