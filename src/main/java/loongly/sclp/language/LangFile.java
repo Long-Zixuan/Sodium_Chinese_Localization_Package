@@ -46,12 +46,12 @@ public class LangFile
 
     public void initMap()
     {
-        /*String langFilePath = LangFile.getLangFilePath(langCode_);
+        String langFilePath = LangFile.getLangFilePath(langCode_);
         try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
         {
             if (inputStream == null) 
             {
-                SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".lang file not found");
+                SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".json file not found");
                 data_ = new HashMap<String,String>();
             }
             else
@@ -72,7 +72,7 @@ public class LangFile
         catch (Exception e)
         {
             e.printStackTrace();
-        }*/
+        }
         CompletableFuture.runAsync
         (
             ()->
