@@ -5,6 +5,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.Logger;
 
 import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
+import me.loongly.mods.sclp.language.I18NLanguage;
 
 import org.apache.logging.log4j.LogManager;
 import net.minecraftforge.fml.ModList;
@@ -39,7 +40,7 @@ public class SCLPClientMod
 
     public static void birthCaiDan()
 	{
-        net.minecraft.util.Util.getOperatingSystem().open("https://www.loongly.me/html/clock.html");
+        net.minecraft.util.Util.getOperatingSystem().open("https://long-zixuan.github.io/html/clock.html");
         net.minecraft.util.Util.getOperatingSystem().open("https://long-zixuan.github.io/html/badapple_h.html");
 	}
 
@@ -72,5 +73,6 @@ public class SCLPClientMod
 
     public SCLPClientMod() 
     {
+		
     }
 }

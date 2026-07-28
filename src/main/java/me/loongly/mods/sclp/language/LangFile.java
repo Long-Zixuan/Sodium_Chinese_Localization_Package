@@ -23,6 +23,8 @@ import com.google.gson.Gson;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
+
+import me.loongly.mods.sclp.client.SCLPClientMod;
 public class LangFile 
 {
     private String langCode_;
@@ -48,12 +50,14 @@ public class LangFile
                 String langStr = doGet(langUrl);
                 if(langStr != null)
                 {
+                    SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ +" have internet update.");
                     Map<String, String> tmp = convertJsonToMap(langStr);
                     for(Map.Entry<String, String> entry : tmp.entrySet())
                     {
                         data_.put(entry.getKey(), entry.getValue());
                     }
                 }
+                SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " loaded.");
             }
         );
     }
