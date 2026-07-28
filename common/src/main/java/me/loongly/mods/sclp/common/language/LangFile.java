@@ -44,14 +44,14 @@ public class LangFile
         String langStr = doGet(langUrl);
         if(langStr != null)
         {
-            SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " have internet update");
+            SCLPClientMod.LOGGER.info("[SCLP]{} have internet update", langCode_);
             Map<String, String> tmp = convertJsonToMap(langStr);
             for(Map.Entry<String, String> entry : tmp.entrySet())
             {
                 data_.put(entry.getKey(), entry.getValue());
             }
         }
-        SCLPClientMod.LOGGER.info("[SCLP]" + langCode_ + " language loaded");
+        SCLPClientMod.LOGGER.info("[SCLP]{} language loaded", langCode_);
     }
 
     public static String getLangUrl(String langCode)

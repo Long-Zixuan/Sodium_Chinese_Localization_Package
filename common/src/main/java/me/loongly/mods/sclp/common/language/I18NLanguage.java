@@ -19,14 +19,14 @@ public class I18NLanguage
     {
         if(instance_s == null)
         {
-            SCLPClientMod.LOGGER.error("[SCLP]I18NLanguage used before init");
+            SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage used before init");
             try
             {
                 instance_s = new I18NLanguage();//补救措施（这种情况不应该发生）
             }
             catch (InterruptedException e)
             {
-                SCLPClientMod.LOGGER.error("[SCLP]I18NLanguage init failed");
+                SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init failed");
                 e.printStackTrace();
             }
         }
@@ -40,17 +40,17 @@ public class I18NLanguage
             try
             {
                 instance_s = new I18NLanguage();
-                SCLPClientMod.LOGGER.info("[SCLP]I18NLanguage init");
+                SCLPClientMod.LOGGER.info("[SCLP] I18NLanguage init");
             }
             catch (InterruptedException e)
             {
-                SCLPClientMod.LOGGER.error("[SCLP]I18NLanguage init failed");
+                SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init failed");
                 e.printStackTrace();
             }
         }
         else
         {
-            SCLPClientMod.LOGGER.error("[SCLP]I18NLanguage init twice");
+            SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init twice");
         }
     }
 
