@@ -6,24 +6,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import loongly.sclp.common.client.SCLPClientMod;
+
 public class I18NLanguage 
 {
     private static I18NLanguage instance_s = null;
-
-    static
-    {
-        if(instance_s == null)
-        {
-            instance_s = new I18NLanguage();
-            System.out.println("[sclp]I18NLanguage init");
-        }
-    }
 
     public static I18NLanguage getInstance()
     {
         if(instance_s == null)
         {
-            System.err.println("[sclp]I18NLanguage used before init");
+            SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage used before init");
+            init();//补救措施，这种情况不应该发生
         }
         return instance_s;
     }
@@ -32,11 +26,12 @@ public class I18NLanguage
     {
         if(instance_s == null)
         {
-           //static代码段初始化实例
+            instance_s = new I18NLanguage();
+            SCLPClientMod.LOGGER.info("[SCLP] I18NLanguage init.");
         }
         else
         {
-            System.err.println("[sclp]I18NLanguage init twice");
+            SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init twice!");
         }
     }
 

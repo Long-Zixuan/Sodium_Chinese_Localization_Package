@@ -21,6 +21,8 @@ import org.apache.commons.io.input.ReaderInputStream;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import loongly.sclp.common.client.SCLPClientMod;
+
 public class LangFile 
 {
     private String langCode_;
@@ -46,12 +48,14 @@ public class LangFile
                 String langStr = doGet(langUrl);
                 if(langStr != null)
                 {
+                    SCLPClientMod.LOGGER.info("[SCLP]{} have internet update", langCode_);
                     Map<String, String> tmp = convertJsonToMap(langStr);
                     for(Map.Entry<String, String> entry : tmp.entrySet())
                     {
                         data_.put(entry.getKey(), entry.getValue());
                     }
                 }
+                SCLPClientMod.LOGGER.info("[SCLP]{} language loaded", langCode_);
             }
         );
     }
@@ -109,10 +113,12 @@ public class LangFile
         catch (MalformedURLException e)
         {
             e.printStackTrace();
+            SCLPClientMod.LOGGER.error("[SCLP]MalformedURLException:", e.toString());
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            SCLPClientMod.LOGGER.error("[SCLP]IOException1:", e.toString());
         }
         finally
         {
@@ -125,6 +131,7 @@ public class LangFile
                 }
                 catch (IOException e)
                 {
+                    SCLPClientMod.LOGGER.error("[SCLP]IOException2:", e.toString());
                     e.printStackTrace();
                 }
             }
@@ -137,6 +144,7 @@ public class LangFile
                 }
                 catch (IOException e)
                 {
+                    SCLPClientMod.LOGGER.error("[SCLP]IOException3:", e.toString());
                     e.printStackTrace();
                 }
             }

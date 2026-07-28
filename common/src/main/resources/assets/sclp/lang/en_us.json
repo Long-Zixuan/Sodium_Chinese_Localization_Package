@@ -28,6 +28,7 @@
   "sclp.percent":"%s%%",
   "sclp.multiplier":"%sx",
   "sclp.page":"SCLP Settings",
-  "sclp.cur_languagecode":"en_us"
+  "sclp.cur_languagecode":"en_us",
+  "sclp.format_error":"Format Error:"
 }
   

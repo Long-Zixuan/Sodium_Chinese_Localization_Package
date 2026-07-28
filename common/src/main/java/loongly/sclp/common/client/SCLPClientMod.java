@@ -40,7 +40,7 @@ public class SCLPClientMod
 		if(CONFIG == null)
 		{
 			CONFIG = SCLPGameOptions.load();
-			LOGGER.info("Init SCLP Config");
+			LOGGER.info("[SCLP] Load Sodium Chinese Localized Package Config");
 		}
 		return CONFIG;
 	}
@@ -49,8 +49,16 @@ public class SCLPClientMod
 	{
 		//CONFIG = SCLPGameOptions.load();
 		I18NLanguage.init();
-
-		LOGGER.info("Init SCLP Client");
+		var ls = "[SCLP]\r\n"+ //
+						"      ____                                    ____ \r\n" + //
+						"     /   /                                   /   /   \r\n" + //
+						"    /   /    ____________  ______  _____    /   /    ___ ___ \r\n" + //
+						"   /   /___ /  _  /  _  / /     / /  _  \\  /   /___ |  //  /\r\n" + //
+						"  /_______/ \\____/\\____/ /  /  /  \\__   / /_______/  \\    /\r\n" + //
+						" ___________________________________/  /______________/  /\r\n" + //
+						"/___LoongLy Software____________________________________/\r\n" + //
+						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
+		LOGGER.info(ls);
 	}
 
 	static int chickCount = 0;

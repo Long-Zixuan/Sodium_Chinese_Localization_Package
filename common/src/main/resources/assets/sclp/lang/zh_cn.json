@@ -138,5 +138,6 @@
   "sclp.multiplier":"%s倍",
   "Default":"默认",
   "threads":"线程",
-  "sclp.cur_languagecode":"zh_cn"
+  "sclp.cur_languagecode":"zh_cn",
+  "sclp.format_error":"格式错误："
 }
