@@ -11,6 +11,10 @@ public class I18N
 {
     public static String trans(String key, Object... args)
     {
+        if(I18NLanguage.getInstance() == null)
+        {
+            return I18n.get(key, args);
+        }
         String languageCode = IPlatformHelper.INSTANCE.getLanguageCode();//I18n.get("sclp.cur_languagecode");
         Map<String, String> language = I18NLanguage.getInstance().getLanguage(languageCode);
         String string = key;
@@ -30,12 +34,16 @@ public class I18N
         }
         catch (IllegalFormatException var4) 
         {
-            return "Format error: " + string;
+            return I18n.get("sclp.format_error") + string;
         }
     }
 
     static public int hadTrans(String key)
     {
+        if(I18NLanguage.getInstance() == null)
+        {
+            return 0;
+        }
         String languageCode = IPlatformHelper.INSTANCE.getLanguageCode();
         Map<?, ?> language = I18NLanguage.getInstance().getLanguage(languageCode);
         Map<?, ?> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");

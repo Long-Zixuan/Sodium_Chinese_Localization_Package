@@ -25,6 +25,7 @@
 
   
   "modmenu.summaryTranslation.sclp": "Sodium Chinese Localized Pack",
-  "modmenu.descriptionTranslation.sclp": "A minecraft mod can translate Sodium to Chinese"
+  "modmenu.descriptionTranslation.sclp": "A minecraft mod can translate Sodium to Chinese",
+  "sclp.format_error":"Format error: "
 }
   
