@@ -19,7 +19,7 @@ import loongly.sclp.language.I18NLanguage;
 @Environment(EnvType.CLIENT)
 public class SclpClientMod implements ClientModInitializer {
 
-	public static final java.util.logging.Logger LOGGER = LogManager.getLogger("sclp");
+	public static final Logger LOGGER = LogManager.getLogger("sclp");
 
 	@Override
 	public void onInitializeClient() 

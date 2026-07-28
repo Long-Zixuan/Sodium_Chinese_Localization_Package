@@ -18,7 +18,7 @@ public class I18NLanguage
     {
         if(instance_s == null)
         {
-            SclpClientMod.LOGGER.err("[SCLP] I18NLanguage used before init!");
+            SclpClientMod.LOGGER.error("[SCLP] I18NLanguage used before init!");
             init();//补救措施，这种情况不应该发生
         }
         return instance_s;
@@ -33,7 +33,7 @@ public class I18NLanguage
         }
         else
         {
-            SclpClientMod.LOGGER.err("[SCLP] I18NLanguage init twice!");
+            SclpClientMod.LOGGER.error("[SCLP] I18NLanguage init twice!");
         }
     }
 

@@ -24,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import loongly.sclp.client.SclpClientMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
+
 public class LangFile 
 {
     private String langCode_;
@@ -50,7 +51,7 @@ public class LangFile
         {
             if (inputStream == null) 
             {
-                SclpClientMod.LOGGER.err("[SCLP] " + langCode_ + ".lang file not found");
+                SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".lang file not found");
                 data_ = new HashMap<String,String>();
             }
             else
@@ -139,12 +140,12 @@ public class LangFile
         catch (MalformedURLException e)
         {
             e.printStackTrace();
-            SCLPClientMod.LOGGER.error("[SCLP] MaMalformedURLException" + e.toString());
+            SclpClientMod.LOGGER.error("[SCLP] MaMalformedURLException" + e.toString());
         }
         catch (IOException e)
         {
             e.printStackTrace();
-            SCLPClientMod.LOGGER.error("[SCLP] IOException1" + e.toString());
+            SclpClientMod.LOGGER.error("[SCLP] IOException1" + e.toString());
         }
         finally
         {
@@ -158,7 +159,7 @@ public class LangFile
                 catch (IOException e)
                 {
                     e.printStackTrace();
-                    SCLPClientMod.LOGGER.error("[SCLP] IOException2" + e.toString());
+                    SclpClientMod.LOGGER.error("[SCLP] IOException2" + e.toString());
                 }
             }
 
@@ -171,7 +172,7 @@ public class LangFile
                 catch (IOException e)
                 {
                     e.printStackTrace();
-                    SCLPClientMod.LOGGER.error("[SCLP] IOException3" + e.toString());
+                    SclpClientMod.LOGGER.error("[SCLP] IOException3" + e.toString());
                 }
             }
 
