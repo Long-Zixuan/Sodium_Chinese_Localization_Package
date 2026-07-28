@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import loongly.sclp.client.SclpClientMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 
@@ -13,27 +14,27 @@ public class I18NLanguage
 {
     private static I18NLanguage instance_s = null;
 
-    static
-    {
-        if(instance_s == null)
-        {
-            instance_s = new I18NLanguage();
-        }
-    }
-
     public static I18NLanguage getInstance()
     {
         if(instance_s == null)
         {
-            System.err.println("I18NLanguage used before init");
+            SclpClientMod.LOGGER.err("[SCLP] I18NLanguage used before init!");
+            init();//补救措施，这种情况不应该发生
         }
         return instance_s;
     }
 
     public static void init()
     {
-        System.out.println("I18NLanguage init");
-        //由static代码段中的代码初始化instance_s
+        if(instance_s == null)
+        {
+            instance_s = new I18NLanguage();
+            SclpClientMod.LOGGER.info("[SCLP] I18NLanguage init.");
+        }
+        else
+        {
+            SclpClientMod.LOGGER.err("[SCLP] I18NLanguage init twice!");
+        }
     }
 
     public Map<String, String> getLanguage(String lanCode)

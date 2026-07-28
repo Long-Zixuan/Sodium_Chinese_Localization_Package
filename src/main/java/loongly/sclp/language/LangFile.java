@@ -21,6 +21,7 @@ import org.apache.commons.io.input.ReaderInputStream;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import loongly.sclp.client.SclpClientMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 public class LangFile 
@@ -44,13 +45,12 @@ public class LangFile
 
     public void initMap()
     {
-        String langFilePath = LangFile.getLangFilePath(langCode_);
+        /*String langFilePath = LangFile.getLangFilePath(langCode_);
         try (InputStream inputStream = I18NLanguage.class.getResourceAsStream(langFilePath)) 
         {
             if (inputStream == null) 
             {
-                
-                System.out.println(langCode_ + ".lang file not found");
+                SclpClientMod.LOGGER.err("[SCLP] " + langCode_ + ".lang file not found");
                 data_ = new HashMap<String,String>();
             }
             else
@@ -71,7 +71,7 @@ public class LangFile
         catch (Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
         CompletableFuture.runAsync
         (
             ()->
@@ -80,12 +80,14 @@ public class LangFile
                 String inputStream = doGet(langUrl);
                 if(inputStream != null)
                 {
+                    SclpClientMod.LOGGER.info("[SCLP] " + langCode_ + " have internet update");
                     Map<String, String> tmp = convertJsonToMap(inputStream);
                     for(Map.Entry<String, String> entry : tmp.entrySet())
                     {
                         data_.put(entry.getKey(), entry.getValue());
                     }
                 }
+                SclpClientMod.LOGGER.info("[SCLP] " + langCode_ + " loaded!");
             }
         );
     }
@@ -137,10 +139,12 @@ public class LangFile
         catch (MalformedURLException e)
         {
             e.printStackTrace();
+            SCLPClientMod.LOGGER.error("[SCLP] MaMalformedURLException" + e.toString());
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            SCLPClientMod.LOGGER.error("[SCLP] IOException1" + e.toString());
         }
         finally
         {
@@ -154,6 +158,7 @@ public class LangFile
                 catch (IOException e)
                 {
                     e.printStackTrace();
+                    SCLPClientMod.LOGGER.error("[SCLP] IOException2" + e.toString());
                 }
             }
 
@@ -166,6 +171,7 @@ public class LangFile
                 catch (IOException e)
                 {
                     e.printStackTrace();
+                    SCLPClientMod.LOGGER.error("[SCLP] IOException3" + e.toString());
                 }
             }
 

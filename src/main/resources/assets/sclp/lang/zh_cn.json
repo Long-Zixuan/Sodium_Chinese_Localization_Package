@@ -110,5 +110,6 @@
   "If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware. If you experience issues with some textures not being animated, disable this option.":"启用后，仅更新判定为可见的动态纹理。此功能可在某些硬件上显著提升帧率。若遇到部分纹理未动态更新的问题，请禁用此选项。",
   "If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.":"如果启用，块网格将使用更紧凑的顶点格式，这会限制顶点属性的精度。这种格式将使图形内存使用量和带宽要求减少约40%，但在某些边缘情况下可能会导致z-fighting/闪烁纹理问题。",
   "sclp.no_internet":"联网以获取最新翻译",
-  "sclp.no_fabricapi_warm":"建议安装FabricAPI，以获得更好的兼容性。"
+  "sclp.no_fabricapi_warm":"建议安装FabricAPI，以获得更好的兼容性。",
+  "sclp.format_error":"格式错误： "
   }

@@ -29,13 +29,17 @@ public class I18N
                 string = fallbackLanguage.get(key);
             }
         }
+        if(args.length == 0)
+        {
+            return string; //防止换行出现Format Error，比较大部分换行不会有格式化字符串
+        }
         try 
         {
             return String.format(string, args);
         }
         catch (IllegalFormatException var4) 
         {
-            return "Format error: " + string;
+            return I18n.translate("sclp.format_error") + string; //为什么不用I18N.trans呢，因为万一格式一直错误就无限递归了
         }
     }
 

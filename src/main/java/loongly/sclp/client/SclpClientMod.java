@@ -19,12 +19,22 @@ import loongly.sclp.language.I18NLanguage;
 @Environment(EnvType.CLIENT)
 public class SclpClientMod implements ClientModInitializer {
 
-	public static final Logger LOGGER = LogManager.getLogger("sclp");
+	public static final java.util.logging.Logger LOGGER = LogManager.getLogger("sclp");
 
 	@Override
-	public void onInitializeClient() {
-		LOGGER.info("[sclp] 钠模组汉化包");
+	public void onInitializeClient() 
+	{
 		I18NLanguage.init();
+		String ls = "[SCLP]\r\n"+ //
+						"      ____                                    ____ \r\n" + //
+						"     /   /                                   /   /   \r\n" + //
+						"    /   /    ____________  ______  _____    /   /    ___ ___ \r\n" + //
+						"   /   /___ /  _  /  _  / /     / /  _  \\  /   /___ |  //  /\r\n" + //
+						"  /_______/ \\____/\\____/ /  /  /  \\__   / /_______/  \\    /\r\n" + //
+						" ___________________________________/  /______________/  /\r\n" + //
+						"/___LoongLy Software____________________________________/\r\n" + //
+						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
+		LOGGER.info(ls);
 		CompletableFuture.runAsync
         (
             ()->
