@@ -14,7 +14,7 @@ public class I18N
     {
         if(!SclpClientMod.options().isEnableSclp)
         {
-            if(!key.startsWith("sclp") && !key.equals("sclp.performance_impact"))
+            if(!key.startsWith("sclp") || key.equals("sclp.performance_impact"))
             {
                 return String.format(key, args);
             }
