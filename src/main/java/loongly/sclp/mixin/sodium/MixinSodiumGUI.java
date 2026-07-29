@@ -5,6 +5,7 @@ import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
 import loongly.sclp.client.OsType;
 import loongly.sclp.client.SclpClientMod;
+import loongly.sclp.client.gui.SCLPGameOptionPages;
 //import net.minecraft.client.resource.language.I18n;
 import loongly.sclp.language.I18N;
 import net.minecraft.client.gui.screen.Screen;
@@ -63,7 +64,7 @@ public class MixinSodiumGUI extends Screen
             this.children.add(this.birthButton_);
             this.drawable.add(this.birthButton_);
         }
-        if(!SclpClientMod.isConnected && SclpClientMod.options().isEnableSclp)
+        if(!SclpClientMod.isConnected && SclpClientMod.options().isEnableSclp && !SclpClientMod.options().isDisableSclpNoInternetWarn)
         {
             this.noInternetButton_ = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
             this.children.add(this.noInternetButton_);
@@ -157,5 +158,15 @@ public class MixinSodiumGUI extends Screen
         {
            this.textRenderer.draw(matrixStack, tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF);
         }
+    }
+
+    @Shadow @Final
+    private List<OptionPage> pages;
+
+
+    @Inject(method = "<init>(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("TAIL"))
+    private void addSCLPOptionPage(CallbackInfo ci)
+    {
+        this.pages.add(SCLPGameOptionPages.sclpPage());
     }
 }
