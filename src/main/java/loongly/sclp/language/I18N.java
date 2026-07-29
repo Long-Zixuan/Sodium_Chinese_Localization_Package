@@ -16,6 +16,10 @@ public class I18N
         {
             if(!key.startsWith("sclp") || key.equals("sclp.performance_impact"))
             {
+                if(key.equals("sclp.performance_impact"))
+                {
+                    return "Performance Impact:";
+                }
                 return String.format(key, args);
             }
         }
