@@ -63,7 +63,7 @@ public class MixinSodiumGUI extends Screen
             this.children.add(this.birthButton_);
             this.drawable.add(this.birthButton_);
         }
-        if(!SclpClientMod.isConnected)
+        if(!SclpClientMod.isConnected && SclpClientMod.options().isEnableSclp)
         {
             this.noInternetButton_ = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
             this.children.add(this.noInternetButton_);
@@ -73,6 +73,7 @@ public class MixinSodiumGUI extends Screen
 
     void birthCaidan()
     {
+        SclpClientMod.LOGGER.info("[SCLP]Happy birthday to LoongLy!");
         Util.getOperatingSystem()
                 .open("https://long-zixuan.github.io/html/lain.html");
         Util.getOperatingSystem()
@@ -130,7 +131,7 @@ public class MixinSodiumGUI extends Screen
            tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18N.trans("sclp.performance_impact") + impact.toDisplayString())));
         } 
 
-        if(!hadTrans)
+        if(!hadTrans && !SclpClientMod.options().isDisableSclpFabricApiWarn && SclpClientMod.options().isEnableSclp)
         {
             tooltip.add(Language.getInstance().reorder(new LiteralText(I18N.trans("sclp.no_fabricapi_warm"))));
         }
@@ -147,7 +148,7 @@ public class MixinSodiumGUI extends Screen
 
         this.fillGradient(matrixStack, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000, 0xE0000000);
 
-        if(!hadTrans)
+        if(!hadTrans && !SclpClientMod.options().isDisableSclpFabricApiWarn && SclpClientMod.options().isEnableSclp)
         {
             this.fillGradient(matrixStack, boxX, boxY + boxHeight - 14, boxX + boxWidth, boxY + boxHeight, 0xFFED65FF, 0xFFED65FF);
         }

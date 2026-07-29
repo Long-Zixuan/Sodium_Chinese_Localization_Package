@@ -3,6 +3,8 @@ package loongly.sclp.language;
 import java.util.HashMap;
 import java.util.IllegalFormatException;
 import java.util.Map;
+
+import loongly.sclp.client.SclpClientMod;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.MinecraftClient;
 
@@ -10,6 +12,13 @@ public class I18N
 {
     public static String trans(String key, Object... args)
     {
+        if(!SclpClientMod.options().isEnableSclp)
+        {
+            if(!key.startsWith("sclp"))
+            {
+                return String.format(key, args);
+            }
+        }
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
         Map<String, String> language = I18NLanguage.getInstance().getLanguage(languageCode);
         Map<String, String> fallbackLanguage = I18NLanguage.getInstance().getLanguage("en_us");

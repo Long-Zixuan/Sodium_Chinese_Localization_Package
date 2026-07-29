@@ -3,6 +3,7 @@ import me.jellysquid.mods.sodium.client.util.Dim2i;
 import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import loongly.sclp.client.SclpClientMod;
 //import net.minecraft.client.resource.language.I18n;
 import loongly.sclp.language.I18N;
 import net.minecraft.client.gui.screen.Screen;
@@ -90,7 +91,7 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
             tooltip.add(Language.getInstance().reorder(new LiteralText(Formatting.GRAY + I18N.trans("sclp.performance_impact") + impact.toDisplayString())));
         }
 
-        if(!hadTrans)
+        if(!hadTrans && !SclpClientMod.options().isDisableSclpFabricApiWarn && SclpClientMod.options().isEnableSclp)
         {
             tooltip.add(Language.getInstance().reorder(new LiteralText(I18N.trans("sclp.no_fabricapi_warm"))));
         }
@@ -111,7 +112,7 @@ public class MixinOptionPageScrollFrame extends AbstractFrame
         }
 
         this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
-        if(!hadTrans)
+        if(!hadTrans && !SclpClientMod.options().isDisableSclpFabricApiWarn && SclpClientMod.options().isEnableSclp)
         {
             this.drawRect(boxX, boxY + boxHeight - 14, boxX + boxWidth, boxY + boxHeight, 0xFFED65FF);
         }

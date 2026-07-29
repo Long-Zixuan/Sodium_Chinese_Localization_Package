@@ -2,5 +2,12 @@
       "sclp.performance_impact":"Performance Impact：",
       "sclp.no_internet":"No Internet Connection",
       "sclp.no_fabricapi_warm":"Please install Fabric API",
-      "sclp.format_error":"Format error: "
+      "sclp.format_error":"Format error: ",
+      "sclp.is_enable_sclp":"Enable SCLP",
+      "sclp.is_enable_sclp_tooltip":"This option will take effect when this page is reopened",
+      "sclp.is_disable_fabric_api_warn":"Disable Fabric API compatibility warning",
+      "sclp.is_disable_fabric_api_warn_tooltip":"Enabling this option will no longer prompt warnings for not installing FabricAPI",
+      "sclp.is_disable_no_internet_warn":"Disable the warning of not being connected to the internet",
+      "sclp.is_disable_no_internet_warn_tooltip":"Enabling this option will no longer prompt warnings for not being connected to the internet",
+      "sclp.page_name":"SCLP"
 }

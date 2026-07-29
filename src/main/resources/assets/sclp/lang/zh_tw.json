@@ -107,5 +107,12 @@
   "If enabled, only animated textures determined to be visible will be updated. This can provide a significant boost to frame rates on some hardware. If you experience issues with some textures not being animated, disable this option.":"啟用後，僅更新判定為可見的動態紋理。 此功能可在某些硬體上顯著提升幀率。 若遇到部分紋理未動態更新的問題，請禁用此選項。",
   "If enabled, a more compact vertex format will be used for chunk meshes which limits the precision of vertex attributes. This format will reduce graphics memory usage and bandwidth requirements by around 40%, but could cause z-fighting/flickering texture issues in some edge cases.":"如果啟用，塊網格將使用更緊湊的頂點格式，這會限制頂點内容的精度。 這種格式將使圖形記憶體使用量和頻寬要求减少約40%，但在某些邊緣情况下可能會導致z-fighting/閃爍紋理問題。",
   "sclp.no_internet":"联网以获取最新翻译",
-  "sclp.no_fabricapi_warm":"建议安装FabricAPI，以获得更好的兼容性。"
+  "sclp.no_fabricapi_warm":"建议安装FabricAPI，以获得更好的兼容性。",
+  "sclp.is_enable_sclp":"启用汉化包",
+  "sclp.is_enable_sclp_tooltip":"该选项将在重新开启此页面时生效",
+  "sclp.is_disable_fabric_api_warn":"禁用Fabric API兼容性警告",
+  "sclp.is_disable_fabric_api_warn_tooltip":"启用该选项，将不再因为未安装FabricAPI而弹出警告",
+  "sclp.is_disable_no_internet_warn":"禁用未联网警告",
+  "sclp.is_disable_no_internet_warn_tooltip":"启用该选项，将不再因为未联网而弹出警告",
+  "sclp.page_name":"汉化包设置"
   }

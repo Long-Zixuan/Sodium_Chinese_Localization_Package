@@ -13,18 +13,30 @@ import java.util.concurrent.CompletableFuture;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import loongly.sclp.client.gui.SCLPGameOptions;
 import loongly.sclp.language.I18NLanguage;
 
 
 @Environment(EnvType.CLIENT)
-public class SclpClientMod implements ClientModInitializer {
+public class SclpClientMod implements ClientModInitializer 
+{
 
 	public static final Logger LOGGER = LogManager.getLogger("sclp");
+
+	private static SCLPGameOptions CONFIG;
+
+
+	public static SCLPGameOptions options() 
+	{
+		return CONFIG;
+	}
 
 	@Override
 	public void onInitializeClient() 
 	{
 		I18NLanguage.init();
+		CONFIG = SCLPGameOptions.load();
 		String ls = "[SCLP]\r\n"+ //
 						"      ____                                    ____ \r\n" + //
 						"     /   /                                   /   /   \r\n" + //
@@ -32,7 +44,7 @@ public class SclpClientMod implements ClientModInitializer {
 						"   /   /___ /  _  /  _  / /     / /  _  \\  /   /___ |  //  /\r\n" + //
 						"  /_______/ \\____/\\____/ /  /  /  \\__   / /_______/  \\    /\r\n" + //
 						" ___________________________________/  /______________/  /\r\n" + //
-						"/___LoongLy Software____________________________________/\r\n" + //
+						"/___LoongLy Software 2026_______________________________/\r\n" + //
 						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
 		LOGGER.info(ls);
 		CompletableFuture.runAsync
