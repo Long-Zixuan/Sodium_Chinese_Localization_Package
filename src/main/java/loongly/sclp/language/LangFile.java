@@ -51,7 +51,7 @@ public class LangFile
         {
             if (inputStream == null) 
             {
-                SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".json file not found");
+                SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".json(local) file not found");
                 data_ = new HashMap<String,String>();
             }
             else
@@ -67,6 +67,11 @@ public class LangFile
                 }
                 String jsStr = sbf.toString();
                 data_ = convertJsonToMap(jsStr);
+                if(data_ == null)
+                {
+                    SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".json(local) file format error");
+                    data_ = new HashMap<String,String>();
+                }
             }
         }
         catch (Exception e)
@@ -83,9 +88,16 @@ public class LangFile
                 {
                     SclpClientMod.LOGGER.info("[SCLP] " + langCode_ + " have internet update");
                     Map<String, String> tmp = convertJsonToMap(inputStream);
-                    for(Map.Entry<String, String> entry : tmp.entrySet())
+                    if(tmp == null)
                     {
-                        data_.put(entry.getKey(), entry.getValue());
+                        SclpClientMod.LOGGER.error("[SCLP] " + langCode_ + ".json file(internet) format error");
+                    }
+                    else
+                    {
+                        for(Map.Entry<String, String> entry : tmp.entrySet())
+                        {
+                            data_.put(entry.getKey(), entry.getValue());
+                        }
                     }
                 }
                 SclpClientMod.LOGGER.info("[SCLP] " + langCode_ + " loaded!");
@@ -97,7 +109,15 @@ public class LangFile
     {
         Gson gson = new Gson();
         TypeToken<Map<String, String>> typeToken = new TypeToken<Map<String, String>>() {};
-        return gson.fromJson(jsonString, typeToken.getType());
+        try
+        {
+            return gson.fromJson(jsonString, typeToken.getType());
+        }
+        catch (Exception e)
+        {
+            SclpClientMod.LOGGER.error("[SCLP] Convert Json To Map error: " + e.toString());
+            return null;
+        }
     }
 
     static private String doGet(String httpurl)
