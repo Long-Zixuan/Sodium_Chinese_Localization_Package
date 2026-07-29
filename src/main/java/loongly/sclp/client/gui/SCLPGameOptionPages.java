@@ -12,7 +12,7 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
-
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
@@ -40,7 +40,7 @@ public class SCLPGameOptionPages
                         .setName(I18N.trans("sclp.is_enable_sclp"))
                         .setTooltip(I18N.trans("sclp.is_enable_sclp_tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> opts.isEnableSclp = value, opts -> opts.isEnableSclp)
+                        .setBinding((opts, value) -> {opts.isEnableSclp = value;closeVideoSettingsPage();}, opts -> opts.isEnableSclp)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -63,5 +63,11 @@ public class SCLPGameOptionPages
                         .build())
                 .build());
         
+    }
+
+    static void closeVideoSettingsPage()
+    {
+        MinecraftClient client = MinecraftClient.getInstance();
+        client.currentScreen.onClose();
     }
 }
