@@ -20,7 +20,14 @@ public class I18N
                 {
                     return "Performance Impact:";
                 }
-                return String.format(key, args);
+                try 
+                {
+                    return String.format(key, args);
+                }
+                catch (IllegalFormatException var4) 
+                {
+                    return key + "ᗜ";
+                }
             }
         }
         String languageCode = MinecraftClient.getInstance().getLanguageManager().getLanguage().getCode();
