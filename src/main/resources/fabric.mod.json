@@ -27,6 +27,14 @@
     "modmenu": {
       "parent": {
         "id": "sodium"
+      },
+      "links": {
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x",
+        "modmenu.modrinth": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack",
+        "modmenu.github_releases": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/releases",
+        "modmenu.donate": "https://ifdian.net/a/loongly",
+        "modmenu.kofi": "https://ko-fi.com/loongly",
+        "modmenu.discord": "https://discord.gg/rVbEMwzFFg"
       }
     }
   },

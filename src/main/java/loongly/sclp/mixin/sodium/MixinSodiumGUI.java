@@ -36,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.Drawable;
 import loongly.sclp.language.I18NLanguage;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import java.util.Optional;
 
 @Mixin(value = SodiumOptionsGUI.class)
 public class MixinSodiumGUI extends Screen
@@ -167,6 +170,10 @@ public class MixinSodiumGUI extends Screen
     @Inject(method = "<init>(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("TAIL"))
     private void addSCLPOptionPage(CallbackInfo ci)
     {
-        this.pages.add(SCLPGameOptionPages.sclpPage());
+        Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
+        if(!SclpClientMod.options().notShowPage || (rsoOptionalModContainer.isPresent() && SCLPGameOptionPages.isChangeNotShowPage))
+        {
+            this.pages.add(SCLPGameOptionPages.sclpPage());
+        }
     }
 }

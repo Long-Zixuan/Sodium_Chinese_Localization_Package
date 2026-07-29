@@ -26,6 +26,8 @@ public class SCLPGameOptionPages
 
     private static final SCLPOptionsStorage sclpOpts = new SCLPOptionsStorage();
 
+    public static boolean isChangeNotShowPage = false;
+
     public static OptionPage sclpPage()
     {
         List<OptionGroup> groups = new ArrayList<>();
@@ -58,11 +60,19 @@ public class SCLPGameOptionPages
                         .setName(I18N.trans("sclp.is_disable_no_internet_warn"))
                         .setTooltip(I18N.trans("sclp.is_disable_no_internet_warn_tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> opts.isDisableSclpNoInternetWarn = value, opts -> opts.isDisableSclpNoInternetWarn)
+                        .setBinding((opts, value) -> {opts.isDisableSclpNoInternetWarn = value;closeVideoSettingsPage();}, opts -> opts.isDisableSclpNoInternetWarn)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-        
+        groups.add(OptionGroup.createBuilder()
+                .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
+                        .setName(I18N.trans("sclp.not_show_page"))
+                        .setTooltip(I18N.trans("sclp.not_show_page_tooltip"))
+                        .setControl(TickBoxControl::new)
+                        .setBinding((opts, value) -> {opts.notShowPage = value;closeVideoSettingsPage();isChangeNotShowPage = true;}, opts -> opts.notShowPage)
+                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                        .build())
+                .build());
     }
 
     static void closeVideoSettingsPage()

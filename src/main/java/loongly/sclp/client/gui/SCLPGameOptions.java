@@ -27,12 +27,14 @@ public class SCLPGameOptions
     public boolean isEnableSclp;
     public boolean isDisableSclpFabricApiWarn;
     public boolean isDisableSclpNoInternetWarn;
+    public boolean notShowPage;
 
     public SCLPGameOptions()
     {
         isEnableSclp = true;
         isDisableSclpFabricApiWarn = false;
         isDisableSclpNoInternetWarn = false;
+        notShowPage = false;
     }
 
 

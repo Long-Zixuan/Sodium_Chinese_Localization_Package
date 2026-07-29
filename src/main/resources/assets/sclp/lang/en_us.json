@@ -9,5 +9,9 @@
       "sclp.is_disable_fabric_api_warn_tooltip":"Enabling this option will no longer prompt warnings for not installing FabricAPI",
       "sclp.is_disable_no_internet_warn":"Disable the warning of not being connected to the internet",
       "sclp.is_disable_no_internet_warn_tooltip":"Enabling this option will no longer prompt warnings for not being connected to the internet",
-      "sclp.page_name":"SCLP"
+      "sclp.page_name":"SCLP",
+      "sclp.not_show_page":"Don't show SCLP page",
+      "sclp.not_show_page_tooltip":"Enabling this option will no longer show the SCLP page",
+      "modmenu.summaryTranslation.sclp": "Sodium Chinese Localized Pack",
+      "modmenu.descriptionTranslation.sclp": "A minecraft mod can translate Sodium to Chinese"
 }
