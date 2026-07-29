@@ -46,9 +46,16 @@ public class LangFile
         {
             SCLPClientMod.LOGGER.info("[SCLP]{} have internet update", langCode_);
             Map<String, String> tmp = convertJsonToMap(langStr);
-            for(Map.Entry<String, String> entry : tmp.entrySet())
+            if(tmp == null)
             {
-                data_.put(entry.getKey(), entry.getValue());
+                SCLPClientMod.LOGGER.error("[SCLP]{} language file error", langUrl);
+            }
+            else
+            {
+                for(Map.Entry<String, String> entry : tmp.entrySet())
+                {
+                    data_.put(entry.getKey(), entry.getValue());
+                }
             }
         }
         SCLPClientMod.LOGGER.info("[SCLP]{} language loaded", langCode_);
@@ -64,7 +71,15 @@ public class LangFile
     {
         Gson gson = new Gson();
         TypeToken<Map<String, String>> typeToken = new TypeToken<Map<String, String>>() {};
-        return gson.fromJson(jsonString, typeToken.getType());
+        try
+        {
+            return gson.fromJson(jsonString, typeToken.getType());
+        }
+        catch (Exception e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Convert Json To Map error: " + e.toString());
+            return null;
+        }
     }
 
     static private String doGet(String httpurl)
