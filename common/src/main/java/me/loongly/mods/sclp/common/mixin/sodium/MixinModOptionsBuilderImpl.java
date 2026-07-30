@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import me.loongly.mods.sclp.common.language.I18N;
 
 
 
@@ -23,14 +24,14 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "setName", at = @At(value = "RETURN"), cancellable = true)
     public void injectSetName(String name, CallbackInfoReturnable<Runnable> c) 
     {
-        name = I18n.get(name);
+        name = I18N.trans(name);
         this.name = name;
     }
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     public void injectInit(String configId, String name, String version, CallbackInfo ci) 
     {
-        name = I18n.get(name);
+        name = I18N.trans(name);
         this.name = name;
     }
 }
