@@ -136,6 +136,7 @@
   "options.framerate":"%s幀",
   "Default":"默認",
   "threads":"綫程",
-  "sclp.cur_languagecode":"zh_tw"
+  "sclp.cur_languagecode":"zh_tw",
+    "sodium.options.pages.general" : "一般"
   }
   
