@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.loongly.sclp.common.mixin",
+  "package": "me.loongly.mods.sclp.common.mixin",
   "refmap": "sclp.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "client": [
