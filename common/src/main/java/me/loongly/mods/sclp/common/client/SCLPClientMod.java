@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import me.loongly.mods.sclp.common.client.options.SCLPOptions;
 import me.loongly.mods.sclp.common.language.I18NLanguage;
 
+import java.time.LocalDate;
+
 
 public class SCLPClientMod
 {
@@ -54,4 +56,18 @@ public class SCLPClientMod
 		net.minecraft.util.Util.getPlatform()
 				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
 	}
+
+	public static boolean isMyBirthday(int year, int month, int day)
+    {
+        return month == 4 && day == 4;
+    }
+
+	public static boolean isMyBirthday()
+    {
+		LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        return isMyBirthday(year, month, day);
+    }
 }
