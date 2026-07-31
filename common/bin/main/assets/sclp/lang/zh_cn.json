@@ -145,5 +145,9 @@
   "sodium.options.improved_fluid_shaping.default" : "原版",
   "sodium.options.improved_fluid_shaping.alternative" : "替代的",
   "Default":"默认",
-  "threads":"线程"
+  "threads":"线程",
+  "Embeddium":"Embeddium(钠)",
+  "ECLP":"Embeddium-汉化包",
+  "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
+  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n该选项将在重新打开该页面时生效"
 }

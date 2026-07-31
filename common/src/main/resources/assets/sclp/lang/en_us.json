@@ -15,6 +15,8 @@
   "sclp.donation.prompt.6":"And thanks again for using our mod! We hope it helps you (and your computer.)",
   "sclp.close":"Close",
   "sclp.multiplier":"%sx",
-  "sclp.cur_languagecode":"en_us"
+  "sclp.cur_languagecode":"en_us",
+  "sclp.options.shoud_trans_mod_name":"Translate Mod Name",
+  "sclp.options.shoud_trans_mod_name.tooltip":"On enabled, mod names will be translated"
 }
   

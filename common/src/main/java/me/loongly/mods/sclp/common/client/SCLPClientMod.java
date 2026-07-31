@@ -3,7 +3,7 @@ package me.loongly.mods.sclp.common.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import me.loongly.mods.sclp.common.client.options.SCLPOptions;
+import me.loongly.mods.sclp.common.client.gui.SCLPGameOptions;
 import me.loongly.mods.sclp.common.language.I18NLanguage;
 
 import java.time.LocalDate;
@@ -14,10 +14,10 @@ public class SCLPClientMod
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("SCLP");
 
-	private static final SCLPOptions CONFIG = SCLPOptions.load();
+	private static final SCLPGameOptions CONFIG = SCLPGameOptions.load();
 
 
-	public static SCLPOptions options() 
+	public static SCLPGameOptions options() 
 	{
 		return CONFIG;
 	}
@@ -70,4 +70,17 @@ public class SCLPClientMod
         int day = today.getDayOfMonth();
         return isMyBirthday(year, month, day);
     }
+
+	public static boolean isEmbeddium()
+	{
+		try
+		{
+			Class.forName("org.embeddedt.embeddium.impl.gui.EmbeddiumGameOptionPages");
+			return true;
+		}
+		catch (ClassNotFoundException e)
+		{
+			return false;
+		}
+	}
 }

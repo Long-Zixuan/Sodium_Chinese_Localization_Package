@@ -1,4 +1,4 @@
-package me.loongly.mods.sclp.common.client.options;
+package me.loongly.mods.sclp.common.client.gui;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -14,9 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-public class SCLPOptions 
+public class SCLPGameOptions 
 {
-    private static final String DEFAULT_FILE_NAME = "sodium-chinese-localized-pack-options.json";
+    private static final String DEFAULT_FILE_NAME = "sodium-chinese-pack-options.json";
     private static final Gson GSON = new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
@@ -28,7 +28,7 @@ public class SCLPOptions
 
     public boolean shouldTransModName;
 
-    public SCLPOptions()
+    public SCLPGameOptions()
     {
         shouldTransModName = DEFAULT_SHOULD_TRANS_MOD_NAME;
     }
@@ -47,16 +47,16 @@ public class SCLPOptions
         SCLPClientMod.LOGGER.info("[SCLP] Saved changes to SCLP options");
     }
 
-    public static SCLPOptions load() 
+    public static SCLPGameOptions load() 
     {
         Path path = IPlatformHelper.INSTANCE.getConfigDirectory().resolve(DEFAULT_FILE_NAME);
-        SCLPOptions config;
+        SCLPGameOptions config;
 
         if (Files.exists(path)) 
         {
             try (FileReader reader = new FileReader(path.toFile())) 
             {
-                config = GSON.fromJson(reader, SCLPOptions.class);
+                config = GSON.fromJson(reader, SCLPGameOptions.class);
             }
             catch (IOException e) 
             {
@@ -65,7 +65,7 @@ public class SCLPOptions
         }
         else 
         {
-            config = new SCLPOptions();
+            config = new SCLPGameOptions();
         }
 
         config.configPath = path;
@@ -81,7 +81,7 @@ public class SCLPOptions
         return config;
     }
 
-    private void writeChanges() throws IOException 
+    public void writeChanges() throws IOException 
     {
         Path dir = this.configPath.getParent();
 

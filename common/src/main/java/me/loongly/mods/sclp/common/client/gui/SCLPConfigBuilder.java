@@ -1,4 +1,4 @@
-package me.loongly.mods.sclp.common.client.options;
+package me.loongly.mods.sclp.common.client.gui;
 
 import net.caffeinemc.mods.sodium.api.config.ConfigEntryPoint;
 import net.caffeinemc.mods.sodium.api.config.option.OptionFlag;
@@ -13,7 +13,7 @@ import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 public class SCLPConfigBuilder implements ConfigEntryPoint 
 {
-    private static final SCLPOptions sclpOpts = SCLPClientMod.options();
+    private static final SCLPGameOptions sclpOpts = SCLPClientMod.options();
 
     @Override
     public void registerConfigLate(ConfigBuilder configBuilder) 
@@ -32,7 +32,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                 .setBinding(value -> {sclpOpts.shouldTransModName = value; SCLPClientMod.caiDan();}, () -> sclpOpts.shouldTransModName)
                                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                                 .setStorageHandler(sclpOpts::save)
-                                .setDefaultValue(SCLPOptions.DEFAULT_SHOULD_TRANS_MOD_NAME)
+                                .setDefaultValue(SCLPGameOptions.DEFAULT_SHOULD_TRANS_MOD_NAME)
                         )
                 );
     }
