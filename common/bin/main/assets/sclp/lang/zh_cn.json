@@ -100,7 +100,7 @@
   "sclp.options.should_trans_mod_name.tooltip":"开启选项后将翻译模组名\n关闭选项后将不翻译模组名\n该选项将在重启游戏后生效",
   "Sodium Shadowy Path Blocks":"钠-土径阴影",
   "Sodium Extra":"钠-扩展",
-  "Sodium/Embeddium Chinese Localized Package":"钠-汉化包",
+  "Sodium Chinese Localized Package":"钠-汉化包",
   "Iris":"视界",
     
   "sodium.options.hidden_fluid_culling.name" : "隐藏流体剔除",

@@ -26,6 +26,10 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "setName", at = @At(value = "RETURN"), cancellable = true)
     public void injectSetName(String name, CallbackInfoReturnable<Runnable> c) 
     {
+        if(name.equals("Sodium/Embeddium Chinese Localized Package"))
+        {
+            name = "Sodium Chinese Localized Package";
+        }
         if(SCLPClientMod.options().shouldTransModName)
         {
             name = I18N.trans(name);
@@ -36,6 +40,10 @@ public class MixinModOptionsBuilderImpl
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     public void injectInit(String configId, String name, String version, CallbackInfo ci) 
     {
+        if(name.equals("Sodium/Embeddium Chinese Localized Package"))
+        {
+            name = "Sodium Chinese Localized Package";
+        }
         if(SCLPClientMod.options().shouldTransModName)
         {
             name = I18N.trans(name);

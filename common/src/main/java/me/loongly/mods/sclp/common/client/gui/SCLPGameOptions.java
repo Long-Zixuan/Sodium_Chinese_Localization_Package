@@ -25,12 +25,15 @@ public class SCLPGameOptions
     private Path configPath;
 
     public static final boolean DEFAULT_SHOULD_TRANS_MOD_NAME = true;
+    public static final boolean DEFAULT_SHOULD_SHOW_SUPPORT_PAGE = true;
 
     public boolean shouldTransModName;
+    public boolean shouldShowSupportPage;
 
     public SCLPGameOptions()
     {
         shouldTransModName = DEFAULT_SHOULD_TRANS_MOD_NAME;
+        shouldShowSupportPage = DEFAULT_SHOULD_SHOW_SUPPORT_PAGE;
     }
 
     public void save() 
