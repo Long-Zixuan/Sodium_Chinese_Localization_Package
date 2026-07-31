@@ -23,7 +23,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(ResourceLocation.parse("sclp:texture/icon.png"))
-                .setVersion("3.9")
+                .setVersion("3.10")
                 .addPage(configBuilder.createOptionPage()
                         .setName(Component.translatable("sclp.pages.sclp_page.name"))
                         .addOption(configBuilder.createBooleanOption(ResourceLocation.parse("sclp:should_trans_mod_name"))//Builder(boolean.class, sclpOpts)

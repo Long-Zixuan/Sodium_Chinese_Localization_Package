@@ -6,27 +6,20 @@ license = "MIT"
 modId = "sclp"
 
 version = "${version}"
-displayName = "Sodium Chinese Localized Package"
+displayName = "Sodium/Embeddium Chinese Localized Package"
 
 logoFile = "icon.png" #optional
 
 authors = "LoongLy"
 
 description = '''
-钠（Sodium）模组汉化包
+钠/Embeddium模组汉化包
 '''
 
 [[dependencies.sclp]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21,)"
-ordering = "NONE"
-side = "CLIENT"
-
-[[dependencies.sclp]]
-modId = "sodium"
-type = "required"
-versionRange = "[0.8.1,)"
 ordering = "NONE"
 side = "CLIENT"
 
