@@ -29,6 +29,7 @@ public class MixinModOptionsBuilderImpl
         if(name.equals("Sodium/Embeddium Chinese Localized Package"))
         {
             name = "Sodium Chinese Localized Package";
+            this.name = name;
         }
         if(SCLPClientMod.options().shouldTransModName)
         {
@@ -43,6 +44,7 @@ public class MixinModOptionsBuilderImpl
         if(name.equals("Sodium/Embeddium Chinese Localized Package"))
         {
             name = "Sodium Chinese Localized Package";
+            this.name = name;
         }
         if(SCLPClientMod.options().shouldTransModName)
         {
