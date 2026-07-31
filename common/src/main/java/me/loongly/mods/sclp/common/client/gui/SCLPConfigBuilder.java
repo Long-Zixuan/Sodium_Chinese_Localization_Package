@@ -77,7 +77,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         group.addOption(configBuilder.createBooleanOption(this.optionId("close_support_page"))//Builder(boolean.class, sclpOpts)
                 .setName(Component.translatable("sclp.options.close_support_page.name"))
                 .setTooltip(Component.translatable("sclp.options.close_support_page.tooltip"))
-                .setBinding(value -> value = !sclpOpts.shouldShowSupportPage, () -> !sclpOpts.shouldShowSupportPage)
+                .setBinding(value -> sclpOpts.shouldShowSupportPage = !value, () -> !sclpOpts.shouldShowSupportPage)
                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                 .setStorageHandler(sclpOpts::save)
                 .setDefaultValue(SCLPGameOptions.DEFAULT_SHOULD_SHOW_SUPPORT_PAGE)
