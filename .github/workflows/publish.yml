@@ -1,80 +1,73 @@
-name: Publish Release
-
+name: publish
 on:
   release:
-     types:
-       - published
+    types:
+      - published
 
 jobs:
   build:
-    if: github.repository_owner == 'LoongLy'
-    runs-on: self-hosted
+    if: github.repository_owner == 'Rynnavinx'
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v2
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v5
+      - name: setup jdk
+        uses: actions/setup-java@v5
         with:
+          java-version: '21'
           distribution: 'temurin'
-          java-version: 21
-          check-latest: true
-      - name: Upload assets to releases
-        run: ./gradlew build publishAllPublicationsToLoongLyReleasesRepository -Pbuild.release
-        env:
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-      - name: Publish NeoForge to Modrinth, CurseForge & GitHub
-        uses: Kir-Antipov/mc-publish@v3.3.0
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew build
+
+      - name: Upload to GitHub
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: Bh37bMuy
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
 
-          curseforge-id: 511319
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          files: |
+            fabric/build/libs/*.jar
+            neoforge/build/libs/*.jar
 
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Fabric to Modrinth and CurseForge
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: EIa1eiMm
+          modrinth-token: ${{ secrets.PUBLISH_MODRINTH_TOKEN }}
 
-          name: '[NeoForge] ${{ github.event.release.name }}'
-          version: '${{ github.event.release.tag_name }}+neoforge'
+          curseforge-id: 556408
+          curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
+
+          name: '${{ github.event.release.name }} / Fabric'
+          version: '${{ github.event.release.tag_name }}-fabric'
           version-type: release
-          game-versions: '1.21.11'
+
+          loaders: |
+            fabric
+            quilt
+
+          dependencies: sodium
+
+          files: fabric/build/libs/!(*-@(dev|sources|javadoc)).jar
+
+      - name: Upload NeoForge to Modrinth and CurseForge
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: EIa1eiMm
+          modrinth-token: ${{ secrets.PUBLISH_MODRINTH_TOKEN }}
+
+          curseforge-id: 556408
+          curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
+
+          name: '${{ github.event.release.name }} / NeoForge'
+          version: '${{ github.event.release.tag_name }}-neoforge'
+          version-type: release
 
           loaders: neoforge
 
-          dependencies: |
-            sodium
-            sodium-extra(optional)
-            irisshaders(optional)
-            iris(optional)
+          dependencies: sodium
 
-          files: |
-            neoforge/build/libs/!(*-@(dev|sources|javadoc|dev-shadow)).jar
-            neoforge/build/libs/*-@(dev|sources|javadoc|dev-shadow).jar
-      - name: Publish Fabric to Modrinth, CurseForge & GitHub
-        uses: Kir-Antipov/mc-publish@v3.3.0
-        with:
-          modrinth-id: Bh37bMuy
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          curseforge-id: 511319
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          name: '[Fabric] ${{ github.event.release.name }}'
-          version: '${{ github.event.release.tag_name }}+fabric'
-          version-type: release
-
-          loaders: fabric
-
-          dependencies: |
-            sodium
-            sodium-extra(optional)
-            irisshaders(optional)
-            iris(optional)
-
-          files: |
-            fabric/build/libs/!(*-@(dev|sources|javadoc|dev-shadow)).jar
-            fabric/build/libs/*-@(dev|sources|javadoc|dev-shadow).jar
+          files: neoforge/build/libs/!(*-@(dev|sources|javadoc)).jar

@@ -22,7 +22,7 @@ import net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen;
 import net.caffeinemc.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import net.caffeinemc.mods.sodium.client.util.Dim2i;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 import net.caffeinemc.mods.sodium.client.gui.SodiumOptions;
 import net.caffeinemc.mods.sodium.client.gui.prompt.ScreenPrompt;
 
@@ -30,35 +30,6 @@ import net.caffeinemc.mods.sodium.client.gui.prompt.ScreenPrompt;
 @Mixin(VideoSettingsScreen.class)
 public class MixinSodiumVideoSettingsScreen
 {
-    FlatButtonWidget birthBtn;
-
-    @Final
-    @Shadow
-    boolean insetX;
-
-    final int BIRTH_BTN_WIDTH = 40;
-    final int BIRTH_BTN_HEIGHT = 20;
-
-    @Inject(method = "rebuild", at = @At(value = "TAIL"))//CallbackInfoReturnable<PageBuilderImpl>
-    public void injectRebuild(CallbackInfo c) 
-    {
-        LocalDate today = LocalDate.now();
-        int year = today.getYear();
-        int month = today.getMonthValue();
-        int day = today.getDayOfMonth();
-        if(isMyBirthday(year, month, day))
-        {
-            var videoSettingsScrIns = ((VideoSettingsScreen)(Object)this);
-            this.birthBtn = new FlatButtonWidget(new Dim2i(videoSettingsScrIns.getLimitX() - BIRTH_BTN_WIDTH - ifNotInsetX(5), videoSettingsScrIns.getY() + BIRTH_BTN_HEIGHT, BIRTH_BTN_WIDTH, BIRTH_BTN_HEIGHT), Component.literal("🎂:" + (year - 2004)), SCLPClientMod::birthCaiDan, true, false);
-            videoSettingsScrIns.addRenderableWidget(this.birthBtn);
-        }
-    }
-
-    private int ifNotInsetX(int value) 
-    {
-        return this.insetX ? 0 : value;
-    }
-
     boolean isMyBirthday(int year, int month, int day)
     {
         return month == 4 && day == 4;

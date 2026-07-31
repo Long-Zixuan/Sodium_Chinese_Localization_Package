@@ -44,16 +44,16 @@ public class SCLPClientMod
 		if (chickCount == 10)
 		{
 			chickCount = 0;
-			net.minecraft.util.Util.getPlatform()
+			net.minecraft.Util.getPlatform()
 					.openUri("https://long-zixuan.github.io/html/lain.html");
 		}
 	}
 
 	public static void birthCaiDan()
 	{
-		net.minecraft.util.Util.getPlatform()
+		net.minecraft.Util.getPlatform()
 				.openUri("https://www.loongly.me/html/clock.html");
-		net.minecraft.util.Util.getPlatform()
+		net.minecraft.Util.getPlatform()
 				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
 	}
 

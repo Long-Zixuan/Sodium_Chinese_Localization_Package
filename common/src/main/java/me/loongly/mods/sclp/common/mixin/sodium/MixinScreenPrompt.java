@@ -22,7 +22,7 @@ import net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen;
 import net.caffeinemc.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import net.caffeinemc.mods.sodium.client.util.Dim2i;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
 import net.caffeinemc.mods.sodium.client.gui.ButtonTheme;
 import net.caffeinemc.mods.sodium.client.gui.Colors;
 import net.caffeinemc.mods.sodium.client.gui.SodiumOptions;
@@ -56,8 +56,8 @@ public class MixinScreenPrompt
 
         int boxX = parentDimensions.getCenterX() - (this.width / 2);
         int boxY = parentDimensions.getCenterY() - (this.height / 2);
-        
-        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + this.width) - 84, (boxY + this.height) - 24, 80, 20), Component.translatable("sclp.close"), this::close, true, false, PROMPT_THEME);
+       
+        this.closeButton = new FlatButtonWidget(new Dim2i((boxX + this.width) - 84, (boxY + this.height) - 24, 80, 20), Component.translatable("sclp.close"), this::close);
     }
 
     private void close() 

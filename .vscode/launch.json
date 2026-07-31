@@ -4,7 +4,7 @@
     {
       "type": "java",
       "request": "launch",
-      "name": "neoforge - Client",
+      "name": "NeoForge Client (:neoforge)",
       "presentation": {
         "group": "Mod Development - neoforge",
         "order": 0
@@ -12,11 +12,11 @@
       "projectName": "neoforge",
       "mainClass": "net.neoforged.devlaunch.Main",
       "args": [
-        "@D:\\MC_MOD\\sclp-1.21.1-Alpha\\Sodium_Chinese_Localization_Package\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
+        "@D:\\MC_MOD\\sodium-shadowy-path-blocks-4.x.x-sodium0.8.12\\sodium-shadowy-path-blocks-4.x.x-sodium0.8.12\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
       ],
       "vmArgs": [
-        "@D:\\MC_MOD\\sclp-1.21.1-Alpha\\Sodium_Chinese_Localization_Package\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
-        "-Dfml.modFolders\u003dsodium_extra%%D:\\MC_MOD\\sclp-1.21.1-Alpha\\Sodium_Chinese_Localization_Package\\neoforge\\bin\\main"
+        "@D:\\MC_MOD\\sodium-shadowy-path-blocks-4.x.x-sodium0.8.12\\sodium-shadowy-path-blocks-4.x.x-sodium0.8.12\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003dsspb%%D:\\MC_MOD\\sodium-shadowy-path-blocks-4.x.x-sodium0.8.12\\sodium-shadowy-path-blocks-4.x.x-sodium0.8.12\\neoforge\\bin\\main"
       ],
       "cwd": "${workspaceFolder}\\neoforge\\run",
       "env": {},

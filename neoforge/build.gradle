@@ -1,0 +1,41 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    version = neoforge_version
+    // Automatically enable neoforge AccessTransformers if the file exists
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run options names with fabric
+        }
+        client {
+            client()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    compileOnly "maven.modrinth:sodium:mc1.21.1-0.6.13-neoforge"
+
+    compileOnly "net.caffeinemc:sodium-neoforge:${sodium_version}"
+    compileOnly "net.caffeinemc:sodium-neoforge-mod:${sodium_version}"
+    compileOnly "net.caffeinemc:sodium-neoforge-api:${sodium_version}"
+}
