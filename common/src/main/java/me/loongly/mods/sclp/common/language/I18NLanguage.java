@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.*;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
@@ -17,6 +20,15 @@ public class I18NLanguage
         if(instance_s == null)
         {
             SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage used before init");
+            try
+            {
+                instance_s = new I18NLanguage();//补救措施（这种情况不应该发生）
+            }
+            catch (InterruptedException e)
+            {
+                SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init failed");
+                e.printStackTrace();
+            }
         }
         return instance_s;
     }
@@ -25,12 +37,20 @@ public class I18NLanguage
     {
         if(instance_s == null)
         {
-            instance_s = new I18NLanguage();
-            SCLPClientMod.LOGGER.info("[SCLP] I18NLanguage init!");
+            try
+            {
+                instance_s = new I18NLanguage();
+                SCLPClientMod.LOGGER.info("[SCLP] I18NLanguage init");
+            }
+            catch (InterruptedException e)
+            {
+                SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init failed");
+                e.printStackTrace();
+            }
         }
         else
         {
-            SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init twice!");
+            SCLPClientMod.LOGGER.error("[SCLP] I18NLanguage init twice");
         }
     }
 
@@ -52,13 +72,29 @@ public class I18NLanguage
 
     final HashMap<String,LangFile> LANGUAGES = new HashMap<String,LangFile>();
 
-    private I18NLanguage()
+    private I18NLanguage() throws InterruptedException
     {
         String[] languages = new String[]{"en_us","zh_cn","zh_tw","zh_hk","ja_jp"};
+        ExecutorService executor = new ThreadPoolExecutor(
+                4, 8, 60, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(10),
+                new ThreadFactoryBuilder().setNameFormat("SCLP Language loading thread-%d").build(),
+                new ThreadPoolExecutor.CallerRunsPolicy());
         for(String languageCode : languages)
         {
-            reloadLanguage(languageCode);
+            executor.execute
+            (
+                ()->
+                {
+                    reloadLanguage(languageCode);
+                }
+            );
         }
+
+        executor.shutdown();
+        executor.awaitTermination(1, TimeUnit.MINUTES);
+        executor.close();
+        SCLPClientMod.LOGGER.info("[SCLP] All language loaded");
     }
 
     boolean reloadLanguage(String languageCode)
