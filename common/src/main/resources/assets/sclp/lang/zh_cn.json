@@ -143,5 +143,16 @@
     "sodium.options.hidden_fluid_culling.default" : "默认",
   "sodium.options.hidden_fluid_culling.optimized" : "优化",
     "sodium.options.improved_fluid_shaping.default" : "原版",
-  "sodium.options.improved_fluid_shaping.alternative" : "替代的"
+  "sodium.options.improved_fluid_shaping.alternative" : "替代的",
+   "Reese's Sodium Options":"Reese的钠视频界面",
+
+  "sclp.options.group.support":"支持",
+  "sclp.options.support_project.name":"请LoongLy喝一杯奶茶",
+  "sclp.options.support_project.tooltip":"将在浏览器打开支持LoongLy的页面",
+  "sclp.options.close_support_page.name":"永久关闭支持页面",
+  "sclp.options.close_support_page.tooltip":"将不再显示支持页面,该选项将在重启游戏后生效",
+
+  "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
+  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验",
+  "sclp.format_error":"格式错误："
 }

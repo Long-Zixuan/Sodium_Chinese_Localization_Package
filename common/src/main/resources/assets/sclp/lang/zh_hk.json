@@ -128,6 +128,12 @@
   "sodium.options.chunk_update_threads.value":"%s綫程",
   "sodium.options.default":"默認",
    "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。",
-  "sclp.cur_languagecode":"zh_hk"
+  "sclp.cur_languagecode":"zh_hk",
+  "sclp.options.close_support_page.name":"永久关闭支持页面",
+  "sclp.options.close_support_page.tooltip":"将不再显示支持页面,该选项将在重启游戏后生效",
+
+  "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
+  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验",
+  "sclp.format_error":"格式错误："
   }
   

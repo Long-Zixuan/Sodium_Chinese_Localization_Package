@@ -25,12 +25,15 @@ public class SCLPOptions
     private Path configPath;
 
     public static final boolean DEFAULT_SHOULD_TRANS_MOD_NAME = true;
+    public static final boolean DEFAULT_SHOULD_SHOW_SCLP_SUPPORT_PAGE = true;
 
     public boolean shouldTransModName;
+    public boolean shouldShowSCLPSupportPage;
 
     public SCLPOptions()
     {
         shouldTransModName = DEFAULT_SHOULD_TRANS_MOD_NAME;
+        shouldShowSCLPSupportPage = DEFAULT_SHOULD_SHOW_SCLP_SUPPORT_PAGE;
     }
 
     public void save() 
