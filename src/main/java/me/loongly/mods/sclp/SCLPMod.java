@@ -20,7 +20,7 @@ public final class SCLPMod
 						"   /   /___ /  _  /  _  / /     / /  _  \\  /   /___ |  //  /\r\n" + //
 						"  /_______/ \\____/\\____/ /  /  /  \\__   / /_______/  \\    /\r\n" + //
 						" ___________________________________/  /______________/  /\r\n" + //
-						"/___LoongLy Software____________________________________/\r\n" + //
+						"/___LoongLy Software 2026_______________________________/\r\n" + //
 						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
 		SCLPClientMod.LOGGER.info(ls);
     }
