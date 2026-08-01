@@ -8,9 +8,12 @@ import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStor
 import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Identifier;
+
+import org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -46,6 +49,7 @@ public class SCLPGameOptionPages
                         .setEnabled(!SCLPClientMod.isXenon())//同上
                         .setBinding((options, value) -> {
                             options.setIsTransModNameVal(value); 
+                            rebuildEmbScreen();
                             try
                             {
                                 SCLPClientMod.caiDan();
@@ -77,5 +81,21 @@ public class SCLPGameOptionPages
     static boolean isMyBirthday(int year, int month, int day)
     {
         return month == 4 && day == 4;
+    }
+
+    static void rebuildEmbScreen()
+    {
+        var sc = MinecraftClient.getInstance().currentScreen;
+        try
+        {
+            if(sc instanceof EmbeddiumVideoOptionsScreen)
+            {
+                ((EmbeddiumVideoOptionsScreen)sc).rebuildUI();
+            }
+        }
+        catch (Exception e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Error while rebuilding embeddium screen", e);
+        }
     }
 }
