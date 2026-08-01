@@ -18,10 +18,13 @@ import org.embeddedt.embeddium.api.options.OptionIdentifier;
 import org.embeddedt.embeddium.api.OptionGroupConstructionEvent;
 import org.embeddedt.embeddium.api.OptionPageConstructionEvent;
 
+import org.embeddedt.embeddium.impl.gui.EmbeddiumVideoOptionsScreen;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import me.loongly.mods.sclp.common.client.gui.options.storage.ECLPOptionsStorage;
-import me.loongly.mods.sclp.common.client.gui.options.storage.SCLPOptionsStorage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,12 +66,38 @@ public class ECLPGameOptionPages
                 .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
                 .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
                 .setControl(TickBoxControl::new)
-                .setBinding((opts, value) -> {opts.shouldTransModName = value;SCLPClientMod.caiDan();}, opts -> opts.shouldTransModName)
+                .setBinding((opts, value) -> {opts.shouldTransModName = value;rebuildEmbScreenUI();SCLPClientMod.caiDan();}, opts -> opts.shouldTransModName)
                 //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                 .build())
             .build());
         return new OptionPage(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
+
+    private static void rebuildEmbScreenUI()
+    {
+        var embScreen = Minecraft.getInstance().screen;
+        try
+        {
+            if(embScreen instanceof EmbeddiumVideoOptionsScreen)
+            {
+                ((EmbeddiumVideoOptionsScreen) embScreen).rebuildUI();
+            }
+        }
+        catch (Exception e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Error when rebuild Embeddium Video Options Screen UI", e);
+        }
+    }
 }
 
-//LoongLy Software Update 2026/04/08
+
+/*
+      ____                                    ____ 
+     /   /                                   /   /   
+    /   /    ____________  ______  _____    /   /    ___ ___ 
+   /   /___ /  _  /  _  / /     / /  _  \  /   /___ |  //  /
+  /_______/ \____/\____/ /  /  /  \__   / /_______/  \    /
+ ___________________________________/  /______________/  /
+/___LoongLy Software 2026_______________________________/
+ */
+//LoongLy Software Update 2026/08/01
