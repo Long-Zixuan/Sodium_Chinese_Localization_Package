@@ -48,11 +48,11 @@ public class MixinSodiumOptionsGUI
 
      static {
         DONATION_PROMPT_MESSAGE = List.of(
-                StringVisitable.concat(Text.translatable("sclp.hello")),
-                StringVisitable.concat(Text.translatable("sclp.donation.1"), Text.literal(I18N.trans("Embeddium")).setStyle(Style.EMPTY.withColor(0x27eb92)), Text.translatable("sclp.donation.2")),
-                StringVisitable.concat(Text.translatable("sclp.donation.3"), Text.translatable("sclp.donation.4").setStyle(Style.EMPTY.withColor(0xff6e00)), Text.translatable("sclp.donation.5")),
-                StringVisitable.concat(Text.translatable("sclp.donation.6"), Text.translatable("sclp.donation.7").setStyle(Style.EMPTY.withColor(0xed49ce)), Text.translatable("sclp.dot")),
-                StringVisitable.concat(Text.translatable("sclp.donation.8"))
+                StringVisitable.concat(Text.literal(I18N.trans("sclp.hello"))),
+                StringVisitable.concat(Text.literal(I18N.trans("sclp.donation.1")), Text.literal(I18N.trans("Embeddium")).setStyle(Style.EMPTY.withColor(0x27eb92)), Text.literal(I18N.trans("sclp.donation.2"))),
+                StringVisitable.concat(Text.literal(I18N.trans("sclp.donation.3")), Text.literal(I18N.trans("sclp.donation.4")).setStyle(Style.EMPTY.withColor(0xff6e00)), Text.literal(I18N.trans("sclp.donation.5"))),
+                StringVisitable.concat(Text.literal(I18N.trans("sclp.donation.6")), Text.literal(I18N.trans("sclp.donation.7")).setStyle(Style.EMPTY.withColor(0xed49ce)), Text.literal(I18N.trans("sclp.dot"))),
+                StringVisitable.concat(Text.literal(I18N.trans("sclp.donation.8")))
         );
     }
 
@@ -65,7 +65,7 @@ public class MixinSodiumOptionsGUI
     {
         SodiumOptionsGUI sodiumGUI = (SodiumOptionsGUI)((Object)this);
         ScreenPrompt prompt = new ScreenPrompt(sodiumGUI, DONATION_PROMPT_MESSAGE, 320, 190,
-                new ScreenPrompt.Action(Text.translatable("Support Sodium"), this::openDonationPage));
+                new ScreenPrompt.Action(Text.literal(I18N.trans("Support Sodium"), this::openDonationPage));
         prompt.setFocused(true);
 
         options.notifications.hasSeenDonationPrompt = true;
