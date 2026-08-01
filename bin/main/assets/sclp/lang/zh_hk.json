@@ -253,7 +253,7 @@
   
   "sclp.options.pages.settings":"漢化包設定",
   "sclp.options.trans_mod_name":"是否翻譯模組名",
-  "sclp.options.trans_mod_name.tooltip":"如果啟用，模組名將會被翻譯。该选项对Xenon无效\n該選項將在重開此頁面時生效",
+  "sclp.options.trans_mod_name.tooltip":"如果啟用，模組名將會被翻譯。该选项对Xenon无效",
   "ECLP":"Embeddium-漢化包",
   "Sodium Dynamic Lights":"钠:动态光源",
   "Sodium Extras":"钠:附属",

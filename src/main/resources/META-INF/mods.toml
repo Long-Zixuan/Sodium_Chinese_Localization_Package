@@ -24,7 +24,7 @@ side = "BOTH"
 [[dependencies.sclp]]
 modId = "embeddium"
 mandatory = true
-versionRange = "[0.3.0,)"
+versionRange = "[0.1.0,)"
 ordering = "NONE"
 side = "CLIENT"
 
