@@ -10,48 +10,32 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 import me.loongly.mods.sclp.common.language.I18N;
+import net.caffeinemc.mods.sodium.client.config.structure.ModOptions;
 
 
 
 //import net.caffeinemc.mods.sodium.client.config.builder.ModOptionsBuilderImpl;
 
 
-@Mixin(targets = "net.caffeinemc.mods.sodium.client.config.builder.ModOptionsBuilderImpl")
-public class MixinModOptionsBuilderImpl
+@Mixin(value = ModOptions.class,remap = false)
+public abstract class MixinModOptionsBuilderImpl
 {
-    @Final
     @Shadow
-    private String name;
+    public abstract String name();
 
-    @Inject(method = "setName", at = @At(value = "RETURN"), cancellable = true)
-    public void injectSetName(String name, CallbackInfoReturnable<Runnable> c) 
+    @Inject(
+        method = "name()Ljava/lang/String;",
+        at = @At("RETURN"),
+        cancellable = true
+    )
+    private void modifyName(CallbackInfoReturnable<String> cir) 
     {
-        if(name.equals("Sodium/Embeddium Chinese Localized Package"))
+        String original = cir.getReturnValue();
+        if (SCLPClientMod.options().shouldTransModName) 
         {
-            name = "Sodium Chinese Localized Package";
-            this.name = name;
-        }
-        if(SCLPClientMod.options().shouldTransModName)
-        {
-            name = I18N.trans(name);
-            this.name = name;
-        }
-    }
-
-    @Inject(method = "<init>", at = @At(value = "RETURN"))
-    public void injectInit(String configId, String name, String version, CallbackInfo ci) 
-    {
-        if(name.equals("Sodium/Embeddium Chinese Localized Package"))
-        {
-            name = "Sodium Chinese Localized Package";
-            this.name = name;
-        }
-        if(SCLPClientMod.options().shouldTransModName)
-        {
-            name = I18N.trans(name);
-            this.name = name;
+            cir.setReturnValue(I18N.trans(original));
         }
     }
 }
 
-//LZX-2025-12-31-001
+//LZX-2026-08-03-002
