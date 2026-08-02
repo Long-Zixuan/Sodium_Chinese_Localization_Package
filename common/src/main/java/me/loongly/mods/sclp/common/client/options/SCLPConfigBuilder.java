@@ -9,6 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 
+import java.time.LocalDate;
+
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 
@@ -30,6 +32,13 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         if(sclpOpts.getShouldShowSupportPage())
         {
                 page.addOptionGroup(createSupportPage(configBuilder));
+        }
+        var today = LocalDate.now();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        if(isMyBirthday(month, day))
+        {
+            page.addOptionGroup(createBirthPage(configBuilder));
         }
         modOpts.addPage(page);
     }
@@ -57,11 +66,11 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
     private OptionGroupBuilder createSupportPage(ConfigBuilder configBuilder)
     {
         var group = configBuilder.createOptionGroup()
-                                .setName(Component.translatable("sclp.options.group.support"))
-                                .addOption(configBuilder.createExternalButtonOption(this.optionId("support_project"))
-                                        .setName(Component.translatable("sclp.options.support_project.name"))
-                                        .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                                        .setScreenConsumer(SCLPClientMod::openSupportWeb));
+                .setName(Component.translatable("sclp.options.group.support"));
+        group.addOption(configBuilder.createExternalButtonOption(this.optionId("support_project"))
+                .setName(Component.translatable("sclp.options.support_project.name"))
+                .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                .setScreenConsumer(SCLPClientMod::openSupportWeb));
         
         group.addOption(configBuilder.createBooleanOption(this.optionId("close_support_page"))//Builder(boolean.class, sclpOpts)
                 .setName(Component.translatable("sclp.options.close_support_page.name"))
@@ -73,6 +82,24 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         );
         
         return group;
+    }
+
+    private OptionGroupBuilder createBirthPage(ConfigBuilder configBuilder)
+    {
+        var today = LocalDate.now();
+        int year = today.getYear();
+        var group = configBuilder.createOptionGroup()
+                .setName(Component.literal("🎂"))
+                .addOption(configBuilder.createExternalButtonOption(this.optionId("birth_caidan"))
+                        .setName(Component.literal("🎂:" + (year - 2004)))
+                        .setTooltip(Component.literal("🎂:" + (year - 2004)))
+                        .setScreenConsumer(SCLPClientMod::birthCaiDan));
+        return group;
+    }
+
+    static boolean isMyBirthday(int month, int day)
+    {
+        return month == 4 && day == 4;
     }
 
     private Identifier optionId(String path) 

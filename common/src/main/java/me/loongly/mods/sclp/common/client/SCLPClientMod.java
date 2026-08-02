@@ -64,6 +64,15 @@ public class SCLPClientMod
 				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
 	}
 
+	public static void birthCaiDan(Screen screen)
+	{
+		LOGGER.info("[SCLP]Happly birthday to LoongLy!!!");
+		Util.getPlatform()
+				.openUri("https://www.loongly.me/html/clock.html");
+		Util.getPlatform()
+				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
+	}
+
 	public static void openSupportWeb(Screen screen)
 	{
 		LOGGER.info("[SCLP]Open Support website.");
