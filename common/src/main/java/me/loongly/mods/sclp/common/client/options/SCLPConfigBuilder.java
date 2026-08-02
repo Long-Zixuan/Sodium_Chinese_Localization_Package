@@ -26,7 +26,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(Identifier.parse("sclp:texture/icon.png"))
-                .setVersion("5.5.1");
+                .setVersion("5.6");
         var page = createOptionsPage(configBuilder);
         page.addOptionGroup(createGeneralPage(configBuilder));
         if(sclpOpts.getShouldShowSupportPage())

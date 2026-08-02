@@ -97,7 +97,7 @@
   "Sodium":"鈉",
   "sclp.pages.sclp_page.name":"漢化包設定",
   "sclp.options.should_trans_mod_name.name":"是否翻譯模組名",
-  "sclp.options.should_trans_mod_name.tooltip":"開啟選項後將翻譯模組名\n關閉選項後將不翻譯模組名\n該選項將在重啓遊戲後生效",
+  "sclp.options.should_trans_mod_name.tooltip":"開啟選項後將翻譯模組名\n關閉選項後將不翻譯模組名\n該選項將在重开此页面后生效",
   "Sodium Shadowy Path Blocks":"鈉-土徑陰影",
   "Sodium Extra":"鈉-扩展",
   "Sodium Chinese Localized Package":"鈉-漢化包",
@@ -129,6 +129,16 @@
   "sodium.options.chunk_update_threads.value":"%s綫程",
   "sodium.options.default":"默認",
   "sclp.cur_languagecode":"zh_hk",
-   "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。"
+   "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。",
+
+  "sclp.options.group.support":"支持",
+  "sclp.options.support_project.name":"请LoongLy喝一杯奶茶",
+  "sclp.options.support_project.tooltip":"将在浏览器打开支持LoongLy的页面",
+  "sodium.options.open_external_page_button": "打開",
+  "sclp.options.close_support_page.name":"永久关闭支持页面",
+  "sclp.options.close_support_page.tooltip":"将不再显示支持页面,该选项将在重启游戏后生效",
+  
+  "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
+  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验"
   }
   

@@ -15,6 +15,17 @@
   "sclp.donation.prompt.6":"And thanks again for using our mod! We hope it helps you (and your computer.)",
   "sclp.multiplier":"%sx",
   "sclp.cur_languagecode":"en_us",
-  "sclp.close":"Close"
+  "sclp.close":"Close",
+  
+  "sclp.options.group.support":"Support",
+  "sclp.options.support_project.name":"Buy LoongLy a Coffee",
+  "sclp.options.support_project.tooltip":"Will open support LoongLy website in your browser",
+  "sclp.options.close_support_page.name":"Permanently close the support page",
+  "sclp.options.close_support_page.tooltip":"The support page will no longer be displayed. This option will take effect after restarting the game",
+
+  
+  "modmenu.summaryTranslation.sclp": "Sodium Chinese Localized Pack",
+  "modmenu.descriptionTranslation.sclp": "A minecraft mod can translate Sodium to Chinese",
+  "sclp.format_error":"Format error: "
 }
   
