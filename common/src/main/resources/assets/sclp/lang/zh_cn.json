@@ -163,5 +163,14 @@
   "embeddium.options.use_quad_normals_for_lighting.name": "使用精确的四重着色",
   "embeddium.options.use_quad_normals_for_lighting.tooltip": "启用后，Embedium将根据原版方块所面向的真实方向（而不是其轴对齐方向）对其进行渲染。这可以在禁用Forge实验的渲染管线时提高照明质量（建议使用最佳性能）。\n\n如果启用实验的渲染管线，则没有效果。",
   "embeddium.options.use_render_pass_optimization.name": "使用渲染过程优化",
-  "embeddium.options.use_render_pass_optimization.tooltip": "启用后，当纹理不透明（或透明）时，Embedium将检测并标记为透明（或半透明）的方块，并自动为其使用更有效率的渲染方法。\n\n当使用第三方光影器包时，此选项无效。"
+  "embeddium.options.use_render_pass_optimization.tooltip": "启用后，当纹理不透明（或透明）时，Embedium将检测并标记为透明（或半透明）的方块，并自动为其使用更有效率的渲染方法。\n\n当使用第三方光影器包时，此选项无效。",
+  "sclp.emb.donation.prompt.1":"看起来您非常中意",
+  "sclp.emb.donation.prompt.2":",这是我的世界钠模组的一个分支。",
+  "sclp.emb.donation.prompt.3":"钠模组很复杂，需要",
+  "sclp.emb.donation.thousand_hours":"上千小时",
+  "sclp.emb.donation.prompt.4":"来开发、测试和维护以给予玩家所期待的体验。",
+  "sclp.emb.donation.prompt.5":"若您想表达感激之情，同时支持我们模组的开发，不妨考虑",
+  "sclp.emb.donation.buycoffee":"支持钠",
+  "sclp.emb.donation.buycoffee2":"支持钠",
+  "sclp.emb.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）"
 }
