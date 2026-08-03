@@ -23,7 +23,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
     @Override
     public void registerConfigLate(ConfigBuilder configBuilder) 
     {
-        String version = IPlatformHelper.INSTANCE.curVersion();
+        String version = IPlatformHelper.INSTANCE.curVersion().split("-")[0];
         var modOpts = configBuilder.registerOwnModOptions()
                 .setColorTheme(configBuilder.createColorTheme()
                         .setBaseThemeRGB(0xed65ff)
