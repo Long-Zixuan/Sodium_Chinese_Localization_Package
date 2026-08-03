@@ -9,4 +9,5 @@ public interface IPlatformHelper
     IPlatformHelper INSTANCE = Services.load(IPlatformHelper.class);
 
     Path getConfigDirectory();
+    
 }
