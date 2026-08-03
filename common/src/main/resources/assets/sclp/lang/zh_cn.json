@@ -97,7 +97,7 @@
   "Sodium":"钠",
   "sclp.pages.sclp_page.name":"汉化包设置",
   "sclp.options.should_trans_mod_name.name":"是否翻译模组名",
-  "sclp.options.should_trans_mod_name.tooltip":"开启选项后将翻译模组名\n关闭选项后将不翻译模组名\n该选项将在重启游戏后生效",
+  "sclp.options.should_trans_mod_name.tooltip":"开启选项后将翻译模组名\n关闭选项后将不翻译模组名\n该选项将在重开此页面时生效",
   "Sodium Shadowy Path Blocks":"钠-土径阴影",
   "Sodium Extra":"钠-扩展",
   "Sodium Chinese Localized Package":"钠-汉化包",
