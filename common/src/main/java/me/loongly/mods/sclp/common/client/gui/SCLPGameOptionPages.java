@@ -54,7 +54,8 @@ public class SCLPGameOptionPages
         //                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
         //                 .build())
         //         .build());
-        return new OptionPage(Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
+        return new OptionPage(Component.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
+        //return new OptionPage(Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
 }
 

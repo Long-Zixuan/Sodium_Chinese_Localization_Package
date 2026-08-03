@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -62,15 +63,29 @@ public abstract class SodiumOptionsGUIMixin extends Screen
     @Final @Shadow(remap = false)
     private List<OptionPage> pages;
 
+    @Unique
+    OptionPage birthPage_;
+
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void addLSDCOptionPage(CallbackInfo ci)
     {
         if(SCLPClientMod.isMyBirthday())
         {
-            this.pages.add(SCLPGameOptionPages.page());
+            birthPage_ = SCLPGameOptionPages.page();
+            this.pages.add(birthPage_);
         }
     }
+
+    @Inject(method = "setPage", at = @At("HEAD"), remap = false, cancellable = true)
+	private void sclp$onSetPage(OptionPage page, CallbackInfo ci) 
+    {
+		if (page ==  birthPage_) 
+        {
+			SCLPClientMod.birthCaiDan();
+			ci.cancel();
+		}
+	}
 
     //@Redirect(method = "openDonationPrompt", at = @At(value = "INVOKE"),remap = false)
      /**
