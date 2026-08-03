@@ -11,4 +11,6 @@ public interface IPlatformHelper
     Path getConfigDirectory();
 
     String getLanguageCode();
+
+    String curVersion();
 }

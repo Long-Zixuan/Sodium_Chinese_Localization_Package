@@ -7,6 +7,8 @@ import me.loongly.mods.sclp.common.services.IPlatformHelper;
 import java.nio.file.Path;
 import net.minecraft.client.Minecraft;
 
+import me.loongly.mods.sclp.common.client.SCLPClientMod;
+
 
 public class FabricPlatformHelper implements IPlatformHelper 
 {
@@ -29,5 +31,11 @@ public class FabricPlatformHelper implements IPlatformHelper
             return Minecraft.getInstance().options.languageCode;
         }
         return "en_us";
+    }
+
+    @Override
+    public String curVersion()
+    {
+        return FabricLoader.getInstance().getModContainer(SCLPClientMod.MOD_ID).get().getMetadata().getVersion().getFriendlyString();
     }
 }

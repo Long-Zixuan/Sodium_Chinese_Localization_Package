@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import com.mojang.authlib.minecraft.client.MinecraftClient;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
+import me.loongly.mods.sclp.common.services.IPlatformHelper;
 
 
 public class SCLPConfigBuilder implements ConfigEntryPoint 
@@ -25,12 +26,13 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
     @Override
     public void registerConfigLate(ConfigBuilder configBuilder) 
     {
+        String version = IPlatformHelper.INSTANCE.curVersion().split("-")[0];
         var modOpts = configBuilder.registerOwnModOptions()
                 .setColorTheme(configBuilder.createColorTheme()
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(Identifier.parse("sclp:texture/icon.png"))
-                .setVersion("5.6");
+                .setVersion(version);
         var page = createOptionsPage(configBuilder);
         page.addOptionGroup(createGeneralPage(configBuilder));
         if(sclpOpts.getShouldShowSupportPage())
@@ -113,17 +115,17 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
 
     static void closeSodiumScreen()
     {
-        var curScreen = Minecraft.getInstance().screen;
-        try
-        {
-            if(curScreen instanceof VideoSettingsScreen)
-            {
-                ((VideoSettingsScreen)curScreen).onClose();
-            }
-        }
-        catch(Exception e)
-        {
-            SCLPClientMod.LOGGER.error("[SCLP] close Sodium Screen Error:", e);
-        }
+        // try
+        // {
+        //     var curScreen = Minecraft.getInstance().screen;
+        //     if(curScreen instanceof VideoSettingsScreen)
+        //     {
+        //         ((VideoSettingsScreen)curScreen).onClose();
+        //     }
+        // }
+        // catch(Exception e)
+        // {
+        //     SCLPClientMod.LOGGER.error("[SCLP] close Sodium Screen Error:", e);
+        // }
     }
 }
