@@ -15,4 +15,10 @@ public class FabricPlatformHelper implements IPlatformHelper
     {
         return FabricLoader.getInstance().getConfigDir();
     }
+
+    @Override
+    public String curVersion()
+    {
+        return FabricLoader.getInstance().getModContainer("sclp").get().getMetadata().getVersion().getFriendlyString();
+    }
 }

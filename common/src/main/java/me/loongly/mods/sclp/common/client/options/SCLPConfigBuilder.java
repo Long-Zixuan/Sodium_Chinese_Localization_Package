@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import java.time.LocalDate;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
+import me.loongly.mods.sclp.common.services.IPlatformHelper;
 
 
 public class SCLPConfigBuilder implements ConfigEntryPoint 
@@ -22,12 +23,13 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
     @Override
     public void registerConfigLate(ConfigBuilder configBuilder) 
     {
+        String version = IPlatformHelper.INSTANCE.curVersion();
         var modOpts = configBuilder.registerOwnModOptions()
                 .setColorTheme(configBuilder.createColorTheme()
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(Identifier.parse("sclp:texture/icon.png"))
-                .setVersion("4.4.2");
+                .setVersion(version);
         var page = createOptionsPage(configBuilder);
         page.addOptionGroup(createGeneralPage(configBuilder));
         if(sclpOpts.shouldShowSCLPSupportPage)
