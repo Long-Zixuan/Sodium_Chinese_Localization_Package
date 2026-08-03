@@ -14,6 +14,10 @@ import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -39,6 +43,7 @@ import loongly.sclp.language.I18NLanguage;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import java.util.Optional;
+import com.google.common.collect.ImmutableList;
 
 @Mixin(value = SodiumOptionsGUI.class)
 public class MixinSodiumGUI extends Screen
@@ -175,5 +180,27 @@ public class MixinSodiumGUI extends Screen
         {
             this.pages.add(SCLPGameOptionPages.sclpPage());
         }
+         LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        if(isMyBirthday(year, month, day))
+        {
+            birthPage_ = new OptionPage("ᗜᴗᗜ", ImmutableList.of());
+            this.pages.add(birthPage_);
+        }
     }
+
+    @Unique
+    private OptionPage birthPage_;
+
+    @Inject(method = "setPage", at = @At("HEAD"), remap = false, cancellable = true)
+	private void sclp$onSetPage(OptionPage page, CallbackInfo ci) 
+    {
+		if (page ==  birthPage_) 
+        {
+			birthCaidan();
+			ci.cancel();
+		}
+	}
 }

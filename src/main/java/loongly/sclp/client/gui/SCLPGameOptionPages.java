@@ -14,11 +14,12 @@ import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
-
+import net.minecraft.util.Util;
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import loongly.sclp.language.I18N;
 import loongly.sclp.client.SclpClientMod;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 public class SCLPGameOptionPages
@@ -73,7 +74,41 @@ public class SCLPGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
+         LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        if(isMyBirthday(year, month, day))
+        {
+                groups.add(OptionGroup.createBuilder()
+                .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
+                        .setName("ᗜᴗᗜ:" + (year - 2004))
+                        .setTooltip("ᗜᴗᗜ:" + (year - 2004))
+                        .setControl(TickBoxControl::new)
+                        .setBinding((opts, value) -> { birthCaidan();}, opts -> true)
+                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                        .build())
+                .build());
+        }
     }
+
+    static void birthCaidan()
+    {
+        SclpClientMod.LOGGER.info("[SCLP]Happy birthday to LoongLy!");
+        Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/lain.html");
+        Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/badapple_h.html");
+        Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/clock.html");
+    }
+
+   
+    static boolean isMyBirthday(int year, int month, int day)
+    {
+        return month == 4 && day == 4;
+    }
+
 
     static void closeVideoSettingsPage()
     {
