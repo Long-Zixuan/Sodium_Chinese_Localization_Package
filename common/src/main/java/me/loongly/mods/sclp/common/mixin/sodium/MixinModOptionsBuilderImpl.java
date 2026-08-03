@@ -31,7 +31,12 @@ public abstract class MixinModOptionsBuilderImpl
     private void modifyName(CallbackInfoReturnable<String> cir) 
     {
         String original = cir.getReturnValue();
-        if (SCLPClientMod.options().shouldTransModName) 
+        if(original.equals("Sodium/Embeddium Chinese Localized Package"))
+        {
+            original = "Sodium Chinese Localized Package";
+            cir.setReturnValue(original);
+        }
+        if(SCLPClientMod.options().shouldTransModName) 
         {
             cir.setReturnValue(I18N.trans(original));
         }
