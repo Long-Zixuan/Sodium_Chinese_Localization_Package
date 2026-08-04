@@ -180,6 +180,17 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
     }
 
     @Override
+    public void open()
+    {
+        setUIEleVis(true);
+    }
+
+    @Override
+    public void close()
+    {
+        setUIEleVis(false);
+    }
+
     public void setUIEleVis(boolean vis)
     {
         if(birthBtn_ != null)
