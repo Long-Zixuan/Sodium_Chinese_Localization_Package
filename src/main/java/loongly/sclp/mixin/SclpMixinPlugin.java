@@ -36,7 +36,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
                 SemanticVersion rsoVersion = (SemanticVersion) rsoOptionalModContainer.get().getMetadata().getVersion();
                 try 
                 {
-                    // don't load the RSO options mixin for RSO versions >= 1.4.2
+                    // don't load the RSO options mixin for RSO versions < 1.6.0
                     if(rsoVersion.compareTo(Version.parse("1.6.0")) < 0) 
                     {
                         return false;
@@ -56,6 +56,35 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
                 return false;
             }
         }
+
+        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinSodiumVideoOptionsScreen")) {
+            Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
+
+            if(rsoOptionalModContainer.isPresent()) {
+                SemanticVersion rsoVersion = (SemanticVersion) rsoOptionalModContainer.get().getMetadata().getVersion();
+                try 
+                {
+                    // don't load the RSO options mixin for RSO versions >= 1.4.2
+                    if(rsoVersion.compareTo(Version.parse("1.4.2")) >= 0) 
+                    {
+                        return false;
+                    }
+                    else 
+                    {
+                        return true;
+                    }
+                }
+                catch (VersionParsingException e) 
+                {
+                    return false; // this should never happen
+                }
+            }
+            else 
+            {        
+                return false;
+            }
+        }
+
         return true;
     }
 
