@@ -89,7 +89,7 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
             var data = LocalDate.now();
             var year = data.getYear();
             var birthText = Text.literal("🎂:" + (year -2004));
-            int birthTextWidth = 50;
+            int birthTextWidth = 20;
             var birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - 240 - birthTextWidth, tabFrameDim.getLimitY() + 5, birthTextWidth + 10, 20);
             birthBtn_ = new FlatButtonWidget(birthBtnDim, birthText, SCLPClientMod::birthCaiDan);
         }
@@ -104,7 +104,7 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
 
     void onClickCloseSupportBtn()
     {
-        SCLPClientMod.options().setIsTransModNameVal(false);;
+        SCLPClientMod.options().setShouldShowSupportPageVal(false);
         
         SCLPClientMod.options().writeChanges();
         
