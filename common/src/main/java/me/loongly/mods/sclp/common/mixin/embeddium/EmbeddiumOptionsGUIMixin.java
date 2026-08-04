@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,6 +37,7 @@ import org.embeddedt.embeddium.impl.util.PlatformUtil;
 
 import org.embeddedt.embeddium.impl.Embeddium;
 import org.embeddedt.embeddium.api.OptionGUIConstructionEvent;
+import org.embeddedt.embeddium.api.math.Dim2i;
 import org.embeddedt.embeddium.impl.data.fingerprint.HashedFingerprint;
 import org.embeddedt.embeddium.impl.gui.console.Console;
 import org.embeddedt.embeddium.impl.gui.console.message.MessageLevel;
@@ -98,5 +100,42 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen
     private void openDonationPage()
     {
         Util.getPlatform().openUri("https://caffeinemc.net/donate");
+    }
+
+    @Unique
+    FlatButtonWidget birthBtn_;
+
+    @Inject(method = "parentFrameBuilder", at = @At("RETURN"),remap = false, cancellable = true)
+    void injectParentFrameBuilder(CallbackInfoReturnable<BasicFrame.Builder> c)
+    {
+        if(SCLPClientMod.isMyBirthday())
+        {
+            int newWidth = this.width;
+            if (newWidth > 550 && (float) this.width / (float) this.height > (5f / 4f)) 
+            {
+                newWidth = Math.max(550, (int) (this.height * 5f / 4f));
+            }
+
+            Dim2i basicFrameDim = new Dim2i((this.width - newWidth) / 2, 0, newWidth, this.height);
+            Dim2i tabFrameDim = new Dim2i(basicFrameDim.x() + basicFrameDim.width() / 20 / 2, basicFrameDim.y() + basicFrameDim.height() / 4 / 2, basicFrameDim.width() - (basicFrameDim.width() / 20), basicFrameDim.height() / 4 * 3);
+
+            var data = LocalDate.now();
+            var year = data.getYear();
+            var birthText = Component.literal("🎂:" + (year -2004));
+            int birthTextWidth = this.minecraft.font.width(birthText);
+            var birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - 240 - birthTextWidth, tabFrameDim.getLimitY() + 5, birthTextWidth + 10, 20);
+            birthBtn_ = new FlatButtonWidget(birthBtnDim, birthText, SCLPClientMod::birthCaiDan);
+        }
+    }
+
+    @Inject(method = "parentBasicFrameBuilder", at = @At("RETURN"),remap = false, cancellable = true)
+    void injectParentBasicFrameBuilder(Dim2i parentBasicFrameDim, Dim2i tabFrameDim, CallbackInfoReturnable<BasicFrame.Builder> cir)
+    {
+        if(SCLPClientMod.isMyBirthday())
+        {
+            var builder = cir.getReturnValue();
+            builder.addChild(dim -> birthBtn_);
+            cir.setReturnValue(builder);
+        }
     }
 }
