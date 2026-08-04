@@ -30,6 +30,7 @@ import java.util.Map;
 public class SCLPGameOptions 
 {
     private BooleanValue isTransModName_;
+    private BooleanValue shouldShowSupportPage_;
     private File file_;
 
     private final ForgeConfigSpec SPECS;
@@ -46,6 +47,9 @@ public class SCLPGameOptions
         isTransModName_ = BUILDER
                 .comment(I18N.trans("sclp.options.trans_mod_name"))
                 .define("isTransModName", true);
+        shouldShowSupportPage_ = BUILDER
+                .comment("Show support btn in options menu")
+                .define("shouldShowSupportPage", true);
        
         BUILDER.pop();
 
@@ -85,6 +89,16 @@ public class SCLPGameOptions
     public boolean getIsTransModNameVal()
     {
         return isTransModName_.get();
+    }
+
+    public void setShouldShowSupportPageVal(boolean shouldShowSupportPage)
+    {
+        shouldShowSupportPage_.set(shouldShowSupportPage);
+    }
+
+    public boolean getShouldShowSupportPageVal()
+    {
+        return shouldShowSupportPage_.get();
     }
 
 }

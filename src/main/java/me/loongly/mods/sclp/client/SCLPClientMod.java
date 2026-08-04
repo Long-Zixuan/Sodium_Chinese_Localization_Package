@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
 import me.loongly.mods.sclp.language.I18NLanguage;
 
+import java.time.LocalDate;
+
 import org.apache.logging.log4j.LogManager;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
@@ -69,6 +71,20 @@ public class SCLPClientMod
             return true;
         }
         return false;
+    }
+
+    public static boolean isMyBirthday(int year, int month, int day)
+    {
+        return month == 4 && day == 4;
+    }
+
+	public static boolean isMyBirthday()
+    {
+		LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        return isMyBirthday(year, month, day);
     }
 
     public SCLPClientMod() 
