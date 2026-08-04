@@ -3,6 +3,7 @@ package loongly.sclp.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.util.Util;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -81,5 +82,35 @@ public class SclpClientMod implements ClientModInitializer
 	{
 		NetworkSettings.openNetWorkSettings();
 	}
+
+	    static int clickCount = 0;
+
+    public static void caidan()
+    {
+        clickCount++;
+        if(clickCount == 10)
+        {
+            clickCount = 0;
+            SclpClientMod.LOGGER.info("[SCLP] Suprise!");
+            Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/lain.html");
+        }
+    }
+
+	public static void birthCaidan()
+    {
+        SclpClientMod.LOGGER.info("[SCLP]Happy birthday to LoongLy!");
+
+        Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/badapple_h.html");
+        Util.getOperatingSystem()
+                .open("https://long-zixuan.github.io/html/clock.html");
+    }
+
+   
+    public static boolean isMyBirthday(int year, int month, int day)
+    {
+        return month == 4 && day == 4;
+    }
 	
 }

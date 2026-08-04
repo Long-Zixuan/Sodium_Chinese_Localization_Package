@@ -66,9 +66,9 @@ public class MixinSodiumGUI extends Screen
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
-        if(isMyBirthday(year, month, day))
+        if(SclpClientMod.isMyBirthday(year, month, day))
         {
-            this.birthButton_ = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), this::birthCaidan);
+            this.birthButton_ = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), SclpClientMod::birthCaidan);
             this.children.add(this.birthButton_);
             this.drawable.add(this.birthButton_);
         }
@@ -80,29 +80,12 @@ public class MixinSodiumGUI extends Screen
         }
     }
 
-    void birthCaidan()
-    {
-        SclpClientMod.LOGGER.info("[SCLP]Happy birthday to LoongLy!");
-        Util.getOperatingSystem()
-                .open("https://long-zixuan.github.io/html/lain.html");
-        Util.getOperatingSystem()
-                .open("https://long-zixuan.github.io/html/badapple_h.html");
-        Util.getOperatingSystem()
-                .open("https://long-zixuan.github.io/html/clock.html");
-    }
-
     void noInternet()
     {
         SclpClientMod.isConnected = true;
         this.noInternetButton_.setVisible(false);
         SclpClientMod.openNetworkSettings();
     }
-
-    boolean isMyBirthday(int year, int month, int day)
-    {
-        return month == 4 && day == 4;
-    }
-
 
     /**
     * @author Loongly
@@ -184,7 +167,7 @@ public class MixinSodiumGUI extends Screen
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
-        if(isMyBirthday(year, month, day))
+        if(SclpClientMod.isMyBirthday(year, month, day))
         {
             birthPage_ = SCLPGameOptionPages.birthPage();
             this.pages.add(birthPage_);
@@ -199,7 +182,7 @@ public class MixinSodiumGUI extends Screen
     {
 		if (page ==  birthPage_) 
         {
-			birthCaidan();
+			SclpClientMod.birthCaidan();
 			ci.cancel();
 		}
 	}

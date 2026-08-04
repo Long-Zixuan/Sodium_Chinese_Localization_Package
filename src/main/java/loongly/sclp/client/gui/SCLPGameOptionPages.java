@@ -52,7 +52,7 @@ public class SCLPGameOptionPages
                         .setName(I18N.trans("sclp.is_enable_sclp"))
                         .setTooltip(I18N.trans("sclp.is_enable_sclp_tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> {opts.isEnableSclp = value;closeVideoSettingsPage();}, opts -> opts.isEnableSclp)
+                        .setBinding((opts, value) -> {opts.isEnableSclp = value;closeVideoSettingsPage();SclpClientMod.caidan();}, opts -> opts.isEnableSclp)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -87,37 +87,19 @@ public class SCLPGameOptionPages
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
-        if(isMyBirthday(year, month, day))
+        if(SclpClientMod.isMyBirthday(year, month, day))
         {
                 groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
                         .setName("ᗜᴗᗜ:" + (year - 2004))
                         .setTooltip("ᗜᴗᗜ:" + (year - 2004))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> { birthCaidan();}, opts -> true)
+                        .setBinding((opts, value) -> { SclpClientMod.birthCaidan();}, opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
         }
     }
-
-    static void birthCaidan()
-    {
-        SclpClientMod.LOGGER.info("[SCLP]Happy birthday to LoongLy!");
-        Util.getOperatingSystem()
-                .open("https://long-zixuan.github.io/html/lain.html");
-        Util.getOperatingSystem()
-                .open("https://long-zixuan.github.io/html/badapple_h.html");
-        Util.getOperatingSystem()
-                .open("https://long-zixuan.github.io/html/clock.html");
-    }
-
-   
-    static boolean isMyBirthday(int year, int month, int day)
-    {
-        return month == 4 && day == 4;
-    }
-
 
     static void closeVideoSettingsPage()
     {
