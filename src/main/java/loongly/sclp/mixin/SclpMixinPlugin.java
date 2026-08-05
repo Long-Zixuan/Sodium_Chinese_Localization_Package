@@ -84,6 +84,34 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
                 return false;
             }
         }
+
+        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinSodiumVideoOptionsScreen")) 
+        {
+            Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
+
+            if(rsoOptionalModContainer.isPresent()) 
+            {  
+                return true;
+            }
+            else 
+            {        
+                return false;
+            }
+        }
+
+        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.OptionPageFrameMixin")) 
+        {
+            Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
+
+            if(rsoOptionalModContainer.isPresent()) 
+            {  
+                return true;
+            }
+            else 
+            {        
+                return false;
+            }
+        }
         return true;
     }
 

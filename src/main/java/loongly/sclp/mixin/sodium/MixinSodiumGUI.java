@@ -3,6 +3,7 @@ import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
+import loongly.sclp.api.ISCLPScreen;
 import loongly.sclp.client.OsType;
 import loongly.sclp.client.SclpClientMod;
 import loongly.sclp.client.gui.SCLPGameOptionPages;
@@ -46,7 +47,7 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableList;
 
 @Mixin(value = SodiumOptionsGUI.class)
-public class MixinSodiumGUI extends Screen
+public class MixinSodiumGUI extends Screen implements ISCLPScreen
 {
     public MixinSodiumGUI(Screen parent) 
     {
@@ -55,9 +56,15 @@ public class MixinSodiumGUI extends Screen
 
     private FlatButtonWidget birthButton_;
     private FlatButtonWidget noInternetButton_;
+    @Unique
+    FlatButtonWidget supportBtn_;
+    @Unique
+    FlatButtonWidget closeSupportBtn_;
     @Shadow
     @Final
     private List<Drawable> drawable;
+    @Shadow
+    OptionPage currentPage;
 
     @Inject(method = "rebuildGUI", at = @At(value = "RETURN"),remap = false, cancellable = true)
     private void injectRebuildGUI(CallbackInfo ci)
@@ -77,6 +84,60 @@ public class MixinSodiumGUI extends Screen
             this.noInternetButton_ = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
             this.children.add(this.noInternetButton_);
             this.drawable.add(this.noInternetButton_);
+        }
+        if(SclpClientMod.options().shouldShowSupportBtn && this.currentPage == sclpPage_)
+        {
+            Dim2i supportBtnDim = new Dim2i(this.width - 108, this.height - 60, 100, 20);
+            supportBtn_ = new FlatButtonWidget(supportBtnDim, I18N.trans("sclp.support"), () -> SclpClientMod.openSupportPage());
+            Dim2i closeSupportBtnDim = new Dim2i(this.width - 130, this.height - 60, 20, 20);
+            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, "x", this::onClickCloseSupportBtn);
+            this.children.add(supportBtn_);
+            this.children.add(closeSupportBtn_);
+            this.drawable.add(supportBtn_);
+            this.drawable.add(closeSupportBtn_);
+        }
+    }
+
+    void onClickCloseSupportBtn()
+    {
+        SclpClientMod.options().shouldShowSupportBtn = false;
+        try
+        {
+            SclpClientMod.options().writeChanges();
+        }
+        catch (IOException e)
+        {
+            SclpClientMod.LOGGER.error("[SCLP] Failed to write SCLP options", e);
+        }
+        this.closeSupportBtn_.setVisible(false);
+        this.supportBtn_.setVisible(false);
+    }
+
+    @Override
+    public void open() 
+    {
+        setUIEleVis(true);
+    }
+
+    @Override
+    public void close()
+    {
+        setUIEleVis(false);
+    }
+
+    public void setUIEleVis(boolean vis)
+    {
+        // if(birthBtn_ != null)
+        // {
+        //     birthBtn_.setVisible(vis);
+        // }
+        if(supportBtn_ != null && SclpClientMod.options().shouldShowSupportBtn)
+        {
+            supportBtn_.setVisible(vis);
+        }
+        if(closeSupportBtn_ != null && SclpClientMod.options().shouldShowSupportBtn)
+        {
+            closeSupportBtn_.setVisible(vis);
         }
     }
 
@@ -161,7 +222,8 @@ public class MixinSodiumGUI extends Screen
         Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
         if(!SclpClientMod.options().notShowPage || (rsoOptionalModContainer.isPresent() && SCLPGameOptionPages.isChangeNotShowPage))
         {
-            this.pages.add(SCLPGameOptionPages.sclpPage());
+            sclpPage_ = SCLPGameOptionPages.sclpPage();
+            this.pages.add(sclpPage_);
         }
          LocalDate today = LocalDate.now();
         int year = today.getYear();
@@ -176,14 +238,21 @@ public class MixinSodiumGUI extends Screen
 
     @Unique
     private OptionPage birthPage_;
+    @Unique
+    private OptionPage sclpPage_;
 
     @Inject(method = "setPage", at = @At("HEAD"), remap = false, cancellable = true)
 	private void sclp$onSetPage(OptionPage page, CallbackInfo ci) 
     {
-		if (page ==  birthPage_) 
+        close();
+		if (page == birthPage_) 
         {
 			SclpClientMod.birthCaidan();
 			ci.cancel();
 		}
+		if (page == sclpPage_)
+        {
+			open();
+        }
 	}
 }
