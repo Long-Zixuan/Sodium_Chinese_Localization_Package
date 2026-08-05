@@ -85,13 +85,29 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
             }
         }
 
-        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinSodiumVideoOptionsScreen")) 
+        if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinSodiumVideoOptionsScreenNew")) 
         {
             Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
 
             if(rsoOptionalModContainer.isPresent()) 
-            {  
-                return true;
+            {
+                SemanticVersion rsoVersion = (SemanticVersion) rsoOptionalModContainer.get().getMetadata().getVersion();
+                try 
+                {
+                    // don't load the RSO options mixin for RSO versions < 1.4.2
+                    if(rsoVersion.compareTo(Version.parse("1.4.2")) < 0) 
+                    {
+                        return false;
+                    }
+                    else 
+                    {
+                        return true;
+                    }
+                }
+                catch (VersionParsingException e) 
+                {
+                    return false; // this should never happen
+                }
             }
             else 
             {        
@@ -103,9 +119,24 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
         {
             Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
 
-            if(rsoOptionalModContainer.isPresent()) 
-            {  
-                return true;
+            if(rsoOptionalModContainer.isPresent()) {
+                SemanticVersion rsoVersion = (SemanticVersion) rsoOptionalModContainer.get().getMetadata().getVersion();
+                try 
+                {
+                    // don't load the RSO options mixin for RSO versions < 1.4.2
+                    if(rsoVersion.compareTo(Version.parse("1.4.2")) < 0) 
+                    {
+                        return false;
+                    }
+                    else 
+                    {
+                        return true;
+                    }
+                }
+                catch (VersionParsingException e) 
+                {
+                    return false; // this should never happen
+                }
             }
             else 
             {        
