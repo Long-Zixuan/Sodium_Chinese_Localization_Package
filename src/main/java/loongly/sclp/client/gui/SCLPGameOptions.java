@@ -28,6 +28,7 @@ public class SCLPGameOptions
     public boolean isDisableSclpFabricApiWarn;
     public boolean isDisableSclpNoInternetWarn;
     public boolean notShowPage;
+    public boolean shouldShowSupportBtn;
 
     public SCLPGameOptions()
     {
@@ -35,6 +36,7 @@ public class SCLPGameOptions
         isDisableSclpFabricApiWarn = false;
         isDisableSclpNoInternetWarn = false;
         notShowPage = false;
+        shouldShowSupportBtn = true;
     }
 
 

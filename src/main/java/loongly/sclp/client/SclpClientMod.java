@@ -107,6 +107,13 @@ public class SclpClientMod implements ClientModInitializer
                 .open("https://long-zixuan.github.io/html/clock.html");
     }
 
+	public static void openSupportPage()
+	{
+		SclpClientMod.LOGGER.info("[SCLP] Open Support Page.");
+		Util.getOperatingSystem()
+                .open("https://github.com/Long-Zixuan/");
+	}
+
    
     public static boolean isMyBirthday(int year, int month, int day)
     {
