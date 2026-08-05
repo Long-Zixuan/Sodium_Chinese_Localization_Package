@@ -25,7 +25,7 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
     public String getRefMapperConfig() {return null;}
 
     @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) //日后再写成函数吧
     {
         if(mixinClassName.equals("loongly.sclp.mixin.reeses_sodium_options.MixinOptionPageScrollFrame")) 
         {
@@ -84,7 +84,6 @@ public class SclpMixinPlugin implements IMixinConfigPlugin
                 return false;
             }
         }
-
         return true;
     }
 

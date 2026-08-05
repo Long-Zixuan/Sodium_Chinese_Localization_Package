@@ -18,6 +18,10 @@ import org.apache.logging.log4j.Logger;
 import loongly.sclp.client.gui.SCLPGameOptions;
 import loongly.sclp.language.I18NLanguage;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.SemanticVersion;
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class SclpClientMod implements ClientModInitializer 
@@ -111,7 +115,7 @@ public class SclpClientMod implements ClientModInitializer
 	{
 		SclpClientMod.LOGGER.info("[SCLP] Open Support Page.");
 		Util.getOperatingSystem()
-                .open("https://github.com/Long-Zixuan/");
+                .open("https://ifdian.net/a/loongly");
 	}
 
    
@@ -119,5 +123,16 @@ public class SclpClientMod implements ClientModInitializer
     {
         return month == 4 && day == 4;
     }
+
+	public static SemanticVersion getRSOVersion()
+	{
+		Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
+		if(rsoOptionalModContainer.isPresent()) 
+		{
+			return (SemanticVersion) rsoOptionalModContainer.get().getMetadata().getVersion();
+		}
+		return null;
+               
+	}
 	
 }

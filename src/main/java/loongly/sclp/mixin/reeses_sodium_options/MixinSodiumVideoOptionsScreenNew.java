@@ -5,6 +5,8 @@ import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.BasicFrame;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
+import net.fabricmc.loader.api.SemanticVersion;
+import net.fabricmc.loader.api.Version;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,7 +51,17 @@ public class MixinSodiumVideoOptionsScreenNew implements ISCLPScreen
 
         Dim2i basicFrameDim = new Dim2i((width - newWidth) / 2, 0, newWidth, height);
         Dim2i tabFrameDim = new Dim2i(basicFrameDim.getOriginX() + basicFrameDim.getWidth() / 20 / 2, basicFrameDim.getOriginY() + basicFrameDim.getHeight() / 4 / 2, basicFrameDim.getWidth() - (basicFrameDim.getWidth() / 20), basicFrameDim.getHeight() / 4 * 3);
-        if(SclpClientMod.options().shouldShowSupportBtn)
+        SemanticVersion rsoVersion = SclpClientMod.getRSOVersion();
+        boolean isRSO1_4_2OrLater = false;
+        try
+        {
+            if(rsoVersion.compareTo(Version.parse("1.4.2")) >= 0) 
+            {
+                isRSO1_4_2OrLater = true;
+            }
+        }
+        catch (Exception e){}
+        if(SclpClientMod.options().shouldShowSupportBtn && isRSO1_4_2OrLater)
         {
             Dim2i supportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 100, tabFrameDim.getLimitY() - 17, 100, 20);
             supportBtn_ = new FlatButtonWidget(supportBtnDim, I18N.trans("sclp.support"), () -> SclpClientMod.openSupportPage());
@@ -62,7 +74,12 @@ public class MixinSodiumVideoOptionsScreenNew implements ISCLPScreen
         int day = today.getDayOfMonth();
         if(SclpClientMod.isMyBirthday(year, month, day))
         {
-            Dim2i birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - 272, tabFrameDim.getLimitY() + 5, 65, 20);
+            int offect = 272;
+            if(!isRSO1_4_2OrLater)
+            {
+                offect = 400;
+            }
+            Dim2i birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - offect, tabFrameDim.getLimitY() + 5, 65, 20);
             birthBtn_ = new FlatButtonWidget(birthBtnDim, I18N.trans("ᗜᴗᗜ:" + (year - 2004)), () -> SclpClientMod.birthCaidan());
         }
 
@@ -120,10 +137,10 @@ public class MixinSodiumVideoOptionsScreenNew implements ISCLPScreen
 
     public void setUIEleVis(boolean vis)
     {
-        if(birthBtn_ != null)
-        {
-            birthBtn_.setVisible(vis);
-        }
+        // if(birthBtn_ != null)
+        // {
+        //     birthBtn_.setVisible(vis);
+        // }
         if(supportBtn_ != null && SclpClientMod.options().shouldShowSupportBtn)
         {
             supportBtn_.setVisible(vis);
