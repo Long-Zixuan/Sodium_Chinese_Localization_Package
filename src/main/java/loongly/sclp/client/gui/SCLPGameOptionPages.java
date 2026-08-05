@@ -39,7 +39,7 @@ public class SCLPGameOptionPages
      public static OptionPage birthPage()
      {
         List<OptionGroup> groups = new ArrayList<>();
-        buildSclpPages(groups);
+        //buildSclpPages(groups);
         LocalDate today = LocalDate.now();
         int year = today.getYear();
         return new OptionPage(I18N.trans("ᗜᴗᗜ:" + (year - 2004)), ImmutableList.copyOf(groups));
@@ -83,7 +83,7 @@ public class SCLPGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-         LocalDate today = LocalDate.now();
+        /*  LocalDate today = LocalDate.now();
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
@@ -98,7 +98,7 @@ public class SCLPGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-        }
+        }*/
     }
 
     static void closeVideoSettingsPage()

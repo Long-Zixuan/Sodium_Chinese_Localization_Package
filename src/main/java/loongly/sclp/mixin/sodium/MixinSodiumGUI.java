@@ -47,7 +47,7 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableList;
 
 @Mixin(value = SodiumOptionsGUI.class)
-public class MixinSodiumGUI extends Screen implements ISCLPScreen
+public class MixinSodiumGUI extends Screen
 {
     public MixinSodiumGUI(Screen parent) 
     {
@@ -69,7 +69,7 @@ public class MixinSodiumGUI extends Screen implements ISCLPScreen
     @Inject(method = "rebuildGUI", at = @At(value = "RETURN"),remap = false, cancellable = true)
     private void injectRebuildGUI(CallbackInfo ci)
     {
-        LocalDate today = LocalDate.now();
+        /*LocalDate today = LocalDate.now();
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
@@ -78,7 +78,7 @@ public class MixinSodiumGUI extends Screen implements ISCLPScreen
             this.birthButton_ = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), SclpClientMod::birthCaidan);
             this.children.add(this.birthButton_);
             this.drawable.add(this.birthButton_);
-        }
+        }*/
         if(!SclpClientMod.isConnected && SclpClientMod.options().isEnableSclp && !SclpClientMod.options().isDisableSclpNoInternetWarn)
         {
             this.noInternetButton_ = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
@@ -111,34 +111,6 @@ public class MixinSodiumGUI extends Screen implements ISCLPScreen
         }
         this.closeSupportBtn_.setVisible(false);
         this.supportBtn_.setVisible(false);
-    }
-
-    @Override
-    public void open() 
-    {
-        setUIEleVis(true);
-    }
-
-    @Override
-    public void close()
-    {
-        setUIEleVis(false);
-    }
-
-    public void setUIEleVis(boolean vis)
-    {
-        // if(birthBtn_ != null)
-        // {
-        //     birthBtn_.setVisible(vis);
-        // }
-        if(supportBtn_ != null && SclpClientMod.options().shouldShowSupportBtn)
-        {
-            supportBtn_.setVisible(vis);
-        }
-        if(closeSupportBtn_ != null && SclpClientMod.options().shouldShowSupportBtn)
-        {
-            closeSupportBtn_.setVisible(vis);
-        }
     }
 
     void noInternet()
@@ -244,15 +216,10 @@ public class MixinSodiumGUI extends Screen implements ISCLPScreen
     @Inject(method = "setPage", at = @At("HEAD"), remap = false, cancellable = true)
 	private void sclp$onSetPage(OptionPage page, CallbackInfo ci) 
     {
-        close();
 		if (page == birthPage_) 
         {
 			SclpClientMod.birthCaidan();
 			ci.cancel();
 		}
-		if (page == sclpPage_)
-        {
-			open();
-        }
 	}
 }
