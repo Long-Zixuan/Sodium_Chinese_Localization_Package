@@ -40,7 +40,7 @@ class OptionPageFrameMixin
             if(embScreen != null)
             {
                 ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
-                sclpScreen.onOpen();
+                sclpScreen.open();
             }
             return;
         }
@@ -48,7 +48,7 @@ class OptionPageFrameMixin
         if(embScreen != null)
         {
             ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
-            sclpScreen.onClose();
+            sclpScreen.close();
         }
     }
 

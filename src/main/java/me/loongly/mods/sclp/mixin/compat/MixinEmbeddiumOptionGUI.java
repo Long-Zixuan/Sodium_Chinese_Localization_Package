@@ -135,13 +135,13 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
     }
 
     @Override
-    public void onClose()
+    public void close()
     {
         setUIEleVis(false);
     }
 
     @Override
-    public void onOpen()
+    public void open()
     {
         setUIEleVis(true);
     }
