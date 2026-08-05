@@ -64,9 +64,9 @@ public class MixinSodiumVideoOptionsScreenNew implements ISCLPScreen
         if(SclpClientMod.options().shouldShowSupportBtn && isRSO1_4_2OrLater)
         {
             Dim2i supportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 100, tabFrameDim.getLimitY() - 17, 100, 20);
-            supportBtn_ = new FlatButtonWidget(supportBtnDim, I18N.trans("sclp.support"), () -> SclpClientMod.openSupportPage());
+            supportBtn_ = new FlatButtonWidget(supportBtnDim, "sclp.support", SclpClientMod::openSupportPage);
             Dim2i closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 122, tabFrameDim.getLimitY() - 17, 20, 20);
-            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, "x", () -> onClickCloseSupportBtn());
+            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, "x", this::onClickCloseSupportBtn);
         }
         LocalDate today = LocalDate.now();
         int year = today.getYear();
