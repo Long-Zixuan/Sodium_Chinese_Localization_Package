@@ -25,7 +25,7 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
     {
         if(mixinClassName.contains("me.loongly.mods.sclp.common.mixin.sodium.MixinScreenPrompt"))
         {
-            return IPlatformHelper.INSTANCE.isNewSodium();
+            return isNewSodium();
         }
         return true;
     }
@@ -41,4 +41,17 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
+
+    boolean isNewSodium()
+    {
+        try
+        {
+            Class.forName("net.caffeinemc.mods.sodium.client.gui.options.control.ControlValueFormatterImpls");
+            return true;
+        }
+        catch (ClassNotFoundException e)
+        {
+            return false;
+        }
+    }
 }
