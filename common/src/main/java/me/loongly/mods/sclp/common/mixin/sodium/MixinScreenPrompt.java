@@ -19,14 +19,8 @@ import java.util.List;
 
 
 @Mixin(ScreenPrompt.class)
-public abstract class MixinScreenPrompt extends ScreenPrompt
+public abstract class MixinScreenPrompt//不继承ScreenPrompt，原因未知（具体是public @NotNull List<AbstractWidget> getWidgets()函数报错了），但是继承了之后对init的overwrite不起作用，原因未知
 {
-    public MixinScreenPrompt(ScreenPromptable parent, List<FormattedText> text, int width, int height, Action action) 
-    {
-        super(parent, text, width, height, action);
-        //TODO Auto-generated constructor stub
-    }
-
     @Final
     @Shadow
     private int width, height;
@@ -39,9 +33,7 @@ public abstract class MixinScreenPrompt extends ScreenPrompt
     @Final
     @Shadow
     ScreenPromptable parent;
-    @Final
-    @Shadow
-    List<FormattedText> text;
+
     @Final
     @Shadow
     Action action;
