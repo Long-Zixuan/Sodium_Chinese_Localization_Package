@@ -12,11 +12,11 @@
       "projectName": "neoforge",
       "mainClass": "net.neoforged.devlaunch.Main",
       "args": [
-        "@D:\\MC_MOD\\sclp-1.21-Alpha\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
+        "@D:\\MC_MOD\\Sodium_Chinese_Localization_Package\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
       ],
       "vmArgs": [
-        "@D:\\MC_MOD\\sclp-1.21-Alpha\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
-        "-Dfml.modFolders\u003dsclp%%D:\\MC_MOD\\sclp-1.21-Alpha\\neoforge\\bin\\main"
+        "@D:\\MC_MOD\\Sodium_Chinese_Localization_Package\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003dsclp%%D:\\MC_MOD\\Sodium_Chinese_Localization_Package\\neoforge\\bin\\main"
       ],
       "cwd": "${workspaceFolder}\\neoforge\\run",
       "env": {},
