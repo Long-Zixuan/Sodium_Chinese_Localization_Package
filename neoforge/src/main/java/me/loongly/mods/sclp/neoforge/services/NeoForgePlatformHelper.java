@@ -28,4 +28,26 @@ public class NeoForgePlatformHelper implements IPlatformHelper
         }
         return "Unknown";
     }
+
+    @Override
+    public boolean isNewSodium()
+    {
+        var modList = ModList.get();
+        var sodiumModCont = modList.getModContainerById("sodium").orElse(null);
+        if (sodiumModCont != null)
+        {
+            var tmpArr = sodiumModCont.getModInfo().getVersion().toString().split(".");
+            int midVersion;
+            if(tmpArr.length >= 2)
+            {
+                midVersion = Integer.parseInt(tmpArr[1]);
+            }
+            else
+            {
+                midVersion = 0;
+            }
+            return midVersion >= 8;
+        }
+        return false;
+    }
 }
