@@ -13,6 +13,7 @@ import net.caffeinemc.mods.sodium.client.gui.options.control.TickBoxControl;
 import net.minecraft.network.chat.Component;
 
 import me.loongly.mods.sclp.common.client.gui.options.storage.SCLPOptionsStorage;
+import me.loongly.mods.sclp.common.language.I18N;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,7 +27,14 @@ public class SCLPGameOptionPages
 
     private static final SCLPOptionsStorage lsdcOpts = new SCLPOptionsStorage();
 
-    public static OptionPage page()
+    public static OptionPage sclpPage()
+    {
+        List<OptionGroup> groups = new ArrayList<>();
+        //未来预留
+        return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
+    }
+
+    public static OptionPage birthPage()
     {
         LocalDate today = LocalDate.now();
         int year = today.getYear();

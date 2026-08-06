@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.loongly.mods.sclp.common.client.gui.SCLPGameOptionPages;
+import me.loongly.mods.sclp.common.language.I18N;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 import java.io.IOException;
@@ -63,16 +64,24 @@ public abstract class SodiumOptionsGUIMixin extends Screen
     @Final @Shadow(remap = false)
     private List<OptionPage> pages;
 
+    @Shadow(remap = false)
+    OptionPage currentPage;
+
     @Unique
     OptionPage birthPage_;
+
+    @Unique
+    OptionPage sclpPage_;
 
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void addLSDCOptionPage(CallbackInfo ci)
     {
+        this.sclpPage_ = SCLPGameOptionPages.sclpPage();
+        this.pages.add(this.sclpPage_);
         if(SCLPClientMod.isMyBirthday())
         {
-            birthPage_ = SCLPGameOptionPages.page();
+            birthPage_ = SCLPGameOptionPages.birthPage();
             this.pages.add(birthPage_);
         }
     }
@@ -118,7 +127,10 @@ public abstract class SodiumOptionsGUIMixin extends Screen
         Util.getPlatform().openUri("https://caffeinemc.net/donate");
     }
 
-    private FlatButtonWidget birthButton;
+    private FlatButtonWidget birthButton_;
+
+    private FlatButtonWidget supportBtn_;
+    private FlatButtonWidget closeSupportBtn_;
 
     @Inject(method = "rebuildGUI", at = @At("TAIL"),remap = false)
     private void injectRebuild(CallbackInfo ci)
@@ -132,8 +144,56 @@ public abstract class SodiumOptionsGUIMixin extends Screen
         int day = today.getDayOfMonth();
         if(SCLPClientMod.isMyBirthday(year, month, day))
         {
-            this.birthButton = new FlatButtonWidget(new Dim2i(width - 73, height - 55, 65, 20), Component.literal("🎂:" + (year - 2004)), SCLPClientMod::birthCaiDan);
-            this.addRenderableWidget(birthButton);
+            this.birthButton_ = new FlatButtonWidget(new Dim2i(width - 73, height - 55, 65, 20), Component.literal("🎂:" + (year - 2004)), SCLPClientMod::birthCaiDan);
+            this.addRenderableWidget(birthButton_);
         }
+        if(SCLPClientMod.options().shouldShowSupportPage)
+        {
+            var closeSupportBtnDim = new Dim2i(this.width - 142, this.height - 52, 20, 20);
+            var supportBtnDim = new Dim2i(closeSupportBtnDim.x() + closeSupportBtnDim.width() + 2, closeSupportBtnDim.y(), 100, 20);
+            supportBtn_ = new FlatButtonWidget(supportBtnDim, Component.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});            
+            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});
+            this.addRenderableWidget(supportBtn_);
+            this.addRenderableWidget(closeSupportBtn_);
+            supportBtn_.setVisible(false);
+            closeSupportBtn_.setVisible(false);
+        }
+        if(currentPage == sclpPage_)
+        {
+            setSupportBtnVis(true);
+        }
+        else
+        {
+            setSupportBtnVis(false);
+        }
+    }
+
+    void setSupportBtnVis(boolean vis)
+    {
+        if(supportBtn_ != null && closeSupportBtn_ != null)
+        {
+            supportBtn_.setVisible(vis);
+            closeSupportBtn_.setVisible(vis);
+        }
+    }
+
+    void onClickCloseSupportBtn()
+    {
+        SCLPClientMod.options().shouldShowSupportPage = false;
+        try
+        {
+            SCLPClientMod.options().writeChanges();
+        }
+        catch (IOException e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Failed to save options.", e);
+        }
+        setSupportBtnVis(false);
+    }
+
+    void openSupportWeb()
+    {
+        SCLPClientMod.LOGGER.info("[SCLP]Open Support website.");
+        Util.getPlatform().openUri("https://ifdian.net/a/loongly");
     }
 }
