@@ -113,13 +113,16 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
     @Unique
     private FlatButtonWidget closeSupportBtn_;
 
+    private static final float ASPECT_RATIO = 5f / 4f;
+    private static final int MINIMUM_WIDTH = 550;
+
     @Inject(method = "parentFrameBuilder", at = @At("RETURN"),remap = false, cancellable = true)
     void injectParentFrameBuilder(CallbackInfoReturnable<BasicFrame.Builder> c)
     {
         int newWidth = this.width;
-        if (newWidth > 550 && (float) this.width / (float) this.height > (5f / 4f)) 
+        if (newWidth > MINIMUM_WIDTH && (float) this.width / (float) this.height > ASPECT_RATIO) 
         {
-            newWidth = Math.max(550, (int) (this.height * 5f / 4f));
+            newWidth = Math.max(MINIMUM_WIDTH, (int) (this.height *ASPECT_RATIO));
         }
 
         Dim2i basicFrameDim = new Dim2i((this.width - newWidth) / 2, 0, newWidth, this.height);
@@ -135,9 +138,9 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
         }
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
-            var supportBtnDim = new Dim2i(30, tabFrameDim.getLimitY() + 5, 100, 20);
-            supportBtn_ = new FlatButtonWidget(supportBtnDim, Component.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});
-            var closeSupportBtnDim = new Dim2i(supportBtnDim.x() + supportBtnDim.width() + 2, supportBtnDim.y(), 20, 20);
+            var closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 134 ,tabFrameDim.getLimitY() - 17 , 20, 20);
+            var supportBtnDim = new Dim2i(closeSupportBtnDim.x() + closeSupportBtnDim.width() + 2, closeSupportBtnDim.y(), 100, 20);
+            supportBtn_ = new FlatButtonWidget(supportBtnDim, Component.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});            
             closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});
         }
     }
