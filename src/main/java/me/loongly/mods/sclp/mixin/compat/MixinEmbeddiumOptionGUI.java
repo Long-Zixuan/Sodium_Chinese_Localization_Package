@@ -95,10 +95,12 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
         }
         if(SCLPClientMod.options().getShouldShowSupportPageVal())
         {
-            var supportBtnDim = new Dim2i(30, tabFrameDim.getLimitY() + 5, 100, 20);
+            var closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 134, tabFrameDim.getLimitY() - 17, 20, 20);
+            var supportBtnDim = new Dim2i(closeSupportBtnDim.x() + closeSupportBtnDim.width() + 2, closeSupportBtnDim.y(), 100, 20);
             supportBtn_ = new FlatButtonWidget(supportBtnDim, Text.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});
-            var closeSupportBtnDim = new Dim2i(supportBtnDim.x() + supportBtnDim.width() + 2, supportBtnDim.y(), 20, 20);
             closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Text.literal("×"), () -> {onClickCloseSupportBtn();});
+            supportBtn_.setVisible(false);
+            closeSupportBtn_.setVisible(false);
         }
     }
 
