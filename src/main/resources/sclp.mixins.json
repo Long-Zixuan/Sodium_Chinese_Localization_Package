@@ -12,7 +12,7 @@
     "compat.MixinControlValueFormatter",
     "compat.OptionPageFrameMixin"
   ],
-  "plugin": "me.loongly.mods.sclp.mixin.SodiumExtraMixinConfigPlugin",
+  "plugin": "me.loongly.mods.sclp.mixin.SCLPMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
   }

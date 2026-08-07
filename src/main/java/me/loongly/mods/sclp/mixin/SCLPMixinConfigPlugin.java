@@ -11,7 +11,7 @@ import java.util.Optional;
 
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 
-public class SodiumExtraMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin 
+public class SCLPMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin 
 {
 
     private static final String MIXIN_PACKAGE_ROOT = "me.loongly.mods.sclp.mixin.";
