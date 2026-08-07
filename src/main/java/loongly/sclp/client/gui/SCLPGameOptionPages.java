@@ -12,13 +12,16 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
+import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Util;
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import loongly.sclp.language.I18N;
 import loongly.sclp.client.SclpClientMod;
 
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +55,7 @@ public class SCLPGameOptionPages
                         .setName(I18N.trans("sclp.is_enable_sclp"))
                         .setTooltip(I18N.trans("sclp.is_enable_sclp_tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> {opts.isEnableSclp = value;closeVideoSettingsPage();SclpClientMod.caidan();}, opts -> opts.isEnableSclp)
+                        .setBinding((opts, value) -> {opts.isEnableSclp = value;rebuildSodiumScr();SclpClientMod.caidan();}, opts -> opts.isEnableSclp)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -70,7 +73,7 @@ public class SCLPGameOptionPages
                         .setName(I18N.trans("sclp.is_disable_no_internet_warn"))
                         .setTooltip(I18N.trans("sclp.is_disable_no_internet_warn_tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> {opts.isDisableSclpNoInternetWarn = value;closeVideoSettingsPage();}, opts -> opts.isDisableSclpNoInternetWarn)
+                        .setBinding((opts, value) -> {opts.isDisableSclpNoInternetWarn = value;rebuildSodiumScr();}, opts -> opts.isDisableSclpNoInternetWarn)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -79,7 +82,7 @@ public class SCLPGameOptionPages
                         .setName(I18N.trans("sclp.not_show_page"))
                         .setTooltip(I18N.trans("sclp.not_show_page_tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> {opts.notShowPage = value;closeVideoSettingsPage();isChangeNotShowPage = true;}, opts -> opts.notShowPage)
+                        .setBinding((opts, value) -> {opts.notShowPage = value;rebuildSodiumScr();isChangeNotShowPage = true;}, opts -> opts.notShowPage)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -99,6 +102,26 @@ public class SCLPGameOptionPages
                         .build())
                 .build());
         }*/
+    }
+
+    static void rebuildSodiumScr()
+    {
+        try
+        {
+                MinecraftClient client = MinecraftClient.getInstance();
+                Screen curScreen = client.currentScreen;
+                if(curScreen instanceof SodiumOptionsGUI)
+                {
+                        Class<?> clazz = SodiumOptionsGUI.class;
+                        Method method = clazz.getDeclaredMethod("rebuildGUI");
+                        method.setAccessible(true);
+                        method.invoke(curScreen);
+                }
+        }
+        catch(Exception e)
+        {
+                SclpClientMod.LOGGER.error("[SCLP] close Sodium Screen Error:", e);
+        }
     }
 
     static void closeVideoSettingsPage()
