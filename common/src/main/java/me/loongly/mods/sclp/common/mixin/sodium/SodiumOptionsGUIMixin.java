@@ -78,7 +78,7 @@ public abstract class SodiumOptionsGUIMixin extends Screen
     private void addLSDCOptionPage(CallbackInfo ci)
     {
         this.sclpPage_ = SCLPGameOptionPages.sclpPage();
-        this.pages.add(this.sclpPage_);
+        //this.pages.add(this.sclpPage_);
         if(SCLPClientMod.isMyBirthday())
         {
             birthPage_ = SCLPGameOptionPages.birthPage();
