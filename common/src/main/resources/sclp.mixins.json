@@ -6,7 +6,7 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "sodium.MixinModOptionsBuilderImpl",
-    "sodium.MixinScreenPrompt",
+    "sodium.MixinScreenPromptNew",
     "sodium.MixinSodiumVideoSettingsScreen"
   ],
   "plugin": "me.loongly.mods.sclp.common.mixin.SCLPMixinPlugin",

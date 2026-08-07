@@ -23,9 +23,13 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
     {
-        if(mixinClassName.contains("me.loongly.mods.sclp.common.mixin.sodium.MixinScreenPrompt"))
+        if(mixinClassName.contains("me.loongly.mods.sclp.common.mixin.sodium.MixinScreenPromptNew"))
         {
             return isNewSodium();
+        }
+        if(mixinClassName.contains("me.loongly.mods.sclp.common.mixin.sodium.MixinScreenPrompt"))
+        {
+            return !isNewSodium();
         }
         return true;
     }

@@ -98,7 +98,7 @@
   "Sodium":"鈉",
   "sclp.pages.sclp_page.name":"漢化包設定",
   "sclp.options.should_trans_mod_name.name":"是否翻譯模組名",
-  "sclp.options.should_trans_mod_name.tooltip":"開啟選項後將翻譯模組名\n關閉選項後將不翻譯模組名\n該選項將在重开此页面時生效",
+  "sclp.options.should_trans_mod_name.tooltip":"開啟選項後將翻譯模組名\n關閉選項後將不翻譯模組名\n該選項將在重新开启此页面时生效",
   "Sodium Shadowy Path Blocks":"鈉-土徑陰影",
   "Sodium Extra":"鈉-扩展",
   "Sodium Chinese Localized Package":"鈉-漢化包",
@@ -129,6 +129,20 @@
   "sodium.options.chunk_update_threads.value":"%s綫程",
   "sodium.options.default":"默認",
    "sodium.options.clouds_distance.tooltip": "遠距離雲層將渲染至該高度範圍。此選項對性能影響極小，僅影響視覺效果。",
-  "sclp.cur_languagecode":"zh_tw"
+  "sclp.cur_languagecode":"zh_tw",
+  "sclp.emb.donation.prompt.1":"看起来您非常中意",
+  "sclp.emb.donation.prompt.2":",这是我的世界钠模组的一个分支。",
+  "sclp.emb.donation.prompt.3":"钠模组很复杂，需要",
+  "sclp.emb.donation.thousand_hours":"上千小时",
+  "sclp.emb.donation.prompt.4":"来开发、测试和维护以给予玩家所期待的体验。",
+  "sclp.emb.donation.prompt.5":"若您想表达感激之情，同时支持我们模组的开发，不妨考虑",
+  "sclp.emb.donation.buycoffee":"支持钠",
+  "sclp.emb.donation.buycoffee2":"支持钠",
+  "sclp.emb.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）",
+  "sclp.options.group.support":"支持",
+  "sclp.options.support_project.name":"請LoongLy喝一杯奶茶",
+  "sclp.options.support_project.tooltip":"將在瀏覽器打开支持LoongLy的页面",
+  "sclp.options.close_support_page.name":"永久關閉支持页面",
+  "sclp.options.close_support_page.tooltip":"將不再顯示支持页面,該選項將在重啓游戲后生效"
   }
   

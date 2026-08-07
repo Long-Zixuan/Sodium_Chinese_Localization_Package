@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Mixin(ScreenPrompt.class)
-public abstract class MixinScreenPrompt//不继承ScreenPrompt，原因未知（具体是public @NotNull List<AbstractWidget> getWidgets()函数报错了），但是继承了之后对init的overwrite不起作用，原因未知
+public abstract class MixinScreenPromptNew//不继承ScreenPrompt，原因未知（具体是public @NotNull List<AbstractWidget> getWidgets()函数报错了），但是继承了之后对init的overwrite不起作用，原因未知
 {
     @Shadow @Final
     FlatButtonWidget closeButton;
