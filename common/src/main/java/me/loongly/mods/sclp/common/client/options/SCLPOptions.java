@@ -67,7 +67,7 @@ public class SCLPOptions
             throw new RuntimeException("Couldn't save SCLP options changes", e);
         }
 
-        SCLPClientMod.LOGGER.info("[SCLP] Saved changes to SCLP options");
+        SCLPClientMod.logger().info("[SCLP] Saved changes to SCLP options");
     }
 
     public static SCLPOptions load() 
@@ -111,7 +111,7 @@ public class SCLPOptions
         if (!Files.exists(dir)) 
         {
             Files.createDirectories(dir);
-            SCLPClientMod.LOGGER.info("[SCLP] Create config file :" + dir.toString());
+            SCLPClientMod.logger().info("[SCLP] Create config file :" + dir.toString());
         }
         else if (!Files.isDirectory(dir)) 
         {

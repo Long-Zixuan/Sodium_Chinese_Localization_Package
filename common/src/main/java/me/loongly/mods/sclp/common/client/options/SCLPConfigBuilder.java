@@ -133,7 +133,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         }
         catch(Exception e)
         {
-            SCLPClientMod.LOGGER.error("[SCLP] close Sodium Screen Error:", e);
+            SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
         }
     }
 
@@ -149,7 +149,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         }
         catch(Exception e)
         {
-            SCLPClientMod.LOGGER.error("[SCLP] close Sodium Screen Error:", e);
+            SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
         }
     }
 }

@@ -36,7 +36,7 @@ public class MixinPageBuilderImpl
             //var oriName = name;
             name = Component.translatable(transMap.get(name.getString()));
             this.name = name;
-            //SCLPClientMod.LOGGER.info("[SCLP]" + oriName.getString() + " -> " + name.getString());
+            //SCLPClientMod.logger().info("[SCLP]" + oriName.getString() + " -> " + name.getString());
         }
     }
 }

@@ -13,18 +13,28 @@ import net.minecraft.util.Util;
 
 public class SCLPClientMod
 {
-
-	public static final Logger LOGGER = LoggerFactory.getLogger("SCLP");
-
-	private static final SCLPOptions CONFIG = SCLPOptions.load();
-
 	public static final String MOD_ID = "sclp";
 
+	public static final String MOD_NAME = "SCLP";
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
+
+	private static final SCLPOptions CONFIG = SCLPOptions.load();
 
 	public static SCLPOptions options() 
 	{
 		return CONFIG;
 	}
+
+	public static Logger logger() 
+	{
+        if (LOGGER == null) 
+		{
+            throw new IllegalStateException("[SCLP] Logger not yet available");
+        }
+
+        return LOGGER;
+    }
 
 	public static void onInitClient() 
 	{

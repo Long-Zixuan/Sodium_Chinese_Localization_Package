@@ -44,11 +44,11 @@ public class LangFile
         String langStr = doGet(langUrl);
         if(langStr != null)
         {
-            SCLPClientMod.LOGGER.info("[SCLP]{} have internet update", langCode_);
+            SCLPClientMod.logger().info("[SCLP]{} have internet update", langCode_);
             Map<String, String> tmp = convertJsonToMap(langStr);
             if(tmp == null)
             {
-                SCLPClientMod.LOGGER.error("[SCLP]{} language file error", langUrl);
+                SCLPClientMod.logger().error("[SCLP]{} language file error", langUrl);
             }
             else
             {
@@ -58,7 +58,7 @@ public class LangFile
                 }
             }
         }
-        SCLPClientMod.LOGGER.info("[SCLP]{} language loaded", langCode_);
+        SCLPClientMod.logger().info("[SCLP]{} language loaded", langCode_);
     }
 
     public static String getLangUrl(String langCode)
@@ -77,7 +77,7 @@ public class LangFile
         }
         catch (Exception e)
         {
-            SCLPClientMod.LOGGER.error("[SCLP] Convert Json To Map error: " + e.toString());
+            SCLPClientMod.logger().error("[SCLP] Convert Json To Map error: " + e.toString());
             return null;
         }
     }
@@ -121,12 +121,12 @@ public class LangFile
         }
         catch (MalformedURLException e)
         {
-            SCLPClientMod.LOGGER.error("[SCLP]MalformedURLException:" + e.toString());
+            SCLPClientMod.logger().error("[SCLP]MalformedURLException:" + e.toString());
             e.printStackTrace();
         }
         catch (IOException e)
         {
-            SCLPClientMod.LOGGER.error("[SCLP]IOException1:" + e.toString());
+            SCLPClientMod.logger().error("[SCLP]IOException1:" + e.toString());
             e.printStackTrace();
         }
         finally
@@ -140,7 +140,7 @@ public class LangFile
                 }
                 catch (IOException e)
                 {
-                    SCLPClientMod.LOGGER.error("[SCLP]IOException2:" + e.toString());
+                    SCLPClientMod.logger().error("[SCLP]IOException2:" + e.toString());
                     e.printStackTrace();
                 }
             }
@@ -153,7 +153,7 @@ public class LangFile
                 }
                 catch (IOException e)
                 {
-                    SCLPClientMod.LOGGER.error("[SCLP]IOException3:" + e.toString());
+                    SCLPClientMod.logger().error("[SCLP]IOException3:" + e.toString());
                     e.printStackTrace();
                 }
             }
