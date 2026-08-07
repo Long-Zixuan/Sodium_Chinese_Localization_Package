@@ -22,13 +22,6 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.sclp]]
-modId = "embeddium"
-mandatory = true
-versionRange = "[0.3.16,)"
-ordering = "NONE"
-side = "CLIENT"
-
-[[dependencies.sclp]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"

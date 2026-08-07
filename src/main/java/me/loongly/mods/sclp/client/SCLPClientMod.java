@@ -73,6 +73,20 @@ public class SCLPClientMod
         return false;
     }
 
+    public static boolean isNewEmbeddium()
+    {
+        try
+        {
+            Class.forName("org.embeddedt.embeddium.gui.frame.BasicFrame");
+            return true;
+        }
+        catch (ClassNotFoundException e)
+        {
+
+        }
+        return false;
+    }
+
     public static boolean isMyBirthday(int year, int month, int day)
     {
         return month == 4 && day == 4;
