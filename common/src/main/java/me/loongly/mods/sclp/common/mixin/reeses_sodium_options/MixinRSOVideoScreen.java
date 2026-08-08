@@ -78,8 +78,8 @@ public class MixinRSOVideoScreen implements ISCLPScreen
         }
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
-            builder.addChild(dim -> closeSupportBtn_);
-            builder.addChild(dim -> supportBtn_);
+            // builder.addChild(dim -> closeSupportBtn_);
+            // builder.addChild(dim -> supportBtn_);
         }
         cir.setReturnValue(builder);
     }
