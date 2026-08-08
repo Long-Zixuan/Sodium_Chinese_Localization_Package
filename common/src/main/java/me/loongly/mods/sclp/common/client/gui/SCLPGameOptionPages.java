@@ -18,6 +18,7 @@ import me.loongly.mods.sclp.common.language.I18N;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
@@ -29,8 +30,18 @@ public class SCLPGameOptionPages
 
     public static OptionPage sclpPage()
     {
+        BooleanSupplier shoudEnableTransModName = () -> false;//用这个page builder的钠版本根本没有显示模组名字的功能，一律false
         List<OptionGroup> groups = new ArrayList<>();
-        //未来预留
+        groups.add(OptionGroup.createBuilder()
+        .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+                        .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
+                        .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
+                        .setControl(TickBoxControl::new)
+                        .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
+                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                        .setEnabled(shoudEnableTransModName)
+                        .build())
+                .build());
         return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
     }
 
