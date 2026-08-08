@@ -59,7 +59,7 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
     {
         try
         {
-            Class.forName("me.flashreese.mods.reese_sodium_options.client.config.ReeseSodiumOptionsConfig");
+            Class.forName("me.flashyreese.mods.reeses_sodium_options.client.config.ReeseSodiumOptionsConfigEntryPoint");
             return true;
         }
         catch (ClassNotFoundException e)
