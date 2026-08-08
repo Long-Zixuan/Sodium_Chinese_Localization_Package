@@ -17,6 +17,7 @@ public class MixinOptionImpl
 {
     HashMap<String,Runnable> sclpEvents = new HashMap<String,Runnable>(){{
         put("sclp.support",()->{SclpClientMod.openSupportPage();});
+        put("sclp.birth",()->{SclpClientMod.birthCaidan();});
     }};
 
     @Shadow @Final

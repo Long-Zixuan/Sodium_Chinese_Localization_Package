@@ -19,6 +19,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Util;
+import loongly.sclp.client.gui.SCLPGameOptionPages.ViaOpt;
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import loongly.sclp.language.I18N;
 import loongly.sclp.client.SclpClientMod;
@@ -27,6 +28,7 @@ import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 public class SCLPGameOptionPages
 {
 
@@ -107,22 +109,22 @@ public class SCLPGameOptionPages
                                 .build())
                         .build());
         }
-        /*  LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now();
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
         if(SclpClientMod.isMyBirthday(year, month, day))
         {
                 groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
-                        .setName("ᗜᴗᗜ:" + (year - 2004))
+                .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
+                        .setName("sclp.birth")
                         .setTooltip("ᗜᴗᗜ:" + (year - 2004))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> { SclpClientMod.birthCaidan();}, opts -> true)
+                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "➤"}))
+                        .setBinding((opts, value) -> { SclpClientMod.birthCaidan();}, opts -> ViaOpt.VIA)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-        }*/
+        }
     }
 
     public enum ViaOpt
