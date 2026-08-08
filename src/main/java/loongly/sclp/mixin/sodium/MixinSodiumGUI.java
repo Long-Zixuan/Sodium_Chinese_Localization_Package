@@ -54,12 +54,7 @@ public class MixinSodiumGUI extends Screen
         super(new TranslatableText("SCLP Mixin Sodium Options"));
     }
 
-    private FlatButtonWidget birthButton_;
     private FlatButtonWidget noInternetButton_;
-    /*@Unique
-    FlatButtonWidget supportBtn_;
-    @Unique
-    FlatButtonWidget closeSupportBtn_;*/
     @Shadow
     @Final
     private List<Drawable> drawable;
@@ -69,49 +64,13 @@ public class MixinSodiumGUI extends Screen
     @Inject(method = "rebuildGUI", at = @At(value = "RETURN"),remap = false, cancellable = true)
     private void injectRebuildGUI(CallbackInfo ci)
     {
-        /*LocalDate today = LocalDate.now();
-        int year = today.getYear();
-        int month = today.getMonthValue();
-        int day = today.getDayOfMonth();
-        if(SclpClientMod.isMyBirthday(year, month, day))
-        {
-            this.birthButton_ = new FlatButtonWidget(new Dim2i(this.width - 73, this.height - 60, 65, 20), "ᗜᴗᗜ:" + (year - 2004), SclpClientMod::birthCaidan);
-            this.children.add(this.birthButton_);
-            this.drawable.add(this.birthButton_);
-        }*/
         if(!SclpClientMod.isConnected && SclpClientMod.options().isEnableSclp && !SclpClientMod.options().isDisableSclpNoInternetWarn)
         {
             this.noInternetButton_ = new FlatButtonWidget(new Dim2i(5, this.height - 10, 80, 10), I18N.trans("sclp.no_internet"), this::noInternet);
             this.children.add(this.noInternetButton_);
             this.drawable.add(this.noInternetButton_);
         }
-        /*if(SclpClientMod.options().shouldShowSupportBtn && this.currentPage == sclpPage_)
-        {
-            Dim2i supportBtnDim = new Dim2i(this.width - 108, this.height - 60, 100, 20);
-            supportBtn_ = new FlatButtonWidget(supportBtnDim, I18N.trans("sclp.support"), () -> SclpClientMod.openSupportPage());
-            Dim2i closeSupportBtnDim = new Dim2i(this.width - 130, this.height - 60, 20, 20);
-            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, "x", this::onClickCloseSupportBtn);
-            this.children.add(supportBtn_);
-            this.children.add(closeSupportBtn_);
-            this.drawable.add(supportBtn_);
-            this.drawable.add(closeSupportBtn_);
-        }*/
     }
-
-    /*void onClickCloseSupportBtn()
-    {
-        SclpClientMod.options().shouldShowSupportBtn = false;
-        try
-        {
-            SclpClientMod.options().writeChanges();
-        }
-        catch (IOException e)
-        {
-            SclpClientMod.LOGGER.error("[SCLP] Failed to write SCLP options", e);
-        }
-        this.closeSupportBtn_.setVisible(false);
-        this.supportBtn_.setVisible(false);
-    }*/
 
     void noInternet()
     {

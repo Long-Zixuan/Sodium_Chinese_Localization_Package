@@ -39,15 +39,6 @@ public class MixinSodiumVideoOptionsScreen
         {
             this.pages.add(SCLPGameOptionPages.sclpPage());
         }
-        // LocalDate today = LocalDate.now();
-        // int year = today.getYear();
-        // int month = today.getMonthValue();
-        // int day = today.getDayOfMonth();
-        // if(SclpClientMod.isMyBirthday(year, month, day))
-        // {
-        //     birthPage_ = SCLPGameOptionPages.birthPage();
-        //     this.pages.add(birthPage_);
-        // }
     }
  
     @Unique
