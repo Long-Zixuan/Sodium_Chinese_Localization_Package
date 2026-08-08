@@ -74,6 +74,14 @@ public class ECLPGameOptionPages
 
         groups.add(OptionGroup.createBuilder()
         .setId(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_support_group"))
+            .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+                    .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "should_close_support"))
+                    .setName(Component.translatable("sclp.options.support_project.name"))
+                    .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                    .setControl(TickBoxControl::new)
+                    .setBinding((opts, value) -> {opts.shouldTransModName = !value;rebuildEmbScreenUI();}, opts -> !opts.shouldTransModName)
+                    //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build())
             .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
                 .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"))
                 .setName(Component.translatable("sclp.options.support_project.name"))
@@ -85,11 +93,6 @@ public class ECLPGameOptionPages
             .build());
         
         return new OptionPage(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
-    }
-
-    public enum ViaOpt 
-    {
-        VIA
     }
 
     private static void rebuildEmbScreenUI()

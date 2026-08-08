@@ -45,10 +45,10 @@ public class MixinRSOVideoScreen implements ISCLPScreen
        
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
-            Dim2i supportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 100, tabFrameDim.getLimitY() - 17, 100, 20);
+            /*Dim2i supportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 100, tabFrameDim.getLimitY() - 17, 100, 20);
             supportBtn_ = new FlatButtonWidget(supportBtnDim, Component.literal(I18N.trans("sclp.options.support_project.name")),() -> {openSupportPage();});
             Dim2i closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 122, tabFrameDim.getLimitY() - 17, 20, 20);
-            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});
+            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});*/
         }
         LocalDate today = LocalDate.now();
         int year = today.getYear();

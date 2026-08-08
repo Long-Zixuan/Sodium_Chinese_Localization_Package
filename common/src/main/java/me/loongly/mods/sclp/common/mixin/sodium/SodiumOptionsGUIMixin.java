@@ -160,7 +160,7 @@ public abstract class SodiumOptionsGUIMixin extends Screen
         }
         if(currentPage == sclpPage_)
         {
-            setSupportBtnVis(true);
+            //setSupportBtnVis(true);
         }
         else
         {

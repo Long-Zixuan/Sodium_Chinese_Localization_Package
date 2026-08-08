@@ -43,16 +43,25 @@ public class SCLPGameOptionPages
                         .setEnabled(shoudEnableTransModName)
                         .build())
                 .build());
-
-        groups.add(OptionGroup.createBuilder()
-        .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
-                        .setName(Component.translatable("sclp.options.support_project.name"))
-                        .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
-                        .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
+        if(SCLPClientMod.options().shouldShowSupportPage)
+        {
+            groups.add(OptionGroup.createBuilder()
+                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+                    .setName(Component.translatable("sclp.options.close_support_page.name"))
+                    .setTooltip(Component.translatable("sclp.options.close_support_page.tooltip"))
+                    .setControl(TickBoxControl::new)
+                    .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
+                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build())
+                .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                    .setName(Component.translatable("sclp.options.support_project.name"))
+                    .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
+                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build())
                 .build());
+        }
         return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
     }
 
@@ -76,11 +85,6 @@ public class SCLPGameOptionPages
         //         .build());
         // }
         return new OptionPage(Component.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
-    }
-
-    public enum ViaOpt
-    {
-        VIA,
     }
 }
 
