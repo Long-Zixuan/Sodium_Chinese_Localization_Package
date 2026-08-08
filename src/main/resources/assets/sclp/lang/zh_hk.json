@@ -122,5 +122,7 @@
   "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
   "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验",
     "sclp.support":"请LoongLy喝杯奶茶！",
-    "sclp.support_tooltip":"将在浏览器打开LoongLy的爱发电主页"
+    "sclp.support_tooltip":"将在浏览器打开LoongLy的爱发电主页",
+    "sclp.support_close":"永远关闭支持选项",
+    "sclp.support_tooltip_close":"如果启用，将不再显示“请LoongLy喝杯奶茶！”选项"
   }

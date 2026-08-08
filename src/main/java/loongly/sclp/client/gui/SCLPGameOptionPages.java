@@ -88,15 +88,25 @@ public class SCLPGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-         groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
-                        .setName("sclp.support")
-                        .setTooltip(I18N.trans("sclp.support_tooltip"))
-                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "->"}))
-                        .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
+        if(SclpClientMod.options().shouldShowSupportBtn)
+        {
+                groups.add(OptionGroup.createBuilder()
+                        .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
+                                .setName("sclp.support")
+                                .setTooltip(I18N.trans("sclp.support_tooltip"))
+                                .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "->"}))
+                                .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                                .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                                .build())
+                        .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
+                                .setName("sclp.close_support")
+                                .setTooltip(I18N.trans("sclp.close_support_tooltip"))
+                                .setControl(TickBoxControl::new)
+                                .setBinding((opts, value) -> {opts.shouldShowSupportBtn = value;rebuildSodiumScr();}, opts -> opts.shouldShowSupportBtn)
+                                .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                                .build())
+                        .build());
+        }
         /*  LocalDate today = LocalDate.now();
         int year = today.getYear();
         int month = today.getMonthValue();

@@ -56,10 +56,10 @@ public class MixinSodiumGUI extends Screen
 
     private FlatButtonWidget birthButton_;
     private FlatButtonWidget noInternetButton_;
-    @Unique
+    /*@Unique
     FlatButtonWidget supportBtn_;
     @Unique
-    FlatButtonWidget closeSupportBtn_;
+    FlatButtonWidget closeSupportBtn_;*/
     @Shadow
     @Final
     private List<Drawable> drawable;
@@ -85,7 +85,7 @@ public class MixinSodiumGUI extends Screen
             this.children.add(this.noInternetButton_);
             this.drawable.add(this.noInternetButton_);
         }
-        if(SclpClientMod.options().shouldShowSupportBtn && this.currentPage == sclpPage_)
+        /*if(SclpClientMod.options().shouldShowSupportBtn && this.currentPage == sclpPage_)
         {
             Dim2i supportBtnDim = new Dim2i(this.width - 108, this.height - 60, 100, 20);
             supportBtn_ = new FlatButtonWidget(supportBtnDim, I18N.trans("sclp.support"), () -> SclpClientMod.openSupportPage());
@@ -95,10 +95,10 @@ public class MixinSodiumGUI extends Screen
             this.children.add(closeSupportBtn_);
             this.drawable.add(supportBtn_);
             this.drawable.add(closeSupportBtn_);
-        }
+        }*/
     }
 
-    void onClickCloseSupportBtn()
+    /*void onClickCloseSupportBtn()
     {
         SclpClientMod.options().shouldShowSupportBtn = false;
         try
@@ -111,7 +111,7 @@ public class MixinSodiumGUI extends Screen
         }
         this.closeSupportBtn_.setVisible(false);
         this.supportBtn_.setVisible(false);
-    }
+    }*/
 
     void noInternet()
     {
