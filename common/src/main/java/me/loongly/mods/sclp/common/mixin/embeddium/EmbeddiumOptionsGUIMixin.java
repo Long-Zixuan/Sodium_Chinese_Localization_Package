@@ -138,10 +138,10 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
         }
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
-            var closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 134 ,tabFrameDim.getLimitY() - 17 , 20, 20);
+            /*var closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 134 ,tabFrameDim.getLimitY() - 17 , 20, 20);
             var supportBtnDim = new Dim2i(closeSupportBtnDim.x() + closeSupportBtnDim.width() + 2, closeSupportBtnDim.y(), 100, 20);
             supportBtn_ = new FlatButtonWidget(supportBtnDim, Component.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});            
-            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});
+            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Component.literal("×"), () -> {onClickCloseSupportBtn();});*/
         }
     }
 

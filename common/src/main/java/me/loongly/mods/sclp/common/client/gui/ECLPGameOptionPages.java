@@ -71,26 +71,28 @@ public class ECLPGameOptionPages
                 //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                 .build())
             .build());
-
-        groups.add(OptionGroup.createBuilder()
-        .setId(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_support_group"))
-            .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+        if(SCLPClientMod.options().shouldShowSupportPage)
+        {
+            groups.add(OptionGroup.createBuilder()
+            .setId(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_support_group"))
+                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
                     .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "should_close_support"))
-                    .setName(Component.translatable("sclp.options.support_project.name"))
-                    .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                    .setName(Component.translatable("sclp.options.close_support_page.name"))
+                    .setTooltip(Component.translatable("sclp.options.close_support_page.tooltip"))
                     .setControl(TickBoxControl::new)
-                    .setBinding((opts, value) -> {opts.shouldTransModName = !value;rebuildEmbScreenUI();}, opts -> !opts.shouldTransModName)
+                    .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;rebuildEmbScreenUI();}, opts -> !opts.shouldShowSupportPage)
                     //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
-            .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
-                .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"))
-                .setName(Component.translatable("sclp.options.support_project.name"))
-                .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
-                .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                .build())
-            .build());
+                .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                    .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"))
+                    .setName(Component.translatable("sclp.options.support_project.name"))
+                    .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
+                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                    //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build())
+                .build());
+        }
         
         return new OptionPage(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
