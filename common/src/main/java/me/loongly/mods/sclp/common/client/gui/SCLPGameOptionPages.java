@@ -7,6 +7,7 @@ import net.caffeinemc.mods.sodium.client.gui.options.OptionGroup;
 import net.caffeinemc.mods.sodium.client.gui.options.OptionImpl;
 import net.caffeinemc.mods.sodium.client.gui.options.OptionPage;
 import net.caffeinemc.mods.sodium.client.gui.options.control.ControlValueFormatter;
+import net.caffeinemc.mods.sodium.client.gui.options.control.CyclingControl;
 import net.caffeinemc.mods.sodium.client.gui.options.control.SliderControl;
 import net.caffeinemc.mods.sodium.client.gui.options.control.TickBoxControl;
 
@@ -42,6 +43,16 @@ public class SCLPGameOptionPages
                         .setEnabled(shoudEnableTransModName)
                         .build())
                 .build());
+
+        groups.add(OptionGroup.createBuilder()
+        .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                        .setName(Component.translatable("sclp.options.support_project.name"))
+                        .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
+                        .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                        .build())
+                .build());
         return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
     }
 
@@ -66,6 +77,12 @@ public class SCLPGameOptionPages
         // }
         return new OptionPage(Component.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
     }
+
+    public enum ViaOpt
+    {
+        VIA,
+    }
 }
+
 
 //LoongLy Software Update 2026/04/05

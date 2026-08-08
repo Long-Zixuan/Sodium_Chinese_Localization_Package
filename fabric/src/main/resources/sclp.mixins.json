@@ -8,6 +8,7 @@
     "sodium.SodiumOptionsGUIMixin",
     "sodium.MixinScreenPrompt",
     "sodium.MixinControlValueFormatter",
+    "sodium.MixinOptionImpl",
     "reeses_sodium_options.MixinRSOVideoScreen",
     "reeses_sodium_options.MixinOptionPageFrame"
   ],
