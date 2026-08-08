@@ -123,5 +123,6 @@
   "sclp.not_show_page_tooltip":"启用该选项，将不再显示汉化包设置页面\n诺想重新显示该页面，可将游戏目录下config/sodium-chinese-pack-options.json文件删除，即可重新显示该页面（此举会重置汉化包设置）\n如果安装了Reese的钠视频界面，该选项则会在重启游戏后生效",
   "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
   "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验",
-    "sclp.support":"请LoongLy喝杯奶茶！"
+    "sclp.support":"请LoongLy喝杯奶茶！",
+    "sclp.support_tooltip":"将在浏览器打开LoongLy的爱发电主页"
   }

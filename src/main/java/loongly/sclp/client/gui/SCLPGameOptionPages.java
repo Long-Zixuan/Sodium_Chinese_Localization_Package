@@ -10,11 +10,13 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
+import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Util;
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
@@ -86,6 +88,15 @@ public class SCLPGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
+         groups.add(OptionGroup.createBuilder()
+                .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
+                        .setName("sclp.support")
+                        .setTooltip(I18N.trans("sclp.support_tooltip"))
+                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "->"}))
+                        .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                        .build())
+                .build());
         /*  LocalDate today = LocalDate.now();
         int year = today.getYear();
         int month = today.getMonthValue();
@@ -102,6 +113,11 @@ public class SCLPGameOptionPages
                         .build())
                 .build());
         }*/
+    }
+
+    public enum ViaOpt
+    {
+        VIA,
     }
 
     static void rebuildSodiumScr()
