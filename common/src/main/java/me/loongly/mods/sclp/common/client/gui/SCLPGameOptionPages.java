@@ -52,29 +52,19 @@ public class SCLPGameOptionPages
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
         List<OptionGroup> groups = new ArrayList<>();
-        if(SCLPClientMod.isMyBirthday(year, month, day))
-        {
-            groups.add(OptionGroup.createBuilder()
-            .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.literal("🎂:" + (year -2004)))
-                        .setTooltip(Component.literal("🎂"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SCLPClientMod.birthCaiDan(), opts -> true)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
-        }
-        // groups.add(OptionGroup.createBuilder()
-        // .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-        //                 .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
-        //                 .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
+        // if(SCLPClientMod.isMyBirthday(year, month, day))
+        // {
+        //     groups.add(OptionGroup.createBuilder()
+        //     .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
+        //                 .setName(Component.literal("🎂:" + (year -2004)))
+        //                 .setTooltip(Component.literal("🎂"))
         //                 .setControl(TickBoxControl::new)
-        //                 .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
+        //                 .setBinding((opts, value) -> SCLPClientMod.birthCaiDan(), opts -> true)
         //                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
         //                 .build())
         //         .build());
+        // }
         return new OptionPage(Component.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
-        //return new OptionPage(Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
     }
 }
 
