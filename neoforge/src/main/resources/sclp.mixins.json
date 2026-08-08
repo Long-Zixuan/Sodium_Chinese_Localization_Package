@@ -14,6 +14,7 @@
     "sodium.MixinControlValueFormatter",
     "sodium.MixinOptionImpl",
     "embeddium.OptionPageFrameMixin",
+    "embeddium.MixinOptionImpl",
     "reeses_sodium_options.MixinRSOVideoScreen",
     "reeses_sodium_options.MixinOptionPageFrame"
   ],

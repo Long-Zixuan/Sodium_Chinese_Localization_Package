@@ -2,6 +2,7 @@ package me.loongly.mods.sclp.common.client.gui;
 
 import com.google.common.collect.ImmutableList;
 
+import org.embeddedt.embeddium.api.options.control.CyclingControl;
 import org.embeddedt.embeddium.api.options.control.SliderControl;
 import org.embeddedt.embeddium.api.options.structure.Option;
 import org.embeddedt.embeddium.api.options.structure.OptionGroup;
@@ -70,7 +71,25 @@ public class ECLPGameOptionPages
                 //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                 .build())
             .build());
+
+        groups.add(OptionGroup.createBuilder()
+        .setId(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_support_group"))
+            .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"))
+                .setName(Component.translatable("sclp.options.support_project.name"))
+                .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
+                .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
+                .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                .build())
+            .build());
+        
         return new OptionPage(OptionIdentifier.create(SCLPClientMod.MOD_ID, "sclp_settings"),Component.translatable("sclp.page"), ImmutableList.copyOf(groups));
+    }
+
+    public enum ViaOpt 
+    {
+        VIA
     }
 
     private static void rebuildEmbScreenUI()
