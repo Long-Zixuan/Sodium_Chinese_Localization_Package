@@ -23,6 +23,10 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
     {
+        if(mixinClassName.startsWith("me.loongly.mods.sclp.common.mixin.reeses_sodium_options"))
+        {
+            return !isNewRSO();
+        }
         return true;
     }
 
@@ -43,6 +47,19 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
         try
         {
             Class.forName("net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen");
+            return true;
+        }
+        catch (ClassNotFoundException e)
+        {
+            return false;
+        }
+    }
+
+    boolean isNewRSO()
+    {
+        try
+        {
+            Class.forName("me.flashreese.mods.reese_sodium_options.client.config.ReeseSodiumOptionsConfig");
             return true;
         }
         catch (ClassNotFoundException e)
