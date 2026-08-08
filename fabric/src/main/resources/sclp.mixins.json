@@ -7,7 +7,9 @@
   "client": [
     "sodium.SodiumOptionsGUIMixin",
     "sodium.MixinScreenPrompt",
-    "sodium.MixinControlValueFormatter"
+    "sodium.MixinControlValueFormatter",
+    "reeses_sodium_options.MixinRSOVideoScreen",
+    "reeses_sodium_options.MixinOptionPageFrame"
   ],
   "injectors": {
     "defaultRequire": 1

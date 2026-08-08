@@ -12,7 +12,9 @@
     "embeddium.EmbeddiumOptionsGUIMixin",
     "embeddium.MixinControlValueFormatter",
     "sodium.MixinControlValueFormatter",
-    "embeddium.OptionPageFrameMixin"
+    "embeddium.OptionPageFrameMixin",
+    "reeses_sodium_options.MixinRSOVideoScreen",
+    "reeses_sodium_options.MixinOptionPageFrame"
   ],
   "server": [
   ],
