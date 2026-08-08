@@ -124,5 +124,5 @@
     "sclp.support":"请LoongLy喝杯奶茶！",
     "sclp.support_tooltip":"将在浏览器打开LoongLy的爱发电主页",
     "sclp.support_close":"永远关闭支持选项",
-    "sclp.support_tooltip_close":"如果启用，将不再显示“请LoongLy喝杯奶茶！”选项"
+    "sclp.support_close_tooltip":"如果启用，将不再显示“请LoongLy喝杯奶茶！”选项"
   }
