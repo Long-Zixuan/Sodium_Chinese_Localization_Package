@@ -94,7 +94,7 @@ public class SCLPGameOptionPages
                         .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
                                 .setName("sclp.support")
                                 .setTooltip(I18N.trans("sclp.support_tooltip"))
-                                .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "→"}))
+                                .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "➤"}))
                                 .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                                 .build())
@@ -102,7 +102,7 @@ public class SCLPGameOptionPages
                                 .setName("sclp.support_close")
                                 .setTooltip(I18N.trans("sclp.support_close_tooltip"))
                                 .setControl(TickBoxControl::new)
-                                .setBinding((opts, value) -> {opts.shouldShowSupportBtn = !value;rebuildSodiumScr();}, opts -> !opts.shouldShowSupportBtn)
+                                .setBinding((opts, value) -> {opts.shouldShowSupportBtn = !value;}, opts -> !opts.shouldShowSupportBtn)
                                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                                 .build())
                         .build());
