@@ -16,6 +16,8 @@ dependencies {
     modImplementation "maven.modrinth:sodium:${sodium_version}-fabric"
 
     modImplementation "org.embeddedt:embeddium-1.21.1:1.0.12-beta.400+mc1.21.1"
+
+    modImplementation "maven.modrinth:reeses-sodium-options:mc1.21.1-1.8.0-beta.4+fabric"
 }
 
 loom {
