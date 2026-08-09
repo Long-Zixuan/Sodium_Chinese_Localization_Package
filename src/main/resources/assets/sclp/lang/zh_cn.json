@@ -276,5 +276,6 @@
   "options.framerate":"%s帧",
   "Default":"默认",
   "threads":"线程",
-  "sclp.options.support_project.name":"请LoongLy喝一杯奶茶"
+  "sclp.options.support_project.name":"请LoongLy喝一杯奶茶",
+  "sclp.options.open_external_page_button": "打开 ➤"
 }

@@ -3,16 +3,20 @@ package me.loongly.mods.sclp.client.gui;
 import com.google.common.collect.ImmutableList;
 
 import me.jellysquid.mods.sodium.client.gui.options.*;
+import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
 import me.loongly.mods.sclp.client.SCLPClientMod;
+import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages.ViaOpt;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.resource.Resource;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Identifier;
 
+import org.apache.logging.log4j.core.config.builder.api.Component;
 import org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen;
 
 import java.time.LocalDate;
@@ -96,6 +100,22 @@ public class SCLPGameOptionPages
         catch (Exception e)
         {
             SCLPClientMod.LOGGER.error("[SCLP] Error while rebuilding embeddium screen", e);
+        }
+    }
+
+    public enum ViaOpt
+    {
+        VIA;
+        public static OptionImpl<SCLPGameOptions,ViaOpt> create(String namespace,String id,String name,String tooltip,SCLPOptionsStorage opts)
+        {
+            return OptionImpl.createBuilder(ViaOpt.class, opts)
+                    .setId(Identifier.of(namespace, id))
+                    .setName(Text.translatable(name))
+                    .setTooltip(Text.translatable(tooltip))
+                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Text[] { Text.literal(I18N.trans("sclp.options.open_external_page_button"))}))
+                    .setBinding((opt, value) -> {}, opt -> ViaOpt.VIA)
+                    //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build();
         }
     }
 }
