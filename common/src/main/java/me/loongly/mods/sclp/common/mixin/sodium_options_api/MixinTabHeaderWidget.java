@@ -23,7 +23,7 @@ public abstract class MixinTabHeaderWidget
     private static void mixinGetModName(String modId, CallbackInfoReturnable<String> cir) 
     {
         String modName = cir.getReturnValue();
-        if(modName.equals("Sodium/Embeddium Chinese Localized Package")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示SCLP这种缩写
+        if(modName.equals("Sodium/Embeddium Chinese Localized Package")||modName.equals("Sodium Chinese Localized Package")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示SCLP这种缩写
         {
             modName = "SCLP";
         }
