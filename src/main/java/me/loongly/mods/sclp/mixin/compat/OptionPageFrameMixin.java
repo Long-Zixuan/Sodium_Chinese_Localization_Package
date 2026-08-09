@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.resource.Resource;
+import net.minecraft.util.Identifier;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.loongly.mods.sclp.api.ISCLPScreen;
@@ -25,10 +27,18 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 
 @Mixin(value = OptionPageFrame.class)
 class OptionPageFrameMixin
 {
+    @SuppressWarnings("null")
+    @Unique @Nonnull
+    private static final Identifier LOGO_LOCATION = Identifier.of("sclp", "textures/sclp/gui/LZXLOGO.png");
+
+    private static final int LOGO_SIZE = 5;
+
     @Shadow @Final
     OptionPage page;
     @Inject(method = "render", at = @At("TAIL"))
@@ -42,6 +52,7 @@ class OptionPageFrameMixin
                 ISCLPScreen sclpScreen = (ISCLPScreen) embScreen;
                 sclpScreen.open();
             }
+            drawContext.drawTexture(LOGO_LOCATION, mouseX - LOGO_SIZE / 2, mouseY - LOGO_SIZE / 2, 0, 0, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE);
             return;
         }
         var embScreen = getEmbScreen();
