@@ -10,4 +10,6 @@ public interface IPlatformHelper {
     Path getConfigDirectory();
 
     String getLanguageCode();
+
+    boolean isSOA();
 }

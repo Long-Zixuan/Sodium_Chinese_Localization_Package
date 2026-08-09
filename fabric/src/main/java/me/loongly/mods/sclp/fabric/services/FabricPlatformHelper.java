@@ -30,4 +30,10 @@ public class FabricPlatformHelper implements IPlatformHelper
         }
         return "en_us";
     }
+
+    @Override
+    public boolean isSOA()
+    {
+        return FabricLoader.getInstance().getModContainer("sodiumoptionsapi").isPresent();
+    }
 }

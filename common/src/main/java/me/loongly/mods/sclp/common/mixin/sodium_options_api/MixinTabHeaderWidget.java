@@ -27,6 +27,10 @@ public abstract class MixinTabHeaderWidget
         {
             modName = "SCLP";
         }
+        if(modName.equals("Sodium Shadowy Path Blocks"))
+        {
+            modName = "SSPB";
+        }
         if(SCLPClientMod.options().shouldTransModName)
         {
             modName = I18N.trans(modName);
@@ -35,8 +39,7 @@ public abstract class MixinTabHeaderWidget
     }
 
     /**
-     * Overwrites the original getLabel method to provide custom label formatting.
-     * This method creates a component for the given modId and applies underline style based on the underline parameter.
+     * 防止SSPB无法被翻译
      * 
      * @param modId The mod identifier to create label for
      * @param underline Whether the label should be underlined
