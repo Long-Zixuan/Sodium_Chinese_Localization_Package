@@ -153,8 +153,7 @@ public class MixinSodiumGUI extends Screen
         Optional<ModContainer> rsoOptionalModContainer = FabricLoader.getInstance().getModContainer("reeses-sodium-options");
         if(!SclpClientMod.options().notShowPage || (rsoOptionalModContainer.isPresent() && SCLPGameOptionPages.isChangeNotShowPage))
         {
-            sclpPage_ = SCLPGameOptionPages.sclpPage();
-            this.pages.add(sclpPage_);
+            this.pages.add(SCLPGameOptionPages.sclpPage());
         }
          LocalDate today = LocalDate.now();
         int year = today.getYear();
@@ -169,8 +168,6 @@ public class MixinSodiumGUI extends Screen
 
     @Unique
     private OptionPage birthPage_;
-    @Unique
-    private OptionPage sclpPage_;
 
     @Inject(method = "setPage", at = @At("HEAD"), remap = false, cancellable = true)
 	private void sclp$onSetPage(OptionPage page, CallbackInfo ci) 

@@ -40,7 +40,7 @@ public class SCLPGameOptionPages
     {
         List<OptionGroup> groups = new ArrayList<>();
         buildSclpPages(groups);
-        return new OptionPage(I18N.trans("sclp.page_name"), ImmutableList.copyOf(groups));
+        return new OptionPage("sclp.page_name", ImmutableList.copyOf(groups));
     }
 
      public static OptionPage birthPage()
@@ -49,15 +49,15 @@ public class SCLPGameOptionPages
         //buildSclpPages(groups);
         LocalDate today = LocalDate.now();
         int year = today.getYear();
-        return new OptionPage(I18N.trans("ᗜᴗᗜ:" + (year - 2004)), ImmutableList.copyOf(groups));
+        return new OptionPage("ᗜᴗᗜ:" + (year - 2004), ImmutableList.copyOf(groups));
      }
 
     static void buildSclpPages(List<OptionGroup> groups)
     {
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
-                        .setName(I18N.trans("sclp.is_enable_sclp"))
-                        .setTooltip(I18N.trans("sclp.is_enable_sclp_tooltip"))
+                        .setName("sclp.is_enable_sclp")
+                        .setTooltip("sclp.is_enable_sclp_tooltip")
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> {opts.isEnableSclp = value;rebuildSodiumScr();SclpClientMod.caidan();}, opts -> opts.isEnableSclp)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -65,8 +65,8 @@ public class SCLPGameOptionPages
                 .build());
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
-                        .setName(I18N.trans("sclp.is_disable_fabric_api_warn"))
-                        .setTooltip(I18N.trans("sclp.is_disable_fabric_api_warn_tooltip"))
+                        .setName("sclp.is_disable_fabric_api_warn")
+                        .setTooltip("sclp.is_disable_fabric_api_warn_tooltip")
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> opts.isDisableSclpFabricApiWarn = value, opts -> opts.isDisableSclpFabricApiWarn)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -74,8 +74,8 @@ public class SCLPGameOptionPages
                 .build());
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
-                        .setName(I18N.trans("sclp.is_disable_no_internet_warn"))
-                        .setTooltip(I18N.trans("sclp.is_disable_no_internet_warn_tooltip"))
+                        .setName("sclp.is_disable_no_internet_warn")
+                        .setTooltip("sclp.is_disable_no_internet_warn_tooltip")
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> {opts.isDisableSclpNoInternetWarn = value;rebuildSodiumScr();}, opts -> opts.isDisableSclpNoInternetWarn)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -83,8 +83,8 @@ public class SCLPGameOptionPages
                 .build());
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
-                        .setName(I18N.trans("sclp.not_show_page"))
-                        .setTooltip(I18N.trans("sclp.not_show_page_tooltip"))
+                        .setName("sclp.not_show_page")
+                        .setTooltip("sclp.not_show_page_tooltip")
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> {opts.notShowPage = value;rebuildSodiumScr();isChangeNotShowPage = true;}, opts -> opts.notShowPage)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -95,14 +95,14 @@ public class SCLPGameOptionPages
                 groups.add(OptionGroup.createBuilder()
                         .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
                                 .setName("sclp.support")
-                                .setTooltip(I18N.trans("sclp.support_tooltip"))
+                                .setTooltip("sclp.support_tooltip")
                                 .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "➤"}))
                                 .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                                 .build())
                         .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
                                 .setName("sclp.support_close")
-                                .setTooltip(I18N.trans("sclp.support_close_tooltip"))
+                                .setTooltip("sclp.support_close_tooltip")
                                 .setControl(TickBoxControl::new)
                                 .setBinding((opts, value) -> {opts.shouldShowSupportBtn = !value;}, opts -> !opts.shouldShowSupportBtn)
                                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
