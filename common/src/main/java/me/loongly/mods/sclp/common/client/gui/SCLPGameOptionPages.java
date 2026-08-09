@@ -56,7 +56,7 @@ public class SCLPGameOptionPages
                 .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
                     .setName(Component.translatable("sclp.options.support_project.name"))
                     .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
+                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
                     .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())

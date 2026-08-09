@@ -26,6 +26,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import me.loongly.mods.sclp.common.client.gui.options.storage.ECLPOptionsStorage;
+import me.loongly.mods.sclp.common.language.I18N;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class ECLPGameOptionPages
                     .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"))
                     .setName(Component.translatable("sclp.options.support_project.name"))
                     .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal("➤")}))
+                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
                     .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                     //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())

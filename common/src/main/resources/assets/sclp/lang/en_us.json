@@ -30,6 +30,7 @@
   "sclp.page":"SCLP Settings",
   "sclp.cur_languagecode":"en_us",
   "sclp.format_error":"Format Error:",
-  "sclp.options.support_project.name":"Buy LoongLy a coffee"
+  "sclp.options.support_project.name":"Buy LoongLy a coffee",
+  "sclp.options.open_external_page_button": "Open ➤"
 }
   

@@ -148,6 +148,7 @@
   "sodium.options.improved_fluid_shaping.alternative" : "替代的",
   "sodium.options.default":"默认",
   
-  "sodium.options.pages.general" : "通用"
+  "sodium.options.pages.general" : "通用",
+  "sclp.options.open_external_page_button": "打開 ➤"
   }
   
