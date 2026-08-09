@@ -1,6 +1,8 @@
 package me.loongly.mods.sclp.fabric.services;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.Version;
+import net.fabricmc.loader.api.VersionParsingException;
 
 import me.loongly.mods.sclp.common.services.IPlatformHelper;
 
@@ -17,18 +19,34 @@ public class FabricPlatformHelper implements IPlatformHelper
         return FabricLoader.getInstance().getConfigDir();
     }
 
-    @Override
-    public String getLanguageCode()
+     @Override
+    public String curVersion()
     {
-        if(Minecraft.getInstance().getLanguageManager() != null)
+        return FabricLoader.getInstance().getModContainer("sclp").get().getMetadata().getVersion().getFriendlyString();
+    }
+
+    @Override
+    public boolean isNewSodium()
+    {
+        var modList = FabricLoader.getInstance().getModContainer("sodium");
+        if(modList.isPresent())
         {
-            return Minecraft.getInstance().getLanguageManager().getSelected();
+            var mod = modList.get();
+            var version = mod.getMetadata().getVersion();
+            try
+            {
+                return version.compareTo(Version.parse("0.8.0")) >= 0; // >= 0.8.0
+            }
+            catch (VersionParsingException e)
+            {
+                return false;
+            }
         }
-        if(Minecraft.getInstance().options != null)
+        else
         {
-            return Minecraft.getInstance().options.languageCode;
+            return false;
         }
-        return "en_us";
+        
     }
 
     @Override

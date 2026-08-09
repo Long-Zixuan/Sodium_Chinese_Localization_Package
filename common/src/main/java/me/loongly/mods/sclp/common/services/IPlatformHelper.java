@@ -9,7 +9,9 @@ public interface IPlatformHelper {
 
     Path getConfigDirectory();
 
-    String getLanguageCode();
+    String curVersion();
+
+    boolean isNewSodium();
 
     boolean isSOA();
 }
