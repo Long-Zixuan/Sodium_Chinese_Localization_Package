@@ -23,13 +23,19 @@ public abstract class MixinTabHeaderWidget
     private static void mixinGetModName(String modId, CallbackInfoReturnable<String> cir) 
     {
         String modName = cir.getReturnValue();
-        if(modName.equals("Sodium/Embeddium Chinese Localized Package")||modName.equals("Sodium Chinese Localized Package")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示SCLP这种缩写
+        switch (modName) 
         {
-            modName = "SCLP";
-        }
-        if(modName.equals("Sodium Shadowy Path Blocks"))
-        {
-            modName = "SSPB";
+            case "Sodium/Embeddium Chinese Localized Package":
+                modName = "SCLP";
+                break;
+            case "Sodium Chinese Localized Package":
+                modName = "SCLP";
+                break;
+            case "Sodium Shadowy Path Blocks":
+                modName = "SSPB";
+                break;
+            default:
+                break;
         }
         if(SCLPClientMod.options().shouldTransModName)
         {
