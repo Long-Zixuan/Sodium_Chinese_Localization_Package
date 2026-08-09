@@ -18,5 +18,6 @@
       "sclp.support_tooltip":"Open the browser to support LoongLy",
       "sclp.support_close":"Don't show \"Buy LoongLy a coffee\" anymore",
       "sclp.support_close_tooltip":"If enabled, the \"Buy LoongLy a coffee\" will not be displayed again",
-      "sclp.birth":"ᗜᴗᗜ"
+      "sclp.birth":"ᗜᴗᗜ",
+      "sclp.options.open_external_page_button": "Open ➤"
 }

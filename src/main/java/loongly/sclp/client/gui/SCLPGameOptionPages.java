@@ -19,7 +19,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Util;
-import loongly.sclp.client.gui.SCLPGameOptionPages.ViaOpt;
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import loongly.sclp.language.I18N;
 import loongly.sclp.client.SclpClientMod;
@@ -93,13 +92,7 @@ public class SCLPGameOptionPages
         if(SclpClientMod.options().shouldShowSupportBtn)
         {
                 groups.add(OptionGroup.createBuilder()
-                        .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
-                                .setName("sclp.support")
-                                .setTooltip("sclp.support_tooltip")
-                                .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "➤"}))
-                                .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                                .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                                .build())
+                        .add(ViaOpt.build(sclpOpts, "sclp.support", "sclp.support_tooltip"))
                         .add(OptionImpl.createBuilder(boolean.class, sclpOpts)
                                 .setName("sclp.support_close")
                                 .setTooltip("sclp.support_close_tooltip")
@@ -116,21 +109,12 @@ public class SCLPGameOptionPages
         if(SclpClientMod.isMyBirthday(year, month, day))
         {
                 groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(ViaOpt.class, sclpOpts)
-                        .setName("sclp.birth")
-                        .setTooltip("ᗜᴗᗜ:" + (year - 2004))
-                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new String[] { "➤"}))
-                        .setBinding((opts, value) -> { SclpClientMod.birthCaidan();}, opts -> ViaOpt.VIA)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
+                .add(ViaOpt.build(sclpOpts, "sclp.birth", "ᗜᴗᗜ:" + (year - 2004)))
                 .build());
         }
     }
 
-    public enum ViaOpt
-    {
-        VIA,
-    }
+   
 
     static void rebuildSodiumScr()
     {
