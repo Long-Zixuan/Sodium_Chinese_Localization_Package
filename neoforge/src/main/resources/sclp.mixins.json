@@ -16,7 +16,8 @@
     "embeddium.OptionPageFrameMixin",
     "embeddium.MixinOptionImpl",
     "reeses_sodium_options.MixinRSOVideoScreen",
-    "reeses_sodium_options.MixinOptionPageFrame"
+    "reeses_sodium_options.MixinOptionPageFrame",
+    "sodium_options_api.MixinTabHeaderWidget"
   ],
   "server": [
   ],

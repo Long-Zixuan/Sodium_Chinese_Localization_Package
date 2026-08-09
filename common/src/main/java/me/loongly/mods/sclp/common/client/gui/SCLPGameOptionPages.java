@@ -40,7 +40,7 @@ public class SCLPGameOptionPages
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .setEnabled(shoudEnableTransModName)
+                        //.setEnabled(shoudEnableTransModName)
                         .build())
                 .build());
         if(SCLPClientMod.options().shouldShowSupportPage)

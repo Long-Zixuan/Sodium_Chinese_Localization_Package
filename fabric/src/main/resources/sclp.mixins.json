@@ -10,7 +10,8 @@
     "sodium.MixinControlValueFormatter",
     "sodium.MixinOptionImpl",
     "reeses_sodium_options.MixinRSOVideoScreen",
-    "reeses_sodium_options.MixinOptionPageFrame"
+    "reeses_sodium_options.MixinOptionPageFrame",
+    "sodium_options_api.MixinTabHeaderWidget"
   ],
   "injectors": {
     "defaultRequire": 1
