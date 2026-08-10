@@ -84,14 +84,7 @@ public class ECLPGameOptionPages
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;rebuildEmbScreenUI();}, opts -> !opts.shouldShowSupportPage)
                     //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
-                .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
-                    .setId(ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"))
-                    .setName(Component.translatable("sclp.options.support_project.name"))
-                    .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
-                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                    //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                    .build())
+                .add(eclpCreate("sclp.options.support_project.name", "sclp.options.support_project.tooltip", ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"), lsdcOpts))
                 .build());
         }
         
@@ -112,6 +105,18 @@ public class ECLPGameOptionPages
         {
             SCLPClientMod.LOGGER.error("[SCLP] Error when rebuild Embeddium Video Options Screen UI", e);
         }
+    }
+
+    public static org.embeddedt.embeddium.api.options.structure.OptionImpl<SCLPGameOptions, ViaOpt> eclpCreate(String nameKey,String tooltipKey,ResourceLocation id, ECLPOptionsStorage lsdcOpts)
+    {
+        return org.embeddedt.embeddium.api.options.structure.OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                    .setId(id)
+                    .setName(Component.translatable(nameKey))
+                    .setTooltip(Component.translatable(tooltipKey))
+                    .setControl(opt -> new org.embeddedt.embeddium.api.options.control.CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
+                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                    .setFlags(org.embeddedt.embeddium.api.options.structure.OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build();
     }
 }
 

@@ -54,13 +54,7 @@ public class SCLPGameOptionPages
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
-                .add(OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
-                    .setName(Component.translatable("sclp.options.support_project.name"))
-                    .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
-                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                    .build())
+                .add(sclpCreate("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
                 .build());
         }
         return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
@@ -87,6 +81,18 @@ public class SCLPGameOptionPages
         // }
         return new OptionPage(Component.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
     }
+
+    public static net.caffeinemc.mods.sodium.client.gui.options.OptionImpl<SCLPGameOptions, ViaOpt> sclpCreate(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
+    {
+        return net.caffeinemc.mods.sodium.client.gui.options.OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                    .setName(Component.translatable(nameKey))
+                    .setTooltip(Component.translatable(tooltipKey))
+                    .setControl(opt -> new net.caffeinemc.mods.sodium.client.gui.options.control.CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
+                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
+                    .setFlags(net.caffeinemc.mods.sodium.client.gui.options.OptionFlag.REQUIRES_RENDERER_RELOAD)
+                    .build();
+    }
+
 }
 
 

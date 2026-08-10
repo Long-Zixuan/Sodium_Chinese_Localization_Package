@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
+import me.loongly.mods.sclp.common.client.gui.ViaOpt;
 import me.loongly.mods.sclp.common.language.I18N;
 import net.caffeinemc.mods.sodium.client.gui.options.OptionImpl;
 import net.minecraft.Util;
@@ -24,10 +25,13 @@ public class MixinOptionImpl
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
     {
-        if(name.getString().equals(I18N.trans("sclp.options.support_project.name")))
+        if(value instanceof ViaOpt)
         {
-            openSupportPage();
-            ci.cancel();
+            if(name.getString().equals(I18N.trans("sclp.options.support_project.name")))
+            {
+                openSupportPage();
+                ci.cancel();
+            }
         }
     }
 

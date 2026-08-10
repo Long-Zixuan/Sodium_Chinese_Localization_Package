@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
+import me.loongly.mods.sclp.common.client.gui.ViaOpt;
 import me.loongly.mods.sclp.common.language.I18N;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
@@ -30,7 +31,7 @@ public class MixinOptionImpl<T>
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
     {
-        if(id.getModId().equals(SCLPClientMod.MOD_ID))
+        if(id.getModId().equals(SCLPClientMod.MOD_ID) && value instanceof ViaOpt)
         {
             if(sclpEvents.containsKey(id.getPath()))
             {
