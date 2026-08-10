@@ -65,7 +65,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                         .setTooltip(Component.translatable("sclp.options.should_trans_mod_name.tooltip"))
                                         .setBinding(value -> {
                                             sclpOpts.setShoudTransModName(value); 
-                                            //rebuildSodiumScr(); 
+                                            rebuildSodiumScr(); 
                                             SCLPClientMod.caiDan();
                                         }, () -> sclpOpts.getShouldTransModName())
                                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -118,38 +118,58 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         return Identifier.fromNamespaceAndPath(SCLPClientMod.MOD_ID, path);
     }
 
+    static boolean canGetScreen()
+    {
+        var clazz = Minecraft.class;
+        try 
+        {
+            clazz.getDeclaredField("screen");
+            return true;
+        } 
+        catch (NoSuchFieldException e) 
+        {
+            return false;
+        }
+    }
+
     static void rebuildSodiumScr()//26.2 MC的API改了，故不支持该函数
     {
-        try
+        if(canGetScreen())
         {
-            var curScreen = Minecraft.getInstance().screen;
-            if(curScreen instanceof VideoSettingsScreen)
+            try
             {
-                Class<?> clazz = VideoSettingsScreen.class;
-                Method method = clazz.getDeclaredMethod("rebuild");
-                method.setAccessible(true);
-                method.invoke(curScreen);
+                var curScreen = Minecraft.getInstance().screen;
+                if(curScreen instanceof VideoSettingsScreen)
+                {
+                    Class<?> clazz = VideoSettingsScreen.class;
+                    Method method = clazz.getDeclaredMethod("rebuild");
+                    method.setAccessible(true);
+                    method.invoke(curScreen);
+                }
             }
-        }
-        catch(Exception e)
-        {
-            SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
+            catch(Exception e)
+            {
+                SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
+            }
         }
     }
 
     static void closeSodiumScreen()//26.2 MC的API改了，故不支持该函数
     {
-        try
+        if(canGetScreen())
         {
-            var curScreen = Minecraft.getInstance().screen;
-            if(curScreen instanceof VideoSettingsScreen)
+            try
             {
-                ((VideoSettingsScreen)curScreen).onClose();
+                var curScreen = Minecraft.getInstance().screen;
+                if(curScreen instanceof VideoSettingsScreen)
+                {
+                    ((VideoSettingsScreen)curScreen).onClose();
+                }
             }
-        }
-        catch(Exception e)
-        {
-            SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
+            catch(Exception e)
+            {
+                SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
+            }
         }
     }
 }

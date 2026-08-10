@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import me.loongly.mods.sclp.common.client.options.SCLPOptions;
 import me.loongly.mods.sclp.common.language.I18NLanguage;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.util.Util;
 
