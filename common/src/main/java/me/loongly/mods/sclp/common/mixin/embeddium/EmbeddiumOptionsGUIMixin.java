@@ -176,8 +176,8 @@ public abstract class EmbeddiumOptionsGUIMixin extends Screen implements ISCLPSc
         }
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
-            builder.addChild(dim -> closeSupportBtn_);
-            builder.addChild(dim -> supportBtn_);
+            //builder.addChild(dim -> closeSupportBtn_);
+            //builder.addChild(dim -> supportBtn_);
         }
         cir.setReturnValue(builder);
     }
