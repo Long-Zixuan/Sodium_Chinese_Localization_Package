@@ -40,10 +40,8 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         {
                 page.addOptionGroup(createSupportPage(configBuilder));
         }
-        LocalDate today = LocalDate.now();
-        int month = today.getMonthValue();
-        int day = today.getDayOfMonth();
-        if(isBirthday(month, day))
+        
+        if(SCLPClientMod.isMyBirthday())
         {
             page.addOptionGroup(createBirthPage(configBuilder));
         }
@@ -77,7 +75,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                 .addOption(configBuilder.createExternalButtonOption(this.optionId("support_project"))
                                         .setName(Component.translatable("sclp.options.support_project.name"))
                                         .setTooltip(Component.translatable("sclp.options.support_project.tooltip"))
-                                        .setScreenConsumer(SCLPConfigBuilder::openSupportWeb));
+                                        .setScreenConsumer((s) -> {SCLPClientMod.openSupportPage();}));
         
         group.addOption(configBuilder.createBooleanOption(this.optionId("close_support_page"))//Builder(boolean.class, sclpOpts)
                 .setName(Component.translatable("sclp.options.close_support_page.name"))
@@ -100,32 +98,13 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                 .addOption(configBuilder.createExternalButtonOption(this.optionId("birth_caidan"))
                                         .setName(Component.literal("🎂:" + (year - 2004)))
                                         .setTooltip(Component.literal("🎂:" + (year - 2004)))
-                                        .setScreenConsumer(SCLPConfigBuilder::birthCaiDan));
+                                        .setScreenConsumer((s) -> {SCLPClientMod.birthCaiDan();}));
         return group;
-    }
-
-    static boolean isBirthday(int month, int day)
-    {
-        return month == 4 && day == 4;
     }
 
     private ResourceLocation optionId(String path) 
     {
         return ResourceLocation.fromNamespaceAndPath("sclp", path);
-    }
-
-    public static void openSupportWeb(Screen screen)
-    {
-        SCLPClientMod.LOGGER.info("[SCLP]Open Support website.");
-        Util.getPlatform().openUri("https://ifdian.net/a/loongly");
-    }
-    public static void birthCaiDan(Screen s)
-    {
-        SCLPClientMod.LOGGER.info("[SCLP]Happly birthday to LoongLy!!!");
-        Util.getPlatform()
-                        .openUri("https://www.loongly.me/html/clock.html");
-        Util.getPlatform()
-                        .openUri("https://long-zixuan.github.io/html/badapple_h.html");
     }
 
     static void rebuildSodiumScr()//26.2 MC的API改了，故不支持该函数
