@@ -175,5 +175,7 @@
   "sclp.emb.donation.buycoffee":"支持钠",
   "sclp.emb.donation.buycoffee2":"支持钠",
   "sclp.emb.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）",
-  "sclp.options.open_external_page_button": "打开 ➤"
+  "sclp.options.open_external_page_button": "打开 ➤",
+  "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
+  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验"
 }

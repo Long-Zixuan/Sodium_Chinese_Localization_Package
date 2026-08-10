@@ -145,6 +145,8 @@
   "sclp.options.support_project.tooltip":"將在瀏覽器打开支持LoongLy的页面",
   "sclp.options.close_support_page.name":"永久關閉支持页面",
   "sclp.options.close_support_page.tooltip":"將不再顯示支持页面,該選項將在重啓游戲后生效",
-  "sclp.options.open_external_page_button": "打開 ➤"
+  "sclp.options.open_external_page_button": "打開 ➤",
+  "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
+  "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验"
   }
   
