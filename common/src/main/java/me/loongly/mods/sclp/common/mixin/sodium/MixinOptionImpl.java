@@ -29,16 +29,9 @@ public class MixinOptionImpl
         {
             if(name.getString().equals(I18N.trans("sclp.options.support_project.name")))
             {
-                openSupportPage();
+                SCLPClientMod.openSupportPage();
                 ci.cancel();
             }
         }
     }
-
-    void openSupportPage()
-	{
-		SCLPClientMod.LOGGER.info("[SCLP] Open Support Page.");
-		Util.getPlatform()
-                .openUri("https://ifdian.net/a/loongly");
-	}
 }

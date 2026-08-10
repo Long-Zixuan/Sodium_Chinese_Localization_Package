@@ -59,7 +59,7 @@ public class MixinRSOVideoScreen implements ISCLPScreen
             int offect = 272;
       
             Dim2i birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - offect, tabFrameDim.getLimitY() + 5, 65, 20);
-            birthBtn_ = new FlatButtonWidget(birthBtnDim, Component.literal("🎂:" + (year -2004)), () -> {birthCaidan();});
+            birthBtn_ = new FlatButtonWidget(birthBtnDim, Component.literal("🎂:" + (year -2004)), () -> {SCLPClientMod.birthCaiDan();});
         }
 
     }
@@ -83,23 +83,6 @@ public class MixinRSOVideoScreen implements ISCLPScreen
         }
         cir.setReturnValue(builder);
     }
-
-    void birthCaidan()
-    {
-        SCLPClientMod.LOGGER.info("[SCLP]Happy birthday to LoongLy!");
-
-        Util.getPlatform()
-                .openUri("https://long-zixuan.github.io/html/badapple_h.html");
-        Util.getPlatform()
-                .openUri("https://long-zixuan.github.io/html/clock.html");
-    }
-
-	void openSupportPage()
-	{
-		SCLPClientMod.LOGGER.info("[SCLP] Open Support Page.");
-		Util.getPlatform()
-                .openUri("https://ifdian.net/a/loongly");
-	}
 
     void onClickCloseSupportBtn()
     {

@@ -81,7 +81,7 @@ public class ECLPGameOptionPages
                     .setName(Component.translatable("sclp.options.close_support_page.name"))
                     .setTooltip(Component.translatable("sclp.options.close_support_page.tooltip"))
                     .setControl(TickBoxControl::new)
-                    .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;rebuildEmbScreenUI();}, opts -> !opts.shouldShowSupportPage)
+                    .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
                     //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
                 .add(eclpCreate("sclp.options.support_project.name", "sclp.options.support_project.tooltip", ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"), lsdcOpts))

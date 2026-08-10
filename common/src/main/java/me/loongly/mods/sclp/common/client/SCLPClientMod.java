@@ -93,4 +93,11 @@ public class SCLPClientMod
 			return false;
 		}
 	}
+
+	public static void openSupportPage()
+	{
+		SCLPClientMod.LOGGER.info("[SCLP] Open Support Page.");
+		Util.getPlatform()
+                .openUri("https://ifdian.net/a/loongly");
+	}
 }

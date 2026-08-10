@@ -24,14 +24,14 @@ public class MixinOptionImpl<T>
     @Shadow @Final
     OptionIdentifier<T> id;
     HashMap<String,Runnable> sclpEvents = new HashMap<String,Runnable>(){{
-        put("sclp_support",()->{openSupportPage();});
+        put("sclp_support",()->{SCLPClientMod.openSupportPage();});
     }};
     @Shadow @Final
     Component name;
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
     {
-        if(id.getModId().equals(SCLPClientMod.MOD_ID) && value instanceof ViaOpt)
+        if(value instanceof ViaOpt && id != null && id.getModId().equals(SCLPClientMod.MOD_ID))
         {
             if(sclpEvents.containsKey(id.getPath()))
             {
@@ -41,11 +41,6 @@ public class MixinOptionImpl<T>
         }
     }
 
-    void openSupportPage()
-	{
-		SCLPClientMod.LOGGER.info("[SCLP] Open Support Page.");
-		Util.getPlatform()
-                .openUri("https://ifdian.net/a/loongly");
-	}
+    
     
 }
