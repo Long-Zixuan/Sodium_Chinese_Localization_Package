@@ -10,7 +10,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.screens.Screen;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 
@@ -118,12 +121,11 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         return Identifier.fromNamespaceAndPath(SCLPClientMod.MOD_ID, path);
     }
 
-    static boolean canGetScreen()
+    static boolean hadField(Class<?>clazz, String fi)
     {
-        var clazz = Minecraft.class;
         try 
         {
-            clazz.getDeclaredField("screen");
+            clazz.getDeclaredField(fi);
             return true;
         } 
         catch (NoSuchFieldException e) 
@@ -132,9 +134,9 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         }
     }
 
-    static void rebuildSodiumScr()//26.2 MC的API改了，故不支持该函数
+    static void rebuildSodiumScr()
     {
-        if(canGetScreen())
+        if(hadField(Minecraft.class,"screen"))
         {
             try
             {
@@ -149,14 +151,39 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
             }
             catch(Exception e)
             {
-                SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
+                SCLPClientMod.logger().error("[SCLP] rebuild Sodium Screen Error:", e);
+            }
+        }
+        if(hadField(Minecraft.class,"gui"))
+        {
+            try
+            {
+                var gui = Minecraft.getInstance().gui;
+                var clazz = Gui.class;
+                if(hadField(clazz, "screen"))
+                {
+                    Field field = clazz.getDeclaredField("screen");//工程环境的客户端是26.1的，Gui类没有screnn字段，故只能用反射
+                    field.setAccessible(true);
+                    var curScreen = (Screen)field.get(gui);
+                    if(curScreen instanceof VideoSettingsScreen)
+                    {
+                        Class<?> cla = VideoSettingsScreen.class;
+                        Method method = cla.getDeclaredMethod("rebuild");
+                        method.setAccessible(true);
+                        method.invoke(curScreen);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                
             }
         }
     }
 
-    static void closeSodiumScreen()//26.2 MC的API改了，故不支持该函数
+    static void closeSodiumScreen()
     {
-        if(canGetScreen())
+        if(hadField(Minecraft.class,"screen"))
         {
             try
             {
