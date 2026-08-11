@@ -54,7 +54,7 @@ public class SCLPGameOptionPages
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
-                .add(sclpCreate("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
+                .add(ViaOpt.SCLPViaOptCreater.create("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
                 .build());
         }
         return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
