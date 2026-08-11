@@ -10,11 +10,24 @@ public enum ViaOpt
 {
     VIA;
 
-    public static class ECLPViaOptCreater
+    public static Object create(String modIdStr,String nameKey, String tooltipKey, ResourceLocation id, Object sclpOpts)
     {
-        public static org.embeddedt.embeddium.api.options.structure.OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey,ResourceLocation id, ECLPOptionsStorage lsdcOpts)
+        switch (modIdStr)
         {
-            return org.embeddedt.embeddium.api.options.structure.OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+            case "sodium":        
+                return SCLPViaOptCreater.create(nameKey, tooltipKey, sclpOpts);
+            case "embeddium": 
+                return ECLPViaOptCreater.create(nameKey, tooltipKey, id, sclpOpts);
+            default: 
+                return null;
+        }
+    }
+
+    private static class ECLPViaOptCreater
+    {
+        public static org.embeddedt.embeddium.api.options.structure.OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey,ResourceLocation id, Object lsdcOpts)
+        {
+            return org.embeddedt.embeddium.api.options.structure.OptionImpl.createBuilder(ViaOpt.class, (ECLPOptionsStorage)lsdcOpts)
                         .setId(id)
                         .setName(Component.translatable(nameKey))
                         .setTooltip(Component.translatable(tooltipKey))
@@ -25,11 +38,11 @@ public enum ViaOpt
         }
     }
 
-    public static class SCLPViaOptCreater
+    private static class SCLPViaOptCreater
     {
-        public static net.caffeinemc.mods.sodium.client.gui.options.OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
+        public static net.caffeinemc.mods.sodium.client.gui.options.OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, Object lsdcOpts)
         {
-            return net.caffeinemc.mods.sodium.client.gui.options.OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+            return net.caffeinemc.mods.sodium.client.gui.options.OptionImpl.createBuilder(ViaOpt.class, (SCLPOptionsStorage)lsdcOpts)
                         .setName(Component.translatable(nameKey))
                         .setTooltip(Component.translatable(tooltipKey))
                         .setControl(opt -> new net.caffeinemc.mods.sodium.client.gui.options.control.CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button")).withStyle(s -> s.withUnderlined(true))}))

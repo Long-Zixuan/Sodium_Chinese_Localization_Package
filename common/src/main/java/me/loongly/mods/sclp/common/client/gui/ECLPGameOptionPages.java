@@ -40,6 +40,7 @@ public class ECLPGameOptionPages
 
     private static final ECLPOptionsStorage lsdcOpts = new ECLPOptionsStorage();
 
+    @SuppressWarnings("unchecked")
     public static OptionPage buildPage()
     {
         LocalDate today = LocalDate.now();
@@ -84,7 +85,7 @@ public class ECLPGameOptionPages
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
                     //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
-                .add(ViaOpt.ECLPViaOptCreater.create("sclp.options.support_project.name", "sclp.options.support_project.tooltip", ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"), lsdcOpts))
+                .add((OptionImpl<SCLPGameOptions, ViaOpt>)ViaOpt.create("embeddium","sclp.options.support_project.name", "sclp.options.support_project.tooltip", ResourceLocation.fromNamespaceAndPath(SCLPClientMod.MOD_ID, "sclp_support"), (Object)lsdcOpts))
                 .build());
         }
         

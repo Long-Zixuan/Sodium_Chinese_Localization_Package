@@ -30,6 +30,7 @@ public class SCLPGameOptionPages
 
     private static final SCLPOptionsStorage lsdcOpts = new SCLPOptionsStorage();
 
+    @SuppressWarnings("unchecked")
     public static OptionPage sclpPage()
     {
         BooleanSupplier shoudEnableTransModName = () -> IPlatformHelper.INSTANCE.isSOA();
@@ -54,7 +55,7 @@ public class SCLPGameOptionPages
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build())
-                .add(ViaOpt.SCLPViaOptCreater.create("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
+                .add((OptionImpl<SCLPGameOptions, ViaOpt>)ViaOpt.create("sodium","sclp.options.support_project.name", "sclp.options.support_project.tooltip", null, (Object)lsdcOpts))
                 .build());
         }
         return new OptionPage(Component.literal(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
