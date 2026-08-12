@@ -10,8 +10,7 @@
     "compat.MixinEmbeddiumOptionGUI",
     "compat.MixinScreenPrompt",
     "compat.MixinControlValueFormatter",
-    "compat.OptionPageFrameMixin",
-    "compat.MixinOptionImpl"
+    "compat.OptionPageFrameMixin"
   ],
   "plugin": "me.loongly.mods.sclp.mixin.SCLPMixinConfigPlugin",
   "injectors": {
