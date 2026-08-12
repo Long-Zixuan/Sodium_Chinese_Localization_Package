@@ -57,7 +57,7 @@ class OptionPageFrameMixin
                 sclpScreen.open();
             }
             drawContext.drawTexture(LOGO_LOCATION, mouseX - LOGO_SIZE / 2, mouseY - LOGO_SIZE / 2, 0, 0, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE);
-            drawContext.drawTexture(LS_LOCATION, 0, 0, 0, 0, 35, 20, 35, 20);
+            drawContext.drawTexture(LS_LOCATION, 0, 0, 0, 0, 36, 20, 36, 20);
             return;
         }
         var embScreen = getEmbScreen();
