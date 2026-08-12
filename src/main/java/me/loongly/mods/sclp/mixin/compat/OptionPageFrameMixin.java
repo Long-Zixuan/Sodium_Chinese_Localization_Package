@@ -37,6 +37,10 @@ class OptionPageFrameMixin
     @Unique @Nonnull
     private static final Identifier LOGO_LOCATION = Identifier.of("sclp", "textures/sclp/gui/LZXLOGO.png");
 
+    @SuppressWarnings("null")
+    @Unique @Nonnull
+    private static final Identifier LS_LOCATION = Identifier.of("sclp", "textures/sclp/gui/LSLOGO.png");
+
     private static final int LOGO_SIZE = 5;
 
     @Shadow @Final
@@ -53,6 +57,7 @@ class OptionPageFrameMixin
                 sclpScreen.open();
             }
             drawContext.drawTexture(LOGO_LOCATION, mouseX - LOGO_SIZE / 2, mouseY - LOGO_SIZE / 2, 0, 0, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE);
+            drawContext.drawTexture(LS_LOCATION, 0, 0, 0, 0, 35, 20, 35, 20);
             return;
         }
         var embScreen = getEmbScreen();
