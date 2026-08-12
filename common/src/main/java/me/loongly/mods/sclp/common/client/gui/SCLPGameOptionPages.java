@@ -12,11 +12,13 @@ import net.caffeinemc.mods.sodium.client.gui.options.control.SliderControl;
 import net.caffeinemc.mods.sodium.client.gui.options.control.TickBoxControl;
 
 import net.minecraft.network.chat.Component;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import me.loongly.mods.sclp.common.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.common.language.I18N;
 import me.loongly.mods.sclp.common.services.IPlatformHelper;
 
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,7 @@ public class SCLPGameOptionPages
                         .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
                         .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> opts.shouldTransModName = value, opts -> opts.shouldTransModName)
+                        .setBinding((opts, value) -> {opts.shouldTransModName = value; rebuildRSOSodiumScr();}, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setEnabled(shoudEnableTransModName)
                         .build())
@@ -83,15 +85,23 @@ public class SCLPGameOptionPages
         return new OptionPage(Component.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
     }
 
-    public static net.caffeinemc.mods.sodium.client.gui.options.OptionImpl<SCLPGameOptions, ViaOpt> sclpCreate(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
+    private static void rebuildRSOSodiumScr()//虽然环境里面有RSO环境而且运行时没安装RSO选项是不能点的，但是保险起见还是反射来降低运行时耦合度
     {
-        return net.caffeinemc.mods.sodium.client.gui.options.OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
-                    .setName(Component.translatable(nameKey))
-                    .setTooltip(Component.translatable(tooltipKey))
-                    .setControl(opt -> new net.caffeinemc.mods.sodium.client.gui.options.control.CyclingControl<>(opt, ViaOpt.class, new Component[] { Component.literal(I18N.trans("sclp.options.open_external_page_button"))}))
-                    .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
-                    .setFlags(net.caffeinemc.mods.sodium.client.gui.options.OptionFlag.REQUIRES_RENDERER_RELOAD)
-                    .build();
+        var curSrc = Minecraft.getInstance().screen;
+        try
+        {
+            Class<?> rsoSrcClass = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
+            if(rsoSrcClass.isInstance(curSrc))
+            {
+                Method rebuildMeth = rsoSrcClass.getMethod("rebuildUI");
+                rebuildMeth.setAccessible(true);
+                rebuildMeth.invoke(curSrc);
+            }
+        }
+        catch (Exception e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Failed to rebuild RSOSodium Screen",e);
+        }
     }
 
 }
