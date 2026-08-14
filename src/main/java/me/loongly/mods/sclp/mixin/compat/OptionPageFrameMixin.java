@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.texture.AbstractTexture;
+import net.minecraft.client.texture.ResourceTexture;
 import net.minecraft.resource.Resource;
 import net.minecraft.util.Identifier;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages;
@@ -57,7 +59,10 @@ class OptionPageFrameMixin
                 sclpScreen.open();
             }
             //drawContext.drawTexture(LOGO_LOCATION, mouseX - LOGO_SIZE / 2, mouseY - LOGO_SIZE / 2, 0, 0, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE, LOGO_SIZE);
-            drawContext.drawTexture(LS_LOCATION, 0, 0, 0, 0, 40, 22, 40, 22);
+            if(LS_LOCATION != null)//暂时未知为何LS_LOCATION为null,但是加了Oculus就不会为null
+            {
+                drawContext.drawTexture(LS_LOCATION, 0, 0, 0, 0, 40, 22, 40, 22);
+            }
             return;
         }
         var embScreen = getEmbScreen();
