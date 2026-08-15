@@ -1,4 +1,4 @@
-![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3_LOW_PIX.png)
+![LS](https://cdn.modrinth.com/data/5vV6tCDu/images/90b59b95ea2271e969dbcfa7ad4e22a89254d2df.png)
 <center class="half">
 <img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric3.png" width="40%">
 <img src="https://gitee.com/zixuan_long/Img/raw/master/support_quilt2.png" width="35%">
@@ -8,7 +8,7 @@
 <img src="https://gitee.com/zixuan_long/Img/raw/master/support_forge2.png" width="37%">
 </center>
 
-![钠铷emb](https://cdn.modrinth.com/data/cached_images/d844daba8902ccbeaff5ebdeb986494392d2b034_0.webp)
+![all logo](https://cdn.modrinth.com/data/cached_images/007222d88b98d2c0fd965451197a8076a4624e89.png)
 # 钠模组汉化模组
 安装钠模组后安装此模组即可汉化模组
 支持简体中文和繁体中文  
@@ -37,7 +37,7 @@ Supports Simplified Chinese and Traditional Chinese
 Special thanks to Law4x
 
 
-![logo](https://cdn.modrinth.com/data/cached_images/7f0a5635129160e42c731866bc13d947e077a377.png)
+![logo](https://cdn.modrinth.com/data/5vV6tCDu/images/7f3bce004cf1ebc064b17d55b7535c7c333a8768.png)
 ![](https://cdn.modrinth.com/data/5vV6tCDu/images/ce0cff1cb90ce1b55d06b2ea80674793549b5ea2.jpeg)
 
 ![img](https://cdn.modrinth.com/data/cached_images/90308f19ade8eea70e4d917894b6abe41d0b3fbd.jpeg)
@@ -47,4 +47,5 @@ Special thanks to Law4x
 ![img](https://cdn.modrinth.com/data/cached_images/33fd81c69ab57c550a25ee8b530248506ddd20d6.jpeg)
 ![`1](https://cdn.modrinth.com/data/cached_images/9962b6e5e84e1601bbb2a4cf4778b094d76f2093.jpeg)
 ![img](https://cdn.modrinth.com/data/cached_images/e616f1da0195f36858b3d983c195cf3101ffa9f0.jpeg)
-
+![1.20汉化](https://cdn.modrinth.com/data/cached_images/3212d19528aa1b187fa953325a8001ea729633c5.jpeg)
+![1.20汉化界面](https://cdn.modrinth.com/data/cached_images/5cef072760264bc24e3880be2f3c1432e7501062.jpeg)
