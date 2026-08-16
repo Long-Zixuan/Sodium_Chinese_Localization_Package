@@ -28,26 +28,11 @@ public class SCLPMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin
         return MIXIN_PACKAGE_ROOT;
     }
 
-    static String[] l1Mixin = {
-    };
-    static String[] l2Mixin = {
-        "me.loongly.mods.sclp.mixin.compat.MixinSodiumOptionsGUI",
-        "me.loongly.mods.sclp.mixin.compat.MixinSodiumEmbeddiumOptionsGUI"
-    };
-    static String[] l3Mixin= {
-        "me.loongly.mods.sclp.mixin.compat.MixinSodiumOptionsGUI",
-        "me.loongly.mods.sclp.mixin.compat.MixinSodiumEmbeddiumOptionsGUI",
-        "me.loongly.mods.sclp.mixin.compat.MixinSodiumOptionsAPIGUI",
-        "me.loongly.mods.sclp.mixin.compat.MixinEmbeddiumOptionGUI",
-        "me.loongly.mods.sclp.mixin.compat.MixinScreenPrompt",
-        "me.loongly.mods.sclp.mixin.compat.MixinControlValueFormatter"
-    };
-    
-
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) 
     {
-        if(mixinClassName.equals("me.loongly.mods.sclp.mixin.compat.MixinSodiumOptionsGUI"))
+        if(mixinClassName.equals("me.loongly.mods.sclp.mixin.compat.MixinSodiumOptionsGUI") || 
+        mixinClassName.equals("me.loongly.mods.sclp.mixin.compat.MixinOptionImpl"))
         {
             return SCLPClientMod.isNewEmbeddium();
         }
