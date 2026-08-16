@@ -276,6 +276,9 @@
    "Default":"默認",
   "threads":"綫程",
   "sclp.options.support_project.name":"请LoongLy喝一杯奶茶",
+  "sclp.options.support_project.tooltip":"将在浏览器打开LoongLy的爱发电页面",
+  "sclp.options.close_support_page.name":"永远关闭支持页面",
+  "sclp.options.close_support_page.tooltip":"如果启用，将不再显示支持页面。\n该选项将在重新打开此页面时生效",
   "sclp.options.open_external_page_button": "打開 ➤"
   }
   

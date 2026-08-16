@@ -101,6 +101,12 @@ public class SCLPClientMod
         return isMyBirthday(year, month, day);
     }
 
+    public static void openSupportWeb()
+    {
+        SCLPClientMod.LOGGER.info("[SCLP] Open Support website.");
+        net.minecraft.util.Util.getOperatingSystem().open("https://ifdian.net/a/loongly");
+    }
+
     public SCLPClientMod() 
     {
 		

@@ -65,12 +65,6 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
     @Unique
     private FlatButtonWidget birthBtn_;
 
-    @Unique
-    private FlatButtonWidget supportBtn_;
-
-    @Unique
-    private FlatButtonWidget closeSupportBtn_;
-
     @Inject(method = "parentFrameBuilder", at = @At("RETURN"),cancellable = true)
     void injectParentFrameBuilder(CallbackInfoReturnable<BasicFrame.Builder> c)
     {
@@ -88,36 +82,11 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
         {
             var data = LocalDate.now();
             var year = data.getYear();
-            var birthText = Text.literal("🎂:" + (year -2004));
+            var birthText = Text.literal("🎂:" + (year - 2004));
             int birthTextWidth = 20;
             var birthBtnDim = new Dim2i(tabFrameDim.getLimitX() - 240 - birthTextWidth, tabFrameDim.getLimitY() + 5, birthTextWidth + 10, 20);
             birthBtn_ = new FlatButtonWidget(birthBtnDim, birthText, SCLPClientMod::birthCaiDan);
         }
-        if(SCLPClientMod.options().getShouldShowSupportPageVal())
-        {
-            var closeSupportBtnDim = new Dim2i(tabFrameDim.getLimitX() - 134, tabFrameDim.getLimitY() - 17, 20, 20);
-            var supportBtnDim = new Dim2i(closeSupportBtnDim.x() + closeSupportBtnDim.width() + 2, closeSupportBtnDim.y(), 100, 20);
-            supportBtn_ = new FlatButtonWidget(supportBtnDim, Text.literal(I18N.trans("sclp.options.support_project.name")), () -> {openSupportWeb();});
-            closeSupportBtn_ = new FlatButtonWidget(closeSupportBtnDim, Text.literal("×"), () -> {onClickCloseSupportBtn();});
-            supportBtn_.setVisible(false);
-            closeSupportBtn_.setVisible(false);
-        }
-    }
-
-    void onClickCloseSupportBtn()
-    {
-        SCLPClientMod.options().setShouldShowSupportPageVal(false);
-        
-        SCLPClientMod.options().writeChanges();
-        
-        supportBtn_.setVisible(false);
-        closeSupportBtn_.setVisible(false);
-    }
-
-    void openSupportWeb()
-    {
-        SCLPClientMod.LOGGER.info("[SCLP] Open Support website.");
-        net.minecraft.util.Util.getOperatingSystem().open("https://ifdian.net/a/loongly");
     }
 
     @Inject(method = "parentBasicFrameBuilder", at = @At("RETURN"),cancellable = true)
@@ -127,11 +96,6 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
         if(SCLPClientMod.isMyBirthday())
         {
             builder.addChild(dim -> birthBtn_);
-        }
-        if(SCLPClientMod.options().getShouldShowSupportPageVal())
-        {
-            builder.addChild(dim -> closeSupportBtn_);
-            builder.addChild(dim -> supportBtn_);
         }
         cir.setReturnValue(builder);
     }
@@ -151,7 +115,7 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
 
     public void setUIEleVis(boolean vis)
     {
-        if(birthBtn_ != null)
+        /*if(birthBtn_ != null)
         {
             birthBtn_.setVisible(vis);
         }
@@ -162,6 +126,6 @@ class MixinEmbeddiumOptionGUI implements ISCLPScreen
         if(closeSupportBtn_ != null && SCLPClientMod.options().getShouldShowSupportPageVal())
         {
             closeSupportBtn_.setVisible(vis);
-        }
+        }*/
     }
 }

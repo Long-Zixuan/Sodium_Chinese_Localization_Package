@@ -16,5 +16,8 @@
   "sclp.close":"Close",
   "sclp.multiplier":"%sx",
   "sclp.options.support_project.name":"Buy LoongLy a coffee",
+  "sclp.options.support_project.tooltip":"Via LoongLy's Aifadian Page in Browser",
+  "sclp.options.close_support_page.name":"Close Support Page",
+  "sclp.options.close_support_page.tooltip":"If enabled, will not show the support page.",
   "sclp.options.open_external_page_button": "Open ➤"
 }

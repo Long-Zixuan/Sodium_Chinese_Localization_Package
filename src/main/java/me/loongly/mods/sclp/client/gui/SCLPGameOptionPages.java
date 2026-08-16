@@ -6,12 +6,14 @@ import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
+import me.loongly.mods.sclp.SCLPMod;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages.ViaOpt;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.Resource;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Identifier;
@@ -62,21 +64,23 @@ public class SCLPGameOptionPages
                         }, options -> options.getIsTransModNameVal())
                         .build())
                 .build());
-        if(isMyBirthday(year, month, day))
+
+        if(SCLPClientMod.options().getShouldShowSupportPageVal())
         {
             groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
-                        .setName(Text.translatable("🎂:" + (year - 2004)))
-                        .setTooltip(Text.translatable("🎂:" + (year - 2004)))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((options, value) -> {
-                            try
-                            {
-                                SCLPClientMod.birthCaiDan();
-                            }
-                            catch (Exception e){}
-                        }, options -> options.getIsTransModNameVal())
-                        .build())
+                    .setName(Text.literal(I18N.trans("sclp.options.close_support_page.name")))
+                    .setTooltip(Text.literal(I18N.trans("sclp.options.close_support_page.tooltip")))
+                    .setControl(TickBoxControl::new)
+                    .setBinding((options, value) -> {
+                        options.setShouldShowSupportPageVal(!value);
+                    }, options -> !options.getShouldShowSupportPageVal())
+                    .build())
+                .add(ViaOpt.create(SCLPMod.MOD_ID, 
+                    "support_project", 
+                    "sclp.options.support_project.name", 
+                    "sclp.options.support_project.tooltip", 
+                    sodiumExtraOpts))
                 .build());
         }
         return new OptionPage(Text.translatable("sclp.options.pages.settings"), ImmutableList.copyOf(groups));
@@ -112,9 +116,8 @@ public class SCLPGameOptionPages
                     .setId(Identifier.of(namespace, id))
                     .setName(Text.translatable(name))
                     .setTooltip(Text.translatable(tooltip))
-                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Text[] { Text.literal(I18N.trans("sclp.options.open_external_page_button"))}))
+                    .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Text[] { Text.literal(I18N.trans("sclp.options.open_external_page_button")).setStyle(Style.EMPTY.withUnderline(true))}))
                     .setBinding((opt, value) -> {}, opt -> ViaOpt.VIA)
-                    //.setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .build();
         }
     }

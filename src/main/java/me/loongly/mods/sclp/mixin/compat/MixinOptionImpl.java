@@ -20,7 +20,7 @@ import me.loongly.mods.sclp.client.gui.SCLPGameOptionPages.ViaOpt;
 class MixinOptionImpl<T>
 {
     HashMap<String,Runnable> sclpEvents = new HashMap<String,Runnable>(){{
-        put("sclp_support",()->{});
+        put("support_project",()->{SCLPClientMod.openSupportWeb();});
     }};
 
     @Shadow @Final
@@ -29,7 +29,7 @@ class MixinOptionImpl<T>
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     public void injectSetValue(Object value, CallbackInfo ci) 
     {
-        if(id.getModId().equals(SCLPMod.MOD_ID) && value instanceof ViaOpt)
+        if(value instanceof ViaOpt && id.getModId().equals(SCLPMod.MOD_ID))
         {
             if(sclpEvents.containsKey(id.getPath()))
             {
