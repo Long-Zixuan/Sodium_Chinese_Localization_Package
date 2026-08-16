@@ -65,7 +65,7 @@ public class SCLPGameOptionPages
                         .build())
                 .build());
 
-        if(SCLPClientMod.options().getShouldShowSupportPageVal())
+        if(SCLPClientMod.options().getShouldShowSupportPageVal() && SCLPClientMod.isNewEmbeddium())
         {
             groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
