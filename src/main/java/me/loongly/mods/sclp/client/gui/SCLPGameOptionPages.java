@@ -83,6 +83,16 @@ public class SCLPGameOptionPages
                     sodiumExtraOpts))
                 .build());
         }
+        if(SCLPClientMod.isMyBirthday(year, month, day))
+        {
+            groups.add(OptionGroup.createBuilder()
+                .add(ViaOpt.create(SCLPMod.MOD_ID, 
+                    "birth_caidan", 
+                    "🎂:" + (year -2004), 
+                    "🎂:" + (year -2004), 
+                    sodiumExtraOpts))
+            .build());
+        }
         return new OptionPage(Text.translatable("sclp.options.pages.settings"), ImmutableList.copyOf(groups));
     }
 

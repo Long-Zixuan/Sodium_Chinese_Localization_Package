@@ -1,6 +1,7 @@
 package me.loongly.mods.sclp.mixin.compat;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 
@@ -11,7 +12,6 @@ import net.minecraft.text.Text;
 
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import dev.architectury.patchedmixin.staticmixin.spongepowered.asm.mixin.Overwrite;
 import me.loongly.mods.sclp.language.I18N;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 
@@ -30,7 +30,7 @@ public class MixinSodiumEmbeddiumOptionsGUI
         return idComponent(modId).setStyle(Style.EMPTY.withUnderline(true));
     }
 
-    static MutableText idComponent(String namespace) 
+    private static MutableText idComponent(String namespace) 
     {
         
         var modOriName = PlatformUtil.getModName(namespace);
@@ -38,9 +38,9 @@ public class MixinSodiumEmbeddiumOptionsGUI
         switch(modOriName) 
         {
             case "Sodium Shadowy Path Blocks" -> modOriName = "SSPB";//这个不可能，但是原本逻辑写了，所有这里也写
-            case "Embeddium Chinese Localization Pack" -> modOriName = "ECLP";
+            case "Embeddium Chinese Localized Pack" -> modOriName = "ECLP";
         }
-        
+
         var modDisName = modOriName;
         if(SCLPClientMod.options().getIsTransModNameVal())
         {

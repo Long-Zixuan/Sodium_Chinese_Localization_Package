@@ -21,6 +21,7 @@ class MixinOptionImpl<T>
 {
     HashMap<String,Runnable> sclpEvents = new HashMap<String,Runnable>(){{
         put("support_project",()->{SCLPClientMod.openSupportWeb();});
+        put("birth_caidan",() -> {SCLPClientMod.birthCaiDan();});
     }};
 
     @Shadow @Final
