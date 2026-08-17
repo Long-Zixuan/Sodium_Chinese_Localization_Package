@@ -5,26 +5,49 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 
 import net.minecraft.client.resource.language.I18n;
-import org.embeddedt.embeddium.util.PlatformUtil;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import dev.architectury.patchedmixin.staticmixin.spongepowered.asm.mixin.Overwrite;
 import me.loongly.mods.sclp.language.I18N;
 import me.loongly.mods.sclp.client.SCLPClientMod;
 
+import org.apache.logging.log4j.core.config.builder.api.Component;
+import org.embeddedt.embeddium.gui.frame.tab.Tab;
+import org.embeddedt.embeddium.gui.frame.tab.TabHeaderWidget;
+import org.embeddedt.embeddium.util.PlatformUtil;
 
-@Mixin(value = PlatformUtil.class, remap = false)
+
+@Mixin(value = TabHeaderWidget.class, remap = false)
 public class MixinSodiumEmbeddiumOptionsGUI
 {
-    @Inject(method = "getModName", at = @At(value = "RETURN"), cancellable = true)
-    private static void mixinGetModName(String modId, CallbackInfoReturnable<String> cir) {
-        String modName = cir.getReturnValue();
-        if(modName.equals("Embeddium Chinese Localized Pack")) //因为这个模组名字太长了，影响显示了，但是我也不想其他页面显示ECLP这种缩写
+    @Overwrite
+    public static MutableText getLabel(String modId) 
+    {
+        return idComponent(modId).setStyle(Style.EMPTY.withUnderline(true));
+    }
+
+    static MutableText idComponent(String namespace) 
+    {
+        
+        var modOriName = PlatformUtil.getModName(namespace);
+
+        switch(modOriName) 
         {
-            modName = "ECLP";
+            case "Sodium Shadowy Path Blocks" -> modOriName = "SSPB";//这个不可能，但是原本逻辑写了，所有这里也写
+            case "Embeddium Chinese Localization Pack" -> modOriName = "ECLP";
         }
+        
+        var modDisName = modOriName;
         if(SCLPClientMod.options().getIsTransModNameVal())
         {
-            modName = I18N.trans(modName);
+            modDisName = I18N.trans(modOriName);
         }
-        cir.setReturnValue(modName);
+        
+        return Text.literal(modDisName);
     }
+
 }
