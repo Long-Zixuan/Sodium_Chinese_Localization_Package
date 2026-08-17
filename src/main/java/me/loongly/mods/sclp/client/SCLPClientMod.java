@@ -87,6 +87,20 @@ public class SCLPClientMod
         return false;
     }
 
+    public static boolean is6_5_0_Rubiddium()
+    {
+        try
+        {
+            Class.forName("me.jellysquid.mods.sodium.client.gl.arena.SwapBufferArena");
+            return true;
+        }
+        catch (ClassNotFoundException e)
+        {
+
+        }
+        return false;
+    }
+
     public static boolean isMyBirthday(int year, int month, int day)
     {
         return month == 4 && day == 4;

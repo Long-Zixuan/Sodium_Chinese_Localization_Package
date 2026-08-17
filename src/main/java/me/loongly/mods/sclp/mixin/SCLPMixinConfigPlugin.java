@@ -36,6 +36,10 @@ public class SCLPMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin
         {
             return SCLPClientMod.isNewEmbeddium();
         }
+        if(mixinClassName.equals("me.loongly.mods.sclp.mixin.compat.MixinControlValueFormatter"))
+        {
+            return !SCLPClientMod.is6_5_0_Rubiddium();
+        }
         return true;
     }
 
