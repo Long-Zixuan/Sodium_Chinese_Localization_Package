@@ -6,7 +6,7 @@ import net.neoforged.fml.common.Mod;
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 
 
-@Mod("sclp")
+@Mod(SCLPClientMod.MOD_ID)
 public class SCLPNeoForgeClientMod 
 {
 
