@@ -5,8 +5,9 @@ import net.caffeinemc.mods.sodium.api.config.option.OptionFlag;
 import net.caffeinemc.mods.sodium.api.config.structure.ConfigBuilder;
 import net.caffeinemc.mods.sodium.api.config.structure.OptionGroupBuilder;
 import net.caffeinemc.mods.sodium.api.config.structure.OptionPageBuilder;
+import net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen;
 import net.caffeinemc.mods.sodium.client.gui.options.control.ControlValueFormatterImpls;
-
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -61,7 +62,7 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
                                 .addOption(configBuilder.createBooleanOption(this.optionId("should_trans_mod_name"))//Builder(boolean.class, sclpOpts)
                                         .setName(Component.translatable("sclp.options.should_trans_mod_name.name"))
                                         .setTooltip(Component.translatable("sclp.options.should_trans_mod_name.tooltip"))
-                                        .setBinding(value -> {sclpOpts.shouldTransModName = value; SCLPClientMod.caiDan();}, () -> sclpOpts.shouldTransModName)
+                                        .setBinding(value -> {sclpOpts.shouldTransModName = value; SCLPClientMod.caiDan(); rebuildSodiumScr();}, () -> sclpOpts.shouldTransModName)
                                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                                         .setStorageHandler(sclpOpts::save)
                                         .setDefaultValue(SCLPOptions.DEFAULT_SHOULD_TRANS_MOD_NAME)
@@ -110,5 +111,24 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
     private Identifier optionId(String path) 
     {
         return Identifier.fromNamespaceAndPath(SCLPClientMod.MOD_ID, path);
+    }
+
+    static void rebuildSodiumScr()
+    {
+        try
+        {
+            var curScreen = Minecraft.getInstance().screen;
+            if(curScreen instanceof VideoSettingsScreen)
+            {
+                Class<?> clazz = VideoSettingsScreen.class;
+                var method = clazz.getDeclaredMethod("rebuild");
+                method.setAccessible(true);
+                method.invoke(curScreen);
+            }
+        }
+        catch(Exception e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] rebuild Sodium Screen Error:", e);
+        }
     }
 }
