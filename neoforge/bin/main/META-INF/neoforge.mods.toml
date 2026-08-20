@@ -19,7 +19,7 @@ description = '''
 [[dependencies.sclp]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.11,)"
+versionRange = "[1.21.11,1.21.11]"
 ordering = "NONE"
 side = "CLIENT"
 
