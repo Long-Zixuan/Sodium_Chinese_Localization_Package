@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "sclp",
+  "version": "${version}",
+
+  "name": "Sodium Chinese Localization Package",
+  "description": "SDC will detect your device configuration when using the sodium module as a reference for setting image quality, making it convenient for you to adjust the image quality.  ",
+  "authors": [
+    "LoongLy"
+  ],
+  "contact": {
+    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package",
+    "issues": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
+  },
+
+  "license": "LGPLv3",
+  "icon": "assets/sclp/icon.png",
+
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x",
+        "modmenu.modrinth": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack",
+        "modmenu.github_releases": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/releases",
+        "modmenu.donate": "https://ifdian.net/a/loongly",
+        "modmenu.kofi": "https://ko-fi.com/loongly",
+        "modmenu.discord": "https://discord.gg/rVbEMwzFFg"
+      }
+    }
+  },
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.loongly.mods.sclp.client.SCLPClientMod"
+    ]
+  },
+  "mixins": [
+    "sclp.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.10",
+    "java": ">=17"
+  },
+
+  "suggests": {
+    "fabric-api": "*",
+    "sodium": ">=0.4.3 <0.6.0-"
+  },
+
+  "breaks": {
+    "sodium": ["<0.4.3", ">=0.6.0-"]
+  }
+}
