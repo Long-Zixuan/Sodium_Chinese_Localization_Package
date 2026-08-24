@@ -42,6 +42,8 @@ dependencies {
 	modImplementation "maven.modrinth:indium:${project.indium_version}"
 
 	modImplementation "maven.modrinth:Es5v4eyq:nww69hqs"
+
+	modImplementation "maven.modrinth:sk9rgfiA:kJkE9dfS"
 }
 
 processResources {

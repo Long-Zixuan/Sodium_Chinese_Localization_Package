@@ -97,4 +97,9 @@ public class SCLPClientMod implements ClientModInitializer
     {
         return FabricLoader.getInstance().getModContainer("sodiumoptionsapi").isPresent();
     }
+
+	public static boolean isEmb()
+    {
+        return FabricLoader.getInstance().getModContainer("embeddium").isPresent();
+    }
 }

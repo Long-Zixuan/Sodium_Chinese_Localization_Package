@@ -36,9 +36,19 @@ public class SCLPGameOptionPages
                         .setName(Text.translatable("sclp.options.shoud_trans_mod_name"))
                         .setTooltip(Text.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> {opts.shouldTransModName = value; rebuildRSOSodiumScr();}, opts -> opts.shouldTransModName)
+                        .setBinding((opts, value) -> {
+                            opts.shouldTransModName = value; 
+                            if(SCLPClientMod.isSOA())
+                            {
+                                rebuildRSOSodiumScr();
+                            }
+                            if(SCLPClientMod.isEmb())
+                            {
+                                rebuildEmbScr();
+                            }
+                        }, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .setEnabled(SCLPClientMod.isSOA())
+                        .setEnabled(SCLPClientMod.isSOA() || SCLPClientMod.isEmb())
                         .build())
                 .build());
         if(SCLPClientMod.options().shouldShowSupportPage)
@@ -79,7 +89,7 @@ public class SCLPGameOptionPages
         return new OptionPage(Text.literal("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
     }
 
-    private static void rebuildRSOSodiumScr()//虽然环境里面有RSO环境而且运行时没安装RSO选项是不能点的，但是保险起见还是反射来降低运行时耦合度
+    private static void rebuildRSOSodiumScr()//环境里面没有RSO
     {
         var curSrc = MinecraftClient.getInstance().currentScreen;
         try
@@ -95,6 +105,25 @@ public class SCLPGameOptionPages
         catch (Exception e)
         {
             SCLPClientMod.LOGGER.error("[SCLP] Failed to rebuild RSOSodium Screen",e);
+        }
+    }
+
+    private static void rebuildEmbScr()//避免老版本Emb，所以用反射解耦
+    {
+        var curSrc = MinecraftClient.getInstance().currentScreen;
+        try
+        {
+            Class<?> embSrcClass = Class.forName("org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen");
+            if(embSrcClass.isInstance(curSrc))
+            {
+                Method rebuildMeth = embSrcClass.getMethod("rebuildUI");
+                rebuildMeth.setAccessible(true);
+                rebuildMeth.invoke(curSrc);
+            }
+        }
+        catch (Exception e)
+        {
+            SCLPClientMod.LOGGER.error("[SCLP] Failed to rebuild EmbScreen",e);
         }
     }
 
