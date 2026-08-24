@@ -20,7 +20,7 @@ public enum ViaOpt
     private static class SCLPViaOptCreater
     {
         public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
-        {
+        {//setId不可用，此为Embeddium的函数，其包名类名与Sodium完全相同
             return OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
                         .setName(Text.literal(I18N.trans(nameKey)))
                         .setTooltip(Text.literal(I18N.trans(tooltipKey)))

@@ -9,7 +9,8 @@
     "sodium.MixinScreenPrompt",
     "sodium.MixinOptionImpl",
     "sodium_options_api.MixinTabHeaderWidget",
-    "embeddium.MixinTabHeaderWidget"
+    "embeddium.MixinTabHeaderWidget",
+    "embeddium.MixinScreenPrompt"
   ],
   "injectors": {
     "defaultRequire": 1
