@@ -148,10 +148,10 @@
   "sodium.options.improved_fluid_shaping.alternative" : "替代的",
   "Default":"默认",
   "threads":"线程",
-  "Embeddium":"Embeddium(钠)",
+  "Embeddium":"Embeddium(铷)",
   "ECLP":"Embeddium-汉化包",
   "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
-  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。",
+  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n仅安装Sodium Options API或使用Embeddium时生效",
   "sclp.page":"汉化包设置",
   "sclp.options.group.support":"支持",
   "sclp.options.support_project.name":"请LoongLy喝一杯奶茶",
@@ -175,7 +175,7 @@
   "sclp.emb.donation.buycoffee":"支持钠",
   "sclp.emb.donation.buycoffee2":"支持钠",
   "sclp.emb.donation.prompt.6":"最后再一次感谢您，希望这个模组可以帮助您（和您的电脑。）",
-  "sclp.options.open_external_page_button": "打开 ➤",
+  "sclp.options.open_external_page_button": "打开",
   "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
   "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验"
 }

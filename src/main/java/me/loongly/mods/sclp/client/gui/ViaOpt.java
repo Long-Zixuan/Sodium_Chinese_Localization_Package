@@ -24,7 +24,7 @@ public enum ViaOpt
             return OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
                         .setName(Text.literal(I18N.trans(nameKey)))
                         .setTooltip(Text.literal(I18N.trans(tooltipKey)))
-                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Text[] { Text.literal(I18N.trans("sclp.options.open_external_page_button")).setStyle(Style.EMPTY.withUnderline(true))}))
+                        .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Text[] { Text.literal(I18N.trans("sclp.options.open_external_page_button") + " ➤").setStyle(Style.EMPTY.withUnderline(true))}))
                         .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build();
