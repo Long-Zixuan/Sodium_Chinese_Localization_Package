@@ -38,7 +38,7 @@ public class SCLPGameOptionPages
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> {opts.shouldTransModName = value; rebuildRSOSodiumScr();}, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .setEnabled(false)
+                        .setEnabled(SCLPClientMod.isSOA())
                         .build())
                 .build());
         if(SCLPClientMod.options().shouldShowSupportPage)

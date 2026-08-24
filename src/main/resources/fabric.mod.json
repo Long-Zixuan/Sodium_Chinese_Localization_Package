@@ -3,7 +3,7 @@
   "id": "sclp",
   "version": "${version}",
 
-  "name": "Sodium Chinese Localization Package",
+  "name": "Sodium Chinese Localized Package",
   "description": "SDC will detect your device configuration when using the sodium module as a reference for setting image quality, making it convenient for you to adjust the image quality.  ",
   "authors": [
     "LoongLy"
@@ -18,6 +18,9 @@
 
   "custom": {
     "modmenu": {
+      "parent": {
+        "id": "sodium"
+      },
       "links": {
         "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x",
         "modmenu.modrinth": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack",

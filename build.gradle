@@ -37,11 +37,11 @@ dependencies {
 
 	modImplementation "maven.modrinth:sodium:${project.sodium_version}"
 
-	compileOnly group: 'com.github.oshi',name: 'oshi-core', version: '6.4.0'
-
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "maven.modrinth:indium:${project.indium_version}"
+
+	modImplementation "maven.modrinth:Es5v4eyq:nww69hqs"
 }
 
 processResources {
