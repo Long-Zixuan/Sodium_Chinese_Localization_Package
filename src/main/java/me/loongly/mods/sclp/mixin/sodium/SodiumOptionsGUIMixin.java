@@ -31,29 +31,23 @@ import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPrompt;
 import me.jellysquid.mods.sodium.client.gui.prompt.ScreenPromptable;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 
 @Mixin(SodiumOptionsGUI.class)
-public abstract class SodiumOptionsGUIMixin// extends Screen implements ScreenPromptable
+public abstract class SodiumOptionsGUIMixin
 {
-    /*protected SodiumOptionsGUIMixin(Text title) 
-    {
-        super(title);
-        //TODO Auto-generated constructor stub
-    }
-
-    @Shadow(remap = false)
-    private static final List<StringVisitable> DONATION_PROMPT_MESSAGE = List.of(StringVisitable.concat(new StringVisitable[]{Text.literal("Hello!")}), StringVisitable.concat(new StringVisitable[]{Text.literal("It seems that you've been enjoying "), Text.literal("Sodium").withColor(2616210), Text.literal(", the free and open-source optimization mod for Minecraft.")}), StringVisitable.concat(new StringVisitable[]{Text.literal("Mods like these are complex. They require "), Text.literal("thousands of hours").withColor(16739840), Text.literal(" of development, debugging, and tuning to create the experience that players have come to expect.")}), StringVisitable.concat(new StringVisitable[]{Text.literal("If you'd like to show your token of appreciation, and support the development of our mod in the process, then consider "), Text.literal("buying us a coffee").withColor(15550926), Text.literal(".")}), StringVisitable.concat(new StringVisitable[]{Text.literal("And thanks again for using our mod! We hope it helps you (and your computer.)")}));
-
-    /*static {
-        DONATION_PROMPT_MESSAGE = List.of(
-                StringVisitable.concat(Text.translatable("sclp.hello")),
-                StringVisitable.concat(Text.translatable("sclp.donation.prompt.1"), Text.translatable("Sodium").withColor(0x27eb92), Text.translatable("sclp.donation.prompt.2")),
-                StringVisitable.concat(Text.translatable("sclp.donation.prompt.3"), Text.translatable("sclp.donation.thousand_hours").withColor(0xff6e00), Text.translatable("sclp.donation.prompt.4")),
-                StringVisitable.concat(Text.translatable("sclp.donation.prompt.5"), Text.translatable("sclp.donation.buycoffee").withColor(0xed49ce), Text.literal(".")),
-                StringVisitable.concat(Text.translatable("sclp.donation.prompt.6"))
-        );
-    }*/
+    /*@Final @Shadow(remap = false)
+    private static List<StringVisitable> DONATION_PROMPT_MESSAGE = List.of(
+        StringVisitable.concat(new StringVisitable[]{Text.translatable("sclp.hello")}), 
+        StringVisitable.concat(new StringVisitable[]{Text.translatable("sclp.donation.prompt.1"), 
+        Text.translatable("Sodium").withColor(2616210), Text.translatable("sclp.donation.prompt.2")}), 
+        StringVisitable.concat(new StringVisitable[]{Text.translatable("sclp.donation.prompt.3"), 
+        Text.translatable("sclp.donation.thousand_hours").withColor(16739840), 
+        Text.translatable("sclp.donation.prompt.4")}), 
+        StringVisitable.concat(new StringVisitable[]{Text.translatable("sclp.donation.prompt.5"), 
+        Text.translatable("sclp.donation.buycoffee").withColor(15550926), Text.literal(".")}), 
+        StringVisitable.concat(new StringVisitable[]{Text.translatable("sclp.donation.prompt.6")}));*/
 
     @Final @Shadow(remap = false)
     private List<OptionPage> pages;
@@ -98,12 +92,16 @@ public abstract class SodiumOptionsGUIMixin// extends Screen implements ScreenPr
     /*@Overwrite(remap = false)
     private void openDonationPrompt(SodiumGameOptions options) 
     {
-        var videoSettingsScrIns = ((SodiumOptionsGUI)(Object)this);
-        var prompt = new ScreenPrompt(videoSettingsScrIns, DONATION_PROMPT_MESSAGE, 320, 190,
+        var curSrc = MinecraftClient.getInstance().currentScreen;
+        if(curSrc instanceof SodiumOptionsGUI)
+        {
+            var videoSettingsScrIns = ((SodiumOptionsGUI)curSrc);
+            var prompt = new ScreenPrompt(videoSettingsScrIns, DONATION_PROMPT_MESSAGE, 320, 190,
                 new ScreenPrompt.Action(Text.translatable("sclp.donation.buycoffee2"), this::openDonationPage));
-        prompt.setFocused(true);
+            prompt.setFocused(true);
 
-        options.notifications.hasSeenDonationPrompt = true;
+            options.notifications.hasSeenDonationPrompt = true;
+        }
 
         try 
         {
@@ -112,16 +110,16 @@ public abstract class SodiumOptionsGUIMixin// extends Screen implements ScreenPr
         catch (IOException e) 
         {
             SodiumClientMod.logger()
-                    .error("Failed to update config file", e);
+                    .error("[SCLP/Sodium] Failed to update config file", e);
         }
     }
 
     private void openDonationPage()
     {
         Util.getOperatingSystem().open("https://caffeinemc.net/donate");
-    }
+    }*/
 
-    private FlatButtonWidget birthButton_;
+    /*private FlatButtonWidget birthButton_;
 
     private FlatButtonWidget supportBtn_;
     private FlatButtonWidget closeSupportBtn_;
