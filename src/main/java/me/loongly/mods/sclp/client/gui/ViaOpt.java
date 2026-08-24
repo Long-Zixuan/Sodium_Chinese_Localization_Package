@@ -12,18 +12,18 @@ public enum ViaOpt
 {
     VIA;
 
-    public static Object create(String nameKey, String tooltipKey, Object sclpOpts)
+    public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey, String tooltipKey, SCLPOptionsStorage sclpOpts)
     {
         return SCLPViaOptCreater.create(nameKey, tooltipKey, sclpOpts);
     }
 
     private static class SCLPViaOptCreater
     {
-        public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, Object lsdcOpts)
+        public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
         {
-            return OptionImpl.createBuilder(ViaOpt.class, (SCLPOptionsStorage)lsdcOpts)
-                        .setName(Text.translatable(nameKey))
-                        .setTooltip(Text.translatable(tooltipKey))
+            return OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
+                        .setName(Text.literal(I18N.trans(nameKey)))
+                        .setTooltip(Text.literal(I18N.trans(tooltipKey)))
                         .setControl(opt -> new CyclingControl<>(opt, ViaOpt.class, new Text[] { Text.literal(I18N.trans("sclp.options.open_external_page_button")).setStyle(Style.EMPTY.withUnderline(true))}))
                         .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
