@@ -69,7 +69,7 @@ public class LangFile
 
     public static String getLangUrl(String langCode)
     {
-        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/1.21/lang/%s.json";
+        String url = "https://gitee.com/zixuan_long/Json/raw/master/sclp/1.21.11/lang/%s.json";
         return String.format(url, langCode);
     }
 
