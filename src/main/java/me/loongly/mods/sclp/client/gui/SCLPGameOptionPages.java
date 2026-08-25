@@ -46,6 +46,7 @@ public class SCLPGameOptionPages
                             {
                                 rebuildEmbScr();
                             }
+                            SCLPClientMod.caiDan();
                         }, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setEnabled(SCLPClientMod.isSOA() || SCLPClientMod.isEmb())
