@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.Version;
 import net.minecraft.util.Util;
 
 import java.time.LocalDate;
@@ -102,4 +103,20 @@ public class SCLPClientMod implements ClientModInitializer
     {
         return FabricLoader.getInstance().getModContainer("embeddium").isPresent();
     }
+
+	public static boolean isNewEmb()
+	{
+		if(!isEmb())
+		{
+			return false;
+		}
+
+		var emb = FabricLoader.getInstance().getModContainer("embeddium").get();
+		try
+		{
+			return emb.getMetadata().getVersion().compareTo(Version.parse("0.3.16")) >= 0;
+		}
+		catch (Exception e){}
+		return false;
+	}
 }

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
+import org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen;
+
 import me.jellysquid.mods.sodium.client.gui.options.OptionFlag;
 import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
@@ -49,7 +51,7 @@ public class SCLPGameOptionPages
                             SCLPClientMod.caiDan();
                         }, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .setEnabled(SCLPClientMod.isSOA() || SCLPClientMod.isEmb())
+                        .setEnabled(SCLPClientMod.isSOA() || SCLPClientMod.isNewEmb())
                         .build())
                 .build());
         if(SCLPClientMod.options().shouldShowSupportPage)
@@ -109,22 +111,12 @@ public class SCLPGameOptionPages
         }
     }
 
-    private static void rebuildEmbScr()//避免老版本Emb，所以用反射解耦
+    private static void rebuildEmbScr()//没必要反射了
     {
         var curSrc = MinecraftClient.getInstance().currentScreen;
-        try
+        if(curSrc instanceof EmbeddiumVideoOptionsScreen)
         {
-            Class<?> embSrcClass = Class.forName("org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen");
-            if(embSrcClass.isInstance(curSrc))
-            {
-                Method rebuildMeth = embSrcClass.getMethod("rebuildUI");
-                rebuildMeth.setAccessible(true);
-                rebuildMeth.invoke(curSrc);
-            }
-        }
-        catch (Exception e)
-        {
-            SCLPClientMod.LOGGER.error("[SCLP] Failed to rebuild EmbScreen",e);
+            ((EmbeddiumVideoOptionsScreen)curSrc).rebuildUI();
         }
     }
 
