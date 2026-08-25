@@ -42,7 +42,7 @@ public class SCLPGameOptionPages
                         .setName(Component.translatable("sclp.options.shoud_trans_mod_name"))
                         .setTooltip(Component.translatable("sclp.options.shoud_trans_mod_name.tooltip"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> {opts.shouldTransModName = value; rebuildRSOSodiumScr();}, opts -> opts.shouldTransModName)
+                        .setBinding((opts, value) -> {opts.shouldTransModName = value; rebuildRSOSodiumScr(); SCLPClientMod.caiDan();}, opts -> opts.shouldTransModName)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setEnabled(shoudEnableTransModName)
                         .build())
