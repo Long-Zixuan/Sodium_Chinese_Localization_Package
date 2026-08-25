@@ -151,7 +151,7 @@
   "Embeddium":"Embeddium(铷)",
   "ECLP":"Embeddium-汉化包",
   "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
-  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n仅安装Sodium Options API或使用Embeddium时生效",
+  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n仅安装Sodium Options API或使用高版本的Embeddium时生效",
   "sclp.page":"汉化包设置",
   "sclp.options.group.support":"支持",
   "sclp.options.support_project.name":"请LoongLy喝一杯奶茶",

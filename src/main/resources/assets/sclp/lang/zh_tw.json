@@ -150,7 +150,7 @@
   "modmenu.summaryTranslation.sclp": "Sodium(钠)汉化包",
   "modmenu.descriptionTranslation.sclp": "钠汉化包旨在为玩家提供完美的钠模组汉化体验",
   "sclp.options.shoud_trans_mod_name":"是否翻译模组名",
-  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n仅安装Sodium Options API或使用Embeddium时生效",
+  "sclp.options.shoud_trans_mod_name.tooltip":"开启后，模组名将显示为翻译后的内容。\n仅安装Sodium Options API或使用高版本的Embeddium时生效",
   "sclp.page":"汉化包设置"
   }
   
