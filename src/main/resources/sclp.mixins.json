@@ -12,6 +12,7 @@
     "embeddium.MixinTabHeaderWidget",
     "embeddium.MixinScreenPrompt"
   ],
+  "plugin": "me.loongly.mods.sclp.mixin.SCLPMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }
