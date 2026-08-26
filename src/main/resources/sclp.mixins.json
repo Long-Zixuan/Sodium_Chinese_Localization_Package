@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.loongly.mods.sclp.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "sodium.MixinControlValueFormatter"
+  ],
+  "plugin": "me.loongly.mods.sclp.mixin.LSDCMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
