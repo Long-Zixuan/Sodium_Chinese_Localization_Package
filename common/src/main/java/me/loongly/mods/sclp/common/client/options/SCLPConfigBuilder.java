@@ -134,69 +134,71 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
         }
     }
 
-    static void rebuildSodiumScr()
+    static Screen getCurScreen()
     {
         if(hadField(Minecraft.class,"screen"))
         {
-            try
-            {
-                var curScreen = Minecraft.getInstance().screen;
-                if(curScreen instanceof VideoSettingsScreen)
-                {
-                    Class<?> clazz = VideoSettingsScreen.class;
-                    Method method = clazz.getDeclaredMethod("rebuild");
-                    method.setAccessible(true);
-                    method.invoke(curScreen);
-                }
-            }
-            catch(Exception e)
-            {
-                SCLPClientMod.logger().error("[SCLP] rebuild Sodium Screen Error:", e);
-            }
+            return Minecraft.getInstance().screen;
         }
         if(hadField(Minecraft.class,"gui"))
         {
-            try
+            var gui = Minecraft.getInstance().gui;
+            var clazz = Gui.class;
+            if(hadField(clazz, "screen"))
             {
-                var gui = Minecraft.getInstance().gui;
-                var clazz = Gui.class;
-                if(hadField(clazz, "screen"))
+                try
                 {
                     Field field = clazz.getDeclaredField("screen");//工程环境的客户端是26.1的，Gui类没有screnn字段，故只能用反射
                     field.setAccessible(true);
                     var curScreen = (Screen)field.get(gui);
-                    if(curScreen instanceof VideoSettingsScreen)
-                    {
-                        Class<?> cla = VideoSettingsScreen.class;
-                        Method method = cla.getDeclaredMethod("rebuild");
-                        method.setAccessible(true);
-                        method.invoke(curScreen);
-                    }
+                    return curScreen;
                 }
+                catch(Exception e)
+                {
+                    SCLPClientMod.logger().error("[SCLP] get Cur Screen Error:", e);
+                }
+            }
+        }
+        SCLPClientMod.logger().warn("[SCLP] Can't get Cur Screen. Minecraft API may changed!");
+        return null;
+    }
+
+    static void rebuildSodiumScr()
+    {
+        var curScreen = getCurScreen();
+        if(curScreen == null)
+        {
+            return;
+        }
+        if(curScreen instanceof VideoSettingsScreen)
+        {
+            try
+            {
+                Class<?> clazz = VideoSettingsScreen.class;
+                Method method = clazz.getDeclaredMethod("rebuild");
+                method.setAccessible(true);
+                method.invoke(curScreen);
             }
             catch(Exception e)
             {
-                
+                SCLPClientMod.logger().error("[SCLP] Rebuild Sodium Screen Error:", e);
             }
         }
     }
 
     static void closeSodiumScreen()
     {
-        if(hadField(Minecraft.class,"screen"))
+        var curScreen = getCurScreen();
+        try
         {
-            try
+            if(curScreen instanceof VideoSettingsScreen)
             {
-                var curScreen = Minecraft.getInstance().screen;
-                if(curScreen instanceof VideoSettingsScreen)
-                {
-                    ((VideoSettingsScreen)curScreen).onClose();
-                }
+                ((VideoSettingsScreen)curScreen).onClose();
             }
-            catch(Exception e)
-            {
-                SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
-            }
+        }
+        catch(Exception e)
+        {
+            SCLPClientMod.logger().error("[SCLP] close Sodium Screen Error:", e);
         }
     }
 }
