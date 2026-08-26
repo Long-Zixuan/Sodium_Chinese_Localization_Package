@@ -48,6 +48,26 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
                 return false;
             }
         }
+        if(mixinClassName.equals("me.loongly.mods.sclp.mixin.sodium.MixinControlValueFormatter_Old"))//0.5.0 开始Sodium的ValueFormatter类里面的函数返回值都是ControlValueFormatter，正确都是String，再开发一个版本意义不大，所以直接屏蔽
+        {
+            var modContainer = FabricLoader.getInstance().getModContainer("sodium");
+            if(modContainer.isPresent())
+            {
+                var mod = modContainer.get();
+                var version = mod.getMetadata().getVersion();
+                try 
+                {
+                    if(version.compareTo(Version.parse("0.5.0")) >= 0)
+                    {
+                        return false;
+                    }
+                } 
+                catch (VersionParsingException e) 
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
         return true;
     }
 
