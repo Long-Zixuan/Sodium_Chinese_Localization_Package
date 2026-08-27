@@ -85,9 +85,9 @@ public interface MixinControlValueFormatter
                     Matcher m = p.matcher(finalStr);//不为零时字符串包含数字就是格式化字符串，不为零时字符串不包含数字就不是
                     if(m.matches() || v == 0)//是格式化字符串或者显示disableText时不需要拼接
                     {
-                        return (String) getStringMeth.invoke(translationTextComponent);
+                        return finalStr;
                     }
-                    return v + " " + (String)getStringMeth.invoke(translationTextComponent);  //老版本Rubiddium不是格式化字符串，所以这里要手动拼接
+                    return v + " " + finalStr;  //老版本Rubiddium不是格式化字符串，所以这里要手动拼接
                 } 
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
                 {
