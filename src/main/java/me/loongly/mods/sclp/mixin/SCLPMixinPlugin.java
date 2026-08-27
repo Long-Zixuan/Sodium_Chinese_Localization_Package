@@ -56,7 +56,7 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
             }
             else 
             {
-                SCLPClientMod.LOGGER.warn("[SCLP] Reese's Sodium Options not present. Mixin 'loongly.lsdc.mixin.reeses_sodium_options.MixinSodiumVideoOptionsScreen' will not be enabled");
+                SCLPClientMod.LOGGER.warn("[SCLP] Reese's Sodium Options not present. Mixin 'me.loongly.mods.sclp.mixin.reeses_sodium_options.MixinSodiumVideoOptionsScreen' will not be enabled");
                 return false;
             }
         }

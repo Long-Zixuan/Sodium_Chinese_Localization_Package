@@ -6,7 +6,10 @@
   "mixins": [
   ],
   "client": [
-    "sodium.MixinControlValueFormatter"
+    "reeses_sodium_options.MixinSodiumVideoOptionsScreen",
+    "sodium.MixinControlValueFormatter",
+    "sodium.SodiumOptionsGUIMixin",
+    "sodium.MixinOptionImpl"
   ],
   "plugin": "me.loongly.mods.sclp.mixin.LSDCMixinPlugin",
   "injectors": {

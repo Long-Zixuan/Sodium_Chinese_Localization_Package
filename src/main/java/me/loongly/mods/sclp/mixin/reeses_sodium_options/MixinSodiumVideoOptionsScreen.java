@@ -17,8 +17,8 @@ import java.util.List;
 
 
 @Mixin(SodiumVideoOptionsScreen.class)
-public class MixinSodiumVideoOptionsScreen {
-
+public class MixinSodiumVideoOptionsScreen 
+{
     @Shadow @Final
     private List<OptionPage> pages;
 
@@ -26,6 +26,6 @@ public class MixinSodiumVideoOptionsScreen {
     @Inject(method = "<init>(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("TAIL"))
     private void addSCLPOptionPage(CallbackInfo ci)
     {
-       
+        pages.add(SCLPGameOptionPages.sclpPage());
     }
 }
