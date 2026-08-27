@@ -203,5 +203,7 @@
   "sodium.options.enable_memory_tracing.name": "启用内存跟踪",
   "sodium.options.enable_memory_tracing.tooltip": "调试功能。 启用后，堆栈追踪将与内存分配一起收集，以帮助在检测到内存泄漏时改进诊断信息。",
  
-  "sodium.options.threads.value": "%s 线程"
+  "sodium.options.threads.value": "%s 线程",
+  "block(s)":"个方块",
+  "None":"无"
 }
