@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
 import me.loongly.mods.sclp.language.I18NLanguage;
-
+import net.minecraft.client.MinecraftClient;
 import java.time.LocalDate;
 
 import org.apache.logging.log4j.LogManager;
@@ -101,4 +101,15 @@ public class SCLPClientMod
 						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
 		LOGGER.info(ls);
     }
+
+	public static boolean isOldRubVersion()
+	{
+		try
+		{
+			Class.forName("me.jellysquid.mods.sodium.client.SodiumPreLaunch");
+			return false;
+		}
+		catch (ClassNotFoundException e){}
+		return true;
+	}
 }

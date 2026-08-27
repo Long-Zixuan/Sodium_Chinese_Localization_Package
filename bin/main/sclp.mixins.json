@@ -1,12 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "plugin": "me.loongly.mods.sclp.mixin.SCLPMixinConfigPlugin",
   "package": "me.loongly.mods.sclp.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "compat.MixinControlValueFormatter",
-    "compat.MixinOptionImpl"
+    "compat.MixinControlValueFormatter"
   ],
   "injectors": {
     "defaultRequire": 1

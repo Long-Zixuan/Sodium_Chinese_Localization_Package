@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[40,)"
+loaderVersion = "[36,)"
 license = "LGPLv3"
 issueTrackerURL="https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
 
@@ -15,20 +15,20 @@ description = "Rubidium Chinese Localized Package can make Rubuddium support Chi
 [[dependencies.sclp]]
 modId = "forge"
 mandatory = true
-versionRange = "[40,)"
+versionRange = "[36,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.sclp]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.2,1.19.4]"
+versionRange = "[1.16.3,1.19.4]"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.sclp]]
 modId = "rubidium"
 mandatory = true
-versionRange = "[0.5,)"
+versionRange = "[0.2,)"
 ordering = "NONE"
 side = "BOTH"
