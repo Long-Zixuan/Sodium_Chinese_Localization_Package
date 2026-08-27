@@ -9,6 +9,8 @@ import net.minecraft.text.TranslatableText;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -78,7 +80,14 @@ public interface MixinControlValueFormatter
                 }
                 try 
                 {
-                    return (String) getStringMeth.invoke(translationTextComponent);
+                    String finalStr = (String) getStringMeth.invoke(translationTextComponent);
+                    Pattern p = Pattern.compile(".*\\d+.*");
+                    Matcher m = p.matcher(finalStr);//不为零时字符串包含数字就是格式化字符串，不为零时字符串不包含数字就不是
+                    if(m.matches() || v == 0)//是格式化字符串或者显示disableText时不需要拼接
+                    {
+                        return (String) getStringMeth.invoke(translationTextComponent);
+                    }
+                    return v + " " + (String)getStringMeth.invoke(translationTextComponent);  //老版本Rubiddium不是格式化字符串，所以这里要手动拼接
                 } 
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
                 {
