@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+license = "LGPLv3"
+issueTrackerURL="https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
+
+[[mods]]
+modId = "sclp"
+version = "${version}"
+displayName = "Rubidium Chinese Localization Package"
+logoFile= "icon.png"
+authors = "LoongLy"
+displayURL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
+description = "Rubidium Chinese Localized Package can make Rubuddium support Chinese."
+
+[[dependencies.sclp]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.sclp]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.sclp]]
+modId = "rubidium"
+mandatory = true
+versionRange = "[0.5,)"
+ordering = "NONE"
+side = "BOTH"
