@@ -6,7 +6,8 @@
   "client": [
     "compat.MixinControlValueFormatter",
     "compat.MixinOptionImpl",
-    "compat.MixinFlatButtonWidget"
+    "compat.MixinFlatButtonWidget",
+    "compat.MixinOptionImplBuilder"
   ],
   "injectors": {
     "defaultRequire": 1
