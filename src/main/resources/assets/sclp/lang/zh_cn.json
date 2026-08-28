@@ -205,5 +205,9 @@
  
   "sodium.options.threads.value": "%s 线程",
   "block(s)":"个方块",
-  "None":"无"
+  "None":"无",
+  "Use Chunk Multi-Draw":"使用区块多重绘制",
+  "Use Vertex Array Objects":"使用顶点数组对象",
+  "Ignore Driver Blacklist":"忽略驱动程序黑名单",
+  "Use Compact Vertex Format":"使用紧凑型顶点格式"
 }
