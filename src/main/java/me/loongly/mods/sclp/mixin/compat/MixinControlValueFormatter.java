@@ -34,6 +34,20 @@ public interface MixinControlValueFormatter
         String i18NDisableText = I18N.trans(disableText);
         return (v) -> (v == 0 ? i18NDisableText : v + " " + i18nName);
     }
+
+    #if BEFORE_18_1
+    @Overwrite
+    static ControlValueFormatter fpsLimit() 
+    {
+        return v -> (v == 260) ? I18N.trans("options.framerateLimit.max") : I18N.trans("options.framerate", new Object[] { Integer.valueOf(v) });
+    }
+
+    @Overwrite
+    static ControlValueFormatter quantity(String name) 
+    {
+        return v -> v + " " +  I18N.trans(name);
+    }
+    #endif
 }
 
 //LZX-2026-08-27-003
