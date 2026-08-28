@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 @Mixin(FlatButtonWidget.class)
 public class MixinFlatButtonWidget//1.16.5的高版本铷，构造函数label是ITextComponent类型，所以不兼容，故屏蔽
 {
+    #if BEFORE_18_1
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     public void InjectInit(Dim2i dim, String label, Runnable action, CallbackInfo ci)
     {
@@ -73,4 +74,5 @@ public class MixinFlatButtonWidget//1.16.5的高版本铷，构造函数label是
             e.printStackTrace();
         }
     }
+    #endif
 }
