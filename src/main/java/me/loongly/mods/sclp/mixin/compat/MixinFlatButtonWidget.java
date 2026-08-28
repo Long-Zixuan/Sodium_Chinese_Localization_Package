@@ -8,24 +8,36 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.lang.reflect.Field;
 
-@Mixin(FlatButtonWidget.class)
-public class MixinFlatButtonWidget//1.16.5的高版本铷，构造函数label是ITextComponent类型，所以不兼容，故屏蔽
+@Mixin(value = FlatButtonWidget.class,remap = false)
+public class MixinFlatButtonWidget
 {
-    @Inject(method = "<init>", at = @At(value = "RETURN"))
-    public void InjectInit(Dim2i dim, String label, Runnable action, CallbackInfo ci)
+    /*@ModifyArg(
+    method = "<init>(Lme/jellysquid/mods/sodium/client/util/Dim2i;Ljava/lang/String;Ljava/lang/Runnable;)V",
+        at = @At(value = "INVOKE", 
+                target = "java/lang/String", 
+                ordinal = 0),
+        index = 1
+    )
+    private String modifyLabel(String originalLabel) 
     {
-        try 
-        {
-            Field field = FlatButtonWidget.class.getDeclaredField("label");
-            field.setAccessible(true);
-            field.set((FlatButtonWidget)(Object)this, I18N.trans(label));
-        }
-        catch (NoSuchFieldException | IllegalAccessException e) 
-        {
-            e.printStackTrace();
-        }
+        return I18N.trans(originalLabel);
+    }*/
+   @Redirect(
+        method = "<init>(Lme/jellysquid/mods/sodium/client/util/Dim2i;Ljava/lang/String;Ljava/lang/Runnable;)V",
+        at = @At(value = "INVOKE", 
+                target = "java/lang/String", 
+                ordinal = 0),
+        require = 0 // 表示不依赖其他条件，总是尝试注入
+    )
+    private String redirectLabel(String originalLabel) 
+    {
+        return I18N.trans(originalLabel);
     }
 }

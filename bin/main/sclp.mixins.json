@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "compat.MixinControlValueFormatter",
-    "compat.MixinOptionImpl"
+    "compat.MixinOptionImpl",
+    "compat.MixinFlatButtonWidget"
   ],
   "injectors": {
     "defaultRequire": 1
