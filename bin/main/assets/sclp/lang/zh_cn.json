@@ -329,5 +329,5 @@
   "sclp.support_close":"永远关闭支持选项",
   "sclp.support_close_tooltip":"如果启用，将不再显示“请LoongLy喝杯奶茶！”选项\n选项将在重新开启此页面时生效",
   "Leaves Quality": "树叶质量",
-  "Controls the quality of leaves":"控制树叶的渲染质量"
+  "Controls the quality of leaves.":"控制树叶的渲染质量"
 }
