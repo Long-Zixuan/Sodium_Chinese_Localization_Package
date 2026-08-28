@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import me.loongly.mods.sclp.language.I18N;
+
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 
 @Mixin(value = OptionImpl.class, remap = false)
@@ -22,64 +24,7 @@ public class MixinOptionImpl
     private void ibjectSetName(CallbackInfoReturnable<String> cir)
     {
         String name = cir.getReturnValue();
-        if(name instanceof String)
-        {
-            Class<?> clazz;
-            try 
-            {
-                clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");
-            } 
-            catch (ClassNotFoundException e) 
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return;
-            }
-            Constructor<?> constructor;
-            try 
-            {
-                constructor = clazz.getConstructor(String.class, Object[].class);
-            } 
-            catch (NoSuchMethodException | SecurityException e) 
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return;
-            }
-            Object translationTextComponent;
-            try 
-            {
-                translationTextComponent = constructor.newInstance(name,null);
-            } 
-            catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) 
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return;
-            }
-            Method getStringMeth;
-            try 
-            {
-                getStringMeth = clazz.getMethod("getString");
-            } 
-            catch (NoSuchMethodException | SecurityException e) 
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return;
-            }
-            try 
-            {
-                String finalStr = (String) getStringMeth.invoke(translationTextComponent);
-                name = finalStr;
-            } 
-            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+        name = I18N.trans(name);
         cir.setReturnValue(name);
     }
     #endif
