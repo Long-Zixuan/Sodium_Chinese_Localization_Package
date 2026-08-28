@@ -64,14 +64,33 @@ def preprocessMacros = [
 ]
 
 // 预处理任务：在 Java 编译前扫描源文件，处理 #if / #endif 条件编译
-task preprocessJava {
+task preprocessJava(type: Sync) {
     def sourceDir = file('src/main/java')
+    def tempDir = file("${project.buildDir}/preprocessed-java")
+
+    // 设置 Sync 任务的输出目录
+    destinationDir = tempDir
+
+    // 输入输出声明
     inputs.dir(sourceDir)
-    outputs.dir(sourceDir)
+    outputs.dir(tempDir)
+
+    from(sourceDir) {
+        // 复制所有非 Java 文件
+        include '**/*'
+        exclude '**/*.java'
+    }
 
     doLast {
+        // 处理所有 Java 文件
         sourceDir.eachFileRecurse(groovy.io.FileType.FILES) { file ->
             if (file.name.endsWith('.java')) {
+                def relativePath = sourceDir.toPath().relativize(file.toPath()).toString()
+                def targetFile = new File(tempDir, relativePath)
+
+                // 确保目标目录存在
+                targetFile.getParentFile().mkdirs()
+
                 def lines = file.readLines('UTF-8')
                 def result = []
                 def skipStack = [] // 栈：记录嵌套的 #if 块是否应跳过
@@ -122,17 +141,16 @@ task preprocessJava {
                     throw new GradleException("Unclosed #if in ${file}, missing #endif")
                 }
 
-                // 只有内容变化时才写回，避免不必要的文件更新
-                def newContent = result.join(System.lineSeparator()) + System.lineSeparator()
-                def oldContent = file.getText('UTF-8')
-                if (newContent != oldContent) {
-                    file.write(newContent, 'UTF-8')
-                    logger.lifecycle("[Preprocess] Processed macros in: ${file}")
-                }
+                // 将处理后的内容写入临时文件
+                targetFile.write(result.join(System.lineSeparator()) + System.lineSeparator(), 'UTF-8')
+                logger.lifecycle("[Preprocess] Processed macros in: ${file} -> ${targetFile}")
             }
         }
     }
 }
+
+// 创建一个源集，使用预处理后的临时目录
+sourceSets.main.java.srcDirs = [file("${project.buildDir}/preprocessed-java")]
 
 // 让 Java 编译依赖预处理任务
 tasks.withType(JavaCompile).configureEach {
