@@ -17,6 +17,7 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 @Mixin(value = OptionImpl.class, remap = false)
 public class MixinOptionImpl 
 {
+    #if BEFORE_18_1
     @Inject(method = "getName", at = @At("RETURN"),cancellable = true)
     private void ibjectSetName(CallbackInfoReturnable<String> cir)
     {
@@ -81,4 +82,5 @@ public class MixinOptionImpl
         }
         cir.setReturnValue(name);
     }
+    #endif
 }    

@@ -57,9 +57,88 @@ processResources {
     }
 }
 
+// ==================== 预处理宏配置 ====================
+// 在 gradle.properties 中设置 before_18_1=true/false 来控制宏 BEFORE_18_1
+def preprocessMacros = [
+    'BEFORE_18_1': project.hasProperty('before_18_1') && project.property('before_18_1').toBoolean()
+]
+
+// 预处理任务：在 Java 编译前扫描源文件，处理 #if / #endif 条件编译
+task preprocessJava {
+    def sourceDir = file('src/main/java')
+    inputs.dir(sourceDir)
+    outputs.dir(sourceDir)
+
+    doLast {
+        sourceDir.eachFileRecurse(groovy.io.FileType.FILES) { file ->
+            if (file.name.endsWith('.java')) {
+                def lines = file.readLines('UTF-8')
+                def result = []
+                def skipStack = [] // 栈：记录嵌套的 #if 块是否应跳过
+
+                for (def line : lines) {
+                    def trimmed = line.trim()
+
+                    // 处理 #if MACRO
+                    def ifMatch = trimmed =~ /^#if\s+(\w+)$/
+                    if (ifMatch) {
+                        def macroName = ifMatch[0][1]
+                        def defined = preprocessMacros.get(macroName, false)
+                        // 如果外层已经在跳过，则内层也跳过；否则根据宏定义决定
+                        def shouldSkip = skipStack ? true : !defined
+                        skipStack.push(shouldSkip)
+                        continue
+                    }
+
+                    // 处理 #else
+                    if (trimmed == '#else') {
+                        if (skipStack.isEmpty()) {
+                            throw new GradleException("#else without matching #if in ${file}")
+                        }
+                        // 翻转当前层的跳过状态（仅当外层不跳过时才有效）
+                        def currentSkip = skipStack.pop()
+                        def outerSkipping = skipStack ? true : false
+                        def newSkip = outerSkipping ? true : !currentSkip
+                        skipStack.push(newSkip)
+                        continue
+                    }
+
+                    // 处理 #endif
+                    if (trimmed == '#endif') {
+                        if (skipStack.isEmpty()) {
+                            throw new GradleException("#endif without matching #if in ${file}")
+                        }
+                        skipStack.pop()
+                        continue
+                    }
+
+                    // 普通代码行：如果当前不在跳过状态则保留
+                    if (!skipStack || !skipStack[-1]) {
+                        result.add(line)
+                    }
+                }
+
+                if (!skipStack.isEmpty()) {
+                    throw new GradleException("Unclosed #if in ${file}, missing #endif")
+                }
+
+                // 只有内容变化时才写回，避免不必要的文件更新
+                def newContent = result.join(System.lineSeparator()) + System.lineSeparator()
+                def oldContent = file.getText('UTF-8')
+                if (newContent != oldContent) {
+                    file.write(newContent, 'UTF-8')
+                    logger.lifecycle("[Preprocess] Processed macros in: ${file}")
+                }
+            }
+        }
+    }
+}
+
+// 让 Java 编译依赖预处理任务
 tasks.withType(JavaCompile).configureEach {
     // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
     it.options.release = 17
+    dependsOn preprocessJava
 }
 
 java {
