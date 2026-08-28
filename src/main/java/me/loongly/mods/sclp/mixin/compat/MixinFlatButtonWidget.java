@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @Mixin(FlatButtonWidget.class)
-public class MixinFlatButtonWidget//1.16.5的高版本铷，构造函数label是ITextComponent类型，所以不兼容，故屏蔽
+public class MixinFlatButtonWidget
 {
     #if BEFORE_18_1
     @Inject(method = "<init>", at = @At(value = "RETURN"))

@@ -22,7 +22,7 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionImpl.Builder;
 public class MixinOptionImplBuilder
 {
     #if BEFORE_18_1
-    @Inject(method = "setTooltip", at = @At("RETURN"),cancellable = true)
+    @Inject(method = "setTooltip(Ljava/lang/String;)Lme/jellysquid/mods/sodium/client/gui/options/OptionImpl$Builder;", at = @At("RETURN"),cancellable = true)
     private void injectSetTooltip(String tooltip, CallbackInfoReturnable<Builder> cir)
     {
         try 
