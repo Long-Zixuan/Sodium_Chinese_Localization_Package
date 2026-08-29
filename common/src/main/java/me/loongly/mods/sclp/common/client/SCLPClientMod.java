@@ -41,15 +41,19 @@ public class SCLPClientMod
 	{
 		LOGGER.info("[SCLP]Sodium Chinese Localized Package start init");
 		I18NLanguage.init();
-		var ls = "[SCLP]\r\n"+ //
-						"      ____                                    ____ \r\n" + //
-						"     /   /                                   /   /   \r\n" + //
-						"    /   /    ____________  ______  _____    /   /    ___ ___ \r\n" + //
-						"   /   /___ /  _  /  _  / /     / /  _  \\  /   /___ |  //  /\r\n" + //
-						"  /_______/ \\____/\\____/ /  /  /  \\__   / /_______/  \\    /\r\n" + //
-						" ___________________________________/  /______________/  /\r\n" + //
-						"/___LoongLy Software 2026_______________________________/\r\n" + //
-						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
+var ls = """
+[SCLP]
+      ____                                    ____ 
+     /   /                                   /   /   
+    /   /    ____________  ______  _____    /   /    ___ ___ 
+   /   /___ /  _  /  _  / /     / /  _  \\  /   /___ |  //  /
+  /_______/ \\____/\\____/ /  /  /  \\__   / /_______/  \\    /
+ ___________________________________/  /______________/  /
+/___LoongLy Software 2026_______________________________/
+[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)
+        """;
+
+
 		LOGGER.info(ls);
 	}
 
