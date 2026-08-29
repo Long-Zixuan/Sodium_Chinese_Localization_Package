@@ -55,7 +55,7 @@ public class MixinCyclingControl<T>
     {
         try 
         {
-            Field namesField = CyclingControl.class.getDeclaredField("names");
+            Field namesField = CyclingControl.class.getDeclaredField("names");//本来还想着反射改成@Shadow，结果你在新版本类型也变了。。。。
             namesField.setAccessible(true);
             Object tmpName = namesField.get(this);
             if(tmpName instanceof String[])

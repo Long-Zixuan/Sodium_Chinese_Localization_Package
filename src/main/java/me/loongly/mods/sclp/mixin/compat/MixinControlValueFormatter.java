@@ -47,6 +47,18 @@ public interface MixinControlValueFormatter
     {
         return v -> v + " " +  I18N.trans(name);
     }
+
+    @Overwrite
+    static ControlValueFormatter guiScale() 
+    {
+        return v -> (v == 0) ? I18N.trans("options.guiScale.auto") : I18N.trans("sclp.multiplier", v);
+    }
+    
+    @Overwrite
+    static ControlValueFormatter brightness() 
+    {
+        return v -> (v == 0) ? I18N.trans("options.gamma.min") : (v == 100) ? I18N.trans("options.gamma.max") : I18N.trans("sclp.percent", v);
+    }
     #endif
 }
 
