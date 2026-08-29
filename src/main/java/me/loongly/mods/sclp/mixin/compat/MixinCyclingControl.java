@@ -23,7 +23,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 public class MixinCyclingControl<T>
 {
     #if BEFORE_18_1
-    @Inject(
+    /*@Inject( //为了兼容性，只好牺牲你了呵呵呵
         method = "<init>(Lme/jellysquid/mods/sodium/client/gui/options/Option;Ljava/lang/Class;[Ljava/lang/String;)V",
         at = @At("RETURN")
     )
@@ -45,7 +45,7 @@ public class MixinCyclingControl<T>
         {
             e.printStackTrace();
         }
-    }
+    }*/
 
      @Inject(
         method = "<init>(Lme/jellysquid/mods/sodium/client/gui/options/Option;Ljava/lang/Class;)V",
@@ -57,7 +57,16 @@ public class MixinCyclingControl<T>
         {
             Field namesField = CyclingControl.class.getDeclaredField("names");
             namesField.setAccessible(true);
-            String[] originalNames = (String[]) namesField.get(this);
+            Object tmpName = namesField.get(this);
+            if(tmpName instanceof String[])
+            {
+                
+            }
+            else
+            {
+                return;//如果是ITextComponent，肯定是现代化I18n了，不需要我翻译
+            }
+            String[] originalNames = (String[]) tmpName;
             
             // 翻译所有名称
             for (int i = 0; i < originalNames.length; i++) 
