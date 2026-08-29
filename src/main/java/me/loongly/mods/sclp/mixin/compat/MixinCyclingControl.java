@@ -46,5 +46,29 @@ public class MixinCyclingControl<T>
             e.printStackTrace();
         }
     }
+
+     @Inject(
+        method = "<init>(Lme/jellysquid/mods/sodium/client/gui/options/Option;Ljava/lang/Class;)V",
+        at = @At("RETURN")
+    )
+    private void injectInit2(Option<T> option, Class<T> enumType,CallbackInfo ci)
+    {
+        try 
+        {
+            Field namesField = CyclingControl.class.getDeclaredField("names");
+            namesField.setAccessible(true);
+            String[] originalNames = (String[]) namesField.get(this);
+            
+            // 翻译所有名称
+            for (int i = 0; i < originalNames.length; i++) 
+            {
+                originalNames[i] = I18N.trans(originalNames[i]);
+            }
+        } 
+        catch (NoSuchFieldException | IllegalAccessException e) 
+        {
+            e.printStackTrace();
+        }
+    }
     #endif
 }    
