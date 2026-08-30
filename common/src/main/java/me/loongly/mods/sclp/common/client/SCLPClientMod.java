@@ -75,7 +75,7 @@ public class SCLPClientMod
 	{
 		try
 		{
-			Class.forName("org.embeddedt.embeddium.impl.gui.EmbeddiumGameOptionPages");
+			Class.forName("org.embeddedt.embeddium.impl.gui.EmbeddiumGameOptionPages",false,SCLPClientMod.class.getClassLoader());
 			return true;
 		}
 		catch (ClassNotFoundException e)
