@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.util.Util;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 
 import loongly.sclp.client.gui.SCLPGameOptions;
 import loongly.sclp.language.I18NLanguage;
-
+import me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.SemanticVersion;
@@ -136,11 +137,12 @@ public class SclpClientMod implements ClientModInitializer
                
 	}
 
-	public static boolean isNewRSO()
+	public static boolean haveRSORebuildMeth()
 	{
 		try
 		{
-			return getRSOVersion() != null && getRSOVersion().compareTo(Version.parse("1.4.2")) >= 0;
+			Method m = SodiumVideoOptionsScreen.class.getMethod("rebuildUI");
+			return true;
 		}
 		catch(Exception e)
 		{

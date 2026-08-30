@@ -122,7 +122,7 @@ public class SCLPGameOptionPages
 
     static void rebuildSodiumScr()
     {
-        if(SclpClientMod.isNewRSO())
+        if(SclpClientMod.haveRSORebuildMeth())
         {
                 MinecraftClient client = MinecraftClient.getInstance();
                 Screen curScreen = client.currentScreen;
