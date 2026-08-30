@@ -106,7 +106,7 @@ public class SCLPClientMod
 	{
 		try
 		{
-			Class.forName("me.jellysquid.mods.sodium.client.SodiumPreLaunch");
+			Class.forName("me.jellysquid.mods.sodium.client.SodiumPreLaunch",false,SCLPClientMod.class.getClassLoader());
 			return false;
 		}
 		catch (ClassNotFoundException e){}
