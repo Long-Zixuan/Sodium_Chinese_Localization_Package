@@ -147,5 +147,10 @@ public class SclpClientMod implements ClientModInitializer
 			return false;
 		}
 	}
+
+	public static boolean isRSO()
+	{
+		return getRSOVersion() != null;
+	}
 	
 }

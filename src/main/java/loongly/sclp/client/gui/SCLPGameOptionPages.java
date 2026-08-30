@@ -14,6 +14,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen;
+import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.AbstractFrame;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -23,7 +24,9 @@ import net.minecraft.util.Util;
 import loongly.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import loongly.sclp.language.I18N;
 import loongly.sclp.client.SclpClientMod;
+import net.minecraft.client.gui.Element;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -129,6 +132,44 @@ public class SCLPGameOptionPages
                         sodiumScr.rebuildUI();
                 }
                 return;
+        }
+        if(SclpClientMod.isRSO())
+        {
+                MinecraftClient client = MinecraftClient.getInstance();
+                Screen curScreen = client.currentScreen;
+                if(curScreen instanceof SodiumVideoOptionsScreen)
+                {}
+                else
+                {
+                        return;
+                }
+                try
+                {
+                        Class<?> clazz = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
+                        Class<?> clazzSup = clazz.getSuperclass();
+                        Field childrenField = clazzSup.getDeclaredField("field_22786");//field_22786是children字段编译后的名字
+                        childrenField.setAccessible(true);
+                        List<Element> children = (List<Element>) childrenField.get(curScreen);
+                        Field frameField = clazz.getDeclaredField("frame");
+                        frameField.setAccessible(true);
+                        AbstractFrame frame = (AbstractFrame) frameField.get(curScreen);
+                        children.remove(frame);
+                        Method method = clazz.getDeclaredMethod("method_25426");//method_25426是init方法编译后的名字
+                        method.setAccessible(true);
+                        method.invoke(curScreen);
+                        /*
+                        上面这一堆，等价于
+                        this.children.remove(this.frame);
+                        this.frame = this.parentFrameBuilder().build();
+                        this.children.add(this.frame);
+                         */
+                        return;
+                }
+                catch(Exception e)
+                {
+                        SclpClientMod.LOGGER.error("[SCLP] Failed rebuild old RSO Screen:", e);
+                        return;
+                }
         }
         try
         {
