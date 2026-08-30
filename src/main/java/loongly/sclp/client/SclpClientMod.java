@@ -145,10 +145,9 @@ public class SclpClientMod implements ClientModInitializer
 		}
 		try
 		{
-			Method m = SodiumVideoOptionsScreen.class.getMethod("rebuildUI");
-			return true;
+			return getRSOVersion() != null && getRSOVersion().compareTo(Version.parse("1.6.0")) >= 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return false;
 		}
