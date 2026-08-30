@@ -23,9 +23,10 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 public class MixinCyclingControl<T>
 {
     #if BEFORE_18_1
-    /*@Inject( //为了兼容性，只好牺牲你了呵呵呵
+    @Inject( 
         method = "<init>(Lme/jellysquid/mods/sodium/client/gui/options/Option;Ljava/lang/Class;[Ljava/lang/String;)V",
-        at = @At("RETURN")
+        at = @At("RETURN"),
+        require = 0
     )
     private void injectInit(Option<T> option, Class<T> enumType, String[] names,CallbackInfo ci)
     {
@@ -45,7 +46,7 @@ public class MixinCyclingControl<T>
         {
             e.printStackTrace();
         }
-    }*/
+    }
 
      @Inject(
         method = "<init>(Lme/jellysquid/mods/sodium/client/gui/options/Option;Ljava/lang/Class;)V",
