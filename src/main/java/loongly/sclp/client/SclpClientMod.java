@@ -139,6 +139,10 @@ public class SclpClientMod implements ClientModInitializer
 
 	public static boolean haveRSORebuildMeth()
 	{
+		if(!isRSO())
+		{
+			return false;
+		}
 		try
 		{
 			Method m = SodiumVideoOptionsScreen.class.getMethod("rebuildUI");
