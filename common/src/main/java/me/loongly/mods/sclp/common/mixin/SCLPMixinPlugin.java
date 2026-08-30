@@ -46,7 +46,7 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
     {
         try
         {
-            Class.forName("net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen");
+            Class.forName("net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen",false,getClass().getClassLoader());
             return true;
         }
         catch (ClassNotFoundException e)
@@ -59,7 +59,7 @@ public class SCLPMixinPlugin implements IMixinConfigPlugin
     {
         try
         {
-            Class.forName("me.flashyreese.mods.reeses_sodium_options.client.config.ReeseSodiumOptionsConfigEntryPoint");
+            Class.forName("me.flashyreese.mods.reeses_sodium_options.client.config.ReeseSodiumOptionsConfigEntryPoint",false,getClass().getClassLoader());
             return true;
         }
         catch (ClassNotFoundException e)
