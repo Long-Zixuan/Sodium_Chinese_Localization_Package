@@ -101,15 +101,4 @@ public class SCLPClientMod
 						"[SCLP]LoongLy:Sodium Chinese Localized Package init successful!(钠汉化包初始化成功！)\r\n";
 		LOGGER.info(ls);
     }
-
-	public static boolean isOldRubVersion()
-	{
-		try
-		{
-			Class.forName("me.jellysquid.mods.sodium.client.SodiumPreLaunch",false,SCLPClientMod.class.getClassLoader());
-			return false;
-		}
-		catch (ClassNotFoundException e){}
-		return true;
-	}
 }

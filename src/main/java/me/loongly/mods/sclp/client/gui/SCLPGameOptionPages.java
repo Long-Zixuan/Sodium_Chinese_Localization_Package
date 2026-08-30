@@ -83,45 +83,6 @@ public class SCLPGameOptionPages
         // }
         return new OptionPage(new LiteralText("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
     }
-
-    private static void rebuildRSOSodiumScr()//环境里面没有RSO
-    {
-        var curSrc = MinecraftClient.getInstance().currentScreen;
-        try
-        {
-            Class<?> rsoSrcClass = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
-            if(rsoSrcClass.isInstance(curSrc))
-            {
-                Method rebuildMeth = rsoSrcClass.getMethod("rebuildUI");
-                rebuildMeth.setAccessible(true);
-                rebuildMeth.invoke(curSrc);
-            }
-        }
-        catch (Exception e)
-        {
-            SCLPClientMod.logger().error("[SCLP] Failed to rebuild RSOSodium Screen",e);
-        }
-    }
-
-    private static void rebuildEmbScr()//避免老版本Emb，所以用反射解耦
-    {
-        var curSrc = MinecraftClient.getInstance().currentScreen;
-        try
-        {
-            Class<?> embSrcClass = Class.forName("org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen");
-            if(embSrcClass.isInstance(curSrc))
-            {
-                Method rebuildMeth = embSrcClass.getMethod("rebuildUI");
-                rebuildMeth.setAccessible(true);
-                rebuildMeth.invoke(curSrc);
-            }
-        }
-        catch (Exception e)
-        {
-            SCLPClientMod.logger().error("[SCLP] Failed to rebuild EmbScreen",e);
-        }
-    }
-
 }
 
 
