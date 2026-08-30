@@ -77,7 +77,7 @@ public class SCLPClientMod
     {
         try
         {
-            Class.forName("org.embeddedt.embeddium.gui.frame.BasicFrame");
+            Class.forName("org.embeddedt.embeddium.gui.frame.BasicFrame",false, SCLPClientMod.class.getClassLoader());
             return true;
         }
         catch (ClassNotFoundException e)
@@ -91,7 +91,7 @@ public class SCLPClientMod
     {
         try
         {
-            Class.forName("me.jellysquid.mods.sodium.client.gl.arena.SwapBufferArena");
+            Class.forName("me.jellysquid.mods.sodium.client.gl.arena.SwapBufferArena",false,SCLPClientMod.class.getClassLoader());
             return true;
         }
         catch (ClassNotFoundException e)
