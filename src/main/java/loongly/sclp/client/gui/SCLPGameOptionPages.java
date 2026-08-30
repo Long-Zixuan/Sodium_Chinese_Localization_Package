@@ -13,6 +13,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatte
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
+import me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -118,6 +119,17 @@ public class SCLPGameOptionPages
 
     static void rebuildSodiumScr()
     {
+        if(SclpClientMod.isNewRSO())
+        {
+                MinecraftClient client = MinecraftClient.getInstance();
+                Screen curScreen = client.currentScreen;
+                if(curScreen instanceof SodiumVideoOptionsScreen)
+                {
+                        SodiumVideoOptionsScreen sodiumScr = (SodiumVideoOptionsScreen) curScreen;
+                        sodiumScr.rebuildUI();
+                }
+                return;
+        }
         try
         {
                 MinecraftClient client = MinecraftClient.getInstance();

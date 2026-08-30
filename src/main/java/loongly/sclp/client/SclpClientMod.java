@@ -22,6 +22,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.SemanticVersion;
 import java.util.Optional;
+import net.fabricmc.loader.api.Version;
 
 @Environment(EnvType.CLIENT)
 public class SclpClientMod implements ClientModInitializer 
@@ -133,6 +134,18 @@ public class SclpClientMod implements ClientModInitializer
 		}
 		return null;
                
+	}
+
+	public static boolean isNewRSO()
+	{
+		try
+		{
+			return getRSOVersion() != null && getRSOVersion().compareTo(Version.parse("1.4.2")) >= 0;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 	
 }
