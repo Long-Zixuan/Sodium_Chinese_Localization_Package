@@ -36,6 +36,11 @@ public class MixinCyclingControl<T>
     )
     private void injectInit(Option<T> option, Class<T> enumType, String[] names,CallbackInfo ci)
     {
+        /*
+        也是无心插柳柳成荫，之前的这里的逻辑没有类型判断逻辑,
+        这也是为什么2.0.9加载其他Embeddium的子模组游戏会崩溃的原因（因为调用了这个函数,而新版本的模组内部已经不会调用这个函数了），
+        优化的时候顺带写了类型判断逻辑，顺带修复了一个bug
+         */
         if(names == null)
         {
             return;//新版本names为ITextComponent[]，所以注入的时候这里是null
