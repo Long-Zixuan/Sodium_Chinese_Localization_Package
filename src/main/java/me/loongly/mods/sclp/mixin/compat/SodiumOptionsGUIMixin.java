@@ -19,17 +19,13 @@ import java.util.List;
 @Mixin(SodiumOptionsGUI.class)
 public abstract class SodiumOptionsGUIMixin 
 {
-
-    #if BEFORE_18_1
-    #else
     @Final @Shadow(remap = false)
     private List<OptionPage> pages;
 
     @Unique
     OptionPage birthPage_;
 
-
-    @Inject(method = "<init>(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("TAIL"))
+    @Inject(method = "<init>", at = @At("TAIL"))
     private void addSCLPOptionPage(CallbackInfo ci)
     {
         //this.pages.add(SCLPGameOptionPages.sclpPage());
@@ -49,5 +45,4 @@ public abstract class SodiumOptionsGUIMixin
 			ci.cancel();
 		}
 	}
-    #endif
 }

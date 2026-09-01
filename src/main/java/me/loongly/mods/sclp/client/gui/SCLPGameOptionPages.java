@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
+import java.lang.String;
 
 import me.jellysquid.mods.sodium.client.gui.options.OptionFlag;
 import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
@@ -20,9 +21,12 @@ import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.client.MinecraftClient;
+#if BEFORE_18_1
+#else
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+#endif
 
 
 public class SCLPGameOptionPages 
@@ -30,6 +34,8 @@ public class SCLPGameOptionPages
 
     private static final SCLPOptionsStorage lsdcOpts = new SCLPOptionsStorage();
 
+    #if BEFORE_18_1
+    #else
     @SuppressWarnings("unchecked")
     public static OptionPage sclpPage()
     {
@@ -62,6 +68,7 @@ public class SCLPGameOptionPages
         }
         return new OptionPage(new LiteralText(I18N.trans("sclp.page")), ImmutableList.copyOf(groups));
     }
+    #endif
 
     public static OptionPage birthPage()
     {
@@ -82,6 +89,102 @@ public class SCLPGameOptionPages
         //                 .build())
         //         .build());
         // }
+        #if BEFORE_18_1
+        Class<?> optionPageClazz;
+        try
+        {
+            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        Constructor<?> optionPageConstructor;
+        try 
+        {
+            optionPageConstructor = optionPageClazz.getConstructor(String.class, com.google.common.collect.ImmutableList.class);
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        try
+        {
+            return (OptionPage) optionPageConstructor.newInstance("🎂:" + (year -2004), ImmutableList.copyOf(groups));
+        } 
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
+        {
+            // TODO Auto-generated catch block
+            //e.printStackTrace();
+            //return null;
+        }
+
+        Class<?> clazz;
+        try 
+        {
+            clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        Constructor<?> transTextConstructor;
+        try 
+        {
+            transTextConstructor = clazz.getConstructor(String.class, Object[].class);
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        Object translationTextComponent;
+        try 
+        {
+            translationTextComponent = transTextConstructor.newInstance("🎂:" + (year -2004), null);
+        } 
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        Class<?> iTextCompClazz;
+        try
+        {
+            iTextCompClazz = Class.forName("net.minecraft.util.text.ITextComponent");
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            e.printStackTrace();
+            return null;
+        }
+        try 
+        {
+            optionPageConstructor = clazz.getConstructor(iTextCompClazz, com.google.common.collect.ImmutableList.class);
+        } 
+        catch (NoSuchMethodException | SecurityException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        try
+        {
+            return (OptionPage)optionPageConstructor.newInstance(translationTextComponent, ImmutableList.copyOf(groups));
+        } 
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        #else
         try
         {
             Class.forName("net.minecraft.network.chat.TextComponent");
@@ -153,6 +256,7 @@ public class SCLPGameOptionPages
             e.printStackTrace();
             return null;
         }
+        #endif
         //end 1.19
     }
 }

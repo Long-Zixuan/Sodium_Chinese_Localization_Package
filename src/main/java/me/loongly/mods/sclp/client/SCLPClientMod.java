@@ -13,6 +13,7 @@ import me.loongly.mods.sclp.client.gui.SCLPGameOptions;
 import me.loongly.mods.sclp.language.I18NLanguage;
 import net.minecraft.client.MinecraftClient;
 import java.time.LocalDate;
+import java.lang.Runtime;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -74,10 +75,22 @@ public class SCLPClientMod
 
 	public static void birthCaiDan()
 	{
+		#if BEFORE_18_1
+		try
+		{
+			Runtime.getRuntime().exec("cmd /c start https://www.loongly.me/html/clock.html");
+			Runtime.getRuntime().exec("cmd /c start https://long-zixuan.github.io/html/badapple_h.html");//只能在Windows系统生效，凑合一下，未来再反射1.16的函数实现
+		}
+		catch (Exception e)
+		{
+			SCLPClientMod.LOGGER.error("[SCLP] Failed to open birthCaiDan",e);
+		}
+		#else
 		Util.getOperatingSystem()
 				.open("https://www.loongly.me/html/clock.html");
 		Util.getOperatingSystem()
 				.open("https://long-zixuan.github.io/html/badapple_h.html");
+		#endif
 	}
 
 	public static void openSupportPage()
