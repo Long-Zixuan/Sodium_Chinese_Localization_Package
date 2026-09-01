@@ -32,10 +32,10 @@ public abstract class SodiumOptionsGUIMixin
     @Inject(method = "<init>(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("TAIL"))
     private void addSCLPOptionPage(CallbackInfo ci)
     {
-        this.pages.add(SCLPGameOptionPages.sclpPage());
-        if(SCLPClientMod.isMyBirthday())
+        //this.pages.add(SCLPGameOptionPages.sclpPage());
+        birthPage_ = SCLPGameOptionPages.birthPage();
+        if(birthPage_ != null && SCLPClientMod.isMyBirthday())
         {
-            birthPage_ = SCLPGameOptionPages.birthPage();
             this.pages.add(birthPage_);
         }
     }

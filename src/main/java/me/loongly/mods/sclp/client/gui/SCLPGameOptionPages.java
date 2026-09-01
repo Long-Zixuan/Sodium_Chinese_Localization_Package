@@ -3,7 +3,8 @@ package me.loongly.mods.sclp.client.gui;
 import com.google.common.collect.ImmutableList;
 
 
-
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -81,7 +82,78 @@ public class SCLPGameOptionPages
         //                 .build())
         //         .build());
         // }
-        return new OptionPage(new LiteralText("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
+        try
+        {
+            Class.forName("net.minecraft.network.chat.TextComponent");
+            return new OptionPage(new LiteralText("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
+        }
+        catch (ClassNotFoundException e)
+        {}
+        //1.19
+        Class<?> textCompClazz;
+        try
+        {
+            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        Method constructor;
+        try
+        {
+            constructor = textCompClazz.getMethod("m_237115_",String.class);
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        Object textComp;
+        try
+        {
+            textComp = constructor.invoke(null,"🎂:" + (year -2004));
+        }
+        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        Class<?> optionPageClazz;
+        try
+        {
+            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        Constructor<?> optionPageConstructor;
+        try 
+        {
+            optionPageConstructor = optionPageClazz.getConstructor(textCompClazz, com.google.common.collect.ImmutableList.class);
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        try
+        {
+            return (OptionPage) optionPageConstructor.newInstance(textComp, ImmutableList.copyOf(groups));
+        } 
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        //end 1.19
     }
 }
 
