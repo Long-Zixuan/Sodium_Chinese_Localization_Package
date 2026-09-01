@@ -81,8 +81,8 @@ public class SCLPGameOptionPages
         // {
         //     groups.add(OptionGroup.createBuilder()
         //     .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-        //                 .setName(Text.literal("🎂:" + (year -2004)))
-        //                 .setTooltip(Text.literal("🎂"))
+        //                 .setName(Text.literal("ᗜᴗᗜ:" + (year -2004)))
+        //                 .setTooltip(Text.literal("ᗜᴗᗜ"))
         //                 .setControl(TickBoxControl::new)
         //                 .setBinding((opts, value) -> SCLPClientMod.birthCaiDan(), opts -> true)
         //                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -113,7 +113,7 @@ public class SCLPGameOptionPages
         }
         try
         {
-            return (OptionPage) optionPageConstructor.newInstance("🎂:" + (year -2004), ImmutableList.copyOf(groups));
+            return (OptionPage) optionPageConstructor.newInstance("ᗜᴗᗜ:" + (year -2004), ImmutableList.copyOf(groups));
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
@@ -147,7 +147,7 @@ public class SCLPGameOptionPages
         Object translationTextComponent;
         try 
         {
-            translationTextComponent = transTextConstructor.newInstance("🎂:" + (year -2004), null);
+            translationTextComponent = transTextConstructor.newInstance("ᗜᴗᗜ:" + (year -2004), null);
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) 
@@ -188,7 +188,7 @@ public class SCLPGameOptionPages
         try
         {
             Class.forName("net.minecraft.network.chat.TextComponent");
-            return new OptionPage(new LiteralText("🎂:" + (year -2004)), ImmutableList.copyOf(groups));
+            return new OptionPage(new LiteralText("ᗜᴗᗜ:" + (year -2004)), ImmutableList.copyOf(groups));
         }
         catch (ClassNotFoundException e)
         {}
@@ -217,7 +217,7 @@ public class SCLPGameOptionPages
         Object textComp;
         try
         {
-            textComp = constructor.invoke(null,"🎂:" + (year -2004));
+            textComp = constructor.invoke(null,"ᗜᴗᗜ:" + (year -2004));
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
