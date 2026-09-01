@@ -35,7 +35,7 @@ public class MixinOptionImpl
         name = I18N.trans(name);
         cir.setReturnValue(name);
     }
-    #else
+    /*#else
     @Shadow @Final
     Text name;
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
@@ -49,6 +49,6 @@ public class MixinOptionImpl
                 ci.cancel();
             }
         }
-    }
+    }*/
     #endif
 }    
