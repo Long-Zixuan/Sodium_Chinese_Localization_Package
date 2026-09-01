@@ -8,8 +8,7 @@
     "compat.MixinOptionImpl",
     "compat.MixinFlatButtonWidget",
     "compat.MixinOptionImplBuilder",
-    "compat.MixinCyclingControl",
-    "compat.SodiumOptionsGUIMixin"
+    "compat.MixinCyclingControl"
   ],
   "injectors": {
     "defaultRequire": 1
