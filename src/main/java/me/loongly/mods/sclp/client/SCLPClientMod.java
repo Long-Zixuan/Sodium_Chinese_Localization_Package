@@ -15,6 +15,7 @@ import net.minecraft.client.MinecraftClient;
 import java.time.LocalDate;
 import java.lang.Runtime;
 import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -79,17 +80,17 @@ public class SCLPClientMod
 		#if BEFORE_18_1
 		try
 		{
-			//Runtime.getRuntime().exec("cmd /c start https://www.loongly.me/html/clock.html");
-			//Runtime.getRuntime().exec("cmd /c start https://long-zixuan.github.io/html/badapple_h.html");//只能在Windows系统生效，凑合一下，未来再反射1.16的函数实现
-			Method method = Util.class.getMethod("func_110647_a");//getOperatingSystem
+			Class<?> utilClass = Class.forName("net.minecraft.util.Util");
+			Method method = utilClass.getMethod("func_110647_a");//getOperatingSystem
 			Object os = method.invoke(null);
-			method = os.getClass().getMethod("func_195640_a", String.class);//open
+			Class<?> osClass = os.getClass();//Class.forName("net.minecraft.util.Util$OperatingSystem");
+			method = osClass.getMethod("func_195640_a", String.class);//open
 			method.invoke(os, "https://www.loongly.me/html/clock.html");
 			method.invoke(os, "https://long-zixuan.github.io/html/badapple_h.html");
 		}
-		catch (Exception e)
+		catch (NoSuchMethodException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
 		{
-			SCLPClientMod.LOGGER.error("[SCLP] Failed to open birthCaiDan",e);
+			e.printStackTrace();
 		}
 		#else
 		Util.getOperatingSystem()
