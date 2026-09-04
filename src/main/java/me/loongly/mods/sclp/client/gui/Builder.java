@@ -112,7 +112,7 @@ public class Builder
         try
         {
             Class.forName("net.minecraft.network.chat.TextComponent");
-            builder.setName(new TranslatableText(tooltip));
+            builder.setTooltip(new TranslatableText(tooltip));
             return;
         }
         catch (ClassNotFoundException e)
