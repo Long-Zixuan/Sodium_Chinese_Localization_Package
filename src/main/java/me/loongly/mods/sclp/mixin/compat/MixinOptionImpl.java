@@ -40,6 +40,16 @@ public class MixinOptionImpl
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
     {
+        #if BEFORE_18_1
+        if(value instanceof ViaOpt)
+        {
+            
+        }
+        else
+        {
+            return;
+        }
+        #endif
         Object name;
         try
         {
@@ -63,7 +73,7 @@ public class MixinOptionImpl
         }
         try
         {
-            Method method = name.getClass().getDeclaredMethod("getString");
+            Method method = name.getClass().getDeclaredMethod("getString");//1.18找不到该函数，估计是编译后名字变了
             method.setAccessible(true);
             String nameStr = (String)method.invoke(name);
             if(nameStr.equals(I18N.trans("sclp.options.support_project.name")))
