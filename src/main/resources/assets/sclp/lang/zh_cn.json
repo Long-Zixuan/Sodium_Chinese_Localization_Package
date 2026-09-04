@@ -331,5 +331,7 @@
   "Leaves Quality": "树叶质量",
   "Controls the quality of leaves.":"控制树叶的渲染质量",
   "sclp.options.sclp_on":"启用汉化包",
-  "sclp.options.sclp_on.tooltip":"启用汉化包"
+  "sclp.options.sclp_on.tooltip":"启用汉化包",
+  "sclp.options.sclp_page_off":"不再显示汉化包设置页面",
+  "sclp.options.sclp_page_off.tooltip":"启用该选项，将不再显示汉化包设置页面"
 }

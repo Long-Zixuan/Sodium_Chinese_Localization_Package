@@ -39,6 +39,8 @@
   "modmenu.summaryTranslation.sclp": "Sodium Chinese Localized Pack",
   "modmenu.descriptionTranslation.sclp": "A minecraft mod can translate Sodium to Chinese",
   "sclp.options.sclp_on":"Enable Chinese Localized Pack",
-  "sclp.options.sclp_on.tooltip":"Enable Chinese Localized Pack"
+  "sclp.options.sclp_on.tooltip":"Enable Chinese Localized Pack",
+  "sclp.options.sclp_page_off":"Disable Chinese Localized Pack Settings Page",
+  "sclp.options.sclp_page_off.tooltip":"Disable Chinese Localized Pack Settings Page"
 }
   

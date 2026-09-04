@@ -49,6 +49,20 @@ public class SCLPGameOptionPages
         groups.add(OptionGroup.createBuilder()
         .add(builder.build())
                 .build());
+
+        var builder2 = OptionImpl.createBuilder(boolean.class, lsdcOpts);
+        Builder.setImplBuilderName(builder2, I18N.trans("sclp.options.sclp_page_off"));
+        Builder.setImplBuilderTooltip(builder2, I18N.trans("sclp.options.sclp_page_off.tooltip"));
+        builder2.setControl(TickBoxControl::new)
+                    .setBinding((opts, value) -> {
+                        opts.sclpPageOff = value;
+                        SCLPClientMod.caiDan();
+                    }, opts -> opts.sclpPageOff)
+                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
+        groups.add(OptionGroup.createBuilder()
+        .add(builder2.build())
+                .build());
+            
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
             var closeSupBuilder = OptionImpl.createBuilder(boolean.class, lsdcOpts)
