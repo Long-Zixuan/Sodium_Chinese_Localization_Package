@@ -2,7 +2,7 @@ package me.loongly.mods.sclp.client.gui;
 
 import com.google.common.collect.ImmutableList;
 
-
+import me.loongly.mods.sclp.client.gui.Builder;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -38,8 +38,8 @@ public class SCLPGameOptionPages
     {
         List<OptionGroup> groups = new ArrayList<>();
         var builder = OptionImpl.createBuilder(boolean.class, lsdcOpts);
-        setImplBuilderName(builder, I18N.trans("sclp.options.shoud_trans_mod_name"));
-        setImplBuilderTooltip(builder, I18N.trans("sclp.options.shoud_trans_mod_name.tooltip"));
+        Builder.setImplBuilderName(builder, I18N.trans("sclp.options.shoud_trans_mod_name"));
+        Builder.setImplBuilderTooltip(builder, I18N.trans("sclp.options.shoud_trans_mod_name.tooltip"));
         builder.setControl(TickBoxControl::new)
                     .setBinding((opts, value) -> {
                         opts.shouldTransModName = value;
@@ -63,7 +63,7 @@ public class SCLPGameOptionPages
                 .add(ViaOpt.create("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
                 .build());
         }*/
-        return createOptionPage(I18N.trans("sclp.page"), groups);
+        return Builder.createOptionPage(I18N.trans("sclp.page"), groups);
     }
 
     public static OptionPage birthPage()
@@ -85,315 +85,10 @@ public class SCLPGameOptionPages
         //                 .build())
         //         .build());
         // }
-        return createOptionPage("ᗜᴗᗜ:" + (year -2004), groups);
+        return Builder.createOptionPage("ᗜᴗᗜ:" + (year -2004), groups);
     }
 
-    private static void setImplBuilderName(OptionImpl.Builder builder, String name)
-    {
-        #if BEFORE_18_1
-        try
-        {
-            Method setName = builder.getClass().getMethod("setName", String.class);
-            setName.invoke(builder, name);
-        }
-        catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-        }
-        #else
-        try
-        {
-            Class.forName("net.minecraft.network.chat.TextComponent");
-            builder.setName(new TranslatableText(name));
-            return;
-        }
-        catch (ClassNotFoundException e)
-        {}
-        //1.19
-        Class<?> textCompClazz;
-        try
-        {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return;
-        }
-        Object textComp;
-        try
-        {
-            textComp = constructor.invoke(null,name);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return;
-        }
-        try
-        {
-            Method setName = builder.getClass().getMethod("setName", textCompClazz);
-            setName.invoke(builder, textComp);
-        }
-        catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-            return;
-        }
-        #endif
-    }
-
-    private static void setImplBuilderTooltip(OptionImpl.Builder builder, String tooltip)
-    {
-        #if BEFORE_18_1
-        try
-        {
-            Method setName = builder.getClass().getMethod("setTooltip", String.class);
-            setName.invoke(builder, tooltip);
-        }
-        catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-        }
-        #else
-        try
-        {
-            Class.forName("net.minecraft.network.chat.TextComponent");
-            builder.setName(new TranslatableText(tooltip));
-            return;
-        }
-        catch (ClassNotFoundException e)
-        {}
-        //1.19
-        Class<?> textCompClazz;
-        try
-        {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return;
-        }
-        Object textComp;
-        try
-        {
-            textComp = constructor.invoke(null,tooltip);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return;
-        }
-        try
-        {
-            Method setName = builder.getClass().getMethod("setTooltip", textCompClazz);
-            setName.invoke(builder, textComp);
-        }
-        catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-            return;
-        }
-        #endif
-    }
-
-    private static OptionPage createOptionPage(String text, List<OptionGroup> groups)
-    {
-        #if BEFORE_18_1
-        Class<?> optionPageClazz;
-        try
-        {
-            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        Constructor<?> optionPageConstructor;
-        try 
-        {
-            optionPageConstructor = optionPageClazz.getConstructor(String.class, com.google.common.collect.ImmutableList.class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        try
-        {
-            return (OptionPage) optionPageConstructor.newInstance(text, ImmutableList.copyOf(groups));
-        } 
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            //e.printStackTrace();
-            //return null;
-        }
-
-        Class<?> clazz;
-        try 
-        {
-            clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        Constructor<?> transTextConstructor;
-        try 
-        {
-            transTextConstructor = clazz.getConstructor(String.class, Object[].class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        Object translationTextComponent;
-        try 
-        {
-            translationTextComponent = transTextConstructor.newInstance(text, null);
-        } 
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        Class<?> iTextCompClazz;
-        try
-        {
-            iTextCompClazz = Class.forName("net.minecraft.util.text.ITextComponent");
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            e.printStackTrace();
-            return null;
-        }
-        try 
-        {
-            optionPageConstructor = clazz.getConstructor(iTextCompClazz, com.google.common.collect.ImmutableList.class);
-        } 
-        catch (NoSuchMethodException | SecurityException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        try
-        {
-            return (OptionPage)optionPageConstructor.newInstance(translationTextComponent, ImmutableList.copyOf(groups));
-        } 
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        #else
-        try
-        {
-            Class.forName("net.minecraft.network.chat.TextComponent");
-            return new OptionPage(new LiteralText(text), ImmutableList.copyOf(groups));
-        }
-        catch (ClassNotFoundException e)
-        {}
-        //1.19
-        Class<?> textCompClazz;
-        try
-        {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        Object textComp;
-        try
-        {
-            textComp = constructor.invoke(null,text);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        Class<?> optionPageClazz;
-        try
-        {
-            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        Constructor<?> optionPageConstructor;
-        try 
-        {
-            optionPageConstructor = optionPageClazz.getConstructor(textCompClazz, com.google.common.collect.ImmutableList.class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        try
-        {
-            return (OptionPage) optionPageConstructor.newInstance(textComp, ImmutableList.copyOf(groups));
-        } 
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        #endif
-        //end 1.19
-    }
+   
 }
 
 
