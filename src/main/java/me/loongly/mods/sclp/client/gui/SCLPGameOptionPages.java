@@ -50,19 +50,19 @@ public class SCLPGameOptionPages
         groups.add(OptionGroup.createBuilder()
         .add(builder.build())
                 .build());
-        /*if(SCLPClientMod.options().shouldShowSupportPage)
+        if(SCLPClientMod.options().shouldShowSupportPage)
         {
-            groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                    .setName(new TranslatableText("sclp.options.close_support_page.name"))
-                    .setTooltip(new TranslatableText("sclp.options.close_support_page.tooltip"))
+            var closeSupBuilder = OptionImpl.createBuilder(boolean.class, lsdcOpts)
                     .setControl(TickBoxControl::new)
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
-                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                    .build())
+                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
+            Builder.setImplBuilderName(closeSupBuilder, I18N.trans("sclp.options.close_support_page.name"));
+            Builder.setImplBuilderTooltip(closeSupBuilder, I18N.trans("sclp.options.close_support_page.tooltip"));
+            groups.add(OptionGroup.createBuilder()
+                .add(closeSupBuilder.build())
                 .add(ViaOpt.create("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
                 .build());
-        }*/
+        }
         return Builder.createOptionPage(I18N.trans("sclp.page"), groups);
     }
 

@@ -35,20 +35,46 @@ public class MixinOptionImpl
         name = I18N.trans(name);
         cir.setReturnValue(name);
     }
-    /*#else
-    @Shadow @Final
-    Text name;
+    #endif
+
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
     {
-        if(value instanceof ViaOpt)
+        Object name;
+        try
         {
-            if(name.getString().equals(I18N.trans("sclp.options.support_project.name")))
+            Field field = OptionImpl.class.getDeclaredField("name");
+            field.setAccessible(true);
+            name = field.get((OptionImpl)(Object)this);
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) 
+        {
+            e.printStackTrace();
+            return;
+        }
+        if(name instanceof String)
+        {
+            if(name.equals(I18N.trans("sclp.options.support_project.name")))
+            {
+                SCLPClientMod.openSupportPage();
+                ci.cancel();
+            }
+            return;
+        }
+        try
+        {
+            Method method = name.getClass().getDeclaredMethod("getString");
+            method.setAccessible(true);
+            String nameStr = (String)method.invoke(name);
+            if(nameStr.equals(I18N.trans("sclp.options.support_project.name")))
             {
                 SCLPClientMod.openSupportPage();
                 ci.cancel();
             }
         }
-    }*/
-    #endif
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
+        {
+            e.printStackTrace();
+        }
+    }
 }    
