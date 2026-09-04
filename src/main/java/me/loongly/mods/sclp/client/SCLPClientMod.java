@@ -103,8 +103,24 @@ public class SCLPClientMod
 	public static void openSupportPage()
 	{
 		SCLPClientMod.LOGGER.info("[SCLP] Open Support Page.");
+		#if BEFORE_18_1
+		try
+		{
+			Class<?> utilClass = Class.forName("net.minecraft.util.Util");
+			Method method = utilClass.getMethod("func_110647_a");//getOperatingSystem
+			Object os = method.invoke(null);
+			Class<?> osClass = os.getClass();//Class.forName("net.minecraft.util.Util$OperatingSystem");
+			method = osClass.getMethod("func_195640_a", String.class);//open
+			method.invoke(os, "https://ifdian.net/a/loongly");
+		}
+		catch (NoSuchMethodException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
+		{
+			e.printStackTrace();
+		}
+		#else
 		Util.getOperatingSystem()
                 .open("https://ifdian.net/a/loongly");
+		#endif
 	}
 
     public SCLPClientMod()
