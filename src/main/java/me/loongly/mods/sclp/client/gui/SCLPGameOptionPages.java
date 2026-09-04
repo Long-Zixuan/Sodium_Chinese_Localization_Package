@@ -34,6 +34,7 @@ public class SCLPGameOptionPages
 {
 
     private static final SCLPOptionsStorage lsdcOpts = new SCLPOptionsStorage();
+    public static boolean isChangePageVis = false;
 
     public static OptionPage sclpPage()
     {
@@ -58,6 +59,7 @@ public class SCLPGameOptionPages
                     .setBinding((opts, value) -> {
                         opts.sclpPageOff = value;
                         SCLPClientMod.caiDan();
+                        SCLPGameOptionPages.isChangePageVis = true;
                     }, opts -> opts.sclpPageOff)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
         groups.add(OptionGroup.createBuilder()

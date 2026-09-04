@@ -29,7 +29,7 @@ public abstract class SodiumOptionsGUIMixin
     private void addSCLPOptionPage(CallbackInfo ci)
     {
         #if BEFORE_18_1
-        if(!SCLPClientMod.options().sclpPageOff)
+        if(!SCLPClientMod.options().sclpPageOff || (SCLPClientMod.isRSO() && SCLPGameOptionPages.isChangePageVis))
         {
             this.pages.add(SCLPGameOptionPages.sclpPage());
         }
