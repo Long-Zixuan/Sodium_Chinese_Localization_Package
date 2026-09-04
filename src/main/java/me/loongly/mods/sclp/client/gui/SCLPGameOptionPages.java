@@ -38,18 +38,17 @@ public class SCLPGameOptionPages
     {
         List<OptionGroup> groups = new ArrayList<>();
         var builder = OptionImpl.createBuilder(boolean.class, lsdcOpts);
-        Builder.setImplBuilderName(builder, I18N.trans("sclp.options.shoud_trans_mod_name"));
-        Builder.setImplBuilderTooltip(builder, I18N.trans("sclp.options.shoud_trans_mod_name.tooltip"));
+        Builder.setImplBuilderName(builder, I18N.trans("sclp.options.sclp_on"));
+        Builder.setImplBuilderTooltip(builder, I18N.trans("sclp.options.sclp_on.tooltip"));
         builder.setControl(TickBoxControl::new)
                     .setBinding((opts, value) -> {
-                        opts.shouldTransModName = value;
+                        opts.sclpOn = value;
                         SCLPClientMod.caiDan();
-                    }, opts -> opts.shouldTransModName)
-                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                    .setEnabled(false);
-        /*groups.add(OptionGroup.createBuilder()
+                    }, opts -> opts.sclpOn)
+                    .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
+        groups.add(OptionGroup.createBuilder()
         .add(builder.build())
-                .build());*/
+                .build());
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
             var closeSupBuilder = OptionImpl.createBuilder(boolean.class, lsdcOpts)

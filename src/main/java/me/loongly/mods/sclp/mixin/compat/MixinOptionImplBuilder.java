@@ -17,6 +17,7 @@ import me.loongly.mods.sclp.language.I18N;
 
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl.Builder;
+import me.loongly.mods.sclp.client.SCLPClientMod;
 
 @Mixin(value = Builder.class, remap = false)
 public class MixinOptionImplBuilder
@@ -25,6 +26,10 @@ public class MixinOptionImplBuilder
     @Inject(method = "setTooltip(Ljava/lang/String;)Lme/jellysquid/mods/sodium/client/gui/options/OptionImpl$Builder;", at = @At("RETURN"),cancellable = true)
     private void injectSetTooltip(String tooltip, CallbackInfoReturnable<Builder> cir)
     {
+        if(!SCLPClientMod.options().sclpOn)
+        {
+            return;
+        }
         try 
         {
             Field field = Builder.class.getDeclaredField("tooltip");

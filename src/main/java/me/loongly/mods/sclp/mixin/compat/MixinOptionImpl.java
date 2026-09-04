@@ -31,6 +31,10 @@ public class MixinOptionImpl
     @Inject(method = "getName", at = @At("RETURN"),cancellable = true)
     private void ibjectSetName(CallbackInfoReturnable<String> cir)
     {
+        if(!SCLPClientMod.options().sclpOn)
+        {
+            return;
+        }
         String name = cir.getReturnValue();
         name = I18N.trans(name);
         cir.setReturnValue(name);

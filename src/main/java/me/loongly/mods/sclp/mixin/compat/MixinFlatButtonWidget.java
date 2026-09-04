@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import me.loongly.mods.sclp.client.SCLPClientMod;
 
 @Mixin(FlatButtonWidget.class)
 public class MixinFlatButtonWidget
@@ -21,6 +22,10 @@ public class MixinFlatButtonWidget
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     public void InjectInit(Dim2i dim, String label, Runnable action, CallbackInfo ci)
     {
+        if(!SCLPClientMod.options().sclpOn)
+        {
+            return;
+        }
         try 
         {
             Field field = FlatButtonWidget.class.getDeclaredField("label");

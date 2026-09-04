@@ -30,6 +30,10 @@ public class MixinOptionImpact
     @Inject(method = "<init>", at = @At("RETURN"),cancellable = true)
     private void injectInit(CallbackInfo c)
     {
+        if(!SCLPClientMod.options().sclpOn)
+        {
+            return;
+        }
         try
         {
             Field field = OptionImpact.class.getDeclaredField("text");

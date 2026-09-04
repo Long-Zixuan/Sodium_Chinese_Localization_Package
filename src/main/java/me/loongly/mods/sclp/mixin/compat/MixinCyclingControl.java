@@ -21,6 +21,8 @@ import me.loongly.mods.sclp.language.I18N;
 
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 
+import me.loongly.mods.sclp.client.SCLPClientMod;
+
 @Mixin(value = CyclingControl.class, remap = false)
 public class MixinCyclingControl<T>
 {
@@ -36,6 +38,10 @@ public class MixinCyclingControl<T>
     )
     private void injectInit(Option<T> option, Class<T> enumType, String[] names,CallbackInfo ci)
     {
+        if(!SCLPClientMod.options().sclpOn)
+        {
+            return;
+        }
         /*
         也是无心插柳柳成荫，之前的这里的逻辑没有类型判断逻辑,
         这也是为什么2.0.9加载其他Embeddium的子模组游戏会崩溃的原因（因为调用了这个函数,而新版本的模组内部已经不会调用这个函数了），
@@ -57,6 +63,10 @@ public class MixinCyclingControl<T>
     )
     private void injectInit2(Option<T> option, Class<T> enumType,CallbackInfo ci)
     {
+        if(!SCLPClientMod.options().sclpOn)
+        {
+            return;
+        }
         if(names == null)
         {
             return;
