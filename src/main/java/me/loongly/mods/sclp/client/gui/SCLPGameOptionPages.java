@@ -21,6 +21,7 @@ import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.client.MinecraftClient;
+import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 #if BEFORE_18_1
 #else
 import net.minecraft.text.LiteralText;
@@ -100,8 +101,6 @@ public class SCLPGameOptionPages
         // }
         return Builder.createOptionPage("ᗜᴗᗜ:" + (year -2004), groups);
     }
-
-   
 }
 
 
