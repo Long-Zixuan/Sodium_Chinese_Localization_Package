@@ -47,9 +47,9 @@ public class SCLPGameOptionPages
                     }, opts -> opts.shouldTransModName)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                     .setEnabled(false);
-        groups.add(OptionGroup.createBuilder()
+        /*groups.add(OptionGroup.createBuilder()
         .add(builder.build())
-                .build());
+                .build());*/
         if(SCLPClientMod.options().shouldShowSupportPage)
         {
             var closeSupBuilder = OptionImpl.createBuilder(boolean.class, lsdcOpts)

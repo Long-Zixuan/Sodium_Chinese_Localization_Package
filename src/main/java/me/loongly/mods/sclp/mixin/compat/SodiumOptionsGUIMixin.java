@@ -28,7 +28,9 @@ public abstract class SodiumOptionsGUIMixin
     @Inject(method = "<init>", at = @At("TAIL"))
     private void addSCLPOptionPage(CallbackInfo ci)
     {
+        #if BEFORE_18_1
         this.pages.add(SCLPGameOptionPages.sclpPage());
+        #endif
         birthPage_ = SCLPGameOptionPages.birthPage();
         if(birthPage_ != null && SCLPClientMod.isMyBirthday())
         {

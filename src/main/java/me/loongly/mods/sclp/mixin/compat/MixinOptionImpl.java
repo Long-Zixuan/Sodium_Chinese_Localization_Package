@@ -35,12 +35,10 @@ public class MixinOptionImpl
         name = I18N.trans(name);
         cir.setReturnValue(name);
     }
-    #endif
-
+   
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
     {
-        #if BEFORE_18_1
         if(value instanceof ViaOpt)
         {
             
@@ -49,7 +47,6 @@ public class MixinOptionImpl
         {
             return;
         }
-        #endif
         Object name;
         try
         {
@@ -73,7 +70,8 @@ public class MixinOptionImpl
         }
         try
         {
-            Method method = name.getClass().getDeclaredMethod("getString");//1.18找不到该函数，估计是编译后名字变了
+            Class<?> clazz = Class.forName("net.minecraft.util.text.ITextComponent");
+            Method method = clazz.getDeclaredMethod("getString");
             method.setAccessible(true);
             String nameStr = (String)method.invoke(name);
             if(nameStr.equals(I18N.trans("sclp.options.support_project.name")))
@@ -82,9 +80,10 @@ public class MixinOptionImpl
                 ci.cancel();
             }
         }
-        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
+        catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
         {
             e.printStackTrace();
         }
     }
+    #endif
 }    
