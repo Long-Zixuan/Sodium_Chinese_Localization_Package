@@ -89,5 +89,64 @@ public class MixinOptionImpl
             e.printStackTrace();
         }
     }
+    #else
+    @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
+    private void injectSetValue(Object value, CallbackInfo ci) 
+    {
+        if(value instanceof ViaOpt)
+        {
+            
+        }
+        else
+        {
+            return;
+        }
+        Object name;
+        try
+        {
+            Field field = OptionImpl.class.getDeclaredField("name");
+            field.setAccessible(true);
+            name = field.get((OptionImpl)(Object)this);
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) 
+        {
+            e.printStackTrace();
+            return;
+        }
+
+        try
+        {
+            Class.forName("net.minecraft.network.chat.TextComponent");
+            if(name instanceof Text)
+            {
+                String nameStr = ((Text)name).getString();
+                if(nameStr.equals(I18N.trans("sclp.options.support_project.name")))
+                {
+                    SCLPClientMod.openSupportPage();
+                    ci.cancel();
+                }
+                return;
+            }
+        }
+        catch (ClassNotFoundException e)
+        {}
+    
+        try
+        {
+            Class<?> textCompClazz = Class.forName("net.minecraft.network.chat.Component");
+            Method method = textCompClazz.getDeclaredMethod("getString");
+            method.setAccessible(true);
+            String nameStr = (String)method.invoke(name);
+            if(nameStr.equals(I18N.trans("sclp.options.support_project.name")))
+            {
+                SCLPClientMod.openSupportPage();
+                ci.cancel();
+            }
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
+        {
+            e.printStackTrace();
+        }
+    }
     #endif
 }    
