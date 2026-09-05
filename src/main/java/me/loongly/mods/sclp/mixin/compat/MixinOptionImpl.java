@@ -39,6 +39,7 @@ public class MixinOptionImpl
         name = I18N.trans(name);
         cir.setReturnValue(name);
     }
+    #endif
    
     @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
     private void injectSetValue(Object value, CallbackInfo ci) 
@@ -63,6 +64,7 @@ public class MixinOptionImpl
             e.printStackTrace();
             return;
         }
+        #if BEFORE_18_1
         if(name instanceof String)
         {
             if(name.equals(I18N.trans("sclp.options.support_project.name")))
@@ -88,32 +90,7 @@ public class MixinOptionImpl
         {
             e.printStackTrace();
         }
-    }
-    #else
-    @Inject(method = "setValue", at = @At("HEAD"), cancellable = true)
-    private void injectSetValue(Object value, CallbackInfo ci) 
-    {
-        if(value instanceof ViaOpt)
-        {
-            
-        }
-        else
-        {
-            return;
-        }
-        Object name;
-        try
-        {
-            Field field = OptionImpl.class.getDeclaredField("name");
-            field.setAccessible(true);
-            name = field.get((OptionImpl)(Object)this);
-        }
-        catch (NoSuchFieldException | IllegalAccessException e) 
-        {
-            e.printStackTrace();
-            return;
-        }
-
+        #else
         try
         {
             Class.forName("net.minecraft.network.chat.TextComponent");
@@ -147,6 +124,6 @@ public class MixinOptionImpl
         {
             e.printStackTrace();
         }
+        #endif
     }
-    #endif
 }    

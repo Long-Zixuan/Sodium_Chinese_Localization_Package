@@ -24,7 +24,6 @@ public enum ViaOpt
 {
     VIA;
 
-    #if BEFORE_18_1
     public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey, String tooltipKey, SCLPOptionsStorage sclpOpts)
     {
         return SCLPViaOptCreater.create(nameKey, tooltipKey, sclpOpts);
@@ -34,6 +33,7 @@ public enum ViaOpt
     {
         public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
         {
+            #if BEFORE_18_1
             var builder = OptionImpl.createBuilder(ViaOpt.class, lsdcOpts)
                 .setControl(opt -> {
                     try
@@ -56,19 +56,7 @@ public enum ViaOpt
             Builder.setImplBuilderName(builder, I18N.trans(nameKey));
             Builder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
             return builder.build();
-        }
-    }
-    
-    #else
-    public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey, String tooltipKey, SCLPOptionsStorage sclpOpts)
-    {
-        return SCLPViaOptCreater.create(nameKey, tooltipKey, sclpOpts);
-    }
-
-    private static class SCLPViaOptCreater
-    {
-        public static OptionImpl<SCLPGameOptions, ViaOpt> create(String nameKey,String tooltipKey, SCLPOptionsStorage lsdcOpts)
-        {
+            #else
             try
             {
                 Class.forName("net.minecraft.network.chat.TextComponent");
@@ -141,8 +129,7 @@ public enum ViaOpt
             Builder.setImplBuilderName(builder, I18N.trans(nameKey));
             Builder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
             return builder.build();
+            #endif
         }
     }
-    
-    #endif
 }
