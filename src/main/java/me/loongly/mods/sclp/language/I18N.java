@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.loongly.mods.sclp.client.SCLPClientMod;
+
 import net.minecraft.client.resource.language.I18n;
 
 public class I18N
