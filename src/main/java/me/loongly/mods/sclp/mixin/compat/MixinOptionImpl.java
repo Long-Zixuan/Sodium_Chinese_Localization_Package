@@ -61,7 +61,7 @@ public class MixinOptionImpl
         }
         catch (NoSuchFieldException | IllegalAccessException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         #if BEFORE_18_1
@@ -88,7 +88,7 @@ public class MixinOptionImpl
         }
         catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
         #else
         try
@@ -122,7 +122,7 @@ public class MixinOptionImpl
         }
         catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
         #endif
     }

@@ -45,7 +45,7 @@ public class MixinFlatButtonWidget
             catch (ClassNotFoundException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return;
             }
             Constructor<?> constructor;
@@ -56,7 +56,7 @@ public class MixinFlatButtonWidget
             catch (NoSuchMethodException | SecurityException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                     return;
             }
             Object translationTextComponent;
@@ -68,7 +68,7 @@ public class MixinFlatButtonWidget
                     | InvocationTargetException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                     return;
             }
                 field.set((FlatButtonWidget)(Object)this, translationTextComponent);
@@ -76,7 +76,7 @@ public class MixinFlatButtonWidget
         }
         catch (NoSuchFieldException | IllegalAccessException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
     }
     #endif

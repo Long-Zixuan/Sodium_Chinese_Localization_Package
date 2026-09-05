@@ -82,7 +82,7 @@ public class SCLPClientMod
 			}
 			catch (NoSuchMethodException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
 			{
-				e.printStackTrace();
+				SCLPClientMod.logger().error("[SCLP] :",e);//warn
 			}
 			#else
 			Util.getOperatingSystem()
@@ -106,7 +106,7 @@ public class SCLPClientMod
 		}
 		catch (NoSuchMethodException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
 		{
-			e.printStackTrace();
+			SCLPClientMod.logger().error("[SCLP] :",e);//warn
 		}
 		#else
 		Util.getOperatingSystem()
@@ -131,7 +131,7 @@ public class SCLPClientMod
 		}
 		catch (NoSuchMethodException | SecurityException | ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
 		{
-			e.printStackTrace();
+			SCLPClientMod.logger().error("[SCLP] :",e);//warn
 		}
 		#else
 		Util.getOperatingSystem()

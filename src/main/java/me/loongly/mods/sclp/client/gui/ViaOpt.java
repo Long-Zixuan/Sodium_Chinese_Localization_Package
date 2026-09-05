@@ -11,6 +11,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
+import me.loongly.mods.sclp.client.SCLPClientMod;
 #if BEFORE_18_1
 #else
 import net.minecraft.text.Text;
@@ -47,7 +48,7 @@ public enum ViaOpt
                     }
                     catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
                     {
-                        e.printStackTrace();
+                        SCLPClientMod.logger().error("[SCLP] :",e);//warn
                         return null;
                     }
                 })
@@ -79,7 +80,7 @@ public enum ViaOpt
             }
             catch (ClassNotFoundException e)
             {
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return null;
             }
             Method textConstructor;
@@ -90,7 +91,7 @@ public enum ViaOpt
             catch (NoSuchMethodException | SecurityException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return null;
             }
             Object textComp;
@@ -101,7 +102,7 @@ public enum ViaOpt
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return null;
             }
             Class<?> textCompArrayClazz = textCompClazz.arrayType();
@@ -120,7 +121,7 @@ public enum ViaOpt
                     }
                     catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
                     {
-                        e.printStackTrace();
+                        SCLPClientMod.logger().error("[SCLP] :",e);//warn
                         return null;
                     }
                 })

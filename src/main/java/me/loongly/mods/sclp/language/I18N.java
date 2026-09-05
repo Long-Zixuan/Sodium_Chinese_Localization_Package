@@ -59,7 +59,7 @@ public class I18N
         catch (ClassNotFoundException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return "error";
         }
         Constructor<?> constructor;
@@ -70,7 +70,7 @@ public class I18N
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return "error";
         }
         Object translationTextComponent;
@@ -82,7 +82,7 @@ public class I18N
                 | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return "error";
         }
         Method getStringMeth;
@@ -93,7 +93,7 @@ public class I18N
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return "error";
         }
         try 
@@ -104,7 +104,7 @@ public class I18N
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return "error";
         }
     }

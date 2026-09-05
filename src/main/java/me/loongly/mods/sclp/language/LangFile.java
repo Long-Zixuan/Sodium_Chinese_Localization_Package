@@ -131,12 +131,12 @@ public class LangFile
         }
         catch (MalformedURLException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             SCLPClientMod.logger().error("[SCLP]MalformedURLException:", e.toString());
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             SCLPClientMod.logger().error("[SCLP]IOException1:", e.toString());
         }
         finally
@@ -151,7 +151,7 @@ public class LangFile
                 catch (IOException e)
                 {
                     SCLPClientMod.logger().error("[SCLP]IOException2:", e.toString());
-                    e.printStackTrace();
+                    SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 }
             }
 
@@ -164,7 +164,7 @@ public class LangFile
                 catch (IOException e)
                 {
                     SCLPClientMod.logger().error("[SCLP]IOException3:", e.toString());
-                    e.printStackTrace();
+                    SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 }
             }
 

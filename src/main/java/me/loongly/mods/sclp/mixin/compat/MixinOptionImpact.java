@@ -46,7 +46,7 @@ public class MixinOptionImpact
         }
         catch (NoSuchFieldException | IllegalAccessException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
     }
     #endif

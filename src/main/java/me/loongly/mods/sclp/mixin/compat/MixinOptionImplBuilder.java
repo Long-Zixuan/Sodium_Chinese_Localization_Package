@@ -49,7 +49,7 @@ public class MixinOptionImplBuilder
             catch (ClassNotFoundException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                 return;
             }
             Constructor<?> constructor;
@@ -60,7 +60,7 @@ public class MixinOptionImplBuilder
             catch (NoSuchMethodException | SecurityException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                     return;
             }
             Object translationTextComponent;
@@ -72,7 +72,7 @@ public class MixinOptionImplBuilder
                     | InvocationTargetException e) 
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                SCLPClientMod.logger().error("[SCLP] :",e);//warn
                     return;
             }
                 field.set((Builder)(Object)this, translationTextComponent);
@@ -80,7 +80,7 @@ public class MixinOptionImplBuilder
         }
         catch (NoSuchFieldException | IllegalAccessException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
     }
     #endif

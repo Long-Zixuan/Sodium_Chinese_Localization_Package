@@ -39,7 +39,7 @@ public class Builder
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
         #else
         try
@@ -58,7 +58,7 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         Method constructor;
@@ -69,7 +69,7 @@ public class Builder
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         Object textComp;
@@ -80,7 +80,7 @@ public class Builder
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         try
@@ -90,7 +90,7 @@ public class Builder
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         #endif
@@ -106,7 +106,7 @@ public class Builder
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
         }
         #else
         try
@@ -125,7 +125,7 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         Method constructor;
@@ -136,7 +136,7 @@ public class Builder
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         Object textComp;
@@ -147,7 +147,7 @@ public class Builder
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         try
@@ -157,7 +157,7 @@ public class Builder
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
         #endif
@@ -173,7 +173,7 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Constructor<?> optionPageConstructor;
@@ -184,7 +184,7 @@ public class Builder
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         try
@@ -194,7 +194,7 @@ public class Builder
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            //e.printStackTrace();
+            //SCLPClientMod.logger().error("[SCLP] :",e);//warn
             //return null;
         }
 
@@ -206,7 +206,7 @@ public class Builder
         catch (ClassNotFoundException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Constructor<?> transTextConstructor;
@@ -217,7 +217,7 @@ public class Builder
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Object translationTextComponent;
@@ -229,7 +229,7 @@ public class Builder
                 | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Class<?> iTextCompClazz;
@@ -239,7 +239,7 @@ public class Builder
         } 
         catch (ClassNotFoundException e) 
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         try 
@@ -248,7 +248,7 @@ public class Builder
         } 
         catch (NoSuchMethodException | SecurityException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         try
@@ -257,7 +257,7 @@ public class Builder
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         #else
@@ -276,7 +276,7 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Method constructor;
@@ -287,7 +287,7 @@ public class Builder
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Object textComp;
@@ -298,7 +298,7 @@ public class Builder
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Class<?> optionPageClazz;
@@ -308,7 +308,7 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         Constructor<?> optionPageConstructor;
@@ -319,7 +319,7 @@ public class Builder
         catch (NoSuchMethodException | SecurityException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         try
@@ -329,7 +329,7 @@ public class Builder
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         #endif
