@@ -109,6 +109,7 @@ public class SCLPGameOptionPages
 
     static void rebuildSodiumSrc()
     {
+        #if BEFORE_18_1
         //field_71462_r  curScreen
         //func_71410_x  getInstance
         try
@@ -144,6 +145,7 @@ public class SCLPGameOptionPages
         {
             SCLPClientMod.logger().error("[SCLP] rebuild Sodium Screen Error:", e);
         }
+        #endif
     }
 }
 
