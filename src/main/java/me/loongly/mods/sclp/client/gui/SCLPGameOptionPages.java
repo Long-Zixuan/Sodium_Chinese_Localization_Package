@@ -122,7 +122,11 @@ public class SCLPGameOptionPages
             if(SCLPClientMod.isRSO())
             {
                 Class<?> clazz = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
-                Method method = clazz.getDeclaredMethod("rebuildUI");
+                Field child = clazz.getSuperclass().getDeclaredField("field_230705_e_");//children
+                child.setAccessible(true);
+                var childScreen = (List)child.get(curScreen);
+                childScreen.clear();
+                Method method = clazz.getDeclaredMethod("func_231160_c_");//init
                 method.setAccessible(true);
                 method.invoke(curScreen);
                 return;
