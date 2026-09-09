@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import me.loongly.mods.sclp.client.gui.Builder;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 #if BEFORE_18_1
 #else
@@ -46,6 +48,7 @@ public class SCLPGameOptionPages
                     .setBinding((opts, value) -> {
                         opts.sclpOn = value;
                         SCLPClientMod.caiDan();
+                        rebuildSodiumSrc();
                     }, opts -> opts.sclpOn)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
         groups.add(OptionGroup.createBuilder()
@@ -103,7 +106,34 @@ public class SCLPGameOptionPages
         // }
         return Builder.createOptionPage("ᗜᴗᗜ:" + (year -2004), groups);
     }
+
+    static void rebuildSodiumSrc()
+    {
+        //field_71462_r  curScreen
+        //func_71410_x  getInstance
+        try
+        {
+            Method clientIns = MinecraftClient.class.getMethod("func_71410_x");
+            clientIns.setAccessible(true);
+            var client = clientIns.invoke(null);
+            Field curScreenFie = MinecraftClient.class.getDeclaredField("field_71462_r");
+            curScreenFie.setAccessible(true);
+            var curScreen = curScreenFie.get(client);
+            if(curScreen instanceof SodiumOptionsGUI)
+            {
+                Class<?> clazz = SodiumOptionsGUI.class;
+                Method method = clazz.getDeclaredMethod("rebuildGUI");
+                method.setAccessible(true);
+                method.invoke(curScreen);
+            }
+            SCLPClientMod.logger().info("[SCLP] rebuild Sodium Screen Success");
+        }
+        catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e)
+        {
+            SCLPClientMod.logger().error("[SCLP] rebuild Sodium Screen Error:", e);
+        }
+    }
 }
 
 
-//LoongLy Software Update 2026/04/05
+//LoongLy Software Update 2026/09/09
