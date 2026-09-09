@@ -119,6 +119,14 @@ public class SCLPGameOptionPages
             Field curScreenFie = MinecraftClient.class.getDeclaredField("field_71462_r");
             curScreenFie.setAccessible(true);
             var curScreen = curScreenFie.get(client);
+            if(SCLPClientMod.isRSO())
+            {
+                Class<?> clazz = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
+                Method method = clazz.getDeclaredMethod("rebuildUI");
+                method.setAccessible(true);
+                method.invoke(curScreen);
+                return;
+            }
             if(curScreen instanceof SodiumOptionsGUI)
             {
                 Class<?> clazz = SodiumOptionsGUI.class;
@@ -128,7 +136,7 @@ public class SCLPGameOptionPages
             }
             SCLPClientMod.logger().info("[SCLP] rebuild Sodium Screen Success");
         }
-        catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e)
+        catch(ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e)
         {
             SCLPClientMod.logger().error("[SCLP] rebuild Sodium Screen Error:", e);
         }
