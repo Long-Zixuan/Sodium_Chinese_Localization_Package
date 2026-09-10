@@ -122,6 +122,8 @@ public class SCLPGameOptionPages
             var curScreen = curScreenFie.get(client);
             if(SCLPClientMod.isRSO())
             {
+                //func_231160_c_ init
+                //field_230705_e_ children
                 Class<?> clazz = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
                 Field child = clazz.getSuperclass().getDeclaredField("field_230705_e_");//children
                 child.setAccessible(true);
