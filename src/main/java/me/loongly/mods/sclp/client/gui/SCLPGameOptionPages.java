@@ -125,13 +125,16 @@ public class SCLPGameOptionPages
                 //func_231160_c_ init
                 //field_230705_e_ children
                 Class<?> clazz = Class.forName("me.flashyreese.mods.reeses_sodium_options.client.gui.SodiumVideoOptionsScreen");
-                Field child = clazz.getSuperclass().getDeclaredField("field_230705_e_");//children
-                child.setAccessible(true);
-                var childScreen = (List)child.get(curScreen);
-                childScreen.clear();
-                Method method = clazz.getDeclaredMethod("func_231160_c_");//init
-                method.setAccessible(true);
-                method.invoke(curScreen);
+                if(clazz.isInstance(curScreen))
+                {
+                    Field child = clazz.getSuperclass().getDeclaredField("field_230705_e_");//children
+                    child.setAccessible(true);
+                    var childScreen = (List)child.get(curScreen);
+                    childScreen.clear();
+                    Method method = clazz.getDeclaredMethod("func_231160_c_");//init
+                    method.setAccessible(true);
+                    method.invoke(curScreen);
+                }
                 return;
             }
             if(curScreen instanceof SodiumOptionsGUI)
