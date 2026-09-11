@@ -18,6 +18,7 @@ import me.loongly.mods.sclp.language.I18N;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl.Builder;
 import me.loongly.mods.sclp.client.SCLPClientMod;
+import me.loongly.mods.sclp.client.gui.SCLPUIBuilder;
 
 @Mixin(value = Builder.class, remap = false)
 public class MixinOptionImplBuilder
@@ -41,40 +42,7 @@ public class MixinOptionImplBuilder
             }
             else
             {
-                Class<?> clazz;
-            try 
-            {
-                clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
-            } 
-            catch (ClassNotFoundException e) 
-            {
-                // TODO Auto-generated catch block
-                SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                return;
-            }
-            Constructor<?> constructor;
-            try 
-            {
-                constructor = clazz.getConstructor(String.class, Object[].class);
-            } 
-            catch (NoSuchMethodException | SecurityException e) 
-            {
-                // TODO Auto-generated catch block
-                SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                    return;
-            }
-            Object translationTextComponent;
-            try 
-            {
-                translationTextComponent = constructor.newInstance(I18N.trans(tooltip), null);
-            } 
-            catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) 
-            {
-                // TODO Auto-generated catch block
-                SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                    return;
-            }
+                Object translationTextComponent = SCLPUIBuilder.create1_16TextComponent(I18N.trans(tooltip));
                 field.set((Builder)(Object)this, translationTextComponent);
             }
         }

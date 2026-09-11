@@ -54,8 +54,8 @@ public enum ViaOpt
                 })
                 .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
-            Builder.setImplBuilderName(builder, I18N.trans(nameKey));
-            Builder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
+            SCLPUIBuilder.setImplBuilderName(builder, I18N.trans(nameKey));
+            SCLPUIBuilder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
             return builder.build();
             #else
             try
@@ -67,8 +67,8 @@ public enum ViaOpt
                     })
                     .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
-                Builder.setImplBuilderName(builder, I18N.trans(nameKey));
-                Builder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
+                SCLPUIBuilder.setImplBuilderName(builder, I18N.trans(nameKey));
+                SCLPUIBuilder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
                 return builder.build();
             }
             catch (ClassNotFoundException e)
@@ -127,8 +127,8 @@ public enum ViaOpt
                 })
                 .setBinding((opts, value) -> {}, opts -> ViaOpt.VIA)
                 .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
-            Builder.setImplBuilderName(builder, I18N.trans(nameKey));
-            Builder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
+            SCLPUIBuilder.setImplBuilderName(builder, I18N.trans(nameKey));
+            SCLPUIBuilder.setImplBuilderTooltip(builder, I18N.trans(tooltipKey));
             return builder.build();
             #endif
         }

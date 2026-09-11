@@ -27,7 +27,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 #endif
 
-public class Builder
+public class SCLPUIBuilder
 {
     public static void setImplBuilderName(OptionImpl.Builder builder, String name)
     {
@@ -51,6 +51,11 @@ public class Builder
         catch (ClassNotFoundException e)
         {}
         //1.19
+        Object textComp = create1_19TextComponent(name);
+        if(textComp == null)
+        {
+            return;
+        }
         Class<?> textCompClazz;
         try
         {
@@ -58,28 +63,6 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return;
-        }
-        Object textComp;
-        try
-        {
-            textComp = constructor.invoke(null,name);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
             SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
@@ -118,6 +101,11 @@ public class Builder
         catch (ClassNotFoundException e)
         {}
         //1.19
+        Object textComp = create1_19TextComponent(tooltip);
+        if(textComp == null)
+        {
+            return;
+        }
         Class<?> textCompClazz;
         try
         {
@@ -125,28 +113,6 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return;
-        }
-        Object textComp;
-        try
-        {
-            textComp = constructor.invoke(null,tooltip);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
             SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return;
         }
@@ -197,41 +163,7 @@ public class Builder
             //SCLPClientMod.logger().error("[SCLP] :",e);//warn
             //return null;
         }
-
-        Class<?> clazz;
-        try 
-        {
-            clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Constructor<?> transTextConstructor;
-        try 
-        {
-            transTextConstructor = clazz.getConstructor(String.class, Object[].class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Object translationTextComponent;
-        try 
-        {
-            translationTextComponent = transTextConstructor.newInstance(text, null);
-        } 
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
+        Object translationTextComponent = create1_16TextComponent(text);
         Class<?> iTextCompClazz;
         try
         {
@@ -244,7 +176,7 @@ public class Builder
         }
         try 
         {
-            optionPageConstructor = clazz.getConstructor(iTextCompClazz, com.google.common.collect.ImmutableList.class);
+            optionPageConstructor = optionPageClazz.getConstructor(iTextCompClazz, com.google.common.collect.ImmutableList.class);
         } 
         catch (NoSuchMethodException | SecurityException e)
         {
@@ -269,6 +201,11 @@ public class Builder
         catch (ClassNotFoundException e)
         {}
         //1.19
+        Object textComp = create1_19TextComponent(text);
+        if(textComp == null)
+        {
+            return null;
+        }
         Class<?> textCompClazz;
         try
         {
@@ -276,28 +213,6 @@ public class Builder
         }
         catch (ClassNotFoundException e)
         {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Object textComp;
-        try
-        {
-            textComp = constructor.invoke(null,text);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
-        {
-            // TODO Auto-generated catch block
             SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
@@ -335,4 +250,82 @@ public class Builder
         #endif
         //end 1.19
     }
+    
+    #if BEFORE_18_1
+    public static Object create1_16TextComponent(String text, Object... args)
+    {
+        Class<?> clazz;
+        try 
+        {
+            clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            return null;
+        }
+        Constructor<?> constructor;
+        try 
+        {
+            constructor = clazz.getConstructor(String.class, Object[].class);
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            return null;
+        }
+        Object translationTextComponent;
+        try 
+        {
+            translationTextComponent = constructor.newInstance(text, args);
+        } 
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            return null;
+        }
+        return translationTextComponent;
+    }
+    #else
+    public static Object create1_19TextComponent(String text)
+    {
+        Class<?> textCompClazz;
+        try
+        {
+            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
+        }
+        catch (ClassNotFoundException e)
+        {
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            return null;
+        }
+        Method constructor;
+        try
+        {
+            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            return null;
+        }
+        Object textComp;
+        try
+        {
+            textComp = constructor.invoke(null,text);
+        }
+        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            return null;
+        }
+        return textComp;
+    }
+    #endif
 }

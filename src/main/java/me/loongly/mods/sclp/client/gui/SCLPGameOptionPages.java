@@ -2,7 +2,7 @@ package me.loongly.mods.sclp.client.gui;
 
 import com.google.common.collect.ImmutableList;
 
-import me.loongly.mods.sclp.client.gui.Builder;
+import me.loongly.mods.sclp.client.gui.SCLPUIBuilder;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -42,8 +42,8 @@ public class SCLPGameOptionPages
     {
         List<OptionGroup> groups = new ArrayList<>();
         var builder = OptionImpl.createBuilder(boolean.class, lsdcOpts);
-        Builder.setImplBuilderName(builder, I18N.trans("sclp.options.sclp_on"));
-        Builder.setImplBuilderTooltip(builder, I18N.trans("sclp.options.sclp_on.tooltip"));
+        SCLPUIBuilder.setImplBuilderName(builder, I18N.trans("sclp.options.sclp_on"));
+        SCLPUIBuilder.setImplBuilderTooltip(builder, I18N.trans("sclp.options.sclp_on.tooltip"));
         builder.setControl(TickBoxControl::new)
                     .setBinding((opts, value) -> {
                         opts.sclpOn = value;
@@ -56,8 +56,8 @@ public class SCLPGameOptionPages
                 .build());
 
         var builder2 = OptionImpl.createBuilder(boolean.class, lsdcOpts);
-        Builder.setImplBuilderName(builder2, I18N.trans("sclp.options.sclp_page_off"));
-        Builder.setImplBuilderTooltip(builder2, I18N.trans("sclp.options.sclp_page_off.tooltip"));
+        SCLPUIBuilder.setImplBuilderName(builder2, I18N.trans("sclp.options.sclp_page_off"));
+        SCLPUIBuilder.setImplBuilderTooltip(builder2, I18N.trans("sclp.options.sclp_page_off.tooltip"));
         builder2.setControl(TickBoxControl::new)
                     .setBinding((opts, value) -> {
                         opts.sclpPageOff = value;
@@ -75,14 +75,14 @@ public class SCLPGameOptionPages
                     .setControl(TickBoxControl::new)
                     .setBinding((opts, value) -> {opts.shouldShowSupportPage = !value;}, opts -> !opts.shouldShowSupportPage)
                     .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD);
-            Builder.setImplBuilderName(closeSupBuilder, I18N.trans("sclp.options.close_support_page.name"));
-            Builder.setImplBuilderTooltip(closeSupBuilder, I18N.trans("sclp.options.close_support_page.tooltip"));
+            SCLPUIBuilder.setImplBuilderName(closeSupBuilder, I18N.trans("sclp.options.close_support_page.name"));
+            SCLPUIBuilder.setImplBuilderTooltip(closeSupBuilder, I18N.trans("sclp.options.close_support_page.tooltip"));
             groups.add(OptionGroup.createBuilder()
                 .add(closeSupBuilder.build())
                 .add(ViaOpt.create("sclp.options.support_project.name", "sclp.options.support_project.tooltip", lsdcOpts))
                 .build());
         }
-        return Builder.createOptionPage(I18N.trans("sclp.page"), groups);
+        return SCLPUIBuilder.createOptionPage(I18N.trans("sclp.page"), groups);
     }
 
     public static OptionPage birthPage()
@@ -104,7 +104,7 @@ public class SCLPGameOptionPages
         //                 .build())
         //         .build());
         // }
-        return Builder.createOptionPage("ᗜᴗᗜ:" + (year -2004), groups);
+        return SCLPUIBuilder.createOptionPage("ᗜᴗᗜ:" + (year -2004), groups);
     }
 
     static void rebuildSodiumSrc()

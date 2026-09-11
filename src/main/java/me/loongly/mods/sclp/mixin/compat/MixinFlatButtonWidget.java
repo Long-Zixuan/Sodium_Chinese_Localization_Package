@@ -14,6 +14,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import me.loongly.mods.sclp.client.SCLPClientMod;
+import me.loongly.mods.sclp.client.gui.SCLPUIBuilder;
 
 @Mixin(FlatButtonWidget.class)
 public class MixinFlatButtonWidget
@@ -37,40 +38,7 @@ public class MixinFlatButtonWidget
             }
             else
             {
-                Class<?> clazz;
-            try 
-            {
-                clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
-            } 
-            catch (ClassNotFoundException e) 
-            {
-                // TODO Auto-generated catch block
-                SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                return;
-            }
-            Constructor<?> constructor;
-            try 
-            {
-                constructor = clazz.getConstructor(String.class, Object[].class);
-            } 
-            catch (NoSuchMethodException | SecurityException e) 
-            {
-                // TODO Auto-generated catch block
-                SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                    return;
-            }
-            Object translationTextComponent;
-            try 
-            {
-                translationTextComponent = constructor.newInstance(label, null);
-            } 
-            catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) 
-            {
-                // TODO Auto-generated catch block
-                SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                    return;
-            }
+                Object translationTextComponent = SCLPUIBuilder.create1_16TextComponent(I18N.trans(label));
                 field.set((FlatButtonWidget)(Object)this, translationTextComponent);
             }
         }
