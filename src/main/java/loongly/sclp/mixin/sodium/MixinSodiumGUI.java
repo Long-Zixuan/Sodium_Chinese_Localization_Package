@@ -4,7 +4,6 @@ import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.font.TextRenderer;
 import loongly.sclp.api.ISCLPScreen;
-import loongly.sclp.client.OsType;
 import loongly.sclp.client.SclpClientMod;
 import loongly.sclp.client.gui.SCLPGameOptionPages;
 //import net.minecraft.client.resource.language.I18n;

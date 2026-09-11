@@ -6,12 +6,13 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.util.Util;
 
 public class NetworkSettings 
 {
     public static void openNetWorkSettings()
 	{
-		switch (OsType.getCurrentOs()) 
+		switch (Util.getOperatingSystem()) 
 		{
 			case WINDOWS:
 				if (System.getProperty("os.version").startsWith("10."))
@@ -26,9 +27,11 @@ public class NetworkSettings
 			case LINUX:
 				openLinuxNetworkSettings();//理论上安卓也会打开这个，但是应该是没有用的
 				break;
-			case MACOS:
+			case OSX:
 				openMacOSNetworkSettings();
 				break;
+			case SOLARIS://UNIX发行版
+				openLinuxNetworkSettings();
 			default:
 				break;
 		}
