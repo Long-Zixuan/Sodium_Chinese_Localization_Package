@@ -48,7 +48,26 @@ public enum ViaOpt
                     }
                     catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
                     {
-                        SCLPClientMod.logger().error("[SCLP] :",e);//warn
+                        SCLPClientMod.logger().error("[SCLP] If you are using rubiddium and the version is 0.2.13 please ignore this error:",e);//warn
+                    }
+                    try
+                    {
+                        Class<?> iTextCmpClazz = Class.forName("net.minecraft.util.text.ITextComponent");
+                        Class<?> iTextCmpClazzArr = iTextCmpClazz.arrayType();
+                        Constructor<?> constructor2 = CyclingControl.class.getConstructor(
+                            Option.class,      // 对应Option<T>
+                            Class.class,       // 对应Class<T>
+                            iTextCmpClazzArr
+                        );
+                        Class<?> textCompClazz_1_16 = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
+                        Object textCompArray = Array.newInstance(textCompClazz_1_16,1);
+                        Object textComp = SCLPUIBuilder.create1_16TextComponent(I18N.trans("sclp.options.open_external_page_button") + " ➤");
+                        Array.set(textCompArray,0,textComp);
+                        return (CyclingControl<ViaOpt>) constructor2.newInstance(opt, ViaOpt.class, textCompArray);
+                    }
+                    catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+                    {
+                        SCLPClientMod.logger().error("[SCLP]:",e);//warn
                         return null;
                     }
                 })
