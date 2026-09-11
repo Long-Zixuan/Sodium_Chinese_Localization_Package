@@ -15,6 +15,49 @@ import net.minecraft.client.resource.language.I18n;
 
 public class I18N
 {
+    #if BEFORE_18_1
+    static Class<?> textCompClazz_1_16;
+    static Constructor<?> textCompClazz_1_16_Con;
+    static Method textCompClazz_1_16_GetStringMeth;
+    static
+    {
+        try 
+        {
+            textCompClazz_1_16 = Class.forName("net.minecraft.util.text.TranslationTextComponent");
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+        }
+        
+        try 
+        {
+            if(textCompClazz_1_16 != null)
+            {
+                textCompClazz_1_16_Con = textCompClazz_1_16.getConstructor(String.class, Object[].class);
+            }
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+        }
+        
+        try 
+        {
+            if(textCompClazz_1_16 != null)
+            {
+                textCompClazz_1_16_GetStringMeth = textCompClazz_1_16.getMethod("getString");
+            }
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+        }
+    }
+    #endif
+
     public static String trans(String key, Object... args)
     {
         #if BEFORE_18_1
@@ -53,61 +96,33 @@ public class I18N
     #if BEFORE_18_1
     public static String oldVersionTrans(String key, Object... args)
     {
-        Class<?> clazz;
-        try 
+        if(textCompClazz_1_16 == null || textCompClazz_1_16_Con == null || textCompClazz_1_16_GetStringMeth == null)
         {
-            clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return "error";
-        }
-        Constructor<?> constructor;
-        try 
-        {
-            constructor = clazz.getConstructor(String.class, Object[].class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                return "error";
+            return "error:" + key;
         }
         Object translationTextComponent;
         try 
         {
-            translationTextComponent = constructor.newInstance(key, args);
+            translationTextComponent = textCompClazz_1_16_Con.newInstance(key, args);
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
             SCLPClientMod.logger().error("[SCLP] :",e);//warn
-                return "error";
+            return "error:" + key;
         }
-        Method getStringMeth;
+        
         try 
         {
-            getStringMeth = clazz.getMethod("getString");
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return "error";
-        }
-        try 
-        {
-            String finalStr = (String) getStringMeth.invoke(translationTextComponent);
+            String finalStr = (String) textCompClazz_1_16_GetStringMeth.invoke(translationTextComponent);
             return finalStr;
         } 
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
             // TODO Auto-generated catch block
             SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return "error";
+            return "error:" + key;
         }
     }
     #endif
