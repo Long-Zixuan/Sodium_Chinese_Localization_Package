@@ -29,6 +29,88 @@ import net.minecraft.text.TranslatableText;
 
 public class SCLPUIBuilder
 {
+    #if BEFORE_18_1
+    static Class<?> textCompClazz_1_16;
+    static Constructor<?> textCompClazz_1_16_Constructor;
+    #else
+    static Class<?> textCompClazz_1_19;
+    static Method textCompClazz_1_19_Constructor;
+    #endif
+    static Class<?> optionPageClazz;
+    static Constructor<?> optionPageConstructor;
+
+    static
+    {    
+        #if BEFORE_18_1
+        try 
+        {
+            textCompClazz_1_16 = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            throw new RuntimeException("[SCLP]" + e.toString());
+        }
+        
+        try 
+        {
+            textCompClazz_1_16_Constructor = textCompClazz_1_16.getConstructor(String.class, Object[].class);
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+            throw new RuntimeException("[SCLP]" + e.toString());
+        }
+        #else
+        try
+        {
+            textCompClazz_1_19 = Class.forName("net.minecraft.network.chat.Component");
+        }
+        catch (ClassNotFoundException e)
+        {
+            SCLPClientMod.logger().error("[SCLP] If you game version is 1.18,Please ignore this error:",e);//warn
+        }
+        
+        try
+        {
+            if(textCompClazz_1_19 != null)
+            {
+                textCompClazz_1_19_Constructor = textCompClazz_1_19.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
+            }
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+        }
+        #endif
+       
+        try
+        {
+            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
+        }
+        catch (ClassNotFoundException e)
+        {
+            SCLPClientMod.logger().error("[SCLP] :",e);//warn
+        }
+
+        try 
+        {
+            #if BEFORE_18_1
+            optionPageConstructor = optionPageClazz.getConstructor(String.class, com.google.common.collect.ImmutableList.class);
+            #else
+            optionPageConstructor = optionPageClazz.getConstructor(textCompClazz_1_19, com.google.common.collect.ImmutableList.class);
+            #endif
+        } 
+        catch (NoSuchMethodException | SecurityException e) 
+        {
+            // TODO Auto-generated catch block
+            SCLPClientMod.logger().error("[SCLP] If you game version is 1.18,Please ignore this error :",e);//warn
+        }
+
+    }
     public static void setImplBuilderName(OptionImpl.Builder builder, String name)
     {
         #if BEFORE_18_1
@@ -56,19 +138,9 @@ public class SCLPUIBuilder
         {
             return;
         }
-        Class<?> textCompClazz;
         try
         {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return;
-        }
-        try
-        {
-            Method setName = builder.getClass().getMethod("setName", textCompClazz);
+            Method setName = builder.getClass().getMethod("setName", textCompClazz_1_19);
             setName.invoke(builder, textComp);
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
@@ -106,19 +178,9 @@ public class SCLPUIBuilder
         {
             return;
         }
-        Class<?> textCompClazz;
         try
         {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return;
-        }
-        try
-        {
-            Method setName = builder.getClass().getMethod("setTooltip", textCompClazz);
+            Method setName = builder.getClass().getMethod("setTooltip", textCompClazz_1_19);
             setName.invoke(builder, textComp);
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
@@ -132,27 +194,6 @@ public class SCLPUIBuilder
     public static OptionPage createOptionPage(String text, List<OptionGroup> groups)
     {
         #if BEFORE_18_1
-        Class<?> optionPageClazz;
-        try
-        {
-            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Constructor<?> optionPageConstructor;
-        try 
-        {
-            optionPageConstructor = optionPageClazz.getConstructor(String.class, com.google.common.collect.ImmutableList.class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
         try
         {
             return (OptionPage) optionPageConstructor.newInstance(text, ImmutableList.copyOf(groups));
@@ -161,35 +202,6 @@ public class SCLPUIBuilder
         {
             // TODO Auto-generated catch block
             //SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            //return null;
-        }
-        Object translationTextComponent = create1_16TextComponent(text);
-        Class<?> iTextCompClazz;
-        try
-        {
-            iTextCompClazz = Class.forName("net.minecraft.util.text.ITextComponent");
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        try 
-        {
-            optionPageConstructor = optionPageClazz.getConstructor(iTextCompClazz, com.google.common.collect.ImmutableList.class);
-        } 
-        catch (NoSuchMethodException | SecurityException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        try
-        {
-            return (OptionPage)optionPageConstructor.newInstance(translationTextComponent, ImmutableList.copyOf(groups));
-        } 
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         #else
@@ -204,37 +216,6 @@ public class SCLPUIBuilder
         Object textComp = create1_19TextComponent(text);
         if(textComp == null)
         {
-            return null;
-        }
-        Class<?> textCompClazz;
-        try
-        {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Class<?> optionPageClazz;
-        try
-        {
-            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Constructor<?> optionPageConstructor;
-        try 
-        {
-            optionPageConstructor = optionPageClazz.getConstructor(textCompClazz, com.google.common.collect.ImmutableList.class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
             return null;
         }
         try
@@ -254,32 +235,10 @@ public class SCLPUIBuilder
     #if BEFORE_18_1
     public static Object create1_16TextComponent(String text, Object... args)
     {
-        Class<?> clazz;
-        try 
-        {
-            clazz = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Constructor<?> constructor;
-        try 
-        {
-            constructor = clazz.getConstructor(String.class, Object[].class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
         Object translationTextComponent;
         try 
         {
-            translationTextComponent = constructor.newInstance(text, args);
+            translationTextComponent = textCompClazz_1_16_Constructor.newInstance(text, args);
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) 
@@ -293,31 +252,10 @@ public class SCLPUIBuilder
     #else
     public static Object create1_19TextComponent(String text)
     {
-        Class<?> textCompClazz;
-        try
-        {
-            textCompClazz = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
-        Method constructor;
-        try
-        {
-            constructor = textCompClazz.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            return null;
-        }
         Object textComp;
         try
         {
-            textComp = constructor.invoke(null,text);
+            textComp =  textCompClazz_1_19_Constructor.invoke(null,text);
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
