@@ -20,6 +20,7 @@ import me.loongly.mods.sclp.client.SCLPClientMod;
 import me.loongly.mods.sclp.client.gui.options.storage.SCLPOptionsStorage;
 import me.loongly.mods.sclp.language.I18N;
 import net.minecraft.client.MinecraftClient;
+import me.loongly.mods.sclp.client.Environment;
 #if BEFORE_18_1
 #else
 import net.minecraft.text.LiteralText;
@@ -29,88 +30,6 @@ import net.minecraft.text.TranslatableText;
 
 public class SCLPUIBuilder
 {
-    #if BEFORE_18_1
-    static Class<?> textCompClazz_1_16;
-    static Constructor<?> textCompClazz_1_16_Constructor;
-    #else
-    static Class<?> textCompClazz_1_19;
-    static Method textCompClazz_1_19_Constructor;
-    #endif
-    static Class<?> optionPageClazz;
-    static Constructor<?> optionPageConstructor;
-
-    static
-    {    
-        #if BEFORE_18_1
-        try 
-        {
-            textCompClazz_1_16 = Class.forName("net.minecraft.util.text.TranslationTextComponent");//这玩意继承了ITextComponent
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            throw new RuntimeException("[SCLP]" + e.toString());
-        }
-        
-        try 
-        {
-            textCompClazz_1_16_Constructor = textCompClazz_1_16.getConstructor(String.class, Object[].class);
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-            throw new RuntimeException("[SCLP]" + e.toString());
-        }
-        #else
-        try
-        {
-            textCompClazz_1_19 = Class.forName("net.minecraft.network.chat.Component");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] If you game version is 1.18,Please ignore this error:",e);//warn
-        }
-        
-        try
-        {
-            if(textCompClazz_1_19 != null)
-            {
-                textCompClazz_1_19_Constructor = textCompClazz_1_19.getMethod("m_237115_",String.class);//m_237115_是translatable的方法名
-            }
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-        }
-        #endif
-       
-        try
-        {
-            optionPageClazz = Class.forName("me.jellysquid.mods.sodium.client.gui.options.OptionPage");
-        }
-        catch (ClassNotFoundException e)
-        {
-            SCLPClientMod.logger().error("[SCLP] :",e);//warn
-        }
-
-        try 
-        {
-            #if BEFORE_18_1
-            optionPageConstructor = optionPageClazz.getConstructor(String.class, com.google.common.collect.ImmutableList.class);
-            #else
-            optionPageConstructor = optionPageClazz.getConstructor(textCompClazz_1_19, com.google.common.collect.ImmutableList.class);
-            #endif
-        } 
-        catch (NoSuchMethodException | SecurityException e) 
-        {
-            // TODO Auto-generated catch block
-            SCLPClientMod.logger().error("[SCLP] If you game version is 1.18,Please ignore this error :",e);//warn
-        }
-
-    }
     public static void setImplBuilderName(OptionImpl.Builder builder, String name)
     {
         #if BEFORE_18_1
@@ -140,7 +59,7 @@ public class SCLPUIBuilder
         }
         try
         {
-            Method setName = builder.getClass().getMethod("setName", textCompClazz_1_19);
+            Method setName = builder.getClass().getMethod("setName", Environment.textCompClazz_1_19);
             setName.invoke(builder, textComp);
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
@@ -180,7 +99,7 @@ public class SCLPUIBuilder
         }
         try
         {
-            Method setName = builder.getClass().getMethod("setTooltip", textCompClazz_1_19);
+            Method setName = builder.getClass().getMethod("setTooltip", Environment.textCompClazz_1_19);
             setName.invoke(builder, textComp);
         }
         catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
@@ -196,7 +115,7 @@ public class SCLPUIBuilder
         #if BEFORE_18_1
         try
         {
-            return (OptionPage) optionPageConstructor.newInstance(text, ImmutableList.copyOf(groups));
+            return (OptionPage) Environment.optionPageConstructor.newInstance(text, ImmutableList.copyOf(groups));
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
@@ -220,7 +139,7 @@ public class SCLPUIBuilder
         }
         try
         {
-            return (OptionPage) optionPageConstructor.newInstance(textComp, ImmutableList.copyOf(groups));
+            return (OptionPage) Environment.optionPageConstructor.newInstance(textComp, ImmutableList.copyOf(groups));
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
@@ -238,7 +157,7 @@ public class SCLPUIBuilder
         Object translationTextComponent;
         try 
         {
-            translationTextComponent = textCompClazz_1_16_Constructor.newInstance(text, args);
+            translationTextComponent = Environment.textCompClazz_1_16_Constructor.newInstance(text, args);
         } 
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) 
@@ -255,7 +174,7 @@ public class SCLPUIBuilder
         Object textComp;
         try
         {
-            textComp =  textCompClazz_1_19_Constructor.invoke(null,text);
+            textComp =  Environment.textCompClazz_1_19_Constructor.invoke(null,text);
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
         {
