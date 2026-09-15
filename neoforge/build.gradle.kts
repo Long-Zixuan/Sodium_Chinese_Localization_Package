@@ -91,19 +91,6 @@ tasks.test {
     failOnNoDiscoveredTests = false
 }
 
-
-tasks {
-    withType<JavaCompile> {
-        source(project(":common").sourceSets.main.get().allSource)
-        source(project(":common").sourceSets.getByName("desktop").allSource)
-    }
-
-    javadoc {
-        source(project(":common").sourceSets.main.get().allJava)
-        source(project(":common").sourceSets.getByName("desktop").allJava)
-    }
-}
-
 dependencies {
     compileOnly(project(":common"))
     implementation("net.caffeinemc:sodium-neoforge-mod:$SODIUM_VERSION")
@@ -114,16 +101,17 @@ val notNeoTask: (Task) -> Boolean = { it: Task -> !it.name.startsWith("neo") && 
 
 tasks.withType<JavaCompile>().matching(notNeoTask).configureEach {
     source(project(":common").sourceSets.main.get().allSource)
+    source(project(":common").sourceSets.getByName("desktop").allSource)
 }
 
 tasks.withType<Javadoc>().matching(notNeoTask).configureEach {
     source(project(":common").sourceSets.main.get().allJava)
+    source(project(":common").sourceSets.getByName("desktop").allJava)
 }
 
 tasks.withType<ProcessResources>().matching(notNeoTask).configureEach {
     from(project(":common").sourceSets.main.get().resources)
 }
-
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 publishing {
