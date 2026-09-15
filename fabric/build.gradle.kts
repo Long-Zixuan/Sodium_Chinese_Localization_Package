@@ -38,6 +38,12 @@ tasks.test {
     failOnNoDiscoveredTests = false
 }
 
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "me.loongly.mods.sclp.common.desktop.LaunchWarn"
+    }
+}
+
 loom {
     @Suppress("UnstableApiUsage")
     mixin { defaultRefmapName.set("${rootProject.name}.refmap.json") }

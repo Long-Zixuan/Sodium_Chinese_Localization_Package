@@ -45,6 +45,10 @@ tasks.jar {
     filesMatching("neoforge.mods.toml") {
         expand(mapOf("version" to MOD_VERSION))
     }
+
+    manifest {
+        attributes["Main-Class"] = "me.loongly.mods.sclp.common.desktop.LaunchWarn"
+    }
 }
 
 neoForge {
