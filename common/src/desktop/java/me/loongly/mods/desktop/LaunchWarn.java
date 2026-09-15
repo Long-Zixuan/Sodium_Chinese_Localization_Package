@@ -14,12 +14,15 @@ public class LaunchWarn {
                     "<body>" +
                     "<p style='width: 600px; padding: 0 0 8px 0;'>" +
                     "You have tried to launch Sodium Chinese Localized Package (a Minecraft mod) directly, but it is not an executable program or mod installer. Instead, " +
-                    "you must install Fabric/Neoforge Loader for Minecraft, and then place this file in your mods directory." +
-                    "<br>看起来你试图执行钠-汉化包模组，但是它并不是一个可执行程序或模组安装器。你需要安装Fabric/Neoforge Loader，然后将这个文件放到你的模组文件夹中。"+
+                    "you must install Fabric Loader or Neoforge Loader for Minecraft, and then place this file in your mods directory." +
                     "</p>" +
                     "<p style='width: 600px; padding: 0 0 8px 0;'>" +
-                    "If this is your first time installing mods with Fabric/Neoforge Loader, then click the \"Help\" button for an installation guide." +
-                    "<br>如果这是你第一次使用Fabric/Neoforge Loader安装模组，那么点击“Help”按钮以寻求帮助。"+
+                    "If this is your first time installing mods with Fabric Loader or Neoforge Loader, then click the \"Help\" button for an installation guide." +
+                    "<p style='width: 600px; padding: 0 0 8px 0;'>" +
+                    "<br>看起来你试图执行钠-汉化包模组，但是它并不是一个可执行程序或模组安装器。你需要安装Fabric加载器或者Neoforge加载器，然后将这个文件放到你的模组文件夹中。"+
+                    "</p>" +
+                    "<p style='width: 600px; padding: 0 0 8px 0;'>" +
+                    "如果这是你第一次使用Fabric加载器或者Neoforge加载器安装模组，那么点击“Help”按钮以寻求帮助。"+
                     "</p>" +
                     "</body>" +
                     "</html>";
@@ -29,12 +32,15 @@ public class LaunchWarn {
                     "<body>" +
                     "<p style='width: 600px; padding: 0 0 8px 0;'>" +
                     "You have tried to launch Sodium Chinese Localized Package (a Minecraft mod) directly, but it is not an executable program or mod installer. Instead, " +
-                    "you must install Fabric/Neoforge Loader for Minecraft, and then place this file in your mods directory." +
-                    "<br>看起来你试图执行钠-汉化包模组，但是它并不是一个可执行程序或模组安装器。你需要安装Fabric/Neoforge Loader，然后将这个文件放到你的模组文件夹中。"+
+                    "you must install Fabric Loader or Neoforge Loader for Minecraft, and then place this file in your mods directory." +
                     "</p>" +
                     "<p style='width: 600px; padding: 0 0 8px 0;'>" +
-                    "If this is your first time installing mods with Fabric/Neoforge Loader, then visit <i>" + HELP_URL + "</i> for an installation guide." +
-                    "<br>如果这是你第一次使用Fabric/Neoforge Loader安装模组，那么点击“Help”按钮以寻求帮助。"+
+                    "If this is your first time installing mods with Fabric Loader or Neoforge Loader, then visit <i>" + HELP_URL + "</i> for an installation guide." +
+                    "<p style='width: 600px; padding: 0 0 8px 0;'>" +
+                    "<br>看起来你试图执行钠-汉化包模组，但是它并不是一个可执行程序或模组安装器。你需要安装Fabric加载器或者Neoforge加载器，然后将这个文件放到你的模组文件夹中。"+
+                    "</p>" +
+                    "<p style='width: 600px; padding: 0 0 8px 0;'>" +
+                    "如果这是你第一次使用Fabric加载器或者Neoforge加载器安装模组，那么点击“Help”按钮以寻求帮助。"+
                     "</p>" +
                     "</body>" +
                     "</html>";
@@ -44,10 +50,11 @@ public class LaunchWarn {
                     "<body>" +
                     "<p style='width: 400px; padding: 0 0 8px 0;'>" +
                     "Failed to open the default browser! Your system may be misconfigured. Please open the URL <i>" + HELP_URL + "</i> manually." +
+                    "<br><br>无法在您的计算机中打开浏览器！您的系统可能被错误配置。请手动打开 <i>"+ HELP_URL + "</i>"+
                     "</p>" +
                     "</body>" +
                     "</html>";
-    public static final String WINDOW_TITLE = "Sodium Chinese Localized Package";
+    public static final String WINDOW_TITLE = "钠-汉化包(SCLP)";
 
     public static void main(String[] args) {
         if (GraphicsEnvironment.isHeadless()) {
