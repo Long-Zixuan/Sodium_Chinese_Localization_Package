@@ -40,7 +40,7 @@ tasks.test {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "me.loongly.mods.sclp.common.desktop.LaunchWarn"
+        attributes["Main-Class"] = "me.loongly.mods.sclp.desktop.LaunchWarn"
     }
 }
 
@@ -67,9 +67,13 @@ loom {
 tasks {
     withType<JavaCompile> {
         source(project(":common").sourceSets.main.get().allSource)
+        source(project(":common").sourceSets.getByName("desktop").allSource)
     }
 
-    javadoc { source(project(":common").sourceSets.main.get().allJava) }
+    javadoc { 
+        source(project(":common").sourceSets.main.get().allJava)
+        source(project(":common").sourceSets.getByName("desktop").allJava)
+    }
 
     processResources {
         from(project(":common").sourceSets.main.get().resources)

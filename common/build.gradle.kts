@@ -13,6 +13,13 @@ val FABRIC_API_VERSION: String by rootProject.extra
 
 val SODIUM_VERSION: String by rootProject.extra
 
+// Configure desktop source set
+val desktopSourceSet = sourceSets.create("desktop") {
+    java {
+        srcDir("src/desktop/java")
+    }
+}
+
 // This trick hides common tasks in the IDEA list.
 tasks.configureEach {
     group = null

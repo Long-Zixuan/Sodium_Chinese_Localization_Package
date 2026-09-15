@@ -1,6 +1,6 @@
-package me.loongly.mods.sclp.common.desktop;
+package me.loongly.mods.sclp.desktop;
 
-import me.loongly.mods.sclp.common.desktop.utils.browse.BrowseUrlHandler;
+import me.loongly.mods.sclp.desktop.utils.browse.BrowseUrlHandler;
 
 import javax.swing.*;
 import java.awt.*;

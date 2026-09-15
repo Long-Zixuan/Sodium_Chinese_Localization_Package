@@ -1,4 +1,4 @@
-package me.loongly.mods.sclp.common.desktop.utils.browse;
+package me.loongly.mods.sclp.desktop.utils.browse;
 
 import java.awt.*;
 import java.io.IOException;
