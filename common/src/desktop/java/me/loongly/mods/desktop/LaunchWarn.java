@@ -60,6 +60,12 @@ public class LaunchWarn {
                     "</body>" +
                     "</html>";
     public static final String WINDOW_TITLE = "钠-汉化包(SCLP)";
+    private static final String OPENED_HELP_PAGE_MESSAGE = """
+        The help page has been opened
+        已经打开帮助页面
+        ヘルプページが開きました
+        La page d'aide est déjà ouverte
+        """;
 
     public static void main(String[] args) {
         if (GraphicsEnvironment.isHeadless()) {
@@ -89,26 +95,30 @@ public class LaunchWarn {
     }
 
     private static void showRichGraphicalDialog(BrowseUrlHandler browseUrlHandler) {
+        Image iconImg = Toolkit.getDefaultToolkit().getImage(LaunchWarn.class.getResource("/icon.png"));
+        Icon iconImage = new ImageIcon(iconImg);
         int selectedOption = showDialogBox(RICH_MESSAGE, WINDOW_TITLE, JOptionPane.YES_NO_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, new String[] { "Help", "Close" }, JOptionPane.YES_OPTION);
+                JOptionPane.INFORMATION_MESSAGE, new String[] { "Help", "Close" }, JOptionPane.YES_OPTION, iconImage);
 
         if (selectedOption == JOptionPane.YES_OPTION) {
             log("Opening URL: " + HELP_URL);
 
             try {
                 browseUrlHandler.browseTo(HELP_URL);
+                showDialogBox(OPENED_HELP_PAGE_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE, null, JOptionPane.DEFAULT_OPTION,null);
             } catch (IOException e) {
                 log("Failed to open default web browser!", e);
 
                 showDialogBox(FAILED_TO_BROWSE_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.WARNING_MESSAGE, null, JOptionPane.DEFAULT_OPTION);
+                        JOptionPane.WARNING_MESSAGE, null, JOptionPane.DEFAULT_OPTION,null);
             }
         }
     }
 
     private static void showFallbackGraphicalDialog() {
         // Fallback for Linux, etc. users with no "default" browser
-        showDialogBox(FALLBACK_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null);
+        showDialogBox(FALLBACK_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null,null);
     }
 
     private static int showDialogBox(String message,
@@ -116,15 +126,13 @@ public class LaunchWarn {
                                      int optionType,
                                      int messageType,
                                      String[] options,
-                                     Object initialValue) {
-        JOptionPane pane = new JOptionPane(message, messageType, optionType, null, options, initialValue);
-
-        Image icon = Toolkit.getDefaultToolkit().getImage(LaunchWarn.class.getResource("/icon.png"));
-        Icon iconImage = new ImageIcon(icon);
-        pane.setIcon(iconImage);
+                                     Object initialValue,
+                                     Icon icon) {
+        JOptionPane pane = new JOptionPane(message, messageType, optionType, icon, options, initialValue);
 
         JDialog dialog = pane.createDialog(title);
-        dialog.setIconImage(icon);
+        Image iconImg = Toolkit.getDefaultToolkit().getImage(LaunchWarn.class.getResource("/icon.png"));
+        dialog.setIconImage(iconImg);
         dialog.setVisible(true);
 
         Object selectedValue = pane.getValue();
