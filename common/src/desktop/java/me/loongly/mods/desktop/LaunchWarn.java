@@ -7,7 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class LaunchWarn {
+public class LaunchWarn 
+{
     private static final String HELP_URL = "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/wiki/Installation-%E5%AE%89%E8%A3%85";
 
     private static final String RICH_MESSAGE =
@@ -67,47 +68,61 @@ public class LaunchWarn {
         La page d'aide est déjà ouverte, si la page ne se charge pas, vérifiez votre connexion réseau ou essayez après avoir utilisé un VPN
         """;
 
-    public static void main(String[] args) {
-        if (GraphicsEnvironment.isHeadless()) {
+    public static void main(String[] args) 
+    {
+        if (GraphicsEnvironment.isHeadless()) 
+        {
             showHeadlessError();
-        } else {
+        } 
+        else 
+        {
             showGraphicalError();
         }
     }
 
-    private static void showHeadlessError() {
+    private static void showHeadlessError() 
+    {
         System.err.println(FALLBACK_MESSAGE);
     }
 
-    private static void showGraphicalError() {
+    private static void showGraphicalError() 
+    {
         trySetSystemLookAndFeel();
         trySetSystemFontPreferences();
 
         BrowseUrlHandler browseUrlHandler = BrowseUrlHandler.createImplementation();
 
-        if (browseUrlHandler != null) {
+        if (browseUrlHandler != null) 
+        {
             showRichGraphicalDialog(browseUrlHandler);
-        } else {
+        } 
+        else 
+        {
             showFallbackGraphicalDialog();
         }
 
         System.exit(0);
     }
 
-    private static void showRichGraphicalDialog(BrowseUrlHandler browseUrlHandler) {
+    private static void showRichGraphicalDialog(BrowseUrlHandler browseUrlHandler) 
+    {
         Image iconImg = Toolkit.getDefaultToolkit().getImage(LaunchWarn.class.getResource("/icon.png"));
         Icon iconImage = new ImageIcon(iconImg);
         int selectedOption = showDialogBox(RICH_MESSAGE, WINDOW_TITLE, JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, new String[] { "Help", "Close" }, JOptionPane.YES_OPTION, iconImage);
 
-        if (selectedOption == JOptionPane.YES_OPTION) {
+        if (selectedOption == JOptionPane.YES_OPTION) 
+        {
             log("Opening URL: " + HELP_URL);
 
-            try {
+            try 
+            {
                 browseUrlHandler.browseTo(HELP_URL);
                 showDialogBox(OPENED_HELP_PAGE_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE, null, JOptionPane.DEFAULT_OPTION,null);
-            } catch (IOException e) {
+            } 
+            catch (IOException e) 
+            {
                 log("Failed to open default web browser!", e);
 
                 showDialogBox(FAILED_TO_BROWSE_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION,
@@ -116,7 +131,8 @@ public class LaunchWarn {
         }
     }
 
-    private static void showFallbackGraphicalDialog() {
+    private static void showFallbackGraphicalDialog() 
+    {
         // Fallback for Linux, etc. users with no "default" browser
         showDialogBox(FALLBACK_MESSAGE, WINDOW_TITLE, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null,null);
     }
@@ -127,7 +143,8 @@ public class LaunchWarn {
                                      int messageType,
                                      String[] options,
                                      Object initialValue,
-                                     Icon icon) {
+                                     Icon icon) 
+    {
         JOptionPane pane = new JOptionPane(message, messageType, optionType, icon, options, initialValue);
 
         JDialog dialog = pane.createDialog(title);
@@ -137,13 +154,16 @@ public class LaunchWarn {
 
         Object selectedValue = pane.getValue();
 
-        if (selectedValue == null) {
+        if (selectedValue == null) 
+        {
             return JOptionPane.CLOSED_OPTION;
         }
 
         // If there is not an array of option buttons:
-        if (options == null) {
-            if (selectedValue instanceof Integer) {
+        if (options == null) 
+        {
+            if (selectedValue instanceof Integer) 
+            {
                 return (Integer) selectedValue;
             }
 
@@ -151,10 +171,12 @@ public class LaunchWarn {
         }
 
         // If there is an array of option buttons:
-        for (int counter = 0; counter < options.length; counter++) {
+        for (int counter = 0; counter < options.length; counter++) 
+        {
             String option = options[counter];
 
-            if (option.equals(selectedValue)) {
+            if (option.equals(selectedValue)) 
+            {
                 return counter;
             }
         }
@@ -162,23 +184,30 @@ public class LaunchWarn {
         return JOptionPane.CLOSED_OPTION;
     }
 
-    private static void trySetSystemLookAndFeel() {
-        try {
+    private static void trySetSystemLookAndFeel() 
+    {
+        try 
+        {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ignored) {
+        } 
+        catch (ReflectiveOperationException | UnsupportedLookAndFeelException ignored) 
+        {
             // Ignored
         }
     }
 
-    private static void trySetSystemFontPreferences() {
+    private static void trySetSystemFontPreferences() 
+    {
         System.setProperty("awt.useSystemAAFontSettings", "on"); // Why is this not a default?
     }
 
-    private static void log(String message) {
+    private static void log(String message) 
+    {
         System.err.println(message);
     }
 
-    private static void log(String message, Throwable exception) {
+    private static void log(String message, Throwable exception) 
+    {
         System.err.println(message);
         exception.printStackTrace(System.err);
     }

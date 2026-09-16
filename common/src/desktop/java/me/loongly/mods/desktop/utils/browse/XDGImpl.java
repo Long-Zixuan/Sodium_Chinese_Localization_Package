@@ -3,8 +3,10 @@ package me.loongly.mods.sclp.desktop.utils.browse;
 import java.io.IOException;
 import java.util.Locale;
 
-class XDGImpl implements BrowseUrlHandler {
-    public static boolean isSupported() {
+class XDGImpl implements BrowseUrlHandler 
+{
+    public static boolean isSupported() 
+    {
         String os = System.getProperty("os.name")
                 .toLowerCase(Locale.ROOT);
 
@@ -12,17 +14,22 @@ class XDGImpl implements BrowseUrlHandler {
     }
 
     @Override
-    public void browseTo(String url) throws IOException {
+    public void browseTo(String url) throws IOException 
+    {
         var process = Runtime.getRuntime()
                 .exec(new String[] { "xdg-open", url });
 
-        try {
+        try 
+        {
             int result = process.waitFor();
 
-            if (result != 0 /* success */) {
+            if (result != 0 /* success */) 
+            {
                 throw new IOException("xdg-open exited with code: %d".formatted(result));
             }
-        } catch (InterruptedException e) {
+        } 
+        catch (InterruptedException e) 
+        {
             throw new RuntimeException(e);
         }
 
