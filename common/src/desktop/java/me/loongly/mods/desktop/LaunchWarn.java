@@ -61,10 +61,10 @@ public class LaunchWarn {
                     "</html>";
     public static final String WINDOW_TITLE = "钠-汉化包(SCLP)";
     private static final String OPENED_HELP_PAGE_MESSAGE = """
-        The help page has been opened
-        已经打开帮助页面
-        ヘルプページが開きました
-        La page d'aide est déjà ouverte
+        The help page has been opened. If the page cannot load, please check your network connection or try using VPN
+        已经打开帮助页面,如果页面无法加载请检查网络连接或使用VPN后尝试
+        ヘルプページが開きました。ページがロードできない場合はネットワーク接続を確認するか、VPNを使用してみてください
+        La page d'aide est déjà ouverte, si la page ne se charge pas, vérifiez votre connexion réseau ou essayez après avoir utilisé un VPN
         """;
 
     public static void main(String[] args) {
