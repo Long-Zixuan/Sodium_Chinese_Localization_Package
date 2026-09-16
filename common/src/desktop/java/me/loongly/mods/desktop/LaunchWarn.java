@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class LaunchWarn {
-    private static final String HELP_URL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack";
+    private static final String HELP_URL = "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/wiki/Installation-%E5%AE%89%E8%A3%85";
 
     private static final String RICH_MESSAGE =
                     "<html>" +
