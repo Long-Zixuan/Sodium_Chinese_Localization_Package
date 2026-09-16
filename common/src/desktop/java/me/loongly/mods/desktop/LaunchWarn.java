@@ -1,5 +1,6 @@
 package me.loongly.mods.sclp.desktop;
 
+import me.loongly.mods.sclp.common.client.SCLPClientMod;
 import me.loongly.mods.sclp.desktop.utils.browse.BrowseUrlHandler;
 
 import javax.swing.*;
@@ -114,7 +115,12 @@ public class LaunchWarn {
                                      Object initialValue) {
         JOptionPane pane = new JOptionPane(message, messageType, optionType, null, options, initialValue);
 
+        Image icon = Toolkit.getDefaultToolkit().getImage(LaunchWarn.class.getResource("/icon.png"));
+        Icon iconImage = new ImageIcon(icon);
+        pane.setIcon(iconImage);
+
         JDialog dialog = pane.createDialog(title);
+        dialog.setIconImage(icon);
         dialog.setVisible(true);
 
         Object selectedValue = pane.getValue();
