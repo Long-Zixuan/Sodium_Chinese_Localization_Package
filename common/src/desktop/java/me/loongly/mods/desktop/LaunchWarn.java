@@ -41,15 +41,21 @@ public class LaunchWarn
                     "</body>" +
                     "</html>";
 
-    private static final String FALLBACK_MESSAGE =
-                    "You have tried to launch Sodium Chinese Localized Package (a Minecraft mod) directly, but it is not an executable program or mod installer. Instead, \n" +
-                    "you must install Fabric Loader or Neoforge Loader for Minecraft, and then place this file in your mods directory." +
-                    "\n\n看起来你试图执行钠-汉化包模组，但是它并不是一个可执行程序或模组安装器。你需要安装Fabric加载器或者Neoforge加载器，然后将这个文件放到你的模组文件夹中。\n"+
-                    "如果这是你第一次使用Fabric加载器或者Neoforge加载器安装模组，那么点击“Help”按钮以寻求帮助。"+
-                    "\n\nあなたがナトリウム-中国語化パッケージモジュールを実行しようとしているように見えますが、それは実行可能プログラムやモジュールインストーラではありません。FabricローダーまたはNeoforgeローダーをインストールした後、このファイルをモジュールフォルダに入れてください。\n"+
-                    "これがFabricローダーやNeoforgeローダーで初めてMODをインストールする場合、ヘルプボタンをクリックしてサポートを受けてください。"+
-                    "\n\nIl semble que vous essayiez d'exécuter un module de sodium, mais ce n'est pas un programme exécutable ou un installateur de module. Vous devez installer Fabric loader ou neoforge Loader, puis déposer ce fichier dans votre dossier modules.\n"+
-                    "Si c’est la première fois que vous installez un module avec Fabric loader ou neoforge Loader, appuyez sur le bouton « aide » pour obtenir de l’aide.";
+    private static final String FALLBACK_MESSAGE = """
+                    You have tried to launch Sodium Chinese Localized Package (a Minecraft mod) directly, but it is not an executable program or mod installer. Instead, 
+                    you must install Fabric Loader or Neoforge Loader for Minecraft, and then place this file in your mods directory.
+                    
+                    
+                    看起来你试图执行钠-汉化包模组，但是它并不是一个可执行程序或模组安装器。你需要安装Fabric加载器或者Neoforge加载器，然后将这个文件放到你的模组文件夹中。
+                    如果这是你第一次使用Fabric加载器或者Neoforge加载器安装模组，那么点击“Help”按钮以寻求帮助。
+                    
+                    
+                    あなたがナトリウム-中国語化パッケージモジュールを実行しようとしているように見えますが、それは実行可能プログラムやモジュールインストーラではありません。FabricローダーまたはNeoforgeローダーをインストールした後、このファイルをモジュールフォルダに入れてください。
+                    これがFabricローダーやNeoforgeローダーで初めてMODをインストールする場合、ヘルプボタンをクリックしてサポートを受けてください。
+                    
+                    
+                    Il semble que vous essayiez d'exécuter un module de sodium, mais ce n'est pas un programme exécutable ou un installateur de module. Vous devez installer Fabric loader ou neoforge Loader, puis déposer ce fichier dans votre dossier modules.
+                    Si c’est la première fois que vous installez un module avec Fabric loader ou neoforge Loader, appuyez sur le bouton « aide » pour obtenir de l’aide.""";
 
     private static final String FAILED_TO_BROWSE_MESSAGE =
             "<html>" +
