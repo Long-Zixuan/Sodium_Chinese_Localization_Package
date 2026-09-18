@@ -12,25 +12,18 @@ logoFile = "icon.png"
 updateJSONURL = ""
 authors = "LoongLy"
 displayURL = "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
-description = "Embeddium/Xenon 汉化包"
+description = "Embeddium/Rubidium/Xenon 汉化包"
 
 [[dependencies.sclp]]
 modId = "forge"
 mandatory = true
-versionRange = "[47.1.3,)"
+versionRange = "[46.0.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.sclp]]
-modId = "embeddium"
-mandatory = true
-versionRange = "[0.3.16,)"
-ordering = "NONE"
-side = "CLIENT"
-
-[[dependencies.sclp]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.1,)"
+versionRange = "[1.20,1.20.2]"
 ordering = "NONE"
 side = "CLIENT"

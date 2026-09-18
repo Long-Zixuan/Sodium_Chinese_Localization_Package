@@ -11,6 +11,18 @@ archivesBaseName = project.archives_base_name
 version = "${project.mod_version}+mc${project.minecraft_version}-${getVersionMetadata()}"
 group = project.maven_group
 
+// 添加desktop源代码集
+sourceSets {
+    desktop {
+        java {
+            srcDir 'src/desktop/java'
+        }
+        resources {
+            srcDir 'src/desktop/resources'
+        }
+    }
+}
+
 loom {
     accessWidenerPath = file("src/main/resources/sclp.accesswidener")
 
@@ -75,6 +87,16 @@ processResources {
 tasks.withType(JavaCompile).configureEach {
     // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
     it.options.release = 17
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "me.loongly.mods.sclp.desktop.LaunchWarn"
+    }
+
+    // 添加desktop源代码目录到编译
+    from sourceSets.main.output
+    from sourceSets.desktop.output
 }
 
 java {
