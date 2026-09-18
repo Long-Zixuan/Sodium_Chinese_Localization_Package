@@ -90,14 +90,14 @@ public class LaunchWarn
 
     public static void main(String[] args) 
     {
-        //if (GraphicsEnvironment.isHeadless()) 
-        //{
+        if (GraphicsEnvironment.isHeadless()) 
+        {
             showHeadlessError();
-        //} 
-        /*else 
+        } 
+        else 
         {
             showGraphicalError();
-        }*/
+        }
     }
 
     private static void showHeadlessError() 
