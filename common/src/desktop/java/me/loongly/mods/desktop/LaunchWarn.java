@@ -2,7 +2,6 @@ package me.loongly.mods.sclp.desktop;
 
 import me.loongly.mods.sclp.common.client.SCLPClientMod;
 import me.loongly.mods.sclp.desktop.utils.browse.BrowseUrlHandler;
-import me.loongly.mods.sclp.desktop.utils.browse.Terminal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,8 +101,7 @@ public class LaunchWarn
 
     private static void showHeadlessError() 
     {
-        Terminal.openTerminal();
-        Terminal.printToTerminal(FALLBACK_MESSAGE);
+        System.err.println(FALLBACK_MESSAGE);//想了想Terminal类没什么意义
     }
 
     private static void showGraphicalError() 
