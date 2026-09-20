@@ -10,6 +10,18 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+// 添加desktop源代码集
+sourceSets {
+    desktop {
+        java {
+            srcDir 'src/desktop/java'
+        }
+        resources {
+            srcDir 'src/desktop/resources'
+        }
+    }
+}
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -78,6 +90,16 @@ tasks.withType(JavaCompile).configureEach {
 	if (JavaVersion.current().isJava9Compatible()) {
 		it.options.release = targetVersion
 	}
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "loongly.sclp.desktop.LaunchWarn"
+    }
+
+    // 添加desktop源代码目录到编译
+    from sourceSets.main.output
+    from sourceSets.desktop.output
 }
 
 java {
