@@ -20,7 +20,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "loongly.sclp.client.SclpClientMod"
+      "me.loongly.mods.sclp.client.SclpClientMod"
     ]
   },
   "custom": {

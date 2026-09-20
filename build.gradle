@@ -94,7 +94,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "loongly.sclp.desktop.LaunchWarn"
+        attributes["Main-Class"] = "me.loongly.mods.sclp.desktop.LaunchWarn"
     }
 
     // 添加desktop源代码目录到编译
