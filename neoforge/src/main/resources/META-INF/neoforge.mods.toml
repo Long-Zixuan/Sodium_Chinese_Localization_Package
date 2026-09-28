@@ -9,6 +9,7 @@ version = "${version}"
 displayName = "Sodium Chinese Localized Package"
 
 logoFile = "icon.png" #optional
+iconFile = "icon.png"
 
 authors = "LoongLy"
 
