@@ -14,6 +14,7 @@ logoFile = "iconBig.png" #optional
 iconFile = "icon.png"
 
 authors = "LoongLy"
+credits = "law4x, EvanHsieh0415"
 
 description = '''
 钠（Sodium）模组汉化包
