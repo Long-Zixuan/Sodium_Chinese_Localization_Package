@@ -37,15 +37,7 @@ Supports Simplified Chinese and Traditional Chinese
 Special thanks to Law4x
 
 
-![logo](https://cdn.modrinth.com/data/5vV6tCDu/images/7f3bce004cf1ebc064b17d55b7535c7c333a8768.png)
+![img1](https://cdn.modrinth.com/data/cached_images/a7c51107ad1a65643d42b607eb269f38255fce7e.jpeg)
 ![](https://cdn.modrinth.com/data/5vV6tCDu/images/ce0cff1cb90ce1b55d06b2ea80674793549b5ea2.jpeg)
-
-![img](https://cdn.modrinth.com/data/cached_images/90308f19ade8eea70e4d917894b6abe41d0b3fbd.jpeg)
-![img5](https://cdn.modrinth.com/data/cached_images/f7b3cb4e9cd9df0bf4c5d597ba8e4e5d28674698.jpeg)
-![img8](https://cdn.modrinth.com/data/cached_images/2ef651e75c15e6975b1e12e392154691f2296ae3.jpeg)
-![img](https://cdn.modrinth.com/data/cached_images/24e059f530134fa1eab79da63d9218ef1b849f38.jpeg)
-![img](https://cdn.modrinth.com/data/cached_images/33fd81c69ab57c550a25ee8b530248506ddd20d6.jpeg)
-![`1](https://cdn.modrinth.com/data/cached_images/9962b6e5e84e1601bbb2a4cf4778b094d76f2093.jpeg)
-![img](https://cdn.modrinth.com/data/cached_images/e616f1da0195f36858b3d983c195cf3101ffa9f0.jpeg)
-![1.20汉化](https://cdn.modrinth.com/data/cached_images/3212d19528aa1b187fa953325a8001ea729633c5.jpeg)
-![1.20汉化界面](https://cdn.modrinth.com/data/cached_images/5cef072760264bc24e3880be2f3c1432e7501062.jpeg)
+![img2](https://cdn.modrinth.com/data/cached_images/707e2e680cfbde0dd5422a7a4c2c567958944e6a.png)
+![img3](https://cdn.modrinth.com/data/cached_images/9492f84b28b4245e14136f0886033aa1144c8a25.png)![img4](https://cdn.modrinth.com/data/cached_images/3a49027c838116c33457cdc9532383fb377afae8.png)![img5](https://cdn.modrinth.com/data/cached_images/14fa7b18ab24f8719b24ecf8ea57e14c9ea5564c.png)![img6](https://cdn.modrinth.com/data/cached_images/3e70932912346bff8a3d1b7605ead5738755d0f1.jpeg)![img7](https://cdn.modrinth.com/data/cached_images/d595d6cf09e6660cbccd05f576664b56a12a6b80.jpeg)![img8](https://cdn.modrinth.com/data/cached_images/6c098b191de964648b0c011ddaa1730f9b1d606b.jpeg)![img9](https://cdn.modrinth.com/data/cached_images/f7272caa41c9d642d71a53b6f011ea9fa84397d3.png)![img10](https://cdn.modrinth.com/data/cached_images/44ef8612aade2beca8bc6a15d494210e05bc5aea.png)![img11](https://cdn.modrinth.com/data/cached_images/4eec0360c0dcc983e4233e225e195830007adfa9.png)
