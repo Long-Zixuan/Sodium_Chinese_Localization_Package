@@ -115,7 +115,7 @@ var ls = """
 		}
 		try
 		{
-			Class<?> osClazz = Class.forName("net.minecraft.util.Util.OS",false,SCLPClientMod.class.getClassLoader());
+			Class<?> osClazz = Class.forName("net.minecraft.util.Util$OS",false,SCLPClientMod.class.getClassLoader());
 			Method openUri = osClazz.getDeclaredMethod("openUri", String.class);
 			Util.getPlatform().openUri(url);
 			LOGGER.info("[SCLP]MC26.1,26.2 Open Uri:" + url);
