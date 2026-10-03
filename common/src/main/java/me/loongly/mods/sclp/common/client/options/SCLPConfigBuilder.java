@@ -136,10 +136,6 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
 
     static Screen getCurScreen()
     {   
-        if(hadField(Minecraft.class,"gui"))
-        {
-            return Minecraft.getInstance().gui.screen();
-        }
         if(hadField(Minecraft.class,"screen"))
         {
             try
@@ -153,6 +149,10 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
             {
                 SCLPClientMod.logger().error("[SCLP] get Cur Screen Error:", e);
             }
+        }
+        if(hadField(Minecraft.class,"gui"))
+        {
+            return Minecraft.getInstance().gui.screen();
         }
         SCLPClientMod.logger().warn("[SCLP] Can't get Cur Screen. Minecraft API may changed!");
         return null;

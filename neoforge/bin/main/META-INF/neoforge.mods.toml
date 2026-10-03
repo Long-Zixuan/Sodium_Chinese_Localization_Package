@@ -1,16 +1,20 @@
 modLoader = "javafml"
 loaderVersion = "*"
 license = "MIT"
+issueTrackerURL="https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/issues"
 
 [[mods]]
 modId = "sclp"
 
 version = "${version}"
 displayName = "Sodium Chinese Localized Package"
+displayURL="https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
 
-logoFile = "icon.png" #optional
+logoFile = "iconBig.png" #optional
+iconFile = "icon.png"
 
 authors = "LoongLy"
+credits = "law4x, EvanHsieh0415"
 
 description = '''
 钠（Sodium）模组汉化包
