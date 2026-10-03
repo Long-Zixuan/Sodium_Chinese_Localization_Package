@@ -28,7 +28,7 @@ import net.caffeinemc.mods.sodium.client.gui.prompt.ScreenPrompt;
 
 
 @Mixin(VideoSettingsScreen.class)
-public class MixinSodiumVideoSettingsScreen
+public abstract class MixinSodiumVideoSettingsScreen
 {
     FlatButtonWidget birthBtn;
 
@@ -97,10 +97,8 @@ public class MixinSodiumVideoSettingsScreen
         }
     }
 
-    private void openDonationPage()
-    {
-        Util.getPlatform().openUri("https://caffeinemc.net/donate");
-    }
+    @Shadow
+    protected abstract void openDonationPage();
 }
 
 //LZX-2026-04-03-001
