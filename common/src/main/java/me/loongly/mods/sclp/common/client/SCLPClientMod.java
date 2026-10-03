@@ -1,5 +1,7 @@
 package me.loongly.mods.sclp.common.client;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import me.loongly.mods.sclp.common.language.I18NLanguage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.util.Util;
+import java.net.URI;
 
 
 public class SCLPClientMod
@@ -65,39 +68,65 @@ var ls = """
 		{
 			LOGGER.info("[SCLP]Open Lain's website.");
 			chickCount = 0;
-			Util.getPlatform()
-					.openUri("https://long-zixuan.github.io/html/lain.html");
+			openWeb("https://long-zixuan.github.io/html/lain.html");
 		}
 	}
 
 	public static void birthCaiDan()
 	{
 		LOGGER.info("[SCLP]Happly birthday to LoongLy!!!");
-		Util.getPlatform()
-				.openUri("https://www.loongly.me/html/clock.html");
-		Util.getPlatform()
-				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
+		openWeb("https://www.loongly.me/html/clock.html");
+		openWeb("https://long-zixuan.github.io/html/badapple_h.html");
 	}
 
 	public static void birthCaiDan(Screen screen)
 	{
 		LOGGER.info("[SCLP]Happly birthday to LoongLy!!!");
-		Util.getPlatform()
-				.openUri("https://www.loongly.me/html/clock.html");
-		Util.getPlatform()
-				.openUri("https://long-zixuan.github.io/html/badapple_h.html");
+		openWeb("https://www.loongly.me/html/clock.html");
+		openWeb("https://long-zixuan.github.io/html/badapple_h.html");
 	}
 
 	public static void openSupportWeb(Screen screen)
 	{
 		LOGGER.info("[SCLP]Open Support website.");
-		Util.getPlatform().openUri("https://ifdian.net/a/loongly");
+		openWeb("https://ifdian.net/a/loongly");
 	}
 
 	public static void openSupportWeb()//未来预留
 	{
 		LOGGER.info("[SCLP]Open Support website.");
-		Util.getPlatform().openUri("https://ifdian.net/a/loongly");
+		openWeb("https://ifdian.net/a/loongly");
+	}
+
+	private static void openWeb(String url)
+	{
+		try
+		{
+			Class<?> blaze3dClazz = Class.forName("com.mojang.blaze3d.Blaze3D",false,SCLPClientMod.class.getClassLoader());
+			var uri = URI.create(url);
+			Method openUri = blaze3dClazz.getDeclaredMethod("openUri", URI.class);
+			openUri.invoke(null,uri);
+			LOGGER.info("[SCLP]MC26.3 Open Uri:" + url);
+			return;//26.3的情况
+		}
+		catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e1)
+		{
+
+		}
+		try
+		{
+			Class<?> osClazz = Class.forName("net.minecraft.util.Util.OS",false,SCLPClientMod.class.getClassLoader());
+			Method openUri = osClazz.getDeclaredMethod("openUri", String.class);
+			Util.getPlatform().openUri(url);
+			LOGGER.info("[SCLP]MC26.1,26.2 Open Uri:" + url);
+			return;//26.1,26.2的情况
+		}
+		catch (ClassNotFoundException | NoSuchMethodException e2)
+		{
+			LOGGER.error("[SCLP]Open Web Error:",e2);
+		}
+		LOGGER.error("[SCLP]Open Web failed,MC API May changeed!");
+		
 	}
 }
 
