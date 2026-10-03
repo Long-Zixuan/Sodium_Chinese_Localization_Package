@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.util.Util;
 import java.net.URI;
+import com.mojang.blaze3d.Blaze3D;
 
 
 public class SCLPClientMod
@@ -105,11 +106,11 @@ var ls = """
 			Class<?> blaze3dClazz = Class.forName("com.mojang.blaze3d.Blaze3D",false,SCLPClientMod.class.getClassLoader());
 			var uri = URI.create(url);
 			Method openUri = blaze3dClazz.getDeclaredMethod("openUri", URI.class);
-			openUri.invoke(null,uri);
+			Blaze3D.openUri(uri);
 			LOGGER.info("[SCLP]MC26.3 Open Uri:" + url);
 			return;//26.3的情况
 		}
-		catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e1)
+		catch (ClassNotFoundException | NoSuchMethodException e1)
 		{
 
 		}
@@ -117,11 +118,11 @@ var ls = """
 		{
 			Class<?> osClazz = Class.forName("net.minecraft.util.Util$OS",false,SCLPClientMod.class.getClassLoader());
 			Method openUri = osClazz.getDeclaredMethod("openUri", String.class);
-			Util.getPlatform().openUri(url);
+			openUri.invoke(null,url);
 			LOGGER.info("[SCLP]MC26.1,26.2 Open Uri:" + url);
 			return;//26.1,26.2的情况
 		}
-		catch (ClassNotFoundException | NoSuchMethodException e2)
+		catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e2)
 		{
 			LOGGER.error("[SCLP]Open Web Error:",e2);
 		}
