@@ -135,24 +135,29 @@ public class SCLPConfigBuilder implements ConfigEntryPoint
     }
 
     static Screen getCurScreen()
-    {   
+    {
         if(hadField(Minecraft.class,"screen"))
         {
-            try
-            {
-                Field field = Minecraft.class.getDeclaredField("screen");//工程环境的客户端是26.3的，Minecraft类没有screen字段，故只能用反射
-                field.setAccessible(true);
-                var curScreen = (Screen)field.get(Minecraft.getInstance());
-                return curScreen;
-            }
-            catch(NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
-            {
-                SCLPClientMod.logger().error("[SCLP] get Cur Screen Error:", e);
-            }
+            return Minecraft.getInstance().screen;
         }
         if(hadField(Minecraft.class,"gui"))
         {
-            return Minecraft.getInstance().gui.screen();
+            var gui = Minecraft.getInstance().gui;
+            var clazz = Gui.class;
+            if(hadField(clazz, "screen"))
+            {
+                try
+                {
+                    Field field = clazz.getDeclaredField("screen");//工程环境的客户端是26.1的，Gui类没有screnn字段，故只能用反射
+                    field.setAccessible(true);
+                    var curScreen = (Screen)field.get(gui);
+                    return curScreen;
+                }
+                catch(Exception e)
+                {
+                    SCLPClientMod.logger().error("[SCLP] get Cur Screen Error:", e);
+                }
+            }
         }
         SCLPClientMod.logger().warn("[SCLP] Can't get Cur Screen. Minecraft API may changed!");
         return null;
